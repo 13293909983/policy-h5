@@ -1,252 +1,166 @@
-<!doctype html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>电子保函服务平台</title>
-	<link th:href="@{css/font-awesome.min.css}" rel="stylesheet">
-	<link th:href="@{css/style.css}" rel="stylesheet" />
-	<script th:src="@{js/jquery.min.js}"></script>
-	<style type="text/css">
-		.module02>span {
-			color:gray;
-		}
-		.module03>span {
-			color:gray;
-		}
-		.module04>span {
-			color:gray;
-		}
-		.module05>span {
-			color:gray;
-		}
-	</style>
-</head>
+<!DOCTYPE html>
+<html lang="en">
 
-<body style="background:url(images/index-bg.jpg) no-repeat;background-size:cover;">
-<div id="auto" style="overflow-y: auto;">
-	<div class="login-btn">
-		<div>
-			<span style="margin:0 20px;font-size:18px">电子保函服务平台</span>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<title>电子保函服务平台</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+		<link rel="stylesheet" type="text/css" href="css/animate.min.css">
+		<script src="js/jquery-1.8.3.min.js"></script>
+
+		<script src="js/index.js"></script>
+		<script src="js/header.js"></script>
+	</head>
+
+	<body>
+<header></header>
+<div class="banner">
+	<div class="banner_wrap">
+		<div class="more_wrap">
+			<div class="more">
+			<a href="#">了解更多</a></div>
 		</div>
-		<ul class="index-nav">
-			<li class="nav-on"><a href="/index.html"><i class="fa fa-home"></i>&nbsp;首页</a></li>
-			<!--<li><a href="#">理赔服务</a></li>
-            <li><a href="#">法律法规</a></li>-->
-			<li><a href="/home.html">保单验真</a></li>
-			<li><a href="/order.html">我的订单</a></li>
-			<li><a href="http://note.youdao.com/noteshare?id=a67afbe1ecf17f62c30401c511eb7fe7&sub=E59A4DAD8E2048868D9D22AD2234B6FD">对接文档</a></li>
-			<!--<li><a href="#">关于我们</a></li>-->
-		</ul>
-		<div th:if="${session.LOGIN_USER==null}">
-			<a href="/login.html">登录</a>|<a href="/login.html#regist">注册</a>
-		</div>
-		<div th:if="${session.LOGIN_USER!=null}">
-			<a th:text="${session.LOGIN_USER.organ.organName}"></a>
-			<a href="/logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a>
-		</div>
-	</div>
-	<div class="platform-box">
-		<div class="index-logo">
-			<img src="images/logo.png" width="450px">
-		</div>
-		<div class="main-box">
-			<ul>
-				<li>
-					<div class="module-box module01">
-						<img src="images/i-01.png">
-						<div class="xian"></div>
-						<span>投标保函</span>
-					</div>
-					<a href="bidPolicyForm.html" class="apply-btn">立即申请</a>
-				</li>
-				<li>
-					<div class="module-box module02">
-						<img src="images/i-02.png">
-						<div class="xian"></div>
-						<span>履约保函</span>
-					</div>
-					<a href="#" class="apply-btn">立即申请</a>
-				</li>
-				<li>
-					<div class="module-box module03">
-						<img src="images/i-05.png">
-						<div class="xian"></div>
-						<span>预付款保函</span>
-					</div>
-					<a href="#" class="apply-btn">立即申请</a>
-				</li>
-				<li>
-					<div class="module-box module04">
-						<img src="images/i-04.png">
-						<div class="xian"></div>
-						<span>质量保函</span>
-					</div>
-					<a href="#" class="apply-btn">立即申请</a>
-				</li>
-				<li>
-					<div class="module-box module05">
-						<img src="images/i-03.png">
-						<div class="xian"></div>
-						<span>农民工资保函</span>
-					</div>
-					<a href="#" class="apply-btn">立即申请</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<!-- 投保须知 -->
-	<div class="item-box">
-		<ul class="item-menu">
-			<li class="item-on">投保指南</li>
-			<li>投保须知</li>
-			<li>投保条款</li>
-		</ul>
-		<div class="item-tab">
-			<div class="item-tabone" style="display: block;">
-				<div class="item-zhinan">
-					<img src="images/file-img.png">
-					<p>用户在一体化平台完善项目信息可通过两种途径：<br/>
-						一是通过平台选择项目。平台内的项目和用户自己登记的项目可直接获取信息。<br />
-						二是用户自行维护项目信息。<br />
-						用户企业信息直接获取平台内的信息，不需要维护。编辑完成后，提交直接进入保险商城，进行投保。
-					</p>
-				</div>
-			</div>
-			<div class="item-tabone">
-				<div class="item-notice">
-					<p>1、请您在购买保险时，仔细确认所填写的投保信息完
-整、真实、准确；<br>
-2、请您在购买保险前，确认已经认真阅读本产品的保
-险责任和责任免除条款，特别是免除保险人责任的条款
-（包括但不限于责任免除、投保人和被保险人义务、保险
-金申请与给付、退保规则等重大约定事项），并已充分理解
-和接受上述内容，同意以此作为订立保险合同的依据。<br>
-3、各投标人使用保单方式缴纳投标保证金前请仔细阅
-读本次项目招标文件中是否未载明使用保单方式缴纳投标
-保证金，若本次项目招标文件未载明使用保单方式缴纳投标
-保证金，投标人仍使用保单方式缴纳投标保证金所产生的一
-切后果均由投标人自行全权负责。</p>
-				</div>
-			</div>
-			<div class="item-tabone">
-				<div class="item-filebox">
-					<h1>中国人民财产保险股份有限公司投标保证保险条款</h1>
-					<h2>总则</h2>
-					<pre>第一条 本保险合同由保险条款、投保单、保险单、保险凭证及批单组成。凡涉及本保险合同的约定，均应采用书面形式
-第二条 招标投标活动中的投标人可作为本保险合同的投保人。
-第三条 招标投标活动中的招标人可作为本保险合同的被保险人。
-第四条 凡符合《中华人民共和国招标投标法》、《中华人民共和国招标投标法实施条例》等法律法规，并在中华人民共和国境内（不包括港、澳、台地区）开展的招标项目，均可适用本保险。</pre>
-					<h2>责任免除</h2>
-					<pre>第五条  在保险期间内，投保人向被保险人组织的招标项目投标过程中，发生下列情形之一的，被保险人可向保险人提出索赔。保险人依据本保险合同的约定对
-（二）投保人接到中标通知后，在招标文件规定的时间内，因自身原因或无正当理由不与被保险人订立招标项目合同;
-（三）投标人中标后不按照招标文件要求缴纳履约保证金。</pre>
-					<h2>保险责任</h2>
-					<pre>第六条  下列原因造成的损失、费用和责任，保险人不负责赔偿：
-（一）战争、敌对行为、恐怖行为、军事行动、武装冲突、罢工、暴动、民众骚乱、恐怖活动或恐怖袭击；
-（二）核爆炸、核子辐射和放射性污染；
-（三）洪水、台风、地震、海啸及其他人力不可抗拒的自然灾害；
-（四）行政行为或司法行为；
-（五）被保险人及其代表的故意或犯罪行为。
-第七条  存在下列情况之一的，保险人不负责赔偿：
-（一）投保人在投标文件递交截止时间前撤回招标文件的; 
-（二）投保人中标后因不可抗力原因未与招标人订立合同或缴纳履约保证金的；
-（三）投保人或其雇员与被保险人或其雇员采用欺诈、贿赂等非法手段串通招投标的； 
-（四）被保险人的招标文件被依法认定无效或被撤销的；
-（五）被保险人未履行招标文件规定义务或在提交投标文件截止时间后变更招标文件的。
-第八条  对下列损失、费用和责任，保险人不负责赔偿：
-（一）被保险人的间接损失；
-（二）被保险人根据招标文件应该承担的责任，以及为收集、确认、证明投保人违反招标文件造成损失所产生的任何费用； 
-（三）罚款、罚金及惩罚性赔偿。
-第九条  本保险单载明的免赔额以及按本保险单载明的免赔率计算的金额，保险人不负责赔偿。</pre>
-					<h2>保险金额、免赔额（率）</h2>
-					<pre>第十条  本保险合同的保险金额为保险人承担赔偿责任的最高金额，根据招标文件中投保人应交纳的投标保证金金额确定，并在保险单中载明。
-第十一条  本保险合同的免赔额（率）由投保人与保险人协商确定并在保险单中载明。</pre>
-					<h2>保险期间</h2>
-					<pre>第十二条　本保险合同的保险期间由投保人与保险人协商约定，具体起期日和终止日以保险单上载明的日期为准，最长不超过一年。</pre>
-					<h2>保险人义务</h2>
-					<pre>第十三条  本保险合同成立后，保险人应当及时向投保人签发保险单以及其他保险凭证。
-第十四条  保险事故发生后，投保人、被保险人提供的有关索赔的证明和资料不完整的，保险人应当及时一次性通知投保人、被保险人补充提供。
-     第十五条  保险人收到被保险人的赔偿请求后，应当及时就是否属于保险责任做出核定，并将核定结果通知被保险人。</pre>
-<h2>投保人、被保险人义务</h2>
-<pre>第十六条  投保人应履行如实告知义务，如实履行保险人就有关情况提出的询问，如实填写投保单。
-第十七条  投保人应在保险责任起始日前一次性交清全部保险费。
-第十八条  在保险合同有效期内，如投保人履约能力发生重大变化，履约风险显著增加的，投保人应采取措施降低或消除上述风险，并应按照本保险合同约定及时通知保险人。保险人可以按照保险合同约定增加保险费或者解除保险合同。
-第十九条  若在投保时有相关约定，投保人应及时向保险人进行与投保合同有关的业务信息申报，包括但不限于招标项目进展情况等信息。
-第二十条  投保人在投保时应向保险人提供以下资料：
-（一）投保人营业执照、税务登记证、组织机构代码证复印件；
-（二）投保人上年度经审计的财务报告及前3个月的资产负债表、损益表、现金流量表；
-（三）招标文件；
-（四）投保人的投标文件；
-（五）投保人既往同类招标项目的履约记录；
-（六）保险人要求的其他资料。
-第二十一条  发生保险事故，投保人或被保险人应当及时通知保险人。
-第二十二条  发生保险事故后，被保险人应向保险人提供下列证明和资料：
-（一）保险单正本；
-（二）索赔申请书；
-（三）招标文件；
-（四）投保人递交的投标文件；
-（五）保险事故发生的证明文件；
-（六）司法机关出具的裁定书、裁决书或判决书等（适用于仲裁或诉讼确定损失的方式）；
-（七）投保人、被保险人所能提供的与确定保险事故的性质、原因、损失程度等有关的其他证明和资料。</pre>
-					<h2>赔偿处理</h2>
-					<pre>第二十三条  保险人的赔偿以下列方式之一确定的被保险人损失为基础：
-（一）投保人、被保险人协商并经保险人确认；
-（二）仲裁机构裁决；
-（三）人民法院判决；
-（四）保险人认可的其它方式。
-第二十四条  发生保险责任范围内的损失，保险人依照本保险合同的约定，在保险金额范围内扣除免赔额后予以赔偿。
-第二十五条　被保险人取得保险赔偿金的同时，应将其对投保人的权益以及根据相关合同拥有的权益转让给保险人，保险人有权向投保人进行追偿。被保险人应当向保险人提供必要的文件及协助。</pre>
-					<h2>争议处理和法律适用</h2>
-					<pre>第二十六条  合同争议解决方式由当事人在合同约定从下列两种方式中选择一种： 
-    （一）因履行本合同发生的争议，由当事人协商解决，协商不成的，提交保险单载明的仲裁委员会仲裁； 
-    （二）因履行本合同发生的争议，由当事人协商解决，协商不成的，依法向人民法院起诉。
-第二十七条  与本保险合同有关的以及履行本保险合同产生的一切争议，适用中华人民共和国法律（不包括港澳台地区法律）。</pre>
-					<h2>其他</h2>
-					<pre>第二十八条  保险责任开始前，投保人要求解除保险合同的，应当向保险人支付相当于保险费5%的退保手续费；剩余保险费，保险人应当退还。
-第二十九条  本保险合同生效后，未经被保险人书面同意，投保人不得解除本保险合同。在保险期间内，如果投保人和被保险人均书面要求解除保险合同的，保险人可以解除本保险合同但不退还保险费。 </pre>
-					<h2>释义</h2>
-					<pre>投标人：指响应招标、参加投标竞争的法人或者其他组织。
-招标人：指依法提出招标项目、进行招标的法人或者其他组织。
-投标有效期：指为保证招标人有足够的时间在开标后完成评标、定标、合同签订等工作而要求投标人提交的投标文件在一定时间内保持有效的期限，该期限由招标人在招标文件中载明，从提交投标文件的截止之日起算。
-投标保证金：指在招标投标活动中，投标人随投标文件一同递交给招标人的一定形式、一定金额的投标责任担保。
-履约保证金：指在招标投标活动中，招标人为督促中标人履行合同，在招标文件中要求中标人以适当的格式或金额采用现金、支票、履约担保书或银行保函形式提供的担保。</pre>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 底部 -->
-	<div class="footer color2">版权所有：山西伟鑫科创科技有限公司 &nbsp;&nbsp;晋ICP备19002913号</div>
-	<!-- 通知！ -->
-	<div class="notice-box">
-		<div class="notice-tit">通知：<span class="notice-close">×</span></div>
-		<p>*****</p>
 	</div>
 </div>
-<script>
-	$(".notice-close").click(function(){
-		$(".notice-box").hide();
-	});
-	$(".item-menu li").click(function(){
-		$(this).addClass("item-on").siblings().removeClass("item-on"); //切换选中的按钮高亮状态
-		var index=$(this).index(); //获取被按下按钮的索引值，需要注意index是从0开始的
-		$(".item-tab > div").eq(index).show().siblings().hide(); //在按钮选中时在下面显示相应的内容，同时隐藏不需要的框架内容
-	})
-</script>
-<script>
-	//监听
-	window.onresize = function () {
-		changeHeight();
-	};
-	function changeHeight() {
-		var h = $(window).height();//获取页面可见高度 
-		$("#auto").css("height", h);
-	};
+<div class="process">
+	<div  class="process_wrap">
+		<div class="process_tit">
+			<img src="images/three_points01.png" />
+			<p>晋e惠电子保函服务平台流程</p>
+			<img src="images/three_points01.png" />
+		</div>
+		<ul class="process_liu">
+		    <li class="process_liu_ren">
+		    <a href="/login.html">
+		    <img src="images/55_16.png" />
+		    <p>注册登录</p></a>
+		    </li> 
+		    <li class="process_liu_t">
+		    <img src="images/11_03.png" />
+		    </li>
+		    <li class="process_liu_ren">
+		    	<a href="#">
+		    <img src="images/44_16.png" />
+		    <p>填写信息</p></a>
+		    </li>
+		    <li class="process_liu_t">
+		    <img src="images/11_03.png" />
+		    </li>
+		    <li class="process_liu_ren">
+		    	<a href="#">
+		    <img src="images/tu_05.png" />
+		    <p>提交申请</p></a>
+		    </li>
+		     <li class="process_liu_t">
+		    <img src="images/11_03.png" />
+		    </li>
+		    <li class="process_liu_ren">
+		    	<a href="#">
+		    <img src="images/33_08.png" />
+		    <p>缴纳付款</p></a>
+		    </li >
+		     <li class="process_liu_t">
+		    <img src="images/11_03.png" />
+		    </li>
+		    <li class="process_liu_ren">
+		    	<a href="#">
+		    <img src="images/66_20.png" />
+		    <p>完成查验</p></a>
+		    </li>
+		</ul>
+	</div>
+</div>
+<div class="service">
+	<div class="service_wrap">
+	<div class="service_tit">
+			<img src="images/three_points01.png" />
+			<p>晋e惠电子保函服务平台</p>
+			<img src="images/three_points01.png" />
+		</div>
+	<div class="service_img">
+		<div class="service_img_one">
+			<a href="#">
+			<div class="service_img_01" ></div></a>
+			<a href="#"><div class="service_img_02" style="float: right;" ></div></a>
+		</div>
+		<div class="service_img_tow">
+			<a href="#"><div class="service_img_03"  ></div></a>
+			<a href="#"><div class="service_img_04"  style="margin-left: 222px;" ></div></a>
+			<a href="#"><div  class="service_img_05" style="float: right;" ></div></a>
+		</div>
+	</div>
+	</div>
+</div>
+<div class="new">
+	<div class="new_wrap">
+		<div class="new_tit">
+			<img src="images/three_points01.png" />
+			<p>新闻热点</p>
+			<img src="images/three_points01.png" />
+		</div>
 
-	//页面加载时
-	$(function () {
-		var h = $(window).height();//获取页面可见高度 
-		$("#auto").css("height", h);
-	});
-</script> 
-</body>
+		<div class="new_new">
+			<img src="images/21.png" />
+			<p>今日关注</p>
+		</div>
+		<div class="about-grids">
+			<div class="new_list_wrap">
+				<div class="new_list">
+					<div class="about-grid">
+						<img src="images/2.jpg" alt=" " class="img-responsive">
+						<div class="img-bottom">
+							<p>西多方共商电子化保函,为民企减负出新招</p>
+						</div>
+						 <div class="new_w">
+					<p class="new_time">2018-07-31</p>
+					<p  class="new_wre">电子保函是担保人以电子化文档为介质通过计算机网络向受益人开立的具有法律效力的担保凭证。</p>
+					</div>
+					</div>
+					<div class="about-grid">
+						<img src="images/3.jpg" alt=" " class="img-responsive">
+						<div class="img-bottom">
+							<p>投标保函</p>
+						</div>
+						 <div class="new_w">
+					<p class="new_time">2018-07-31</p>
+					<p  class="new_wre">电子保函是担保人以电子化文档为介质通过计算机网络向受益人开立的具有法律效力的担保凭证。</p>
+					</div>
+					</div>
+					<div class="about-grid">
+						<img src="images/4.jpg" alt=" " class="img-responsive">
+						<div class="img-bottom">
+							<p>工程保函</p>
+						</div>
+						 <div class="new_w">
+					<p class="new_time">2018-07-31</p>
+					<p  class="new_wre">电子保函是担保人以电子化文档为介质通过计算机网络向受益人开立的具有法律效力的担保凭证。</p>
+					</div>
+					</div>
+	
+					
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+<div class="partner">
+	<div class="partner_wrap">
+	<div class="partner_tit">
+			<img src="images/three_points01.png" />
+			<p>合作伙伴</p>
+			<img src="images/three_points01.png" />
+	</div>
+		<div class="partner_list">
+			<img src="images/Insurance1@2x.jpg"/>
+			<img src="images/Insurance3@2x.jpg"/>
+			<img src="images/Insurance5@2x.jpg"/>
+			<img src="images/Insurance6@2x.jpg"/>
+		</div>
+</div>
+</div>
+<footer></footer>
+	</body>
 </html>
