@@ -14,7 +14,50 @@
 	</head>
 
 	<body>
-<header></header>
+<!-- <header></header> -->
+<!--头部-->
+		<div class="header_wrap">
+    <div class="header">
+    	<div class="header_top">
+        <!--logo-->
+        <div class="logo_wrap">
+            <img src="images/logo.png">
+        </div>
+        <!--二级导航-->
+        <div class="nava_li">  <div class="nav_l">电子保函服务平台</div></div>
+        <ul class="nav_wrap">
+            <li class="nav_piece  now">
+                <h1 ><a href="#">首页</a></h1>
+            </li>
+            <li class="nav_piece">
+                <h1><a href="#">理赔服务</a></h1>
+            </li>
+            <li class="nav_piece">
+                <h1><a href="#">政策法规</a></h1>
+            </li>
+             
+            <li class="nav_piece">
+                <h1><a href="/home.html">保单验证</a></h1>
+            </li>
+            <li class="nav_piece">
+                <h1><a href="/order.html">我的订单</a></h1>
+            </li>
+            <li class="nav_piece">
+                 <h1><a href="#">关于我们</a></h1>
+
+            </li>
+
+        </ul>
+      <div class="login_wrap" th:if="${session.LOGIN_USER==null}">
+			<a href="/login.html">登录</a>|<a href="/login.html#regist">注册</a>
+		</div>
+		<div class="login_wrap" th:if="${session.LOGIN_USER!=null}">
+			<a th:text="${session.LOGIN_USER.organ.organName}"></a>
+			<a href="/logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a>
+		</div>
+      </div>
+    </div>
+</div>
 <div class="banner">
 	<div class="banner_wrap">
 		<div class="more_wrap">
@@ -161,6 +204,14 @@
 		</div>
 </div>
 </div>
-<footer></footer>
-	</body>
+<!-- <footer></footer> -->
+<!--尾部  -->
+	<div class="foot">
+		<div class="ftBar">
+			<div class="fb-left"> ------------------------------------------------------------------------------------------------------------------------------------<br /> Copyright © 2017 - 2018 cehuashen. All Rights Reserved.<br/> 山西伟鑫科创信息技术服务有限公司<br />电话：0351-7027757<br />邮箱：wxjinrong@sina.com<br />
+				<img src="images/888.png" style=" width:16px; margin-right:6px;" />晋ICP备19002913号</div>
+			
+		</div>
+	</div>
+</body>
 </html>
