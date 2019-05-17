@@ -1,0 +1,44 @@
+<script src="js/header.js"></script>
+<!--头部-->
+		<div class="header_wrap">
+    <div class="header">
+    	<div class="header_top">
+        <!--logo-->
+        <div class="logo_wrap">
+            <img src="images/logo.png">
+        </div>
+        <!--二级导航-->
+        <div class="nava_li">  <div class="nav_l">电子保函服务平台</div></div>
+        <ul class="nav_wrap">
+            <li class="nav_piece  now">
+                <h1 ><a href="#">首页</a></h1>
+            </li>
+            <li class="nav_piece">
+                <h1><a href="#">理赔服务</a></h1>
+            </li>
+            <li class="nav_piece">
+                <h1><a href="#">政策法规</a></h1>
+            </li>
+             
+            <li class="nav_piece">
+                <h1><a href="/home.html">保单验证</a></h1>
+            </li>
+            <li class="nav_piece">
+                <h1><a href="/order.html">我的订单</a></h1>
+            </li>
+            <li class="nav_piece">
+                 <h1><a href="#">关于我们</a></h1>
+
+            </li>
+
+        </ul>
+      <div class="login_wrap" th:if="${session.LOGIN_USER==null}">
+			<a href="/login.html">登录</a>|<a href="/login.html#regist">注册</a>
+		</div>
+		<div class="login_wrap" th:if="${session.LOGIN_USER!=null}">
+			<a th:text="${session.LOGIN_USER.organ.organName}"></a>
+			<a href="/logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a>
+		</div>
+      </div>
+    </div>
+</div>
