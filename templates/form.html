@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>电子保函服务平台</title>
+	<link th:href="@{css/font-awesome.min.css}" rel="stylesheet">
+	<link th:href="@{css/style.css}" rel="stylesheet" />
+	<script th:src="@{js/jquery.min.js}"></script>
+	<script type="text/javascript">
+		$(function(){
+		    alert("工程师正在努力开发,敬请期待!");
+		});
+	</script>
+</head>
+
+<body style="background:#f7f7f7;">
+	<div class="top-bner">
+		<span class="head-tit">电子保函服务平台</span>
+		<span class="rt margin-r-20 btn-out">
+			<a href="/logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a>
+		</span>
+	</div>
+	<div class="form-box">
+		<div class="form-tit">关系人信息：</div>
+		<table width="100%" class="form-table">
+			<tr>
+				<th>角色：</th>
+				<td>
+					<form>
+				        <input  type="checkbox" name="Question1" value="被保险人"/>被保险人
+				        <input  type="checkbox" name="Question1" value="投保人"/>投保人
+				    </form>
+				</td>
+				<th>关系人代码：</th>
+				<td>
+					<input class="input-text" placeholder="请输入">
+				</td>
+			</tr>
+			<tr>
+				<th>角色：</th>
+				<td>
+					<form>
+				        <input  type="checkbox" name="Question1" value="被保险人"/>被保险人
+				        <input  type="checkbox" name="Question1" value="投保人"/>投保人
+				    </form>
+				</td>
+				<th>关系人代码：</th>
+				<td>
+					<input class="input-text" placeholder="请输入">
+				</td>
+			</tr>
+			<tr>
+				<th valign= top>关系人名称：</th>
+				<td>
+					<input class="input-text">
+					<div>
+						<button>查询</button><button>修改</button><button>读卡</button>
+					</div>
+				</td>
+				<th>证件号码：</th>
+				<td>
+					<input class="input-text" placeholder="请输入">
+				</td>
+			</tr>
+			<tr>
+				<th>关系人地址：</th>
+				<td colspan="3">
+					<input class="input-text" placeholder="请输入">
+				</td>
+			</tr>
+		</table>
+		<div class="form-tit">基本信息：</div>
+		<table width="100%" class="form-table">
+			<tr>
+				<th>涉农标志：</th>
+				<td>
+					<select class="select-form">
+						<option value="">请选择</option>
+						<option value="1">是</option>
+						<option value="0">否</option>
+					</select>
+				</td>
+				<th>归属机构：</th>
+				<td>
+					<div>
+						<input class="input-text" value="14028765"  disabled>
+						<input class="input-text" value="销售管理部/出单中心">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>归属业务员：</th>
+				<td>
+					<input class="input-text" disabled>
+				</td>
+				<th>经办人：</th>
+				<td>
+					<input class="input-text" disabled>
+				</td>
+			</tr>
+			<tr>
+				<th>渠道码：</th>
+				<td>
+					<div>
+						<input class="input-text" value=""  disabled>
+						<input class="input-text" value="">
+					</div>
+				</td>
+				<th>海外标志：</th>
+				<td>
+					<select class="select-form">
+						<option>是</option>
+						<option selected="">否</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>签单日期：</th>
+				<td>
+					<input type="date" class="input-text"/>
+				</td>
+				<th>起保日期：</th>
+				<td>
+					<input type="date" class="input-text"/>
+					<input class="input-text" style="width:30px;"/>&nbsp;&nbsp;时
+				</td>
+			</tr>
+			<tr>
+				<th>终保日期：</th>
+				<td>
+					<input type="date" class="input-text"/>
+					<input class="input-text" style="width:30px;"/>&nbsp;&nbsp;时
+				</td>
+				<th>是否普惠融资带动客户：</th>
+				<td>
+					<select class="select-form">
+						<option>是</option>
+						<option selected="">否</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>赔款等待期：</th>
+				<td>
+					<input type="text" class="input-text"/>
+				</td>
+				<th>司法管辖：</th>
+				<td>
+					<div>
+						<input class="input-text" value="01"  disabled>
+						<input class="input-text" value="中国境内（港，澳，台除外）">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>交费次数：</th>
+				<td>
+					<input type="text" class="input-text"/>
+				</td>
+				<th>出单机构：</th>
+				<td>
+					<div>
+						<input class="input-text" value="3564225"  disabled>
+						<input class="input-text" value="销售管理部/出单中心">
+					</div>
+				</td>
+			</tr>
+		</table>
+		<div class="btn-bottom">
+			<button class="quxiao">取消</button>
+			<button class="submit">提交</button>
+		</div>
+	</div>
+	<div class="footer-n">版权所有：山西伟鑫科创科技有限公司</div>
+</body>
+</html>

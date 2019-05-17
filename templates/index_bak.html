@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>电子保函服务平台</title>
+	<link th:href="@{css/style.css}" rel="stylesheet" />
+</head>
+
+<body style="background:url(images/index-bg.jpg) no-repeat;background-size:cover;">
+	<div class="login-btn">
+		<div>
+			<span style="margin:0 20px;font-size:18px">电子保函服务平台</span>
+		</div>
+		<ul class="index-nav">
+				<li class="nav-on"><a href="#">首页</a></li>
+				<!--<li><a href="#">理赔服务</a></li>
+				<li><a href="#">法律法规</a></li>-->
+				<li><a href="/home.html">保单验真</a></li>
+				<!--<li><a href="#">关于我们</a></li>-->
+			</ul>
+		<div th:if="${session.LOGIN_USER==null}">
+			<a href="/login.html">登录</a>|<a href="/login.html#regist">注册</a>
+		</div>
+		<div th:if="${session.LOGIN_USER!=null}">
+			<a href="/logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a>
+		</div>
+	</div>
+	<div class="platform-box">
+		<div class="index-logo">
+			<img src="images/logo.png" width="450px">
+		</div>
+		<div class="main-box">
+			<ul>
+				<li>
+					<div class="module-box module01">
+						<img src="images/i-01.png">
+						<div class="xian"></div>
+						<span>投标保函</span>
+					</div>
+					<a href="/form.html" class="apply-btn">立即申请</a>
+				</li>
+				<li>
+					<div class="module-box module02">
+						<img src="images/i-02.png">
+						<div class="xian"></div>
+						<span>履约保函</span>
+					</div>
+					<a href="/form.html" class="apply-btn">立即申请</a>
+				</li>
+				<li>
+					<div class="module-box module03">
+						<img src="images/i-05.png">
+						<div class="xian"></div>
+						<span>预付款保函</span>
+					</div>
+					<a href="/form.html" class="apply-btn">立即申请</a>
+				</li>
+				<li>
+					<div class="module-box module04">
+						<img src="images/i-04.png">
+						<div class="xian"></div>
+						<span>质量保函</span>
+					</div>
+					<a href="/form.html" class="apply-btn">立即申请</a>
+				</li>
+				<li>
+					<div class="module-box module05">
+						<img src="images/i-03.png">
+						<div class="xian"></div>
+						<span>农民工资保函</span>
+					</div>
+					<a href="/form.html" class="apply-btn">立即申请</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="footer color2">版权所有：山西伟鑫科创科技有限公司</div>
+</body>
+</html>

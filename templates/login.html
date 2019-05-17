@@ -1,0 +1,444 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>电子保函服务平台</title>
+	<link th:href="@{css/font-awesome.min.css}" rel="stylesheet">
+	<link th:href="@{css/style.css}" rel="stylesheet" />
+	<script th:src="@{js/jquery.min.js}"></script>
+	<script th:src="@{js/upload.js}"></script>
+	<script th:src="@{js/gVerify.js}"></script>
+	<style type="text/css">
+		.upload-boxone p{
+			font-size:12px;
+			line-height: 20px;
+		}
+		.login-ul li label input{
+			width:30px;
+		}
+	</style>
+	<script type="text/javascript">
+		$(function(){
+            $(".tab-menu ul li").click(function(){
+                $(this).addClass("on").siblings().removeClass("on"); //切换选中的按钮高亮状态
+                var index=$(this).index(); //获取被按下按钮的索引值，需要注意index是从0开始的
+                $(".tab-box > div").eq(index).show().siblings().hide(); //在按钮选中时在下面显示相应的内容，同时隐藏不需要的框架内容
+            });
+            var maodianID = window.location.hash;
+            if("#regist"==maodianID){
+                $(".tab-menu ul li:eq(1)").click();
+            }
+            $("a:contains('注册')").click(function(){
+                $(".tab-menu ul li:eq(1)").click();
+            });
+			$(":radio[name='organ.threeinone']").change(function(){
+				$(":input[name='organ.socialCreditCode']").prop("disabled",$(this).val()=="0").parent().toggle($(this).val()=="1");
+				$(":input[name='organ.organCode']").prop("disabled",$(this).val()=="1").parent().toggle($(this).val()=="0");
+				$(":input[name='organ.businessLicenceNo']").prop("disabled",$(this).val()=="1").parent().toggle($(this).val()=="0");
+				$(":input[name='organ.taxregNo']").prop("disabled",$(this).val()=="1").parent().toggle($(this).val()=="0");
+				$("#drop_area3").parent(".upload-boxone").toggle($(this).val()=="0");
+				$("#drop_area4").parent(".upload-boxone").toggle($(this).val()=="0");
+			});
+            $(":radio[name='organ.threeinone']:checked").change();
+			$(":radio[name='isLo']").change(function(){
+				$(".inform-box:eq(2)").toggle($(this).val()=="0").find(":input").prop("disabled",$(this).val()=="1");
+			});
+            $(":radio[name='isLo']:checked").change();
+		});
+	</script>
+</head>
+
+<body style="background:#f7f7f7">
+	<div class="login-btn">
+		<div>
+			<span style="margin:0 20px;font-size:18px">电子保函服务平台</span>
+		</div>
+		<ul class="index-nav">
+			<li><a href="/index.html"><i class="fa fa-home"></i>&nbsp;首页</a></li>
+			<!--<li><a href="#">理赔服务</a></li>
+			<li><a href="#">法律法规</a></li>-->
+			<li><a href="/home.html">保单验真</a></li>
+			<li><a href="/order.html">我的订单</a></li>
+			<li><a href="http://note.youdao.com/noteshare?id=a67afbe1ecf17f62c30401c511eb7fe7&sub=E59A4DAD8E2048868D9D22AD2234B6FD">对接文档</a></li>
+			<!--<li><a href="#">关于我们</a></li>-->
+		</ul>
+		<div th:if="${session.LOGIN_USER==null}">
+			<a href="/login.html">登录</a>|<a href="/login.html#regist">注册</a>
+		</div>
+		<div th:if="${session.LOGIN_USER!=null}">
+			<a th:text="${session.LOGIN_USER.organ.organName}"></a>
+			<a href="/logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a>
+		</div>
+	</div>
+	<!--<div class="home-top">
+		<span>电子保函服务平台</span>
+		<ul class="index-nav">
+				<li class="nav-on"><a href="/index.html">首页</a></li>
+				&lt;!&ndash;<li><a href="#">理赔服务</a></li>
+				<li><a href="#">法律法规</a></li>&ndash;&gt;
+				<li><a href="/home.html">保单验真</a></li>
+				&lt;!&ndash;<li><a href="#">关于我们</a></li>&ndash;&gt;
+			</ul>
+		<div class="home-top-rt">
+			<a href="/home.html"><i class="fa fa-home"></i>&nbsp;返回首页</a>|
+			<a href="/login.html" class="margin-l-10">登录</a><a href="/login.html#regist">注册</a>
+		</div>
+	</div>-->
+	<div class="login-box">
+		<div class="tab-menu">
+			<ul>
+				<li class="on">登录</li>
+				<li>注册</li>
+			</ul>
+		</div>
+		<div class="tab-box">
+			<div style="display: block;padding: 0 270px;">
+				<form action="/doLogin.html" method="POST">
+					<ul class="login-ul">
+						<li>
+							<span>用户名/手机号</span>
+							<input name="username" placeholder="请输入用户名/手机号">
+						</li>
+						<li>
+							<span>密码</span>
+							<input name="password" type="password" placeholder="请输入登录密码">
+						</li>
+						<li th:if="${message!=null}">
+							<i th:text="${message}"></i>
+						</li>
+					</ul>
+					<div class="submit-box">
+						<button>立即提交</button>
+						<a href="#" class="margin-l-10 color3">忘记密码？</a>
+					</div>
+				</form>
+			</div>
+			<div>
+				<form action="/regist.html" method="POST" onsubmit="if($(':input[name=agree]:checked').length==0){ alert('请勾选同意《用户服务协议》'); return false}">
+					<ul class="login-ul">
+						<li>
+							<span>用户名</span>
+							<input name="username" placeholder=""  th:value="${account.username}">
+							<i th:text="${errorMap['username']==null?'将会成为您唯一的登入名':errorMap['username']}"></i>
+						</li>
+						<li>
+							<span>手机号</span>
+							<input name="mobile"  th:value="${account.mobile}"/>
+							<i th:text="${errorMap['mobile']}">*</i>
+						</li>
+						<li>
+							<span>短信验证码</span>
+							<input name="smsCode"/>
+							<a href="#" class="yzm-btn">获取验证码</a>
+						</li>
+						<li>
+							<span>邮箱</span>
+							<input name="email" th:value="${account.email}"/>
+							<i th:text="${errorMap['email']}">*</i>
+						</li>
+						<li>
+							<span>密码</span>
+							<input name="password" th:value="${account.password}" type="password"/>
+							<i th:text="${errorMap['password']==null?'必须多于8个字符，并包含大写，小写字母和数字':errorMap['password']}"></i>
+						</li>
+						<li>
+							<span>确认密码</span>
+							<input name="repeatPassword" th:value="${account.password}" type="password"/>
+							<i>*</i>
+						</li>
+						<li>
+							<span>图形验证码</span>
+							<input id="code_input" name="captcha"/>
+							<div style="float: right;margin-top: 5px; margin-left: 10px">
+							  <div id="v_container" style="height: 30px;width: 100%;">
+								  <img src="captcha.jpg" onclick="this.src='captcha.jpg?t='+new Date().getTime()" height="30px"/>
+							  </div>
+							</div>
+							<i th:text="${errorMap['captcha']}">*</i>
+						</li>
+					</ul>
+					<div class="inform-box" >
+						<h3 class="tit-h3">企业信息</h3>
+						<ul class="login-ul">
+							<li>
+								<span>认证类型</span>
+								<label>
+									<input type="radio" name="organ.gradeId" value = "1" checked>非担保机构
+									<input type="radio" name="organ.gradeId" value = "2" disabled>担保机构
+								</label>
+								<i>*</i>
+							</li>
+							<li>
+								<span>机构类型</span>
+								<select name="organ.industryType">
+									<option value="">请选择机构类型</option>
+									<option value="1" th:selected="${account.organ.industryType=='1'}">承建单位/承包商/供货商</option>
+									<option value="2" th:selected="${account.organ.industryType=='2'}">建设单位/业主/开发商</option>
+									<option value="5" th:selected="${account.organ.industryType=='5'}">交易中心</option>
+									<option value="6" th:selected="${account.organ.industryType=='6'}">招标代理</option>
+								</select>
+								<i th:text="${errorMap['organ.industryType']}"></i>
+							</li>
+							<li>
+								<span>组织形式</span>
+								<select name="organ.organForm">
+									<option value="">请选择组织形式</option>
+									<option value="1" th:selected="${account.organ.organForm=='1'?true:false}">国有或国有控股</option>
+									<option value="2" th:selected="${account.organ.organForm=='2'?true:false}">股份有限公司</option>
+									<option value="3" th:selected="${account.organ.organForm=='3'?true:false}">有限责任公司</option>
+									<option value="4" th:selected="${account.organ.organForm=='4'?true:false}">中外合资</option>
+									<option value="5" th:selected="${account.organ.organForm=='5'?true:false}">外商融资</option>
+									<option value="6" th:selected="${account.organ.organForm=='6'?true:false}">股份合作</option>
+									<option value="7" th:selected="${account.organ.organForm=='7'?true:false}">集体</option>
+									<option value="8" th:selected="${account.organ.organForm=='8'?true:false}">合伙</option>
+									<option value="9" th:selected="${account.organ.organForm=='9'?true:false}">其他</option>
+								</select>
+								<i th:text="${errorMap['organ.organForm']}"></i>
+							</li>
+							<li>
+								<span>企业名称</span>
+								<input name="organ.organName" placeholder="请输入企业注册名称" class="input-long" th:value="${account.organ.organName}"/>
+								<i th:text="${errorMap['organ.organName']}">*</i>
+							</li>
+							<li>
+								<span>企业地址</span>
+								<input name="organ.address" placeholder="请输入企业地址" class="input-long" th:value="${account.organ.address}"/>
+								<i th:text="${errorMap['organ.address']}">*</i>
+							</li>
+							<li style="position: relative;">
+								<span>注册资本</span>
+								<input name="organ.regMoney" placeholder="请输入注册资本" th:value="${account.organ.regMoney}"/>
+								<b class="label-b">万元</b>
+								<i th:text="${errorMap['organ.regMoney']}">*</i>
+							</li>
+							<!--<li>
+								<span>开户许可证</span>
+								<input name="organ.bankRegNo" placeholder="请输入开户许可证核准号" class="input-long" th:value="${account.organ.bankRegNo}"/>
+								<i th:text="${errorMap['organ.bankRegNo']}">*</i>
+							</li>-->
+							<li>
+								<span>三证合一</span>
+								<label>
+									<input type="radio" name="organ.threeinone" value = "1" th:checked="${account.organ.threeinone==null||account.organ.threeinone=='1'}">是
+									<input type="radio" name="organ.threeinone" value = "0" th:checked="${account.organ.threeinone=='0'}">否
+								</label>
+								<i>*</i>
+							</li>
+							<li>
+								<span>信用代码</span>
+								<input name="organ.socialCreditCode" placeholder="请输入统一信用代码" class="input-long" th:value="${account.organ.socialCreditCode}"/>
+								<i th:text="${errorMap['organ.socialCreditCode']}">*</i>
+							</li>
+							<li style="display: none;">
+								<span>组织机构代码</span>
+								<input name="organ.organCode" placeholder="请输入组织机构代码" class="input-long" th:value="${account.organ.organCode}"/>
+								<i th:text="${errorMap['organ.organCode']}">*</i>
+							</li>
+							<li style="display: none;">
+								<span>营业执照编号</span>
+								<input name="organ.businessLicenceNo" placeholder="请输入营业执照编号" class="input-long" th:value="${account.organ.businessLicenceNo}"/>
+								<i th:text="${errorMap['organ.businessLicenceNo']}">*</i>
+							</li>
+							<li style="display: none;">
+								<span>税务登记号</span>
+								<input name="organ.taxregNo" placeholder="请输入税务登记号" class="input-long" th:value="${account.organ.taxregNo}"/>
+								<i th:text="${errorMap['organ.taxregNo']}">*</i>
+							</li>
+							<li style="height: 280px;">
+								<div class="upload-img">
+									<span>上传证件</span>
+									<div class="upload-box">
+										<div class="upload-boxone">
+											<div id="drop_area"></div>
+											<p>营业执照副本复印件加盖公章</p>
+											<input name="organ.businessLicenceImg" type="hidden" th:value="${account.organ.businessLicenceImg}"/>
+										</div>
+										<!--<div class="upload-boxone">
+											<div id="drop_area1"></div>
+											<p>银行开户许可证复印件加盖公章</p>
+											<input name="organ.bankRegCertImg" type="hidden" th:value="${account.organ.bankRegCertImg}"/>
+										</div>-->
+										<!--<div class="upload-boxone">
+											<div id="drop_area2"></div>
+											<p>法人身份证正反面复印在一页，加盖公章</p>
+											<input name="legal.identityCardImg" type="hidden" th:value="${account.legal.identityCardImg}"/>
+										</div>-->
+										<div class="upload-boxone" style="display: none">
+											<div id="drop_area3"></div>
+											<p>税务登记证复印件加盖公章</p>
+											<input name="organ.taxregCertImg" type="hidden" th:value="${account.organ.taxregCertImg}"/>
+										</div>
+										<div class="upload-boxone" style="display: none">
+											<div id="drop_area4"></div>
+											<p>组织机构代码证复印件加盖公章</p>
+											<input name="organ.orgnizationCertImg" type="hidden" th:value="${account.organ.orgnizationCertImg}"/>
+										</div>
+										<div class="zhu" style="clear: both;">
+											注：必须填，所传证件必须都加盖公章，图片格式支持：jpg,jpeg,png,大小不能超过2M
+											<br/>
+											<i th:text="${errorMap['organ.businessLicenceImg']}"></i>
+											<i th:text="${errorMap['organ.bankRegCertImg']}"></i>
+											<i th:text="${errorMap['legal.identityCardImg']}"></i>
+											<i th:text="${errorMap['organ.taxregCertImg']}"></i>
+											<i th:text="${errorMap['organ.orgnizationCertImg']}"></i>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!--<div class="inform-box" >
+						<h3 class="tit-h3">法人信息</h3>
+						<ul class="login-ul">
+							<li>
+								<span>法人即运营人</span>
+								<label>
+									<input type="radio" name="isLo" value = "0" th:attr="checked=${account.isLo==null||account.isLo=='0'}">否
+									<input type="radio" name="isLo" value = "1" th:attr="checked=${account.isLo=='1'}">是
+								</label>
+								<i>*</i>
+							</li>
+							<li>
+								<span>法人姓名</span>
+								<input name="legal.realName" placeholder="请输入法人姓名" th:value="${account.legal.realName}"/>
+								<i th:text="${errorMap['legal.realName']}">*</i>
+							</li>
+							<li>
+								<span>手机号码</span>
+								<input name="legal.phone" placeholder="请输入法人手机号码" th:value="${account.legal.phone}"/>
+								<i th:text="${errorMap['legal.phone']}">*</i>
+							</li>
+							<li>
+								<span>身份证号</span>
+								<input name="legal.identityNo" placeholder="请输入法人身份证号" th:value="${account.legal.identityNo}"/>
+								<i th:text="${errorMap['legal.identityNo']}">*</i>
+							</li>
+						</ul>
+					</div>-->
+					<div class="inform-box" >
+						<h3 class="tit-h3">授权投保人信息</h3>
+						<ul class="login-ul">
+						<li>
+							<span>运营人姓名</span>
+							<input name="operator.realName" placeholder="运营人姓名" th:value="${account.operator.realName}"/>
+							<i th:text="${errorMap['operator.realName']}">*</i>
+						</li>
+						<li>
+							<span>运营人电话</span>
+							<input name="operator.phone" placeholder="请输入运营人电话" th:value="${account.operator.phone}"/>
+							<i th:text="${errorMap['operator.phone']}">*</i>
+						</li>
+						<li>
+							<span>身份证号</span>
+							<input name="operator.identityNo" placeholder="请输入运营人身份证号" class="input-long"  th:value="${account.operator.identityNo}"/>
+							<i th:text="${errorMap['operator.identityNo']}">*</i>
+						</li>
+						<li style="height: 280px;">
+							<div class="upload-img">
+								<span>上传证件</span>
+								<div class="upload-box" >
+									<div class="upload-boxone">
+										<div id="drop_area5"></div>
+										<p>运营人身份证正反面复印在一页，加盖公章</p>
+										<input name="operator.identityCardImg" type="hidden" th:value="${account.operator.identityCardImg}"/>
+									</div>
+									<div class="upload-boxone">
+										<div id="drop_area6"></div>
+										<p>公司授权运营人运营授权书，加盖公章</p>
+										<input name="certificateImg" type="hidden" th:value="${account.certificateImg}"/>
+									</div>
+									<div class="zhu" style="clear: both;">
+										注：必须填，所传证件必须都加盖公章，图片格式支持：jpg,jpeg,png,大小不能超过2M
+										<br/>
+										<i th:text="${errorMap['operator.identityCardImg']}"></i>
+										<i th:text="${errorMap['certificateImg']}"></i>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+					</div>
+					<div class="margin-t-15">
+						<label><input type="checkbox" name="agree"/>我已同意并阅读<a href="#" class="color3">《用户服务协议》</a></label>
+					</div>
+					<div class="submit-box">
+						<button id="my_button">立即注册</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="footer-h">版权所有：山西伟鑫科创科技有限公司</div>
+ <!-- 高度计算 -->
+<script>
+	//监听
+	window.onresize = function () {
+		changeHeight();
+	};
+	function changeHeight() {
+		var h = $(window).height();//获取页面可见高度 
+		var h1 = (h - 60-60-122) + "px";
+		$(".login-box").css("min-height", h1);
+	};
+
+	//页面加载时
+	$(function () {
+		var h = $(window) .height();//获取页面可见高度 
+		var h1 = (h - 60-60-122) + "px";
+		$(".login-box").css("min-height", h1);
+	});
+</script> 
+<!--验证码--> 
+
+<!--<script>
+			var verifyCode = new GVerify("v_container");
+
+			document.getElementById("my_button").onclick = function(){
+				var res = verifyCode.validate(document.getElementById("code_input").value);
+				if(res){
+					alert("验证正确");
+				}else{
+					alert("验证码错误");
+				}
+			}
+</script>-->
+<!--上传图片-->
+<script type="text/javascript">
+	function initDragImgUpload(area,input){
+        var dragImgUpload = new DragImgUpload(area,{
+            callback:function (files) {
+                //回调函数，可以传递给后台等等
+                var file = files[0];
+                var form = new FormData(); // FormData 对象
+                form.append("file", file); // 文件对象
+                form.enctype="multipart/form-data";
+                $.ajax({
+                    url:"/uploadImg.json",
+                    data:form,
+                    type:"post",
+                    dataType:"json",
+                    processData: false,
+                    contentType: false,
+                    success:function(result){
+                        if(result.success){
+                            $(input).val(result.data)
+                        }
+                    }
+                })
+                console.log(file.name);
+            }
+        });
+        if($(input).val()!=''){
+            $(area).find("img").attr("src",$(input).val());
+		}
+	}
+	initDragImgUpload("#drop_area",":input[name='organ.businessLicenceImg']");
+	/*initDragImgUpload("#drop_area1",":input[name='organ.bankRegCertImg']");
+    initDragImgUpload("#drop_area2",":input[name='legal.identityCardImg']");*/
+    initDragImgUpload("#drop_area3",":input[name='organ.taxregCertImg']");
+    initDragImgUpload("#drop_area4",":input[name='organ.orgnizationCertImg']");
+    initDragImgUpload("#drop_area5",":input[name='operator.identityCardImg']");
+    initDragImgUpload("#drop_area6",":input[name='certificateImg']");
+</script>
+</body>
+</html>
