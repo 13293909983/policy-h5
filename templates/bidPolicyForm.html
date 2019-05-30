@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>电子保函服务平台</title>
+	<link th:href="@{css/index.css}" rel="stylesheet" />
 	<link th:href="@{css/font-awesome.min.css}" rel="stylesheet">
 	<link th:href="@{css/style.css}" rel="stylesheet" />
 	<script th:src="@{js/jquery.min.js}"></script>
@@ -67,12 +68,19 @@
 </head>
 
 <body style="background:#f7f7f7;">
-	<div class="top-bner">
-		<span class="head-tit">电子保函服务平台</span>
-		<span class="rt margin-r-20 btn-out">
-			<a href="/logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a>
-		</span>
+	<div class="top_wrap">
+		<div class="login_wrap">
+			<div class="login_a" th:if="${session.LOGIN_USER==null}">
+				<a href="/login.html">登录</a><span style="margin-left: 0.04rem;">|</span>
+				<a href="/regist.html">注册</a>
+			</div>
+			<div class="login_b" th:if="${session.LOGIN_USER!=null}">
+				<a th:text="${session.LOGIN_USER.organ.organName}"></a><span style="margin-right: 0.04rem;">|</span>
+				<a href="/logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a>
+			</div>
+		</div>
 	</div>
+	<header></header>
 	<form method="post" action="/applyBidPolicy.json">
 		<div class="form-box">
 			<div class="form-tit">被保险人信息：</div>
@@ -224,6 +232,6 @@
 			</div>
 		</div>
 	</form>
-	<div class="footer-n">版权所有：山西伟鑫科创科技有限公司</div>
+	<footer></footer>
 </body>
 </html>

@@ -23,7 +23,7 @@
 			<li><a href="http://note.youdao.com/noteshare?id=a67afbe1ecf17f62c30401c511eb7fe7&sub=E59A4DAD8E2048868D9D22AD2234B6FD">对接文档</a></li>
 		</ul>
 		<div th:if="${session.LOGIN_USER==null}">
-			<a href="/login.html">登录</a>|<a href="/login.html#regist">注册</a>
+			<a href="/login.html">登录</a>|<a href="/regist.html">注册</a>
 		</div>
 		<div th:if="${session.LOGIN_USER!=null}">
 			<a th:text="${session.LOGIN_USER.organ.organName}"></a>

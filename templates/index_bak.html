@@ -19,7 +19,7 @@
 				<!--<li><a href="#">关于我们</a></li>-->
 			</ul>
 		<div th:if="${session.LOGIN_USER==null}">
-			<a href="/login.html">登录</a>|<a href="/login.html#regist">注册</a>
+			<a href="/login.html">登录</a>|<a href="/regist.html">注册</a>
 		</div>
 		<div th:if="${session.LOGIN_USER!=null}">
 			<a href="/logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a>

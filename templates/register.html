@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta charset="utf-8" name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<title>电子保函服务平台</title>
+<link rel="stylesheet" type="text/css" href="../css/index.css">
+<link rel="stylesheet" type="text/css" href="../css/animate.min.css">
+<link rel="stylesheet" type="text/css" href="../css/new_file.css">
+<script src="../js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="../js/index.js" type="text/javascript"></script>
+</head>
+<body>
+	<div class="top_wrap">
+		<div class="login_wrap">
+			<div class="login_a">
+
+				<a href="/login.html">登录</a><span style="margin-left: 0.04rem;">|</span>
+				<a href="/regist.html">注册</a>
+			</div>
+			<!--<a>山西伟鑫科创信息技术服务有限公司</a>
+		<div class="login_b">
+			<a href="#"><span style="margin-right: 0.04rem;">|</span>退出</a>
+		</div>-->
+		</div>
+	</div>
+	<header></header>
+	<div class="body_main">
+		<div class="topone_wrap">
+			<div class="topone_title">
+				<p>注册</p>
+			</div>
+		</div>
+		<div class="register_wrap">
+			<div class="register_my">
+				<div class="tab-box">
+					<form action="/regist.html" method="POST" onsubmit="if($(':input[name=agree]:checked').length==0){ alert('请勾选同意《用户服务协议》'); return false}">
+						<div class="box_wrap">
+							<div class="inform-box">
+								<div class="inform-box-one">
+									<img src="../images/01_03.png" />
+								</div>
+								<h3 class="tit-h3">企业信息</h3>
+	
+								<ul class="login-ul">
+	
+									<li>
+										<span>用户名</span> 
+										<input name="username" placeholder="" th:value="${account.username}">
+										<i th:text="${errorMap['username']==null?'将会成为您唯一的登入名':errorMap['username']}"></i>
+									</li>
+									<li>
+										<span>手机号</span> 
+										<input name="mobile" th:value="${account.mobile}"/>
+										<i th:text="${errorMap['mobile']}">*</i>
+									</li>
+									<li>
+										<span>短信验证码</span> 
+										<input name="smsCode"/>
+										<a href="#" class="yzm-btn">获取验证码</a>
+									</li>
+									<li>
+										<span>邮箱</span> 
+										<input name="email" th:value="${account.email}"/>
+										<i th:text="${errorMap['email']}">*</i>
+									</li>
+									<li>
+										<span>密码</span> 
+										<input name="password" th:value="${account.password}"/>
+										<i th:text="${errorMap['password']==null?'必须多于8个字符，并包含大写，小写字母和数字':errorMap['password']}"></i>
+									</li>
+									<li>
+										<span>确认密码</span> 
+										<input name="repeatPassword" th:value="${account.password}"/>
+										<i>*</i>
+									</li>
+									<li>
+										<span>图形验证码</span> 
+										<input id="code_input" name="captcha"/>
+										<div style="float: right; margin-top: -0.22rem; margin-left: 0.10rem">
+											<div id="v_container" style="height: 0.34rem; width: 100%;"></div>
+										</div>
+										<i th:text="${errorMap['captcha']}">*</i>
+									</li>
+								</ul>
+							</div>
+							<div class="inform-box">
+								<div class="inform-box-one">
+									<img src="../images/02_03.png" />
+								</div>
+								<h3 class="tit-h3">企业信息</h3>
+								<ul class="reg-ul">
+									<li>
+										<span>认证类型</span> 
+										<label> 
+											<input type="radio" name="organ.gradeId" value = "1" checked>非担保机构
+											<input type="radio" name="organ.gradeId" value = "2" disabled>担保机构
+										</label> 
+										<i>*</i>
+									</li>
+									<li>
+										<span>机构类型</span> 
+										<select name="organ.industryType">
+											<option value="">请选择机构类型</option>
+											<option value="1" th:selected="${account.organ.industryType=='1'}">承建单位/承包商/供货商</option>
+											<option value="2" th:selected="${account.organ.industryType=='2'}">建设单位/业主/开发商</option>
+											<option value="5" th:selected="${account.organ.industryType=='5'}">交易中心</option>
+											<option value="6" th:selected="${account.organ.industryType=='6'}">招标代理</option>
+										</select>
+										<i th:text="${errorMap['organ.industryType']}"></i>
+									</li>
+									<li>
+										<span>企业名称</span> 
+										<input placeholder="请输入企业注册名称" name="organ.organName" class="input-long" th:value="${account.organ.organName}"/> 
+										<i th:text="${errorMap['organ.organName']}">*</i>
+									</li>
+									<li>
+										<span>企业地址</span>
+										<input placeholder="请输入企业地址" name="organ.address" class="input-long" th:value="${account.organ.address}"/>
+										<i th:text="${errorMap['organ.address']}">*</i>
+									</li>
+									<!-- <li>
+										<span>开户许可证</span> 
+										<input placeholder="请输入开户许可证核准号" />
+										<i>*</i>
+									</li> -->
+									<li style="position: relative;">
+										<span>注册资本</span> 
+										<input  name="organ.regMoney" placeholder="请输入注册资本" th:value="${account.organ.regMoney}"/>
+										<b class="label-b">万元</b>
+										<i th:text="${errorMap['organ.regMoney']}">*</i>
+									</li>
+									<li>
+										<span>组织形式</span> 
+										<select name="organ.organForm">
+											<option value="">请选择组织形式</option>
+											<option value="1" th:selected="${account.organ.organForm=='1'?true:false}">国有或国有控股</option>
+											<option value="2" th:selected="${account.organ.organForm=='2'?true:false}">股份有限公司</option>
+											<option value="3" th:selected="${account.organ.organForm=='3'?true:false}">有限责任公司</option>
+											<option value="4" th:selected="${account.organ.organForm=='4'?true:false}">中外合资</option>
+											<option value="5" th:selected="${account.organ.organForm=='5'?true:false}">外商融资</option>
+											<option value="6" th:selected="${account.organ.organForm=='6'?true:false}">股份合作</option>
+											<option value="7" th:selected="${account.organ.organForm=='7'?true:false}">集体</option>
+											<option value="8" th:selected="${account.organ.organForm=='8'?true:false}">合伙</option>
+											<option value="9" th:selected="${account.organ.organForm=='9'?true:false}">其他</option>
+										</select>
+										<i th:text="${errorMap['organ.organForm']}"></i>
+									</li>
+									<li>
+										<span>三证合一</span>
+										<label> 
+											<input type="radio" name="organ.threeinone" value = "1" th:checked="${account.organ.threeinone==null||account.organ.threeinone=='1'}">是
+											<input type="radio" name="organ.threeinone" value = "0" th:checked="${account.organ.threeinone=='0'}">否
+										</label> 
+										<i>*</i>
+									</li>
+									<li>
+										<span>信用代码</span>
+										<input placeholder="请输入统一信用代码" name="organ.socialCreditCode" class="input-long" th:value="${account.organ.socialCreditCode}"/>
+										<i th:text="${errorMap['organ.socialCreditCode']}">*</i>
+									</li>
+									<div class="upload-img">
+										<span>上传证件</span>
+										<div class="upload-box">
+											<div class="upload-boxone">
+												<div id="drop_area"></div>
+												<p>营业执照副本复印件加盖公章</p>
+												<input name="organ.businessLicenceImg" type="hidden" th:value="${account.organ.businessLicenceImg}"/>
+											</div>
+											<!--<div class="upload-boxone">
+												<div id="drop_area1"></div>
+												<p>银行开户许可证复印件加盖公章</p>
+												<input name="organ.bankRegCertImg" type="hidden" th:value="${account.organ.bankRegCertImg}"/>
+											</div>-->
+											<!--<div class="upload-boxone">
+												<div id="drop_area2"></div>
+												<p>法人身份证正反面复印在一页，加盖公章</p>
+												<input name="legal.identityCardImg" type="hidden" th:value="${account.legal.identityCardImg}"/>
+											</div>-->
+											<div class="upload-boxone" style="display: none">
+												<div id="drop_area3"></div>
+												<p>税务登记证复印件加盖公章</p>
+												<input name="organ.taxregCertImg" type="hidden" th:value="${account.organ.taxregCertImg}"/>
+											</div>
+											<div class="upload-boxone" style="display: none">
+												<div id="drop_area4"></div>
+												<p>组织机构代码证复印件加盖公章</p>
+												<input name="organ.orgnizationCertImg" type="hidden" th:value="${account.organ.orgnizationCertImg}"/>
+											</div>
+											<div class="zhu" style="clear: both;">
+												注：必须填，所传证件必须都加盖公章，图片格式支持：jpg,jpeg,png,大小不能超过2M
+												<br/>
+												<i th:text="${errorMap['organ.businessLicenceImg']}"></i>
+												<i th:text="${errorMap['organ.bankRegCertImg']}"></i>
+												<i th:text="${errorMap['legal.identityCardImg']}"></i>
+												<i th:text="${errorMap['organ.taxregCertImg']}"></i>
+												<i th:text="${errorMap['organ.orgnizationCertImg']}"></i>
+											</div>
+										</div>
+									</div>
+								</ul>
+							</div>
+							<!-- <div class="inform-box">
+								<div class="inform-box-one">
+									<img src="../images/03_03.png" />
+								</div>
+								<h3 class="tit-h3">法人信息</h3>
+								<ul class="reg-ul">
+									<li>
+										<span>法人即运营人</span>
+										<label>
+											<input type="radio" name="isLo" value = "0" th:attr="checked=${account.isLo==null||account.isLo=='0'}">否
+											<input type="radio" name="isLo" value = "1" th:attr="checked=${account.isLo=='1'}">是
+										</label> 
+										<i>*</i>
+									</li>
+									<li>
+										<span>法人姓名</span>
+										<input name="legal.realName" placeholder="请输入法人姓名" th:value="${account.legal.realName}"/>
+										<i th:text="${errorMap['legal.realName']}">*</i>
+									</li>
+									<li>
+										<span>手机号码</span>
+										<input name="legal.phone" placeholder="请输入法人手机号码" th:value="${account.legal.phone}"/>
+										<i th:text="${errorMap['legal.phone']}">*</i>
+									</li>
+									<li>
+										<span>身份证号</span>
+										<input name="legal.identityNo" placeholder="请输入法人身份证号" th:value="${account.legal.identityNo}"/>
+										<i th:text="${errorMap['legal.identityNo']}">*</i>
+									</li>
+								</ul>
+							</div> -->
+							<div class="inform-box">
+								<div class="inform-box-one">
+									<img src="../images/03_03.png" />
+								</div>
+								<h3 class="tit-h3">授权担保人信息</h3>
+								<ul class="reg-ul">
+									<li>
+										<span>运营人姓名</span>
+										<input name="operator.realName" placeholder="运营人姓名" th:value="${account.operator.realName}"/>
+										<i th:text="${errorMap['operator.realName']}">*</i>
+									</li>
+									<li>
+										<span>运营人电话</span>
+										<input name="operator.phone" placeholder="请输入运营人电话" th:value="${account.operator.phone}"/>
+										<i th:text="${errorMap['operator.phone']}">*</i>
+									</li>
+									<li>
+										<span>身份证号</span>
+										<input name="operator.identityNo" placeholder="请输入运营人身份证号" class="input-long" th:value="${account.operator.identityNo}"/>
+										<i th:text="${errorMap['operator.identityNo']}">*</i>
+									</li>
+									<div class="upload-img">
+										<span>上传证件</span>
+										<div class="upload-box">
+											<div class="upload-boxone">
+												<div id="drop_area5"></div>
+												<p>运营人身份证正反面复印在一页，加盖公章</p>
+												<input name="operator.identityCardImg" type="hidden" th:value="${account.operator.identityCardImg}"/>
+											</div>
+											<div class="upload-boxone">
+												<div id="drop_area6"></div>
+												<p>公司授权运营人运营授权书，加盖公章</p>
+												<input name="certificateImg" type="hidden" th:value="${account.certificateImg}"/>
+											</div>
+											<div class="zhu" style="clear: both;">
+												注：必须填，所传证件必须都加盖公章，图片格式支持：jpg,jpeg,png,大小不能超过2M
+												<br/>
+												<i th:text="${errorMap['operator.identityCardImg']}"></i>
+												<i th:text="${errorMap['certificateImg']}"></i>
+											</div>
+										</div>
+									</div>
+								</ul>
+							</div>
+							<div class="margin-t-15">
+								<label>
+									<p>
+										<input type="checkbox" name="agree"/>我已同意并阅读<button type="button" class="color3 reg_show" >《用户服务协议》</button>
+									</p>
+								</label>
+							</div>
+							<div class="agree_wrap" >
+								<div class="agree_all">
+									<div id="btn" class="btn_op btn_close"> 
+										<img src="../images/xx_06.png" /><p>关闭</p>
+									</div>
+									<div class="agree_content">
+										<p>欢迎“您”（以下或称“用户”）与我方“山西伟鑫科创信息技术服务有限公司”（以下称“本公司”）共同签署《用户服务协议》（以下称“本协议”），本协议阐述之条款和条件适用于您使用“晋E惠”（所涉域名为wxjinrong.com下同）所提供的在山西省招投标市场中进行在线信息发布、保函交易、保函查验和各项服务(下称“服务”)。</p>
+										<h4>1.接受条款</h4>
+										<p>以任何方式进入晋E惠网站即表示您已充分阅读、理解并同意接受本协议的条款和条件。本公司有权根据业务需要酌情修订“条款”，并在网站上予以公告。如您不同意相关修订，请您立即停止使用“服务”。经修订的“条款”一经在晋E惠网站公布，即产生效力。如您继续使用“服务”，则将视为您已接受经修订的“条款”，当您与本公司发生争议时，应以最新的“条款”为准。 本服务协议内容包括协议正文及所有晋E惠网站已发布的各类规则。所有规则为协议不可分割的一部分，与协议正文具有同等法律效力。</p>
+										<h4>2.服务使用对象</h4>
+										<p>“服务”仅供能够根据中国相关法律订立具有法律约束力的合约的公司使用。因此，用户需为依据中国法律设立的法人或非法人主体且具备独立履约能力，用户在平台的操作人员年龄必须在十八周岁或以上且具有完全行为能力，才可使用本服务。如不符合本项条件，请勿使用“服务”，如使用“服务”，则视为其自认满足本项条件。本公司可随时自行全权决定拒绝向任何人士提供“服务”。</p>
+										<h4>3.收费</h4>
+										<p>本公司保留在根据第1条通知您后，收取“服务”费用的权利。您因进行交易、向本公司获取有偿服务或接触本公司服务器而发生的所有应纳税赋，以及相关硬件、软件、通讯、网络服务及其他方面的费用均由您自行承担。本公司保留在无须发出书面通知，仅在晋E惠网站公示的情况下，暂时或永久地更改或停止部分或全部“服务”的权利。</p>
+										<h4>4.晋E惠网站仅作为交易地点</h4>
+										<p>晋E惠网站仅作为用户自主选择交易对象，选购保函产品和服务的交易地点或场所。但是，本公司不能控制交易所涉及的内容、产品、广告或其他信息的真实性或准确性，以及交易方履行其在交易协议项下的各项义务的能力。本公司不能也不会控制交易各方能否履行协议义务。此外，用户应注意到，与以欺诈手段行事的人进行交易的风险是客观存在的。</p>
+										<h4>5.您的资料和交易的产品</h4>
+										<p>“您的资料”包括您在注册、交易或列举产品过程中、在任何公开信息场合或通过任何电子邮件形式，向本公司或其他用户提供的任何资料，包括数据、文本、软件、音乐、声响、照片、图画、影像、词句或其他材料。您应对“您的资料”负全部责任，而本公司仅作为您在网上发布和刊登“您的资料”的被动渠道。但是，倘若本公司认为“您的资料”可能使本公司承担任何法律或道义上的责任，或可能使本公司(全部或部分地)失去本公司的互联网服务供应商或其他供应商的服务，或您未在本公司规定的期限内登录或再次登录网站，则本公司可自行全权决定对“您的资料”采取本公司认为必要或适当的任何行动，包括但不限于删除该类资料。您应保证您对提交给本公司的“您的资料”拥有全部权利，包括全部版权。您确认，本公司没有责任去认定或决定您提交给本公司的资料哪些是应当受到保护的，对享有“服务”的其他用户使用“您的资料”，本公司也不必负责。</p>
+										<h4>5.1注册义务</h4>
+										<p>如您在晋E惠网站注册，您同意：(a)根据晋E惠网站刊载的企业资料表格的要求，提供关于您的真实、准确、完整和反映当前情况的资料；(b)维持并及时更新企业资料（包括但不限企业工商信息和联系人信息等），使其保持真实、准确、完整和反映当前情况。倘若您提供任何不真实、不准确、不完整或不能反映当前情况的资料，或本公司有合理理由怀疑该等资料不真实、不准确、不完整或不能反映当前情况，本公司有权暂停或终止您的注册身份或账号服务，并拒绝您在目前或将来对“服务”(或其任何部分)以任何形式使用。</p>
+										<p>如您以本公司旗下保函查验平台会员身份以您保函查验平台帐号和密码，或以电子保函服务平台会员身份以您电子保函服务平台帐号和密码登录晋E惠网站，则您在此不可撤销地明确授权本公司自保函查验平台或电子保函服务平台获取您在保函查验平台或电子保函服务平台的注册信息、交易/支付数据等信息和数据，并不会就此要求本公司承担任何违约或侵权责任。您在晋E惠网站完成注册后，在您的授权下，同意配合本公司完成您的CA认证手续，用于签订电子合同和开具电子保函。</p>
+										<h4>5.2会员注册名、密码保密</h4>
+										<p>在您按照注册页面提示填写信息、阅读并同意本协议并完成全部注册程序后或以其他本公司允许的方式实际使用晋E惠网站服务时，您即成为晋E惠网站会员（亦称会员），本公司根据会员注册名和密码确认您的身份。您须自行负责对您的会员注册名和密码保密，且须对您在会员注册名和密码下发生的所有活动（包括但不限于发布信息资料、网上点击同意或提交各类规则协议、网上续签协议或购买服务等）承担责任。您同意：(a)如发现任何人未经授权使用您的会员注册名或密码，或发生违反保密规定的任何其他情况，您会立即通知本公司；及(b)确保您在每个上网时段结束时，以正确步骤离开网站。本公司不能也不会对因您未能遵守本款规定而发生的任何损失或损毁负责。您理解本公司对您的请求采取行动需要合理时间，本公司对在采取行动前已经产生的后果（包括但不限于您的任何损失）不承担任何责任。</p>
+										<h4>5.3关于您的资料的规则</h4>
+										<p>您同意，“您的资料”和您提供在晋E惠网站上交易的任何“产品”（泛指一切可供依法交易的、有形的或无形的、以各种形态存在的某种具体的产品）遵循以下规则：</p>
+										<p>a.不会有欺诈成份，与售卖伪造或盗窃无涉；</p>
+										<p>b.不会侵犯任何第三者对该产品享有的物权，或版权、专利、商标、商业秘密或其他知识产权，或隐私权、名誉权；</p>
+										<p>c.不会违反任何法律、法规、条例或规章(包括但不限于关于保护消费者、不正当竞争或虚假广告的法律、法规、条例或规章)；</p>
+										<p>d.不会含有诽谤（包括商业诽谤）、非法恐吓或非法骚扰的内容；</p>
+										<p>e.不会含有淫秽、或包含任何儿童色情内容；</p>
+										<p>f.不会含有蓄意毁坏、恶意干扰、秘密地截取或侵占任何系统、数据或个人资料的任何病毒、伪装破坏程序、电脑蠕虫、定时程序炸弹或其他电脑程序；</p>
+										<p>g.不会直接或间接与下述各项产品或服务连接，或包含对下述各项产品或服务的描述：(i)本协议项下禁止的产品或服务；或(ii)您无权连接或包含的产品或服务。此外，您同意不会：</p>
+										<p>(iii)在与任何连锁信件、大量胡乱邮寄的电子邮件、滥发电子邮件或任何复制或多余的信息有关的方面使用“服务”；(iv)未经其他人士同意，利用“服务”收集其他人士的电子邮件地址及其他资料；或(v)利用“服务”制作虚假的电子邮件地址，或以其他形式试图在发送人的身份或信息的来源方面误导其他人士。</p>
+										<h4>5.4保函备案</h4>
+										<p>您应确保在晋E惠平台备案的保函真实、准确、完整，因保函内容的真实性、准确性和完整性引起的法律纠纷由备案人自行承担，晋E惠平台作为保函查询服务平台对此不承担任何责任。</p>
+										<h4>5.5被禁止产品信息</h4>
+										<p>您不得在本公司网站公布或通过本公司网站交易：(a)可能使本公司违反任何相关法律、法规、条例或规章的任何产品信息；或(b)本公司认为应禁止或不适合通过本网站交易的任何产品信息。</p>
+										<h4>6.您授予的许可使用权</h4>
+										<p>您完全理解并同意不可撤销地授予本公司及其关联公司（指除本公司外晋E惠网站的经营者的单称或合称）下列权利：</p>
+										<p>6.1当您违反本协议或与本公司签订的其他协议的约定，本公司有权以任何方式通知关联公司，要求其对您的权益采取限制措施，要求关联公司中止、终止对您提供部分或全部服务，且在其经营或实际控制的网站公示您的违约情况。</p>
+										<p>6.2同样，当您向本公司关联公司作出任何形式的承诺，且相关公司已确认您违反了该承诺，则本公司有权立即按您的承诺约定的方式对您的账户采取限制措施，包括但不限于中止或终止向您提供服务，并公示相关公司确认的您的违约情况。您了解并同意，本公司无须就相关确认与您核对事实，或另行征得您的同意，且本公司无须就此限制措施或公示行为向您承担任何的责任。</p>
+										<h4>7.隐私</h4>
+										<p>尽管有第6条所规定的许可使用权，但基于保护您的隐私是本公司的一项基本原则，为此本公司还将根据晋E惠网站的隐私政策使用"您的资料"。晋E惠网站隐私政策的全部条款属于本协议的一部分，因此，您必须仔细阅读。</p>
+										<h4>8.交易程序</h4>
+										<h4>8.1添加产品描述</h4>
+										<p>产品描述是由您提供的在晋E惠网站上展示的文字描述、图画或照片，可以是(a)对您拥有而您希望出售的产品的描述；或(b)对您正寻找的产品的描述。您可在晋E惠网站发布任一类产品描述，或两种类型同时发布，条件是，您必须将该等产品描述归入正确的类目内。本公司不对产品描述的准确性或内容负责。</p>
+										<h4>8.2处理交易争议</h4>
+										<p>(i)本公司不涉及用户间因交易而产生的法律关系及法律纠纷，不会且不能牵涉进交易各方的交易当中。倘若您与一名或一名以上用户，或与您通过晋E惠网站获取其服务的第三者服务用户（包括但不限保证人、被保证人、受益人等）发生争议，您免除本公司在因该等争议而引起的，或在任何方面与该等争议有关的不同种类和性质的任何(实际和后果性的)权利主张、要求和损害赔偿等方面的责任。</p>
+										<p>(i)本公司不涉及用户间因交易而产生的法律关系及法律纠纷，不会且不能牵涉进交易各方的交易当中。倘若您与一名或一名以上用户，或与您通过晋E惠网站获取其服务的第三者服务用户（包括但不限保证人、被保证人、受益人等）发生争议，您免除本公司在因该等争议而引起的，或在任何方面与该等争议有关的不同种类和性质的任何(实际和后果性的)权利主张、要求和损害赔偿等方面的责任。</p>
+										<p>(iii)本公司有权通过电子邮件等联系方式向您了解情况，并将所了解的情况通过电子邮件等方式通知对方，您有义务配合晋E惠网站的工作。</p>
+										<p>(ⅳ)经生效法律文书确认用户存在违法或违反本协议行为或者本公司自行判断用户涉嫌存在违法或违反本协议行为的，本公司有权在晋E惠网站上以网络发布形式公布用户的违法行为并做出处罚（包括但不限于限权、终止服务等）。</p>
+										<h4>9.交易系统</h4>
+										<h4>9.1不得操纵交易</h4>
+										<p>您同意不利用帮助实现蒙蔽或欺骗意图的同伙(下属的客户或第三方)，操纵与另一交易方所进行的商业谈判的结果。</p>
+										<p>9.2系统完整性</p>
+										<p>您同意，您不得使用任何装置、软件或例行程序干预或试图干预晋E惠网站的正常运作或正在本公司网站上进行的任何交易。您不得采取对任何将不合理或不合比例的庞大负载加诸本公司网络结构的行动。您不得向任何第三者披露您的密码，或与任何第三者共用您的密码，或为任何未经批准的目的使用您的密码。</p>
+										<h4>9.3反馈</h4>
+										<p>您不得采取任何可能损害信息反馈系统的完整性的行动，诸如：利用第二会员身份标识或第三者为您本身留下正面反馈；利用第二会员身份标识或第三者为其他用户留下负面反馈(反馈数据轰炸)；或在用户未能履行交易范围以外的某些行动时，留下负面的反馈(反馈恶意强加)。</p>
+										<h4>9.4不作商业性利用</h4>
+										<p>您同意，您不得对任何资料作商业性利用，包括但不限于在未经本公司授权高层管理人员事先书面批准的情况下，复制在晋E惠网站上展示的任何资料并用于商业用途。</p>
+										<h4>10.不良信息使用</h4>
+										<p>您在晋E惠网站查询获得的不良信息仅限在晋E惠网站交易与服务环节查阅及使用，不得以截图或复制等其他方式用于其他目的，否则由此引起的后果应由您承担相应的法律责任。</p>
+										<h4>11.终止或访问限制</h4>
+										<p>您同意，在本公司未向您收费的情况下，本公司可自行全权决定以任何理由(包括但不限于本公司认为您已违反本协议的字面意义和精神，或您以不符合本协议的字面意义和精神的方式行事，或您在超过12个月的时间内未以您的帐号及密码登录网站)终止您的“服务”密码、帐户(或其任何部分)或您对“服务”的使用，并删除和丢弃您在使用“服务”中提交的“您的资料”。您同意，在本公司向您收费的情况下，本公司应基于合理的怀疑且经电子邮件通知的情况下实施上述终止服务的行为。本公司同时可自行全权决定，在发出通知或不发出通知的情况下，随时停止提供“服务”或其任何部分。您同意，根据本协议的任何规定终止您使用“服务”之措施可在不发出事先通知的情况下实施，并承认和同意，本公司可立即使您的帐户无效，或撤销您的帐户以及在您的帐户内的所有相关资料和档案，和/或禁止您进一步接入该等档案或“服务”。帐号终止后，本公司没有义务为您保留原帐号中或与之相关的任何信息，或转发任何未曾阅读或发送的信息给您或第三方。此外，您同意，本公司不会就终止您接入“服务”而对您或任何第三者承担任何责任。第13、14、15和21各条款应在本协议终止后继续有效。</p>
+										<h4>12.违反规则的后果</h4>
+										<p>在不限制其他补救措施的前提下，发生下述任一情况，本公司可立即发出警告，暂时中止、永久中止或终止您的会员资格，删除您的任何现有产品信息，以及您在网站上展示的任何其他资料：(i)您违反本协议；(ii)本公司无法核实或鉴定您向本公司提供的任何资料；或(iii)本公司相信您的行为可能会使您、本公司用户或通过本公司或本公司网站提供服务的第三者服务供应商发生任何法律责任。在不限制任何其他补救措施的前提下，若发现您从事涉及本公司网站的诈骗活动，本公司可暂停或终止您的帐户。</p>
+										<h4>13.服务“按现状”提供</h4>
+										<p>本公司会尽一切努力使您在使用共筑网的过程中获得良好的体验感。遗憾的是，本公司不能随时预见到任何技术上的问题或其他困难。该等困难可能会导致数据损失或其他服务中断。为此，您明确理解和同意，您使用“服务”的风险由您自行承担。“服务”以“按现状”和“按可得到”的基础提供。本公司明确声明不作出任何种类的所有明示或暗示的保证，包括但不限于关于适销性、适用于某一特定用途和无侵权行为等方面的保证。本公司对下述内容不作保证：(i)“服务”会符合您的要求；(ii)“服务”不会中断，且适时、安全和不带任何错误；(iii)通过使用“服务”而可能获取的结果将是准确或可信赖的；及(iv)您通过“服务”而购买或获取的任何产品、服务、资料或其他材料的质量将符合您的预期。通过使用“服务”而下载或以其他形式获取任何材料是由您自行全权决定进行的，且与此有关的风险由您自行承担，对于因您下载任何该等材料而发生的您的电脑系统的任何损毁或任何数据损失，您将自行承担责任。您从本公司或通过或从“服务”获取的任何口头或书面意见或资料，均不产生未在本协议内明确载明的任何保证。</p>
+										<h4>14.责任范围</h4>
+										<p>您明确理解和同意，本公司不对因下述任一情况而发生的任何损害赔偿承担责任，包括但不限于利润、商誉、使用、数据等方面的损失或其他无形损失的损害赔偿(无论本公司是否已被告知该等损害赔偿的可能性)：(i)使用或未能使用“服务”；(ii)因通过或从“服务”购买或获取任何产品、样品、数据、资料或服务，或通过或从“服务”接收任何信息或缔结任何交易所产生的获取替代产品和服务的费用；(iii)未经批准接入或更改您的传输资料或数据；(iv)任何第三者对“服务”的声明或关于“服务”的行为；或(v)因任何原因而引起的与“服务”有关的任何其他事宜，包括疏忽。</p>
+										<h4>15.赔偿</h4>
+										<p>您同意，因您违反本协议或经在此提及而纳入本协议的其他文件，或因您违反了法律或侵害了第三方的权利，而使第三方对本公司及其董事、职员、代理人提出索赔要求（包括司法费用和其他专业人士的费用），您必须赔偿给本公司及董事、职员、代理人，使其等免遭损失。</p>
+										<h4>16.遵守法律</h4>
+										<p>您应遵守与您使用“服务”，以及与您购买和销售任何产品以及提供交易信息有关的所有相关的法律、法规、条例和规章。</p>
+										<h4>17.广告</h4>
+										<p>您与在“服务”上或通过“服务”物色的刊登广告人士通讯或进行业务往来或参与其推广活动，包括就相关产品或服务付款和交付相关产品或服务，以及与该等业务往来相关的任何其他条款、条件、保证或声明，仅限于在您和该刊登广告人士之间发生。您同意，对于因任何该等业务往来或因在“服务”上出现该等刊登广告人士而发生的任何种类的任何损失或损毁，本公司无需负责或承担任何责任。</p>
+										<h4>18.链接</h4>
+										<p>“服务”或第三者均可提供与其他万维网网站或资源的链接。由于本公司并不控制该等网站和资源，您承认并同意，本公司并不对该等外在网站或资源的可用性负责，且不认可该等网站或资源上或可从该等网站或资源获取的任何内容、宣传、产品、服务或其他材料，也不对其等负责或承担任何责任。您进一步承认和同意，对于任何因使用或信赖从此类网站或资源上获取的此类内容、宣传、产品、服务或其他材料而造成（或声称造成）的任何直接或间接损失，本公司均不承担责任。</p>
+										<h4>19.有效通知</h4>
+										<h4>19.1有效联系方式</h4>
+										<p>19.1.1您在注册成为会员，并接受本公司服务时，您应该向本公司提供真实有效的联系方式（包括您的电子邮件地址、联系电话、联系地址等），对于联系方式发生变更的，您有义务及时更新有关信息，并保持可被有效联系的状态。</p>
+										<p>19.1.2您在注册会员时生成的用于登录晋E惠网站接收站内信、系统消息、短信、邮箱和晋E惠公众号等即时信息的会员账户（包括子账户），也作为您的有效联系方式。</p>
+										<p>19.1.3本公司将向您的上述联系方式的其中之一或其中若干向您送达各类通知，而此类通知的内容可能对您的权利义务产生重大的有利或不利影响，请您务必及时关注。</p>
+										<p>19.1.4您有权通过您注册时填写的手机号码或者电子邮箱获取您感兴趣的产品/服务广告信息、促销优惠等商业性信息；您如果不愿意接收此类信息，您有权通过本公司提供的相应的退订功能进行退订。</p>
+										<h4>19.2通知的送达</h4>
+										<p>19.2.1本公司通过上述联系方式向您发出通知，其中以电子的方式发出的书面通知，包括但不限于在晋E惠网站公告，向您提供的联系电话发送手机短信，向您提供的电子邮件地址发送电子邮件，向您的账户发送系统消息以及站内信信息，在发送成功后即视为送达；以纸质载体发出的书面通知，按照提供联系地址交邮后的第五个自然日即视为送达。</p>
+										<p>19.2.2对于在晋E惠网站上因交易活动引起的任何纠纷，您同意司法机关（包括但不限于人民法院）可以通过手机短信、电子邮件或即时通讯等现代通讯方式或邮寄方式向您送达法律文书（包括但不限于诉讼文书）。您指定接收法律文书的手机号码、电子邮箱或即时通讯账号等联系方式为您在晋E惠网站注册、更新时提供的手机号码、电子邮箱联系方式以及在注册会员时生成即时通讯账号，司法机关向上述联系方式发出法律文书即视为送达。您指定的邮寄地址为您的法定联系地址或您提供的有效联系地址。</p>
+										<p>您同意司法机关可采取以上一种或多种送达方式向您达法律文书，司法机关采取多种方式向您送达法律文书，送达时间以上述送达方式中最先送达的为准。</p>
+										<p>您同意上述送达方式适用于各个司法程序阶段。如进入诉讼程序的，包括但不限于一审、二审、再审、执行以及督促程序等。</p>
+										<p>您应当保证所提供的联系方式是准确、有效的，并进行实时更新。如果因提供的联系方式不确切，或不及时告知变更后的联系方式，使法律文书无法送达或未及时送达，由您自行承担由此可能产生的法律后果。</p>
+										<h4>20.不可抗力事件</h4>
+										<p>20.1不可抗力事件是指协议双方不能合理控制、不可预见或即使预见亦无法避免的事件，该事件使任何一方根据本协议履行其全部或部分义务已不可能。不可抗力事件包括但不限于政府行为、地震、台风、洪水、火灾或其它天灾、战争或任何其它类似事件，致使本公司延迟或未能履约的，本公司不对您承担任何责任。</p>
+										<p>20.2鉴于互联网之特殊性质，不可抗力事件亦包括下列影响互联网正常运行之情形：</p>
+										<p>20.2.1黑客攻击；</p>
+										<p>20.2.2电信部门技术调整导致之重大影响；</p>
+										<p>20.2.3病毒侵袭等。</p>
+										<h4>21.其他规定</h4>
+										<p>本协议取代您和本公司先前就相同事项订立的任何书面或口头协议。本协议各方面应受中华人民共和国大陆地区法律的管辖。倘若本协议任何规定被裁定为无效或不可强制执行，该项规定应被撤销，而其余规定应予执行。条款标题仅为方便参阅而设，并不以任何方式界定、限制、解释或描述该条款的范围或限度。本公司未就您或其他人士的某项违约行为采取行动，并不表明本公司撤回就任何继后或类似的违约事件采取行动的权利。</p>
+										<h4>22.诉讼</h4>
+										<p>因本协议或本公司服务所引起或与其有关的任何争议应向人民法院提起诉讼，并以中华人民共和国法律为管辖法律。</p>
+										<h4>23.附则</h4>
+										<p>23.1本协议解释权及修订权归山西伟鑫科创信息技术服务有限公司所有。</p>
+										<p>23.2本协议及修订后的条款于公示中指定日期起生效。</p>
+										<p>23.3若您和本公司之间发生任何纠纷或争议，首先应友好协商解决；协商不成的，您同意将纠纷或争议提交本公司住所地有管辖权的人民法院管辖。</p>
+										<h3 style="text-align: right;">山西伟鑫科创信息技术服务有限公司</h3>
+										<p style="text-align: right;">2019年5月17日</p>
+										<div class="agree_but">
+											<input type="button" value="同意"  name=""  class="btn_op"/>
+											<input type="button" value="不同意"  name="" class="btn_op"/>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="submit-box">
+								<button id="my_button">立即注册</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer></footer>
+
+	<script>
+		$(".reg_show").click(function (){
+		    if($(".agree_wrap").css("display")=="none"){
+		        $(".agree_wrap").show();
+		    }
+		});
+		$(".btn_op").click(function (){
+		    if($(".agree_wrap").css("display")=="block"){
+		    	if($(this).val()=='同意'){
+		    		console.log($(':input[name=agree]'));
+		    		$(':input[name=agree]').prop('checked',true);
+		    	}
+		        $(".agree_wrap").hide();
+		    }
+		});
+	</script>
+	<!--验证码-->
+	<script src="../js/gVerify.js"></script>
+	<script>
+		var verifyCode = new GVerify("v_container");
+
+		/* document.getElementById("my_button").onclick = function() {
+			var res = verifyCode
+					.validate(document.getElementById("code_input").value);
+			if (res) {
+				alert("验证正确");
+			} else {
+				alert("验证码错误");
+			}
+		} */
+	</script>
+	<!--上传图片-->
+	<script src="../js/upload.js"></script>
+	<script type="text/javascript">
+		function initDragImgUpload(area,input){
+	        var dragImgUpload = new DragImgUpload(area,{
+	            callback:function (files) {
+	                //回调函数，可以传递给后台等等
+	                var file = files[0];
+	                var form = new FormData(); // FormData 对象
+	                form.append("file", file); // 文件对象
+	                form.enctype="multipart/form-data";
+	                $.ajax({
+	                    url:"/uploadImg.json",
+	                    data:form,
+	                    type:"post",
+	                    dataType:"json",
+	                    processData: false,
+	                    contentType: false,
+	                    success:function(result){
+	                        if(result.success){
+	                            $(input).val(result.data)
+	                        }
+	                    }
+	                })
+	                console.log(file.name);
+	            }
+	        });
+	        if($(input).val()!=''){
+	            $(area).find("img").attr("src",$(input).val());
+			}
+		}
+		initDragImgUpload("#drop_area",":input[name='organ.businessLicenceImg']");
+		/*initDragImgUpload("#drop_area1",":input[name='organ.bankRegCertImg']");
+	    initDragImgUpload("#drop_area2",":input[name='legal.identityCardImg']");*/
+	    initDragImgUpload("#drop_area3",":input[name='organ.taxregCertImg']");
+	    initDragImgUpload("#drop_area4",":input[name='organ.orgnizationCertImg']");
+	    initDragImgUpload("#drop_area5",":input[name='operator.identityCardImg']");
+	    initDragImgUpload("#drop_area6",":input[name='certificateImg']");
+	</script>
+</body>
+</html>

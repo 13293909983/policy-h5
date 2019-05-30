@@ -1,85 +1,72 @@
-<!doctype html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>电子保函服务平台</title>
-	<link th:href="@{css/font-awesome.min.css}" rel="stylesheet">
-	<link th:href="@{css/style.css}" rel="stylesheet" />
-	<script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
-</head>
-<body style="background:url(images/2222.jpg) no-repeat;background-size: cover;background-position: bottom;">
-	<div class="login-btn">
-		<div>
-			<span style="margin:0 20px;font-size:18px">电子保函服务平台</span>
-		</div>
-		<ul class="index-nav">
-			<li><a href="/index.html"><i class="fa fa-home"></i>&nbsp;首页</a></li>
-			<!--<li><a href="#">理赔服务</a></li>
-			<li><a href="#">法律法规</a></li>-->
-			<li class="nav-on"><a href="/home.html">保单验真</a></li>
-			<li><a href="/order.html">我的订单</a></li>
-			<li><a href="http://note.youdao.com/noteshare?id=a67afbe1ecf17f62c30401c511eb7fe7&sub=E59A4DAD8E2048868D9D22AD2234B6FD">对接文档</a></li>
-			<!--<li><a href="#">关于我们</a></li>-->
-		</ul>
-		<div th:if="${session.LOGIN_USER==null}">
-			<a href="/login.html">登录</a>|<a href="/login.html#regist">注册</a>
-		</div>
-		<div th:if="${session.LOGIN_USER!=null}">
-			<a th:text="${session.LOGIN_USER.organ.organName}"></a>
-			<a href="/logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a>
-		</div>
-	</div>
-	<div class="home-box">
-	<div class="home-main">
-		<h1 class="padding-t-30">电子保函服务平台</h1>
-		<h2>保证担保函查验理赔系统，共筑保证担保诚信生态圈</h2>
-		<div class="input-box">
-			<form action="validate.html" method="GET">
-				<input name="policyNo" class="input-search" placeholder="保单号/投保编号" />
-				<button><i class="fa fa-search" aria-hidden="true"></i>&nbsp;搜索</button>
-			</form>
-		</div>
-		<div class="">
-			<ul class="num-box">
-				<li>
-					<span th:utext="${statistics.policyCount+'&lt;b&gt;次&lt;/b&gt;'}"/></span>
-					<span>入库保函数量</span>
-				</li>
-				<li>
-					<span th:utext="${statistics.searchCount+'&lt;b&gt;次&lt;/b&gt;'}"/></span>
-					<span>累计查询请求</span>
-				</li>
-				<li>
-					<span th:utext="${statistics.validateCount+'&lt;b&gt;次&lt;/b&gt;'}"></span>
-					<span>累计验证保函</span>
-				</li>
-			</ul>
-		</div>
-		</div>
-	</div>
-	<div class="footer-h">版权所有：山西伟鑫科创科技有限公司</div>
-	 <!-- 高度计算 -->
-<script>
-	//监听
-	window.onresize = function () {
-		changeHeight();
-	};
-	function changeHeight() {
-		var h = $(window).height();//获取页面可见高度 
-		var h1 = (h - 60-60-41) + "px";
-		var h2 = (h - 60-60-41-160) + "px";
-		$(".home-box").css("height", h1);
-		$(".home-main").css("height", h2);
-	};
+<!DOCTYPE html>
+<html lang="en">
 
-	//页面加载时
-	$(function () {
-		var h = $(window) .height();//获取页面可见高度 
-		var h1 = (h - 60-60-41) + "px";
-		var h2 = (h - 60-60-41-160) + "px";
-		$(".home-box").css("height", h1);
-		$(".home-main").css("height", h2);
-	});
-</script> 
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		 <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+		<title>电子保函服务平台</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+		<link rel="stylesheet" type="text/css" href="css/animate.min.css">
+		<script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+	       <script src="js/bootstrap.js" type="text/javascript"></script>    
+		<script src="js/index.js" type="text/javascript"></script>
+</head>
+	<body>
+	<div class="top_wrap">
+		<div class="login_wrap">
+			<div class="login_a" th:if="${session.LOGIN_USER==null}">
+				<a href="/login.html">登录</a><span style="margin-left: 0.04rem;">|</span>
+				<a href="/regist.html">注册</a>
+			</div>
+			<div class="login_b" th:if="${session.LOGIN_USER!=null}">
+				<a th:text="${session.LOGIN_USER.organ.organName}"></a><span style="margin-right: 0.04rem;">|</span>
+				<a href="/logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a>
+			</div>
+		</div>
+	</div>
+<header></header>
+	<div class="body_main">
+	<div class="topone_wrap">
+		<div class="topone_title">
+			<p>保单验证</p>
+		</div>
+	</div>
+		<div class="home-bo">
+			<div class="home-box">
+				<div class="home-main">
+					<h1 class="padding-t-30">电子保函核验平台</h1>
+					<h2>保证担保函查验理赔系统，共筑保证担保诚信生态圈</h2>
+					<div class="input-box">
+						<form action="validate.html" method="GET">
+							<input name="policyNo" class="input-search" placeholder="保单号/投保编号" />
+							<button><i class="fa fa-search" aria-hidden="true"></i>&nbsp;搜索</button>
+						</form>
+					</div>
+
+					<div class="">
+						<ul class="num-box">
+							<li>
+								<span th:utext="${statistics.policyCount+'&lt;b&gt;次&lt;/b&gt;'}"/></span>
+								<span>入库保函数量</span>
+							</li>
+							<li>
+								<span th:utext="${statistics.searchCount+'&lt;b&gt;次&lt;/b&gt;'}"/></span>
+								<span>累计查询请求</span>
+							</li>
+							<li>
+								<span th:utext="${statistics.validateCount+'&lt;b&gt;次&lt;/b&gt;'}"></span>
+								<span>累计验证保函</span>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer></footer>
+
 </body>
+
 </html>
