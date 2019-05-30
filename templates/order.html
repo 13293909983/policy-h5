@@ -13,6 +13,7 @@
 <link th:href="@{css/index.css}" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="css/new_file.css">
 <script th:src="@{js/jquery.min.js}"></script>
+<script src="js/index.js" type="text/javascript"></script>
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script th:src="@{https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js}"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
@@ -74,7 +75,7 @@
 								th:text="${#dates.format(bidPolicy.endDate,'yyyy-MM-dd')+' 24时'}"></td>
 							<td th:text="${bidPolicy.sumAmount}"></td>
 							<td th:text="${bidPolicy.sumPremium}"></td>
-							<td><span th:if="${bidPolicy.payResult=='00'}">已支付</span> <a
+							<td><span th:if="${bidPolicy.payResult=='00'}">已支付</span> <a style="color: #5cacee"
 								th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}">去支付</a>
 							</td>
 						</tr>
