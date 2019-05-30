@@ -75,8 +75,8 @@
 								th:text="${#dates.format(bidPolicy.endDate,'yyyy-MM-dd')+' 24时'}"></td>
 							<td th:text="${bidPolicy.sumAmount}"></td>
 							<td th:text="${bidPolicy.sumPremium}"></td>
-							<td><span th:if="${bidPolicy.payResult=='00'}">已支付</span> <a style="color: #5cacee"
-								th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}">去支付</a>
+							<td><span th:if="${bidPolicy.payResult=='00'}">已支付</span> <a
+								th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}" style="color: #5cacee">去支付</a>
 							</td>
 						</tr>
 					</tbody>
@@ -103,10 +103,8 @@
 			</div>
 		</div>
 	</div>
-
+	<div class="fixed"></div>
 	<footer></footer>
-
-
 	<script>
 		$(".notice-close").click(function() {
 			$(".notice-box").hide();

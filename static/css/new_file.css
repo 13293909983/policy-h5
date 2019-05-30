@@ -3,10 +3,11 @@
 	min-width: 13rem;
 }
 .platform-form{
-width: 13rem;
-margin:0 auto;
+	width: 13rem;
+    margin: 0.2rem auto;
+    box-shadow: 0 0.02rem 0.04rem rgba(0, 0, 0, .3);
     background-color: #fff;
-    padding: 0.5rem 0;
+    padding: 0.5rem 0.4rem;
     font-size: 0.16rem;
 }
 .platform-form caption{
@@ -21,9 +22,88 @@ margin:0 auto;
 	font-size: 0.14rem;
 	text-align: center;
 }
+.fixed_top {
+    width: 2.00rem;
+    height: 2.40rem;
+    position: fixed;
+    bottom: 3.0rem;
+    right: 0.30rem;
+    z-index: 999 ;
+   
+}
+.fixed_top ul{
+	  width: 0.60rem;
+    height: 2.40rem;
+}
+.fixed_top li{
+	  width: 2.00rem;
+    height: 0.65rem;
+    font-size: 0.16rem;
+    color: #00B7EE;
+}
+.fixed_left{
+	line-height: 0.45rem;
+	float: left;
+ width: 1.55rem;
+ display: none;
+}
+.fixed_left p{
+	font-size: 0.16rem;
+	line-height: 0.45rem;
+	text-align: right;
+	margin-right: 0.02rem;
+}
+.fixed_lx,.fixed_phone,.fixed_bz,.fixed_fh{
+	width: 0.45rem;
+	height: 0.45rem;
+	cursor: pointer;
+	float: right;
 
+}
+.fixed_lx,.fixed_phone,.fixed_bz,.fixed_fh:hover{
+border-radius:0.15rem ;
+
+}
+.fixed_lx{
+	background: url(../images/lx02.png) no-repeat center center;
+	background-size:98%;
+}
+.fixed_phone{
+	background: url(../images/phone02.png) no-repeat center center;
+	background-size: 90%;
+}
+.fixed_bz{
+	background: url(../images/bz02.png) no-repeat center center;
+	background-size: 100%;
+}
+.fixed_fh{
+	display: none;
+	background: url(../images/fh02.png) no-repeat center center;
+	background-size:100%;
+}
+.fixed_lx:hover{
+	background: url(../images/lx01.png) no-repeat center center;
+	background-size:70%;
+	background-color: #00B7EE;
+}
+.fixed_phone:hover{
+	background: url(../images/phone01.png) no-repeat center center;
+	background-size: 70%;
+	background-color: #00B7EE;
+}
+.fixed_bz:hover{
+	background: url(../images/bz01.png) no-repeat center center;
+	background-size: 70%;
+	background-color: #00B7EE;
+}
+.fixed_fh:hover{
+	background: url(../images/fh01.png) no-repeat center center;
+	background-size:70%;
+	background-color: #00B7EE;
+}
 .agree_but{
 	font-size: 0.18rem;text-align: center;
+	background-color: #00B7EE;
 }
 .agree_but input{
 	width: 1.3rem;

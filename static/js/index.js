@@ -6,6 +6,7 @@
     $('header').load('/html/header.html');
     //底部
     $('footer').load('/html/footer.html');
+    $('.fixed').load('/html/fixedtop.html');
     $(".list_wrap_w").click(function() {
     	$(this).addClass("list_active").siblings().removeClass("list_active");
     	$(".main_wrap_o").eq($(this).index()).addClass("main_wrap_active").siblings().removeClass("main_wrap_active");
