@@ -43,14 +43,14 @@ button {
 
 input {
 	border: none;
-	font-family: "微软雅黑";
+	font-family: "寰蒋闆呴粦";
 }
 
 body {
 	min-width: 937px;
 	color: #000;
 	background: #FFF;
-	font-family: PingFangSC, Verdana, Arial, sans-serif, "Times New Roman", 宋体;
+	font-family: PingFangSC, Verdana, Arial, sans-serif, "Times New Roman", 瀹嬩綋;
 }
 
 h1,
@@ -280,7 +280,7 @@ html {
 	float: left;
 	text-align: center;
 }
-/*首页*/
+/*棣栭〉*/
 .mainBody {
 	background: #fff;
 	position: relative;
@@ -319,7 +319,7 @@ html {
 	color: #fff;
 }
 
-.title_box strong {
+.title_box .title0{
 	font-size: 0.45rem;
 	font-weight: bolder;
 }
@@ -553,7 +553,7 @@ text-align: center;
 	-moz-transform: scale(1.1);
 	/* Firefox */
 	-webkit-transform: scale(1.1);
-	/* Safari 和 Chrome */
+	/* Safari 鍜� Chrome */
 	-o-transform: scale(1.1);
 	background-size: cover;
 }
@@ -568,7 +568,7 @@ text-align: center;
 	-moz-transform: scale(1.1);
 	/* Firefox */
 	-webkit-transform: scale(1.1);
-	/* Safari 和 Chrome */
+	/* Safari 鍜� Chrome */
 	-o-transform: scale(1.1);
 	background-size: cover;
 }
@@ -583,7 +583,7 @@ text-align: center;
 	-moz-transform: scale(1.1);
 	/* Firefox */
 	-webkit-transform: scale(1.1);
-	/* Safari 和 Chrome */
+	/* Safari 鍜� Chrome */
 	-o-transform: scale(1.1);
 	background-size: cover;
 }
@@ -598,7 +598,7 @@ text-align: center;
 	-moz-transform: scale(1.1);
 	/* Firefox */
 	-webkit-transform: scale(1.1);
-	/* Safari 和 Chrome */
+	/* Safari 鍜� Chrome */
 	-o-transform: scale(1.1);
 	background-size: cover;
 }
@@ -613,7 +613,7 @@ text-align: center;
 	-moz-transform: scale(1.1);
 	/* Firefox */
 	-webkit-transform: scale(1.1);
-	/* Safari 和 Chrome */
+	/* Safari 鍜� Chrome */
 	-o-transform: scale(1.1);
 	background-size: cover;
 }
@@ -816,7 +816,7 @@ text-align: center;
 .partner_list img {
 	width: 2.95rem;
 }
-/* 保单产品条款*/
+/* 淇濆崟浜у搧鏉℃*/
 .body_main {
 	margin-left: auto;
 	margin-right: auto;
@@ -1203,7 +1203,7 @@ input[type='checkbox']:checked {
 
 
 
-/*全部条款*/
+/*鍏ㄩ儴鏉℃*/
 
 
 .all_clause_wrap {
@@ -1237,7 +1237,7 @@ input[type='checkbox']:checked {
 }
 
 
-/*立即投保表单*/
+/*绔嬪嵆鎶曚繚琛ㄥ崟*/
 
 .form-box {
 	width: 13rem;
@@ -1302,8 +1302,9 @@ input[type='checkbox']:checked {
 }
 
 .btn-bottom {
-	padding: 0.5rem 0;
+	padding:0.3rem  0;
 	text-align: center;
+	font-size: 0.18rem;
 }
 
 .btn-bottom button {
@@ -1325,7 +1326,7 @@ input[type='checkbox']:checked {
 }
 
 
-/*保单验证*/
+/*淇濆崟楠岃瘉*/
 
 .home-box {
 	width: 10rem;
@@ -1414,7 +1415,7 @@ input[type='checkbox']:checked {
 	font-size: 0.36rem;
 	color: #25a5f7;
 }
-/*注册*/
+/*娉ㄥ唽*/
 .register_wrap {
 	width: 100%;
 	min-width: 13rem;
@@ -1880,16 +1881,16 @@ padding:0.4rem 0;
 .paging_policy{
 float: right;
 }
-ul.pagination {
+ul.pagination1 {
     float: left;
     padding: 0.2rem 0;
     margin: 0;
 
 }
 
-ul.pagination li {display: inline;}
+ul.pagination1 li {display: inline;}
 
-ul.pagination li a {
+ul.pagination1 li a {
     color: black;
     float: left;
     padding: 8px 16px;
@@ -1898,13 +1899,13 @@ ul.pagination li a {
     font-size: 0.14rem;
 }
 
-ul.pagination li a.active {
+ul.pagination1 li a.active {
     background-color: #b9e3f6;
     color: white;
     border-radius: 5px;
 }
 
-ul.pagination li a:hover:not(.active) {background-color: #d9e2e7;}
+ul.pagination1 li a:hover:not(.active) {background-color: #d9e2e7;}
 .jump_wrap{
 	font-size: 0.14rem;
 }

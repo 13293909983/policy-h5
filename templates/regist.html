@@ -16,15 +16,15 @@
 <body>
 	<div class="top_wrap">
 		<div class="login_wrap">
-			<div class="login_a">
-
+			<div class="login_a" th:if="${session.LOGIN_USER==null}">
 				<a href="/login.html">登录</a><span style="margin-left: 0.04rem;">|</span>
 				<a href="/regist.html">注册</a>
 			</div>
-			<!--<a>山西伟鑫科创信息技术服务有限公司</a>
-		<div class="login_b">
-			<a href="#"><span style="margin-right: 0.04rem;">|</span>退出</a>
-		</div>-->
+			<div class="login_b" th:if="${session.LOGIN_USER!=null}">
+				<a th:text="${session.LOGIN_USER.organ.organName}"></a><span
+					style="margin-right: 0.04rem;">|</span> <a href="/logout.html"><i
+					class="fa fa-sign-out" aria-hidden="true"></i>退出</a>
+			</div>
 		</div>
 	</div>
 	<header></header>
@@ -69,12 +69,12 @@
 									</li>
 									<li>
 										<span>密码</span> 
-										<input name="password" th:value="${account.password}"/>
+										<input name="password" th:value="${account.password}" type="password"/>
 										<i th:text="${errorMap['password']==null?'必须多于8个字符，并包含大写，小写字母和数字':errorMap['password']}"></i>
 									</li>
 									<li>
 										<span>确认密码</span> 
-										<input name="repeatPassword" th:value="${account.password}"/>
+										<input name="repeatPassword" th:value="${account.password}" type="password"/>
 										<i>*</i>
 									</li>
 									<li>
@@ -478,5 +478,14 @@
 	    initDragImgUpload("#drop_area5",":input[name='operator.identityCardImg']");
 	    initDragImgUpload("#drop_area6",":input[name='certificateImg']");
 	</script>
+	
 </body>
+<style>
+	.login-ul li i{
+		list-style: none;
+	    font-size: 0.14rem;
+	    color: #ff6a00;
+	    margin-left: 0.5rem;
+	}
+</style>
 </html>

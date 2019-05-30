@@ -29,7 +29,7 @@
 						</i> 
 						<input type="password" value="" name="password" placeholder="请输入登录密码" />
 					</div>
-					<div th:if="${message!=null}">
+					<div th:if="${message!=null}" class="message">
 							<i th:text="${message}"></i>
 					</div>
 					<div class="login_but">
@@ -76,4 +76,12 @@
 		})
 	})
 </script>
+<style>
+	.message{
+		font-size: 0.14rem;
+	    color: #ff6a00;
+	    text-align: center;
+	    padding-top: 0.1rem;
+	}
+</style>
 </html>
