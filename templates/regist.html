@@ -81,7 +81,9 @@
 										<span>图形验证码</span> 
 										<input id="code_input" name="captcha"/>
 										<div style="float: right; margin-top: -0.22rem; margin-left: 0.10rem">
-											<div id="v_container" style="height: 0.34rem; width: 100%;"></div>
+											<div id="v_container" style="height: 0.34rem; width: 100%;">
+												<img src="captcha.jpg" onclick="this.src='captcha.jpg?t='+new Date().getTime()" height="30px"/>
+											</div>
 										</div>
 										<i th:text="${errorMap['captcha']}">*</i>
 									</li>
@@ -428,7 +430,7 @@
 	<!--验证码-->
 	<script src="../js/gVerify.js"></script>
 	<script>
-		var verifyCode = new GVerify("v_container");
+		/* var verifyCode = new GVerify("v_container"); */
 
 		/* document.getElementById("my_button").onclick = function() {
 			var res = verifyCode
