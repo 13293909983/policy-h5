@@ -43,14 +43,14 @@ button {
 
 input {
 	border: none;
-	font-family: "寰蒋闆呴粦";
+	font-family: "瀵邦喛钂嬮梿鍛寸拨";
 }
 
 body {
 	min-width: 937px;
 	color: #000;
 	background: #FFF;
-	font-family: PingFangSC, Verdana, Arial, sans-serif, "Times New Roman", 瀹嬩綋;
+	font-family: PingFangSC, Verdana, Arial, sans-serif, "Times New Roman", 鐎瑰缍�;
 }
 
 h1,
@@ -166,7 +166,7 @@ html {
 }
 
 .nava_li {
-	width: 4rem;
+	width: 3rem;
 	height: 1rem;
 	float: left;
 	display: inline-block;
@@ -191,7 +191,7 @@ html {
 }
 
 .nav_wrap {
-	width: 6.9rem;
+	width: 7.9rem;
 	line-height: 0.3rem;
 	float: left;
 	padding-left: 0.3rem;
@@ -280,7 +280,7 @@ html {
 	float: left;
 	text-align: center;
 }
-/*棣栭〉*/
+/*妫ｆ牠銆�*/
 .mainBody {
 	background: #fff;
 	position: relative;
@@ -553,7 +553,7 @@ text-align: center;
 	-moz-transform: scale(1.1);
 	/* Firefox */
 	-webkit-transform: scale(1.1);
-	/* Safari 鍜� Chrome */
+	/* Safari 閸滐拷 Chrome */
 	-o-transform: scale(1.1);
 	background-size: cover;
 }
@@ -568,7 +568,7 @@ text-align: center;
 	-moz-transform: scale(1.1);
 	/* Firefox */
 	-webkit-transform: scale(1.1);
-	/* Safari 鍜� Chrome */
+	/* Safari 閸滐拷 Chrome */
 	-o-transform: scale(1.1);
 	background-size: cover;
 }
@@ -583,7 +583,7 @@ text-align: center;
 	-moz-transform: scale(1.1);
 	/* Firefox */
 	-webkit-transform: scale(1.1);
-	/* Safari 鍜� Chrome */
+	/* Safari 閸滐拷 Chrome */
 	-o-transform: scale(1.1);
 	background-size: cover;
 }
@@ -598,7 +598,7 @@ text-align: center;
 	-moz-transform: scale(1.1);
 	/* Firefox */
 	-webkit-transform: scale(1.1);
-	/* Safari 鍜� Chrome */
+	/* Safari 閸滐拷 Chrome */
 	-o-transform: scale(1.1);
 	background-size: cover;
 }
@@ -613,7 +613,7 @@ text-align: center;
 	-moz-transform: scale(1.1);
 	/* Firefox */
 	-webkit-transform: scale(1.1);
-	/* Safari 鍜� Chrome */
+	/* Safari 閸滐拷 Chrome */
 	-o-transform: scale(1.1);
 	background-size: cover;
 }
@@ -816,7 +816,7 @@ text-align: center;
 .partner_list img {
 	width: 2.95rem;
 }
-/* 淇濆崟浜у搧鏉℃*/
+/* 娣囨繂宕熸禍褍鎼ч弶鈩冾儥*/
 .body_main {
 	margin-left: auto;
 	margin-right: auto;
@@ -1203,7 +1203,7 @@ input[type='checkbox']:checked {
 
 
 
-/*鍏ㄩ儴鏉℃*/
+/*閸忋劑鍎撮弶鈩冾儥*/
 
 
 .all_clause_wrap {
@@ -1237,7 +1237,7 @@ input[type='checkbox']:checked {
 }
 
 
-/*绔嬪嵆鎶曚繚琛ㄥ崟*/
+/*缁斿宓嗛幎鏇氱箽鐞涖劌宕�*/
 
 .form-box {
 	width: 13rem;
@@ -1326,7 +1326,7 @@ input[type='checkbox']:checked {
 }
 
 
-/*淇濆崟楠岃瘉*/
+/*娣囨繂宕熸宀冪槈*/
 
 .home-box {
 	width: 10rem;
@@ -1415,7 +1415,7 @@ input[type='checkbox']:checked {
 	font-size: 0.36rem;
 	color: #25a5f7;
 }
-/*娉ㄥ唽*/
+/*濞夈劌鍞�*/
 .register_wrap {
 	width: 100%;
 	min-width: 13rem;

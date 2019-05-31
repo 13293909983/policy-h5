@@ -82,24 +82,21 @@
 					</tbody>
 				</table>
 				<div style="text-align: center;">
-				<ul class="pagination">
-					<li><a
-						th:href="${'/order.html?page=0'+'&pageSize='+datagrid.pageSize}">&laquo;</a></li>
-					<li th:each="i:${#numbers.sequence(datagrid.page-5,datagrid.page)}"
-						th:class="${datagrid.page==i?'active':''}" th:if="${i>=0}"><a
-						th:href="${'/order.html?page='+i+'&pageSize='+datagrid.pageSize}"
-						th:text="${i+1}"></a></li>
-					<li
-						th:each="i:${#numbers.sequence(datagrid.page+1,datagrid.page+5)}"
-						th:class="${datagrid.page==i?'active':''}"
-						th:if="${i<=(datagrid.total%datagrid.pageSize==0?(datagrid.total/datagrid.pageSize-1):(datagrid.total/datagrid.pageSize))}">
-						<a
-						th:href="${'/order.html?page='+i+'&pageSize='+datagrid.pageSize}"
-						th:text="${i+1}"></a>
-					</li>
-					<li><a
-						th:href="${'/order.html?page='+(datagrid.total%datagrid.pageSize==0?datagrid.total/datagrid.pageSize-1:datagrid.total/datagrid.pageSize)+'&pageSize='+datagrid.pageSize}">&raquo;</a></li>
-				</ul></div>
+					<ul class="pagination" th:if=" ${datagrid.total} gt '0'">
+						<li>
+							<a th:href="${'/order.html?page=0'+'&pageSize='+datagrid.pageSize}">&laquo;</a>
+						</li>
+						<li th:each="i:${#numbers.sequence(datagrid.page-5,datagrid.page)}" th:class="${datagrid.page==i?'active':''}" th:if="${i>=0}">
+							<a th:href="${'/order.html?page='+i+'&pageSize='+datagrid.pageSize}" th:text="${i+1}"></a>
+						</li>
+						<li th:each="i:${#numbers.sequence(datagrid.page+1,datagrid.page+5)}" th:class="${datagrid.page==i?'active':''}" th:if="${i<=(datagrid.total%datagrid.pageSize==0?(datagrid.total/datagrid.pageSize-1):(datagrid.total/datagrid.pageSize))}">
+							<a th:href="${'/order.html?page='+i+'&pageSize='+datagrid.pageSize}" th:text="${i+1}"></a>
+						</li>
+						<li>
+							<a th:href="${'/order.html?page='+(datagrid.total%datagrid.pageSize==0?datagrid.total/datagrid.pageSize-1:datagrid.total/datagrid.pageSize)+'&pageSize='+datagrid.pageSize}">&raquo;</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
