@@ -23,20 +23,19 @@
 	text-align: center;
 }
 .fixed_top {
-    width: 2.00rem;
+    width: 1.90rem;
     height: 2.40rem;
     position: fixed;
-    bottom: 3.0rem;
+    bottom: 1.60rem;
     right: 0.30rem;
     z-index: 999 ;
-   
 }
 .fixed_top ul{
 	  width: 0.60rem;
     height: 2.40rem;
 }
 .fixed_top li{
-	  width: 2.00rem;
+	  width: 1.90rem;
     height: 0.65rem;
     font-size: 0.16rem;
     color: #00B7EE;
@@ -44,7 +43,7 @@
 .fixed_left{
 	line-height: 0.45rem;
 	float: left;
- width: 1.55rem;
+ width: 1.45rem;
  display: none;
 }
 .fixed_left p{
@@ -141,37 +140,96 @@ border-radius:0.15rem ;
 }
 .about_company{
 	width: 100%;
-   height:5rem;
 	min-width: 13rem;
 }
 .about_content{
 	width: 13rem;
 	margin: 0 auto;
+	font-size: 0.16rem;
+	padding: 0.3rem 0;
+	height: 4rem;
 }
 .about_content_left{
-	width: 60%;
+	width: 30%;
 	float: left;
-	padding: 0.5rem 0.5rem;
+    height: 3.4rem;
 }
-
-.about_content_left h4{
+.about_content_left ul{
+	width: 80%;
+	height: 3.3rem;
+	background-color: #ecf6ff;
+	margin: 0 auto;
+	padding: 0.3rem 0;
+}
+.about_content_left ul li{
+	width: 80%;
+	height: 0.47rem;
+	margin: 0 auto;
 	text-align: center;
-	font-size: 0.22rem;
-	line-height: 6em;
+	font-size: 0.20rem;
+	margin-bottom: 0.3rem;
+	line-height:0.47rem;
+	color: #FFFFFF;
+	cursor: pointer;
 }
-.about_content_left p{
-	text-indent: 2em;
-	font-size: 0.18rem;
-	line-height: 2em;
+.about_content_left ul p{
+	width: 93%;
+	background-color: #5cc5fb;
 
+}
+.about_content_now{
+	background: url(../images/left_06.png) no-repeat right center;
 }
 .about_content_right{
-	width: 38%;
+	width: 69%;
+	min-width: 9.1rem;
 	float: left;
+     height: 3.4rem;
+     overflow: hidden;
 
-	  position: relative;
 }
+.about_right{
 
+    position: absolute;
+	  display: none;
+}
+.about_right img{
+	width:8.7rem;
+     
+}
+.about_cp{
+	width: 13rem;
+	min-width: 13rem;
+	margin: 0 auto;
+	height: 3.5rem;
+	display: table;
+	
+}
+.about_cp_content{
+	width:4rem;
+	height: 3rem;
+	background: url(../images/aboutban_03.png) no-repeat center center;
+	margin: 0 0.16rem;
+	background-size:100%;
+	display:table-cell;
+	vertical-align:middle;
+	position: relative;
+}
+.about_cp_content h3{
+	text-align: center;
+	font-size: 0.20rem;
+	position: absolute;
+	top: 0.15rem;
+	left: 1.75rem;
+}
+.about_cp_content p{
+	text-indent: 2em;
+	width: 3rem;
+	margin: 0 auto;
+	line-height: 1.8em;
+	font-size: 0.16rem;
+
+}
 .about_content_img, .about_content_img::before, .about_content_img::after {
           position: absolute;
           top: 0;
@@ -471,3 +529,55 @@ display:inline-block;position:absolute;
   animation:slash1 5s infinite ease;
   animation-iteration-count:1;
 }
+.map_wrap{
+	width: 100%;
+	min-width: 13rem;
+}
+.about_map{
+width: 13rem;
+margin: 0.5rem auto;
+height: 4rem;
+font-size: 0.20rem;
+font-weight: bold;
+}
+.map{
+width:8rem;
+float: left;
+height: 4rem;
+}
+.about_us{
+	width: 5rem;
+	float: left;
+}
+.about_us ul li{
+	padding: 0.4rem 0.3rem;
+	cursor: pointer;
+}
+.about_phone,.about_mail{
+	width: 0.25rem;
+	height: 0.25rem;
+float: left;
+}
+.about_address{
+	width: 0.25rem;
+	height: 0.28rem;
+float: left;
+}
+.about_us ul li p{
+float: left;
+width: 4rem;
+margin-left: 0.04rem;
+}
+.about_phone{
+	background: url(../images/map_03.png) no-repeat 0 0;
+		background-size: cover;
+}
+.about_mail{
+	background: url(../images/map_03.png) no-repeat 0 -0.24rem;
+		background-size: cover;
+}
+.about_address{
+	background: url(../images/map_03.png) no-repeat 0 -0.49rem;
+		background-size: cover;
+}
+
