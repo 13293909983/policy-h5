@@ -1,0 +1,138 @@
+.yz_wrap{
+	width: 13rem;
+	min-height: 6rem;
+	background: url(../images/yzbg.png) no-repeat center bottom;
+}
+
+.yz_box {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    justify-content: center;
+    -moz-box-pack: center;
+    -webkit--moz-box-pack: center;
+    box-pack: center;
+    justify-content: space-between;
+}
+.yz_box h1 {
+    text-align: center;
+    color: #666;
+    font-size: 0.36rem;
+    font-weight: bold;
+    margin-bottom: 0;
+    letter-spacing: 0.03rem;
+}
+.yz_input_box{
+	width: 6rem;
+	height: 0.5rem;
+	margin: 0 auto;border: 2px solid #B80404;
+	border-radius:0.4rem ;
+	    line-height: 0.4rem;
+	        position: relative;
+	        margin-top: 0.3rem;
+}
+.yz_input_search{
+	width: 5.2rem;
+	margin-left: 0.2rem;
+	height: 0.45rem;
+	line-height: 0.45rem;
+}
+.yz_boxptxt{
+	font-size: 0.16rem;
+	text-align: center;
+	color: #7F7D83;
+	margin-top: 0.2rem;
+}
+.yz_boxptxt span{
+	padding:0 0.5rem;
+}
+.num_box{
+	width: 7rem;
+	margin: 0 auto;
+	margin-top: 0.3rem;
+}
+.num_box li{
+	width: 1.5rem;
+	text-align: center;
+	float: left;
+	margin: 0.4rem;
+}
+.num_box01,.num_box02,.num_box03{
+	width: 1.5rem;
+	height: 1.5rem;
+	
+}
+.num_box01{
+	background: url(../images/lj01.png) no-repeat center center;
+	background-size: cover;
+}
+.num_box02{
+	background: url(../images/lj02.png) no-repeat center bottom;
+	background-size: 99%;
+}
+.num_box03{
+	background: url(../images/lj03.png) no-repeat center center;
+	background-size: cover;
+}
+.num_box01 p,.num_box02 p,.num_box03 p{
+	    font-size: 0.30rem;
+	line-height: 1.5rem;
+}
+.num_box01 p b,.num_box02 p b,.num_box03 p b{
+	    font-size: 0.12rem;
+	line-height: 1.5rem;
+}
+.num_box li h2{
+	font-size: 0.18rem;
+	color: #B80404;
+	margin-top: 0.1rem;
+}
+/*不存在*/
+.noyzerr{
+	width: 5rem;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 0.5rem;
+}
+.noyzerr h1 {
+    text-align: center;
+    color: #666;
+    font-size: 0.30rem;
+    font-weight: bold;
+    margin-top: 0.3rem;
+    letter-spacing: 0.03rem;
+    
+}
+/*保单存在且开标状态*/
+.yz_be{
+	margin: 0 auto;
+	text-align: center;
+	padding: 0.3rem;
+}
+/*保单存在禁止查看*/
+.yz_ban{
+	margin: 0 auto;
+	text-align: center;
+	padding: 0.3rem;
+	position: relative;
+}
+.yz_ban_jz{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 3.2rem;
+	height: 0.6rem;
+	margin-top: -0.3rem;
+	margin-left: -1.6rem;
+	z-index: 9999;
+}
+.yz_ban_bd{
+	  filter: url(blur.svg#blur); /* FireFox, Chrome, Opera */
+    
+    -webkit-filter: blur(10px); /* Chrome, Opera */
+       -moz-filter: blur(10px);
+        -ms-filter: blur(10px);    
+            filter: blur(10px);
+    
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false);
+}

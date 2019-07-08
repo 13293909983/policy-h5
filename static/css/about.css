@@ -1,0 +1,137 @@
+.about_wrap{
+	width: 11rem;
+	margin: 0 auto;
+}
+.about_wrapleft{
+	width: 3rem;
+	float: left;
+}
+.about_wrapright{
+	display: inline-block;
+}
+.about_rightnow{
+	display: block !important;
+}
+.about_wrapleft ul{
+	width: 2rem;
+	margin: 0 auto;
+}
+.about_wrapleft li{
+	width:1rem;
+text-align: center;
+padding: 0.2rem 0;
+cursor: pointer;
+font-size: 0.18rem;
+font-weight: bold;
+}
+.about_wrapleftliatv{
+	color: #B80404;
+	border-bottom:4px solid #B80404 ;
+}
+.about_right{
+	display: none;
+}
+.about_right ul{
+	height:0.7rem;
+}
+.about_right ul li{
+	width: 2rem;
+	float: left;
+	padding: 0.2rem 0.3rem;
+	font-size: 0.16rem;
+	cursor: pointer;
+		border-bottom:2px solid #535353 ;
+		text-align: center;
+}
+.about_rightliatv{
+	color: #ef4747;
+	border-bottom:2px solid #ef4747 !important;
+}
+.about_rightimg{
+	display: none;
+	text-align: center;
+}
+.about_rightimg img{
+	padding: 0.3rem;
+	width: 6rem;
+}
+.about_rightimgnow{
+	display: block;
+}
+.about_righttxt{
+	padding: 0.3rem;
+	line-height: 2em;	
+		text-align:left;
+		position: relative;
+}
+.about_righttxt p{
+ 
+	font-size: 0.14rem;
+
+}
+.about_righttxt p b{
+	 padding-right: 0.1rem;
+	font-size: 0.16rem;
+	color: #B80404;
+}
+.about_righttext{
+	display: none;
+	width: 8rem;
+    position: relative;
+}
+.about_righttext p{
+	text-indent: 2em;
+	padding: 0.3rem;
+	line-height: 2em;	
+	font-size: 0.14rem;
+}
+.about_righttextnow{
+	display: block;
+}
+.about_righttextbg{
+	width: 3rem;
+	height: 3rem;
+	position: absolute;
+	top:50%;
+	left: 50%;
+	    margin-top: 0.5rem;
+    margin-left: -1.5rem;
+
+}
+.about_righttextbg img{
+	width: 3rem;
+}
+.about_righttextys,.about_righttextzw,.about_righttextaq,.about_righttextsd{
+	width: 3.5rem;
+
+}
+.about_righttextys p,.about_righttextzw p,.about_righttextaq p{
+	font-size: 0.14rem;
+	text-align: left;
+	text-indent: 0 !important;
+}
+.about_righttextsd p,.about_righttextaq p{
+		font-size: 0.14rem;
+	text-align: right;
+	text-indent: 0 !important;
+}
+.about_righttextys{
+		position: absolute;
+		    top: 0rem;
+    right: 0rem;
+}
+.about_righttextzw{
+		position: absolute;
+		    top: 2.5rem;
+    right: 0rem;
+}
+.about_righttextaq{
+		position: absolute;
+		    top: 2.5rem;
+    left: -0.5rem;
+}
+.about_righttextsd{
+		position: absolute;
+	top: 0.5rem;
+    left: -0.5rem;
+}

@@ -1,0 +1,517 @@
+
+
+.lc_wrap {
+	position: fixed;
+	top: 1.5rem;
+	left: 0.1rem;
+	width: 1rem;
+	height: 6rem;
+	background: url(../images/liuchengbg.png) no-repeat center center;
+	background-size: cover;
+	z-index: 9999;
+}
+.lc_wrapul{
+	width: 0.8rem;
+	margin: 0 auto;
+}
+.lc_wrapli{
+
+margin: 0.25rem 0;
+font-size: 0.14rem;
+color: #FFFFFF;
+line-height: 0.8rem;
+}
+.lc_li01,.lc_li02,.lc_li03,.lc_li04,.lc_li05{
+		width: 0.8rem;
+height: 0.8rem;
+	text-align: center;
+}
+.lc_li01{
+	background: url(../images/liucheng01.png) no-repeat center center;
+	background-size: 100%;
+
+}
+.lc_li02{
+	background: url(../images/liucheng02.png) no-repeat center center;
+	background-size: 100%;
+
+}
+.lc_li03{
+	background: url(../images/liucheng03.png) no-repeat center center;
+	background-size: 100%;
+	color: #000000;
+
+}
+.lc_li04{
+	background: url(../images/liucheng04.png) no-repeat center center;
+	background-size: 100%;
+
+}
+.lc_li05{
+	background: url(../images/liucheng05.png) no-repeat center center;
+	background-size: 100%;
+
+}
+.index_certer {
+	width: 13rem;
+	margin: 0.3rem auto;
+	height: 10.4rem;
+}
+
+.certer_left {
+	width: 9.1rem;
+	float: left;
+}
+
+.certer_left_banner {
+	width: 9.1rem;
+	height: 2.6rem;
+	width: 100%;
+	background: url(../images/banner.png) no-repeat center center;
+	background-size: cover;
+}
+
+.certer_left_cp {
+	width: 9.1rem;
+	height: 1.8rem;
+}
+
+.certer_left_cp ul {
+	margin-top: 0.45rem;
+}
+
+.certer_left_cp ul li {
+	width: 1.8rem;
+	height: 1.4rem;
+	text-align: center;
+	float: left;
+	color: #FFFFFF;
+}
+
+.cp_01,
+.cp_02,
+.cp_03,
+.cp_04,
+.cp_05 {
+	width: 1.8rem;
+	height: 1.4rem;
+	font-size: 0.18rem;
+	line-height: 0.6rem;
+}
+
+.cp_01 {
+	background: url(../images/cp01.png) no-repeat center center;
+	background-size: cover;
+}
+
+.cp_02 {
+	background: url(../images/cp02.png) no-repeat center center;
+	background-size: cover;
+}
+
+.cp_03 {
+	background: url(../images/cp03.png) no-repeat center center;
+	background-size: cover;
+}
+
+.cp_04 {
+	background: url(../images/cp04.png) no-repeat center center;
+	background-size: cover;
+}
+
+.cp_05 {
+	background: url(../images/cp05.png) no-repeat center center;
+	background-size: cover;
+}
+
+.certer_left_con {
+	width: 9.1rem;
+	height: 5rem;
+	box-shadow: 0 0.02rem 0.04rem rgba(0, 0, 0, 0.3);
+}
+
+.certer_left_con h3 {
+	font-size: 0.18rem;
+	padding: 0.2rem;
+}
+
+.certer_left_con a {
+	padding: 0 0.2rem;
+	font-weight: bold;
+}
+.certer_left_con_a{
+	font-size: 0.18rem;
+     padding: 0 0.2rem;
+	font-weight: bold;
+	cursor: pointer;
+}
+.certer_left_conh3{
+	width:80%;
+	display: inline-block;
+}
+.more_news {
+	width: 1rem;
+	height: 0.3rem;
+	border-radius: 0.3rem;
+	display: inline-block;
+	cursor: pointer;
+	font-size: 0.14rem;
+	border: 2px solid #b80404;
+	vertical-align: middle;
+	text-align: center;
+	color: #b80404;
+	margin: 0.2rem;
+}
+
+.more_news a {
+	font-size: 0.14rem;
+	line-height: 0.26rem;
+	text-align: center;
+}
+
+.more_news:hover {
+	background-color: #b80404;
+	color: #FFFFFF;
+}
+.certer_left_con_now {
+	color: #B80404;
+}
+.certer_left_news{
+	display: none;
+}
+.certer_left_newsnow{
+	display: block;
+}
+.certer_left_con_nowhr {
+	height: 4px;
+	width: 100%;
+	background-color: #B80404;
+}
+
+.certer_news_left {
+	width: 3rem;
+	padding: 0.1rem;
+	position: relative;
+	float: left;
+	overflow: hidden;
+}
+.certer_news_leftul{
+	width: 9rem;
+	
+}
+.certer_news_leftli{
+	width: 3rem;
+	float: left;
+	    margin-top: 0.1rem;
+}
+.news_leftimg {
+	width: 2.8rem;
+}
+
+.news_leftimg img {
+	width: 2.8rem;
+	height: 2rem;
+}
+
+.img-bottom {
+	width: 2.8rem;
+	height: 0.3rem;
+	position: absolute;
+	top: 1.9rem;
+	color: #FFFFFF;
+	background: rgba(0, 0, 0, 0.4);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	line-height: 0.3rem;
+}
+
+.img-bottom {
+	font-size: 0.16rem;
+}
+
+.new_w {
+	margin-top: 0.1rem;
+	line-height: 0.3rem;
+}
+
+.new_time,
+.new_from {
+	font-size: 0.14rem;
+}
+
+.new_wre {
+	width: 2.8rem;
+	height: 0.9rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	text-indent: 2em;
+}
+
+.new_wre p {
+	font-size: 0.16rem;
+}
+
+.new_more {
+	width: 1rem;
+	height: 0.3rem;
+	background-color: #343333;
+	border-radius: 0.3rem;
+	font-size: 0.14rem;
+	line-height: 0.3rem;
+	text-align: center;
+	color: #FFFFFF;
+	cursor: pointer;
+	float: right;
+	margin-right: 0.2rem;
+}
+
+.certer_news_right {
+	width: 6rem;
+	float: left;
+}
+
+.certer_news_rightli {
+	border-bottom: 1px solid #C4C5C7;
+	padding: 0.2rem 0.05rem;
+	height: 1.4rem;
+	cursor: pointer;
+	
+}
+
+.certer_news_rightimg {
+	width: 1.8rem;
+	height: 1rem;
+	display: inline-block;
+	padding-left: 0.1rem;
+}
+
+.certer_news_rightimg img {
+	width: 1.7rem;
+	height: 1.1rem;
+}
+
+.certer_news_rightw {
+float: right;
+	width: 4rem;
+		height: 1rem;
+	padding: 0.1rem 0.05rem;
+	line-height:0.35rem;
+}
+
+.certer_news_rightw h4 {
+	font-size: 0.16rem;
+  overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap}
+
+.neww_time,
+.neww_from {
+	font-size: 0.12rem;
+	display: inline-block;
+	padding-right: 0.1rem;
+	height: 0.2rem;
+}
+
+.neww_wre {
+	width: 3.8rem;
+	height: 0.25rem;
+	overflow: hidden;
+}
+
+.neww_wre p {
+  overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+	font-size: 0.14rem;
+	line-height: 1.6em;
+}
+
+
+.certer_right {
+	float: right;
+	width: 3.3rem;
+}
+
+.index_login {
+	width: 3.3rem;
+	height: 4.5rem;
+	box-shadow: 0 0.02rem 0.04rem rgba(0, 0, 0, 0.3);
+}
+
+.index_nologins,.index_logins {
+	width: 3.3rem;
+	padding-top: 0.7rem;
+	height: 3.5rem;
+	background: url(../images/logins.png) no-repeat center bottom;
+	background-size:100%;
+}
+
+.index_nologinsimgs,.index_loginsimgs {
+	width: 1.4rem;
+	height: 1.4rem;
+	border: 0.04rem solid #FFFFFF;
+	border-radius: 50%;
+	margin: 0 auto;
+	background: #FFFFFF;
+}
+
+.index_nologinsimg,.index_loginsimgs {
+	width: 1.3rem;
+	height: 1.3rem;
+	border: 0.1rem solid #B80404;
+	border-radius: 50%;
+	margin: 0 auto;
+	background: #FFFFFF;
+	text-align: center;
+	line-height: 1.8rem;
+	z-index: 9999;
+}
+
+.index_nologinsimg img,.index_loginsimg img {
+	width: 1.1rem;
+	height: 1.1rem;
+	border-radius: 50%;
+	z-index: -1;
+}
+
+.index_nologins p,
+.index_nologins h2 {
+	color: #FFFFFF;
+	text-align: center;
+	line-height: 2em;
+	padding-top: 0.2rem;
+}
+
+.index_nologins p {
+	font-size: 0.16rem;
+}
+
+.index_nologins h2 {
+	font-size: 0.18rem;
+}
+
+.index_nologins h2 a {
+	text-decoration: underline;
+}
+
+.index_nologins h2 a:hover {
+	color: #B80404;
+}
+
+.index_nologinbuts,.index_loginbuts {
+	width: 100%;
+	text-align: center;
+}
+
+.index_nologinbut,.index_loginbut  {
+	width: 1.5rem;
+	height: 0.4rem;
+	margin: 0 auto;
+	text-align: center;
+
+	border-radius: 0.5rem;
+
+	cursor: pointer;
+	font-size: 0.16rem;
+
+}
+
+.index_nologinbut {
+
+	border: 0.05rem solid #B80404;
+
+	background-color: #FFFFFF;
+
+	color: #B80404;
+}
+
+.index_loginbut {
+border: none;
+outline: none;
+	background-color: #C4C5C7;
+
+	color: #FFFFFF;
+}
+.index_loginthis {
+	display: tabel-cell;
+	line-height: 2em;
+	padding: 0.2rem;
+}
+
+.index_loginthis p {
+	font-size: 0.16rem;
+	float: left;
+	vertical-align: middle;
+	padding-left: 0.5rem;
+}
+
+.index_loginthis p img {
+	width: 0.3rem;
+	height: 0.3rem;
+}
+.index_logins p{
+	color: #FFFFFF;text-align: center;
+	padding:0.2rem 0.3rem;
+}
+.index_logins p a{
+	padding:0 0.3rem;
+	font-size: 0.14rem;
+}
+.index_company {
+	margin-top: 0.45rem;
+	width: 3.3rem;
+	height: 2.2rem;
+	box-shadow: 0 0.02rem 0.04rem rgba(0, 0, 0, 0.3);
+}
+
+.index_link {
+	margin-top: 0.45rem;
+	width: 3.3rem;
+	height: 2.2rem;
+	box-shadow: 0 0.02rem 0.04rem rgba(0, 0, 0, 0.3);
+}
+
+.index_link h3,
+.index_company h3 {
+	font-size: 0.18rem;
+	padding: 0.15rem;
+	font-weight: bold;
+}
+
+.index_company_img {
+	width: 3rem;
+	margin: 0 auto;
+}
+
+.index_company_imgli {
+	width: 1.5rem;
+	float: left;
+}
+
+.index_company_imgli a img {
+	width: 100%;
+}
+
+.index_link_img {
+	width: 3rem;
+	margin: 0 auto;
+	line-height: 2em;
+}
+
+.index_link_imgli {
+	width: 1.5rem;
+	float: left;
+	text-align: left;
+	font-size: 0.16rem;
+	font-size: 0.14rem;
+}
+
+.index_link_imgli:hover {
+	color: #B80404;
+}

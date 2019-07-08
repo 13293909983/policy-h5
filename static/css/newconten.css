@@ -1,0 +1,123 @@
+.news_left,.news_lefts {
+	width: 70%;
+	display: inline-block;
+	margin-left: 0.2rem;
+}
+
+.news_left h3 {
+	text-align: center;
+	font-size: 0.22rem;
+}
+
+.news_left p {
+	font-size: 0.16rem;
+	line-height: 2.2em;
+	text-indent: 2em;
+}
+
+.news_left img {
+	text-align: center;
+}
+
+.news_fromtime {
+	text-align: center;
+	color: #777777;
+	font-size: 0.14rem;
+	text-indent: 0 !important;
+}
+
+.news_fromtime span {
+	padding: 0 1rem;
+}
+
+.news_content {
+	padding: 0.3rem 0;
+}
+
+.news_img {
+	width: 100%;
+	text-align: center;
+	margin: 0.2rem 0;
+}
+
+.news_img img {
+	max-width: 100%;
+}
+
+.new_right {
+	width: 26%;
+	float: right;
+
+
+}
+.newsright{
+	width: 26%;
+display: inline-block;
+	width: 3.3rem;
+	box-shadow: 0 0.02rem 0.04rem rgba(0, 0, 0, 0.3);
+	line-height: 2em;
+	height: 3.8rem;
+	padding: 0 0.1rem;
+	position: relative;
+	overflow: hidden;
+
+}
+.mr-listone {
+	width: 50%;
+	font-size: 0.16rem;
+	font-weight: bolder;
+	display: inline-block;
+	padding: 0.1rem;
+}
+
+.certer_left_con_nowhr {
+	height: 4px;
+	width: 100%;
+	background-color: #B80404;
+}
+
+.mr-listthr {
+	width: 48%;
+display: inline-block;
+	height: 0.5rem;
+	font-size: 0.14rem;
+	color: #555555;
+	cursor: pointer;
+	line-height: 0.4rem;
+	padding: 0.1rem;
+	text-align: right;
+}
+
+
+.news-list-v {
+	position: absolute;
+	visibility: hidden;
+	opacity: 0;	
+text-overflow:ellipsis;
+white-space:nowrap; 
+}
+
+.news-list-v li {
+	width: 3.2rem;
+	    overflow: hidden;
+  padding:0 0.1rem;
+    word-wrap:break-word;
+
+text-overflow:ellipsis;
+white-space:nowrap; 
+height: 0.5rem;
+}
+
+.news-list-v a {
+	overflow: hidden !important;
+    word-break:break-all;
+    font-size: 0.14rem;
+    line-height: 1.6em;
+
+}
+.news-list-v.show {
+	z-index: 1;
+	visibility: visible;
+	opacity: 1;
+
+}

@@ -1,0 +1,127 @@
+.formtables{
+	width: 10rem;
+	margin: 0.3rem auto;
+	border: 1px solid #666666;
+	border-radius: 0.05rem;
+}
+.formtables tr th{
+	height: 0.5rem;
+	line-height: 0.5rem;
+	text-align: left;
+	padding: 0 0.2rem;
+	font-size: 0.16rem;
+}
+.formtables tr th{
+border-bottom:1px solid #666666;
+}
+.formtables tr td{
+font-size: 0.16rem;
+border-bottom:1px solid #CCCCCC;
+}
+.formtables tr td{
+	/* width: 2.5rem;
+	height: 0.5rem;
+	line-height: 0.5rem;
+	padding-left:0.2rem ; */
+	 height: 0.5rem;
+    line-height: 0.5rem;
+    padding: 0 0.2rem;
+}
+.formtables tr td:nth-child(odd){
+	font-size: 0.16rem;
+text-align: center;
+background: #e5e5e5;
+
+}
+.input-text{
+	width: 2.2rem;
+}
+.formtables tr td .input-textdz{
+	width: 8rem;
+}
+.select-form{
+	width: 2rem;
+	height: 0.45rem;
+	font-size: 0.16rem;
+	border: none;
+}
+.btn-bottom {
+	padding: 0.3rem 0;
+	text-align: center;
+	font-size: 0.18rem;
+}
+
+.btn-bottom button {
+	border: none;
+	border-radius: 0.03rem;
+	padding: 0.08rem 0.24rem;
+	cursor: pointer;
+}
+
+.btn-bottom .quxiao {
+	background: #f2f2f2;
+	border-bottom: 0.03rem solid #dbdbdb;
+}
+
+.btn-bottom .submit {
+	background: #b80404;
+	color: #fff;
+	border-bottom: 0.03rem solid #e42323;
+	margin-left: 0.01rem;
+}
+.form-table button {
+    color: #fff;
+    margin: 0.05rem;
+    padding: 0.02rem 0.05rem;
+}
+.input-gx{
+	width: 1.4rem;
+}
+
+
+
+
+
+
+
+/*我的订单*/
+.ddtables{
+	margin: 0.3rem auto;
+	border: 1px solid #DCDCDC;
+	min-width: 12rem;
+}
+.ddtables tr th{
+	height: 0.4rem;
+	line-height: 0.4rem;
+	text-align: center;
+	padding: 0 0.2rem;
+	font-size: 0.16rem;
+	background-color: #4a4949;
+	color: #FFFFFF;
+	border: 1px solid #DCDCDC;
+}
+.ddtables tr td{
+	height: 0.4rem;
+	line-height: 0.4rem;
+	text-align: center;
+	padding: 0 0.2rem;
+	font-size: 0.14rem;
+	color: #000;
+	border: 1px solid #DCDCDC;
+}
+.ddtables tr td a{
+	background-color: #B80404;
+	color: #FFFFFF;
+	width: 0.2rem;
+	padding: 0.05rem 0.1rem;
+	border-radius: 0.2rem ;
+}
+.ddtables tr td{
+	min-width: 1.2rem;
+}
+.ddtables tr:nth-child(odd){
+	font-size: 0.16rem;
+text-align: center;
+background: #e5e5e5;
+
+}
