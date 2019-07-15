@@ -39,6 +39,10 @@ background: #e5e5e5;
 .formtables tr td .input-textdz{
 	width: 8rem;
 }
+.formtables tr td i{
+	color: red;
+    font-size: 0.14rem;
+}
 .select-form{
 	width: 2rem;
 	height: 0.45rem;

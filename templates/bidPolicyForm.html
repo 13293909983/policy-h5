@@ -29,11 +29,16 @@
 			</tr>
 			<tr>
 				<td>被保险人名称</td>
-				<td><input name="insuredName" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredName}">
-					<i th:text="${errorMap['insuredName']}"></i></td>
+				<td>
+					<input name="insuredName" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredName}">
+					<br/>
+					<i th:text="${errorMap['insuredName']}"></i>
+				</td>
 				<td>组织机构代码</td>
-				<td><input name="insuredName" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredName}">
-					<i th:text="${errorMap['insuredName']}"></i></td>
+				<td>
+					<input name="insuredIdNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredIdNo}">
+					<i th:text="${errorMap['insuredIdNo']}"></i>
+				</td>
 			</tr>
 			<tr>
 				<td>社会信用代码</td>
