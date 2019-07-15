@@ -55,7 +55,7 @@
 					<td th:text="${bidPolicy.sumAmount}"></td>
 					<td th:text="${bidPolicy.sumPremium}"></td>
 					<td>
-						<span th:if="${bidPolicy.payResult=='00'}" th:οnclick="'look(\''+${bidPolicy.insuredName}+'\')'">查看</span> 
+						<span th:if="${bidPolicy.payResult=='00'}" th:οnclick="'look(\''+${bidPolicy}+'\')'">查看</span> 
 						<a th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}" >去支付</a>
 					</td>
 				</tr>
@@ -104,6 +104,7 @@
 <div class="fixed"></div>
 <script type="text/javascript">
 	function look(bidPolicy){//查看
+		debugger;
 		console.log(bidPolicy);
 		//if(bidPolicy.downloadUrl){
 			//var url= bidPolicy.downloadUrl;
