@@ -113,6 +113,14 @@ background: #e5e5e5;
 	color: #000;
 	border: 1px solid #DCDCDC;
 }
+.ddtables tr td span{
+	background-color: #337ab7;
+	color: #FFFFFF;
+	cursor:pointer;
+	width: 0.2rem;
+	padding: 0.05rem 0.1rem;
+	border-radius: 0.2rem ;
+}
 .ddtables tr td a{
 	background-color: #B80404;
 	color: #FFFFFF;
@@ -128,4 +136,38 @@ background: #e5e5e5;
 text-align: center;
 background: #e5e5e5;
 
+}
+.chakan_wrap{
+	width: 11rem;
+	margin: 0 auto;
+	text-align: center;
+	padding: 0.5rem;
+}
+.chakan_wrap img{
+	width: 100%;
+}
+.chakan_but {
+    width: 2rem;
+    margin: 0 auto;
+    height: 1rem;
+}
+.chakan_down,.chakan_copy {
+    background: #b80404;
+    width: 1rem;
+    height: 0.3rem;
+    color: #FFFFFF;
+    border-radius: 0.5rem;
+    font-size: 0.14rem;
+    cursor: pointer;
+    text-align: center;
+    line-height: 0.3rem;
+}
+.chakan_down{
+	float: left;
+}
+.chakan_copy{
+	float: right;
+}
+.noyzerr img{
+	width: 100%;
 }

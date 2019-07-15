@@ -38,7 +38,7 @@
 	                <th>终保日期</th>
 	                <th>保险金额</th>
 	                <th>保费</th>
-	                <th>是否支付</th>
+	                <th>操作</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,8 +54,9 @@
 						th:text="${#dates.format(bidPolicy.endDate,'yyyy-MM-dd')+' 24时'}"></td>
 					<td th:text="${bidPolicy.sumAmount}"></td>
 					<td th:text="${bidPolicy.sumPremium}"></td>
-					<td><span th:if="${bidPolicy.payResult=='00'}">已支付</span> <a
-						th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}" >去支付</a>
+					<td>
+						<span th:if="${bidPolicy.payResult=='00'}" onclick="look(\''+${bidPolicy.downloadUrl}+'\')">查看</span> 
+						<a th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}" >去支付</a>
 					</td>
 				</tr>
 			</tbody>
@@ -78,9 +79,42 @@
 				</ul>
 			</div>
 		</div>
+		
+		
+		<div class="agree_wrap">
+				<div id="btn" class="btn_closes btn_open"> 
+					<img src="images/close.png" />
+				</div>
+				<div class="agree_all">
+					<div class="agree_content">
+	                     <h2>保函查看</h2>
+	                     <div class="noyzerr">
+							<img id="guarantee">
+							<h1></h1>
+						</div>
+						<div class="chakan_but">
+				        	<a class="chakan_down" >下载</a>
+				        </div>
+					</div>
+				</div>
+			</div>
 	</div>
 </div>
 <footer></footer>
 <div class="fixed"></div>
+<script type="text/javascript">
+	function look(url){//查看
+		if($(".agree_wrap").css("display")=="none"){
+	        $(".agree_wrap").show();
+	        $('#guarantee').attr('src',url);
+	        $('.chakan_down').attr('href',url);
+	    }
+	}
+	$(".btn_open").click(function (){
+	    if($(".agree_wrap").css("display")=="block"){
+	        $(".agree_wrap").hide();
+	    }
+	});
+</script>
 </body>
 </html>
