@@ -21,6 +21,26 @@
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 <body>
+<script type="text/javascript">
+	function lookss(url){//查看
+		console.log(url);
+		//if(bidPolicy.downloadUrl){
+			if($(".agree_wrap").css("display")=="none"){
+		        $(".agree_wrap").show();
+		        $('#guarantee').attr('src',url);
+		        $('.chakan_down').attr('href',url);
+		    }
+		//}
+	}
+	$(".btn_open").click(function (){
+	    if($(".agree_wrap").css("display")=="block"){
+	        $(".agree_wrap").hide();
+	    }
+	});
+	$(function(){
+		$(".agree_wrap").hide();
+	})
+</script>
 <header></header>
 <div class="body_mian">
 	<div class="title_wrap">
@@ -55,7 +75,7 @@
 					<td th:text="${bidPolicy.sumAmount}"></td>
 					<td th:text="${bidPolicy.sumPremium}"></td>
 					<td>
-						<span th:if="${bidPolicy.payResult=='00'}" th:οnclick="'javascript:lookss(\''+${bidPolicy.downloadUrl}+'\');'">查看</span>
+						<span th:if="${bidPolicy.payResult=='00'}" th:οnclick="'lookss(\''+${bidPolicy.downloadUrl}+'\')'">查看</span>
 						<a th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}" >去支付</a>
 					</td>
 				</tr>
@@ -102,25 +122,6 @@
 </div>
 <footer></footer>
 <div class="fixed"></div>
-<script type="text/javascript">
-	function lookss(url){//查看
-		console.log(url);
-		//if(bidPolicy.downloadUrl){
-			if($(".agree_wrap").css("display")=="none"){
-		        $(".agree_wrap").show();
-		        $('#guarantee').attr('src',url);
-		        $('.chakan_down').attr('href',url);
-		    }
-		//}
-	}
-	$(".btn_open").click(function (){
-	    if($(".agree_wrap").css("display")=="block"){
-	        $(".agree_wrap").hide();
-	    }
-	});
-	$(function(){
-		$(".agree_wrap").hide();
-	})
-</script>
+
 </body>
 </html>
