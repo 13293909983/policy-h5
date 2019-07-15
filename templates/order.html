@@ -55,7 +55,8 @@
 					<td th:text="${bidPolicy.sumAmount}"></td>
 					<td th:text="${bidPolicy.sumPremium}"></td>
 					<td>
-						<span th:if="${bidPolicy.payResult=='00'}" th:onclick="'look(\''+${bidPolicy.downloadUrl}+'\')'">查看</span> 
+						<!-- <span th:if="${bidPolicy.payResult=='00'}" th:onclick="'look(\''+${bidPolicy.downloadUrl}+'\')'">查看</span>  -->
+						<a th:if="${bidPolicy.downloadUrl!=''}" th:text="${bidPolicy.downloadUrl}"></a>
 						<a th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}" >去支付</a>
 					</td>
 				</tr>
