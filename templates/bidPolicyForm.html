@@ -37,6 +37,7 @@
 				<td>组织机构代码</td>
 				<td>
 					<input name="insuredIdNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredIdNo}">
+					<br/>
 					<i th:text="${errorMap['insuredIdNo']}"></i>
 				</td>
 			</tr>
@@ -44,11 +45,13 @@
 				<td>社会信用代码</td>
 				<td>
 					<input name="insuredSocialcode" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredSocialcode}">
+					<br/>
 					<i th:text="${errorMap['insuredSocialcode']}"></i>
 				</td>
 				<td>联系电话</td>
 				<td>
 					<input name="insuredIdMobile" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredIdMobile}">
+					<br/>
 					<i th:text="${errorMap['insuredIdMobile']}"></i>
 				</td>
 			</tr>
@@ -56,6 +59,7 @@
 				<td>地址</td>
 				<td colspan="3">
 					<input name="insuredAddress" class="input-text input-textdz" placeholder="请输入" th:text="${bidPolicy.insuredAddress}">
+					<br/>
 					<i th:text="${errorMap['insuredAddress']}"></i>
 				</td>
 			</tr>
@@ -67,11 +71,13 @@
 					<td>项目名称</td>
 					<td>
 						<input name="certificateDepart" class="input-text" placeholder="请输入"  th:value="${bidPolicy.certificateDepart}">
+						<br/>
 						<i th:text="${errorMap['certificateDepart']}"></i>
 					</td>
 					<td>招标文件编号</td>
 					<td>
 						<input name="certificateNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.certificateNo}">
+						<br/>
 						<i th:text="${errorMap['certificateNo']}"></i>
 					</td>
 				</tr>
@@ -79,11 +85,13 @@
 					<td>开标日期</td>
 					<td>
 						<input name="retroactiveStart" type="date" class="input-text"  th:value="${#dates.format(bidPolicy.retroactiveStart,'yyyy-MM-dd')}">
+						<br/>
 						<i th:text="${errorMap['retroactiveStart']}"></i>
 					</td>
 					<td>投标终止日期</td>
 					<td>
 						<input name="retroactiveEnd" type="date" class="input-text"  th:value="${#dates.format(bidPolicy.retroactiveEnd,'yyyy-MM-dd')}" readonly>
+						<br/>
 						<i th:text="${errorMap['retroactiveEnd']}"></i>
 					</td>
 				</tr>
@@ -95,6 +103,7 @@
 							<option value="02" th:selected="${bidPolicy.officeType=='02'}">货物</option>
 							<option value="03" th:selected="${bidPolicy.officeType=='03'}">服务</option>
 						</select>
+						<br/>
 						<i th:text="${errorMap['officeType']}"></i>
 					</td>
 					<td>行业代码</td>
@@ -102,6 +111,7 @@
 						<select name="businesssource" class="select-form">
 							<option value="0000">请选择</option>
 						</select>
+						<br/>
 						<i th:text="${errorMap['businesssource']}"></i>
 					</td>
 				</tr>
@@ -109,11 +119,13 @@
 					<td>保证金金额</td>
 					<td>
 						<input name="electricPower" placeholder="请输入"  type="number" class="input-text" th:value="${bidPolicy.electricPower}">
+						<br/>
 						<i th:text="${errorMap['electricPower']}"></i>
 					</td>
 					<td>保费金额</td>
 					<td>
 						<input name="sumPremium" type="number" class="input-text" th:value="${bidPolicy.sumPremium}" readonly/>
+						<br/>
 						<i th:text="${errorMap['sumPremium']}"></i>
 					</td>
 				</tr>
@@ -122,6 +134,7 @@
 					<td>
 						<input name="startDate" type="date" style="width:43%" class="input-text" th:value="${#dates.format(bidPolicy.startDate,'yyyy-MM-dd')}" readonly/>
 						<input class="input-text" value="00" style="width:30px;" disabled/>&nbsp;&nbsp;时
+						<br/>
 						<i th:text="${errorMap['startDate']}"></i>
 					</td>
 					<td>终保日期</td>
