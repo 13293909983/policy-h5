@@ -576,9 +576,13 @@ margin-top: 0.2rem;
 	font-size: 0.16rem;
 	line-height: 0.45rem;
 	text-align: right;
-	margin-right: 0.02rem;
 }
-
+.fixed_left p img{
+	width: 80%;
+	float: left;
+	border: 1px solid #B80404;
+    background-color:#B80404 ;
+}
 .fixed_lx,.fixed_phone,.fixed_bz,.fixed_fh,.fixed_gwc {
 	width: 0.45rem;
 	height: 0.45rem;
