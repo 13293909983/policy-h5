@@ -22,7 +22,7 @@
 			<h3>产品介绍</h3><img src="/images/xz.png" />
 			<h3>立即投保</h3><img src="/images/xz.png" />
 		</div>
-		<form method="post" action="/applyBidPolicy.json">
+		<form method="post" action="/applyBidPolicy.json" onsubmit="return onCheck()" enctype="multipart/form-data">
 		<table class="formtables" cellspacing="0" cellpadding="0">
 			<tr>
 				<th colspan="4">被保险人信息</th>
@@ -31,13 +31,13 @@
 			<tr>
 				<td>被保险人名称</td>
 				<td>
-					<input name="insuredName" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredName}">
+					<input name="insuredName" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredName}" onChange="getInsuredName()">
 					<br/>
 					<i th:text="${errorMap['insuredName']}"></i>
 				</td>
 				<td>组织机构代码</td>
 				<td>
-					<input name="insuredIdNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredIdNo}">
+					<input name="insuredIdNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredIdNo}" onChange="getInsuredIdNo()">
 					<br/>
 					<i th:text="${errorMap['insuredIdNo']}"></i>
 				</td>
@@ -45,13 +45,13 @@
 			<tr>
 				<td>社会信用代码</td>
 				<td>
-					<input name="insuredSocialcode" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredSocialcode}">
+					<input name="insuredSocialcode" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredSocialcode}" onChange="getInsuredSocialcode()">
 					<br/>
 					<i th:text="${errorMap['insuredSocialcode']}"></i>
 				</td>
 				<td>联系电话</td>
 				<td>
-					<input name="insuredIdMobile" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredIdMobile}">
+					<input name="insuredIdMobile" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredIdMobile}" onChange="getInsuredIdMobile()">
 					<br/>
 					<i th:text="${errorMap['insuredIdMobile']}"></i>
 				</td>
@@ -59,7 +59,7 @@
 			<tr>
 				<td>地址</td>
 				<td colspan="3">
-					<input name="insuredAddress" class="input-text input-textdz" placeholder="请输入" th:text="${bidPolicy.insuredAddress}">
+					<input name="insuredAddress" class="input-text input-textdz" placeholder="请输入" th:value="${bidPolicy.insuredAddress}" onChange="getInsuredAddress()">
 					<br/>
 					<i th:text="${errorMap['insuredAddress']}"></i>
 				</td>
@@ -71,13 +71,13 @@
 			<tr>
 					<td>项目名称</td>
 					<td>
-						<input name="certificateDepart" class="input-text" placeholder="请输入"  th:value="${bidPolicy.certificateDepart}">
+						<input name="certificateDepart" class="input-text" placeholder="请输入"  th:value="${bidPolicy.certificateDepart}" onChange="getCertificateDepart()">
 						<br/>
 						<i th:text="${errorMap['certificateDepart']}"></i>
 					</td>
 					<td>招标文件编号</td>
 					<td>
-						<input name="certificateNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.certificateNo}">
+						<input name="certificateNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.certificateNo}" onChange="getCertificateNo()">
 						<br/>
 						<i th:text="${errorMap['certificateNo']}"></i>
 					</td>
@@ -85,7 +85,7 @@
 				<tr>
 					<td>开标日期</td>
 					<td>
-						<input name="retroactiveStart" type="date" class="input-text"  th:value="${#dates.format(bidPolicy.retroactiveStart,'yyyy-MM-dd')}">
+						<input name="retroactiveStart" type="date" class="input-text"  th:value="${#dates.format(bidPolicy.retroactiveStart,'yyyy-MM-dd')}" onChange="getRetroactiveStart()">
 						<br/>
 						<i th:text="${errorMap['retroactiveStart']}"></i>
 					</td>
@@ -119,7 +119,7 @@
 				<tr>
 					<td>保证金金额</td>
 					<td>
-						<input name="electricPower" placeholder="请输入"  type="number" class="input-text" th:value="${bidPolicy.electricPower}">
+						<input name="electricPower" placeholder="请输入"  type="number" class="input-text" th:value="${bidPolicy.electricPower}" onChange="getElectricPower()">
 						<br/>
 						<i th:text="${errorMap['electricPower']}"></i>
 					</td>
@@ -145,9 +145,16 @@
 					</td>
 				</tr>
 				<tr>
-				<th colspan="4"></th>
-
-			</tr>
+					<th colspan="4"></th>
+				</tr>
+				<tr>
+				<th>影像文件</th>
+				<td colspan="3">
+					<input type='file' id="imageFile" name='imageFile' accept='*.zip' onChange="handleConId_photo(this.files);" onMouseleave="getImageFile()"/>
+					<br/>
+					<i th:text="${errorMap['imageFile']}"></i>
+				</td>
+				</tr>
 		</table>
 		<div class="btn-bottom">
 			<button class="quxiao" type="button" onclick="window.location.href = '/index.html'">取消</button>
@@ -226,6 +233,196 @@
 			}
 			$(":input[name='sumPremium']").val(sumPremium);
 		});
+		
 	})
+	//上传图片
+	function handleConId_photo(files){
+		var imgName = document.all.imageFile.value;
+		if(imgName==""){
+			alert("请选择需要上传的文件!");  
+	        return false; 
+		}else{
+			idx = imgName.lastIndexOf(".");   
+	        if (idx != -1){   
+	            ext = imgName.substr(idx+1).toUpperCase();   
+	            ext = ext.toLowerCase( ); 
+	            if (ext != 'jpg' && ext != 'png' && ext != 'jpeg' && ext != 'zip'){
+	                alert("只能上传.jpg .png .jpeg .zip类型的文件!"); 
+	                var file = document.getElementById('imageFile');
+	                file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
+	                file.outerHTML = file.outerHTML; //重新初始化了file的html
+	                return false;  
+	            }   
+	        }
+	        //是否ie
+	        var isIE = /msie/i.test(navigator.userAgent) && !window.opera;  
+	        var fileSize = 0;       
+	        var filemaxsize = 1024*150*1024;//150M
+	        //获取file的大小
+	        if (isIE && !target.files){       
+	            var filePath = target.value;       
+	            var fileSystem = new ActiveXObject("Scripting.FileSystemObject");          
+	            var file = fileSystem.GetFile (filePath);       
+	            fileSize = file.Size;      
+	        } else { 
+	            fileSize = files[0].size;       
+	        }
+	        if(fileSize>filemaxsize){
+	        	alert("文件大小不能超过150M！");
+	        	var file = document.getElementById('imageFile');
+                file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
+                file.outerHTML = file.outerHTML; //重新初始化了file的html
+                return false;  
+	        }
+		}
+	}
+	function onCheck(){
+		var i=0;
+		//被保险人名称
+		var insuredName=$(":input[name='insuredName']").val();
+		if(insuredName=="" || insuredName==null){
+			$(":input[name='insuredName']").parent().find("i").text("请输入被保险人名称");
+			i++;
+		}
+		//组织机构代码
+		var insuredIdNo=$(":input[name='insuredIdNo']").val();
+		if(insuredIdNo=="" || insuredIdNo==null){
+			$(":input[name='insuredIdNo']").parent().find("i").text("请输入组织机构代码");
+			i++;
+		}
+		//社会信用代码
+		var insuredSocialcode=$(":input[name='insuredSocialcode']").val();
+		var regex =/^([0-9ABCDEFGHJKLMNPQRTUWXY]{2})([0-9]{6})([0-9ABCDEFGHJKLMNPQRTUWXY]{10})$/;
+		if(insuredSocialcode=="" || insuredSocialcode==null){
+			$(":input[name='insuredSocialcode']").parent().find("i").text("请输入社会信用代码");
+			i++;
+		}else if(!regex.test(insuredSocialcode)){
+			$(":input[name='insuredSocialcode']").parent().find("i").text("请输入正确的社会信用代码");
+			i++;
+		}
+		//联系电话
+		var insuredIdMobile=$(":input[name='insuredIdMobile']").val();
+		var phone=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+		if(insuredIdMobile=="" || insuredIdMobile==null){
+			$(":input[name='insuredIdMobile']").parent().find("i").text("请输入联系电话");
+			i++;
+		}else if(!phone.test(insuredIdMobile)){
+			$(":input[name='insuredIdMobile']").parent().find("i").text("请输入正确的联系电话");
+			i++;
+		}
+		//地址
+		/* var insuredAddress=$(":input[name='insuredAddress']").val();
+		if(insuredAddress=="" || insuredAddress==null){
+			$(":input[name='insuredAddress']").parent().find("i").text("请输入地址");
+			i++;
+		} */
+		//项目名称
+		var certificateDepart=$(":input[name='certificateDepart']").val();
+		if(certificateDepart=="" || certificateDepart==null){
+			$(":input[name='certificateDepart']").parent().find("i").text("请输入项目名称");
+			i++;
+		}
+		//招标文件编号
+		var certificateNo=$(":input[name='certificateNo']").val();
+		if(certificateNo=="" || certificateNo==null){
+			$(":input[name='certificateNo']").parent().find("i").text("请输入招标文件编号");
+			i++;
+		}
+		//开标日期
+		var retroactiveStart=$(":input[name='retroactiveStart']").val();
+		if(retroactiveStart=="" || retroactiveStart==null){
+			$(":input[name='retroactiveStart']").parent().find("i").text("请输入开标日期");
+			i++;
+		}
+		//保证金金额
+		var electricPower=$(":input[name='electricPower']").val();
+		if(electricPower=="" || electricPower==null){
+			$(":input[name='electricPower']").parent().find("i").text("请输入保证金金额");
+			i++;
+		}else if(600>electricPower){
+			$(":input[name='electricPower']").parent().find("i").text("保证金金额不得小于保费金额");
+			i++;
+		}
+		//影像文件
+		var imageFile=$(":input[name='imageFile']").val();
+		if(imageFile=="" || imageFile==null){
+			$(":input[name='imageFile']").parent().find("i").text("请上传影像文件");
+			i++;
+		}
+		if(i>0){
+			return false;
+		}
+		//return false;
+	}
+	//被保险人名称
+	function getInsuredName(){
+		var insuredName=$(":input[name='insuredName']").val();
+		if(insuredName!=''&&insuredName!=null){
+			$(":input[name='insuredName']").parent().find("i").text("");
+		}
+	}
+	//组织机构代码
+	function getInsuredIdNo(){
+		var insuredIdNo=$(":input[name='insuredIdNo']").val();
+		if(insuredIdNo!=''&&insuredIdNo!=null){
+			$(":input[name='insuredIdNo']").parent().find("i").text("");
+		}
+	}
+	//社会信用代码
+	function getInsuredSocialcode(){
+		var insuredSocialcode=$(":input[name='insuredSocialcode']").val();
+		if(insuredSocialcode!=''&&insuredSocialcode!=null){
+			$(":input[name='insuredSocialcode']").parent().find("i").text("");
+		}
+	}
+	//联系电话
+	function getInsuredIdMobile(){
+		var insuredIdMobile=$(":input[name='insuredIdMobile']").val();
+		if(insuredIdMobile!=''&&insuredIdMobile!=null){
+			$(":input[name='insuredIdMobile']").parent().find("i").text("");
+		}
+	}
+	//地址
+	/* function getInsuredAddress(){
+		var insuredAddress=$(":input[name='insuredAddress']").val();
+		if(insuredAddress!=''&&insuredAddress!=null){
+			$(":input[name='insuredAddress']").parent().find("i").text("");
+		}
+	} */
+	//项目名称
+	function getCertificateDepart(){
+		var certificateDepart=$(":input[name='certificateDepart']").val();
+		if(certificateDepart!=''&&certificateDepart!=null){
+			$(":input[name='certificateDepart']").parent().find("i").text("");
+		}
+	}
+	//招标文件编号
+	function getCertificateNo(){
+		var certificateNo=$(":input[name='certificateNo']").val();
+		if(certificateNo!=''&&certificateNo!=null){
+			$(":input[name='certificateNo']").parent().find("i").text("");
+		}
+	}
+	//开标日期
+	function getRetroactiveStart(){
+		var retroactiveStart=$(":input[name='retroactiveStart']").val();
+		if(retroactiveStart!=''&&retroactiveStart!=null){
+			$(":input[name='retroactiveStart']").parent().find("i").text("");
+		}
+	}
+	//保证金金额
+	function getElectricPower(){
+		var electricPower=$(":input[name='electricPower']").val();
+		if(electricPower!=''&&electricPower!=null){
+			$(":input[name='electricPower']").parent().find("i").text("");
+		}
+	}
+	//影像文件
+	function getImageFile(){
+		var imageFile=$(":input[name='imageFile']").val();
+		if(imageFile!=''&&imageFile!=null){
+			$(":input[name='imageFile']").parent().find("i").text("");
+		}
+	}
 </script>
 </html>

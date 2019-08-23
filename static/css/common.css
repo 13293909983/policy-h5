@@ -44,7 +44,7 @@ button {
 
 input {
 	border: none;
-	font-family: "微软雅黑";
+	font-family: "寰蒋闆呴粦";
 	outline: none;
 }
 input[type='checkbox']{
@@ -70,7 +70,7 @@ body {
 	min-width: 937px;
 	color: #000;
 	background: #FFF;
-	font-family: PingFangSC, Verdana, Arial, sans-serif, "Times New Roman", 宋体;
+	font-family: PingFangSC, Verdana, Arial, sans-serif, "Times New Roman", 瀹嬩綋;
 	font-size: 16px;
 	margin:  0 auto;
 }
@@ -181,28 +181,25 @@ html {
 }
 
 .header_nava {
-	width: 3.00rem;
-	height: 1.10rem;
-	float: left;
-	display: inline-block;
+	/* width: 3.00rem; */
+	 height:1.10rem;
+	 float:left;
+	 display:inline-block;
+	 line-height:1.1rem;
 }
 
 .nava {
-	height: 0.60rem;
-	border-left: 0.02rem solid #E0E0E0;
-	margin: 0.25rem 0.10rem;
-	color: #666464;
-	float: left;
-	font-size: 0.16rem;
-	padding-left: 0.10rem;
-	vertical-align: middle;
+	color:#666464;
+	float:left;
+	font-size:0.16rem;
+	padding-left:0.10rem;
+	vertical-align:middle;
 }
 
 .nava p {
-	line-height: 0.30rem;
-	color: #6d6d6d;
-	font-weight: 700;
-	font-size: 0.16rem;
+	color:#7f7b7b;
+	font-weight:700;
+	font-size:0.16rem;
 }
 
 .header_search_box {
@@ -460,7 +457,7 @@ color: #FFFFFF;
     width: 1.87rem;
     border: none 0;
     padding-left: 0.13rem;
-    resize: none; /*固定*/
+    resize: none; /*鍥哄畾*/
    background-color: #333333;
    outline: none;
 }
@@ -543,7 +540,7 @@ margin-top: 0.2rem;
 
 
 
-/*返回顶部*/
+/*杩斿洖椤堕儴*/
 .fixed_top {
 	width: 2rem;
 	height: 2.40rem;
@@ -659,7 +656,7 @@ input:-webkit-autofill , textarea:-webkit-autofill, select:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px transparent  inset !important;  
     background-color:transparent;  
     background-image: none;  
-    transition: background-color 50000s ease-in-out 0s; //����ɫ͸��  ��Чʱ��  ����Ч��  ����ʱ�ӳٵ�ʱ��  
+    transition: background-color 50000s ease-in-out 0s; //背景色透明  生效时长  过渡效果  启用时延迟的时间  
 }  
 input {  
      background-color:transparent;  
