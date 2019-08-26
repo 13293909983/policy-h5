@@ -58,7 +58,7 @@
 					<td th:text="${bidPolicy.sumPremium}"></td>
 					<td>
 						<span th:if="${bidPolicy.payResult=='00'}"  th:data-id="${bidPolicy.downloadUrl}" th:data-url="${bidPolicy.previewUrl}" onclick="lookss(this.getAttribute('data-id'),this.getAttribute('data-url'))">查看</span>
-						<a th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}" >去支付</a>
+						<a th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}"  target="_black">去支付</a>
 						<!--th:οnclick="'lookss(\''+${}+'\')'"  -->
 					</td>
 				</tr>
@@ -110,7 +110,7 @@
 		if($(".agree_wrap").css("display")=="none"){
 	        $(".agree_wrap").show();
 	        $('#guarantee').attr('src',srcUrl);
-	        $('.chakan_down').attr('href',url);
+	        $('.chakan_down').attr('href',url+"?atthfilename=baohan.pdf");
 	    }
 	}
 	$(".btn_open").click(function (){
