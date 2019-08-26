@@ -66,7 +66,7 @@
 		</table>
 		<div class="paging_policy paging_policyatv">
 			<div>
-				<ul class="pagination" th:if=" ${datagrid.total} gt '0'">
+				<ul class="pagination" th:if=" ${datagrid.total/datagrid.pageSize} gt '0'">
 					<li>
 						<a th:href="${'/order.html?page=0'+'&pageSize='+datagrid.pageSize}">&laquo;</a>
 					</li>
