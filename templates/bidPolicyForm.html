@@ -23,9 +23,9 @@
 			<h3>立即投保</h3><img src="/images/xz.png" />
 		</div>
 		<form method="post" action="/applyBidPolicy.json" onsubmit="return onCheck()" enctype="multipart/form-data">
-			<input typpe="hidden" th:value="${message}" id="message"/>
+			<input type="hidden" th:value="${message}" id="message"/>
 			<!--交易平台流水号-->
-			<input typpe="hidden" th:value="${sequenceNo}" name="sequenceNo"/>
+			<input type="hidden" th:value="${sequenceNo}" name="sequenceNo"/>
 			<table class="formtables" cellspacing="0" cellpadding="0">
 				<tr>
 					<th colspan="4">被保险人信息</th>
