@@ -23,52 +23,53 @@
 			<h3>立即投保</h3><img src="/images/xz.png" />
 		</div>
 		<form method="post" action="/applyBidPolicy.json" onsubmit="return onCheck()" enctype="multipart/form-data">
-		<table class="formtables" cellspacing="0" cellpadding="0">
-			<tr>
-				<th colspan="4">被保险人信息</th>
+			<input typpe="hidden" th:value="${message}" id="message"/>
+			<table class="formtables" cellspacing="0" cellpadding="0">
+				<tr>
+					<th colspan="4">被保险人信息</th>
 
-			</tr>
-			<tr>
-				<td>被保险人名称</td>
-				<td>
-					<input name="insuredName" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredName}" onChange="getInsuredName()">
-					<br/>
-					<i th:text="${errorMap['insuredName']}"></i>
-				</td>
-				<td>组织机构代码</td>
-				<td>
-					<input name="insuredIdNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredIdNo}" onChange="getInsuredIdNo()">
-					<br/>
-					<i th:text="${errorMap['insuredIdNo']}"></i>
-				</td>
-			</tr>
-			<tr>
-				<td>社会信用代码</td>
-				<td>
-					<input name="insuredSocialcode" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredSocialcode}" onChange="getInsuredSocialcode()">
-					<br/>
-					<i th:text="${errorMap['insuredSocialcode']}"></i>
-				</td>
-				<td>联系电话</td>
-				<td>
-					<input name="insuredIdMobile" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredIdMobile}" onChange="getInsuredIdMobile()">
-					<br/>
-					<i th:text="${errorMap['insuredIdMobile']}"></i>
-				</td>
-			</tr>
-			<tr>
-				<td>地址</td>
-				<td colspan="3">
-					<input name="insuredAddress" class="input-text input-textdz" placeholder="请输入" th:value="${bidPolicy.insuredAddress}" onChange="getInsuredAddress()">
-					<br/>
-					<i th:text="${errorMap['insuredAddress']}"></i>
-				</td>
-			</tr>
-			<tr>
-				<th colspan="4">基本信息</th>
+				</tr>
+				<tr>
+					<td>被保险人名称</td>
+					<td>
+						<input name="insuredName" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredName}" onChange="getInsuredName()">
+						<br/>
+						<i th:text="${errorMap['insuredName']}"></i>
+					</td>
+					<td>组织机构代码</td>
+					<td>
+						<input name="insuredIdNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredIdNo}" onChange="getInsuredIdNo()">
+						<br/>
+						<i th:text="${errorMap['insuredIdNo']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<td>社会信用代码</td>
+					<td>
+						<input name="insuredSocialcode" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredSocialcode}" onChange="getInsuredSocialcode()">
+						<br/>
+						<i th:text="${errorMap['insuredSocialcode']}"></i>
+					</td>
+					<td>联系电话</td>
+					<td>
+						<input name="insuredIdMobile" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredIdMobile}" onChange="getInsuredIdMobile()">
+						<br/>
+						<i th:text="${errorMap['insuredIdMobile']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<td>地址</td>
+					<td colspan="3">
+						<input name="insuredAddress" class="input-text input-textdz" placeholder="请输入" th:value="${bidPolicy.insuredAddress}" onChange="getInsuredAddress()">
+						<br/>
+						<i th:text="${errorMap['insuredAddress']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<th colspan="4">基本信息</th>
 
-			</tr>
-			<tr>
+				</tr>
+				<tr>
 					<td>项目名称</td>
 					<td>
 						<input name="certificateDepart" class="input-text" placeholder="请输入"  th:value="${bidPolicy.certificateDepart}" onChange="getCertificateDepart()">
@@ -152,7 +153,7 @@
 				<td colspan="3">
 					<input type='file' id="imageFile" name='imageFile' accept='*.zip' onChange="handleConId_photo(this.files);" onMouseleave="getImageFile()"/>
 					<br/>
-					<i th:text="${errorMap['imageFile']}"></i>
+					<i th:text="${errorMap['fileKey']}"></i>
 				</td>
 				</tr>
 		</table>
@@ -233,7 +234,10 @@
 			}
 			$(":input[name='sumPremium']").val(sumPremium);
 		});
-		
+		//全局错误提示
+		if($("#message").val()!=""){
+		    alert($("#message").val());
+		}
 	})
 	//上传图片
 	function handleConId_photo(files){
