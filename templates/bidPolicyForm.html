@@ -243,7 +243,6 @@
 		    alert($("#message").val());
 		}
 		var fileKey=[[${bidPolicy.fileKey}]];
-		console.log(fileKey);
 		if(fileKey!=null&&fileKey!=""){
 			$("#fileImg").attr("src", "/images/a7.png");
 		}
@@ -377,7 +376,7 @@
 		//影像文件
 		var imageFile=$(":input[name='imageFile']").val();
 		var fileKey=$(":hidden[name='imageFile']").val();
-		if((imageFile=="" || imageFile==null) && fileKey==""){
+		if((imageFile=="" || imageFile==null) && (fileKey==undefined || fileKey=="")){
 			$(":input[name='imageFile']").parent().find("i").text("请上传影像文件");
 			i++;
 		}
