@@ -23,7 +23,9 @@
 			<h3>立即投保</h3><img src="/images/xz.png" />
 		</div>
 		<form method="post" action="/applyBidPolicy.json" onsubmit="return onCheck()" enctype="multipart/form-data">
-			<input typpe="hidden" th:value="${message}" id="message"/>
+			<input type="hidden" th:value="${message}" id="message"/>
+			<!--交易平台流水号-->
+			<input type="hidden" th:value="${sequenceNo}" name="sequenceNo"/>
 			<table class="formtables" cellspacing="0" cellpadding="0">
 				<tr>
 					<th colspan="4">被保险人信息</th>
@@ -60,7 +62,7 @@
 				<tr>
 					<td>地址</td>
 					<td colspan="3">
-						<input name="insuredAddress" class="input-text input-textdz" placeholder="请输入" th:value="${bidPolicy.insuredAddress}" onChange="getInsuredAddress()">
+						<input name="insuredAddress" class="input-text input-textdz" placeholder="请输入" th:value="${bidPolicy.insuredAddress}">
 						<br/>
 						<i th:text="${errorMap['insuredAddress']}"></i>
 					</td>
@@ -152,6 +154,7 @@
 				<th>影像文件</th>
 				<td colspan="3">
 					<input type='file' id="imageFile" name='imageFile' accept='*.zip' onChange="handleConId_photo(this.files);" onMouseleave="getImageFile()"/>
+					<input type="hidden" name="fileKey" th:value="${bidPolicy.fileKey}"/>
 					<br/>
 					<i th:text="${errorMap['fileKey']}"></i>
 				</td>
@@ -349,7 +352,8 @@
 		}
 		//影像文件
 		var imageFile=$(":input[name='imageFile']").val();
-		if(imageFile=="" || imageFile==null){
+		var fileKey=$(":hidden[name='imageFile']").val();
+		if((imageFile=="" || imageFile==null) && fileKey==""){
 			$(":input[name='imageFile']").parent().find("i").text("请上传影像文件");
 			i++;
 		}
