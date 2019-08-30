@@ -102,7 +102,7 @@
 	    param.type=$('.news_lefttitlenow').attr('data-code');
 	    $.ajax({
 	        type:"get",
-	        url:"http://192.168.19.189:8120/home/loadBusiness",
+	        url:"http://39.100.55.200/home/loadBusiness",
 	        data: param,
 	        dataType:"json",
 	        success:function(dataObj){
@@ -121,7 +121,7 @@
 	                        str+='	<div class="news_leftlistconimg">';
 	                        str+='    <h3 title="'+val.title+'">'+val.title+'</h3>';
 	                        str+='		<div class="news_leftlistconimg">';
-	                        str+='			<img src="http://192.168.19.189:8120'+val.cover+'" />';
+	                        str+='			<img src="http://39.100.55.200'+val.cover+'" />';
 	                        str+='    		<p>'+val.content+'</p>';
 	                        str+='		</div>';
 	                        str+='	</div>';
@@ -176,7 +176,7 @@
 		var type=$('.news_lefttitlenow').attr('data-code');
 	    $.ajax({
 	        type:"get",
-	        url:"http://192.168.19.189:8120/home/selectNeweByType",
+	        url:"http://39.100.55.200/home/selectNeweByType",
 	        data: {"type":type},
 	        dataType:"json",
 	        success:function(dataObj){
