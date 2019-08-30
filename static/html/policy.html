@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,8 +14,9 @@
 		<script src="/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 		<script src="/js/index.js" type="text/javascript"></script>
 		<script type="text/javascript" src="/js/paging.js"></script>
+		<link rel="stylesheet" href="/layui/css/layui.css">
+		<script src="/layui/layui.js"></script>
 	</head>
-
 	<body>
 		<header></header>
 		<div class="body_mian">
@@ -27,143 +27,24 @@
 
 				<div class="news_lefts">
 					<div class="news_lefttit">
-						<div class="news_lefttitle news_lefttitlenow">政策法规</div>
-						<div class="news_lefttitle">新闻热点</div>
+						<div class="news_lefttitle news_lefttitlenow" data-code="1">政策法规</div>
+						<div class="news_lefttitle" data-code="2">新闻热点</div>
 						<hr class="certer_left_con_nowhr">
 					</div>
-					<div class="news_lefttits news_lefttitlatv">
+					<div class="news_lefttits news_lefttitlatv" id="newPolicies">
 						<ul class="news_leftlist">
-							<li>
-								<div class="news_leftlisttime">
-									<p>2019-<br />06-21</p>
-								</div>
-								<div class="news_leftlistcon">
-									<div class="news_leftlistconimg">
-									<h3>国家发展改革委关于依法依规加强PPP项目投资和建设管理的通知</h3>
-									<div class="news_leftlistconimg">
-										<img src="/images/xw02.png" />
-										<p>为了贯彻落实党中央、国务院关于基础设施补短板、防范化解地方政府隐性债务风险的决策部署，加强PPP项目投资和建设管理、提高PPP项目投资决策科学性，按照近日国务院颁布实施的《政府投资条例》（国务院令第712号），以及《企业投资项目核准和备案管理条例》（国务院令第673号）、
-										</p>
-									
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="news_leftlisttime">
-									<p>2019-<br />06-18</p>
-								</div>
-								<div class="news_leftlistcon">
-									<h3>公开征求对《网络安全漏洞管理规定（征求意见稿）》的意见</h3>
-									<div class="news_leftlistconimg">
-										<img src="/images/xw03.png" />
-										<p>为贯彻落实《中华人民共和国网络安全法》，加强网络安全漏洞管理，工业和信息化部会同有关部门起草了《网络安全漏洞管理规定（征求意见稿）》（见附件），拟以规范性文件形式印发，现面向社会公开征求意见。如有意见或建议，请于2019年7月18日前反馈。</p>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="news_leftlisttime">
-									<p>2019-<br />05-33</p>
-								</div>
-								<div class="news_leftlistcon">
-									<h3>国务院办公厅转发国家发展改革委关于深化公共资源交易平台整合共享指导意见的通知</h3>
-									<div class="news_leftlistconimg">
-										<img src="/images/xw01.png" />
-										<img src="/images/xw02.png" />
-										<img src="/images/xw04.png" />
-									</div>
-								</div>
-							</li>
-							
-
 						</ul>
-
 					</div>
-					<div class="news_lefttits">
-						<ul class="news_leftlist">
-							<li>
-								<div class="news_leftlisttime">
-									<p>2019-<br />07-01</p>
-								</div>
-								<div class="news_leftlistcon">
-									<h3>垫资施工、层层转包、工资拖欠，青岛地铁项目显行业乱象</h3>
-									<div class="news_leftlistconimg">
-										<img src="/images/xw07.png" />
-										<img src="/images/xw08.png" />
-										<img src="/images/xw09.png" />
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="news_leftlisttime">
-									<p>2019-<br />06-25</p>
-								</div>
-								<div class="news_leftlistcon">
-									<h3>定额计价、清单计价施工方人工费倒挂，行业难题如何破解？</h3>
-									<div class="news_leftlistconimg">
-										<img src="/images/xw03.png" />
-									<p>目前，我国建筑工程预算所采用的工程计价模式，主要分为：定额计价模式与工程量清单计价模式两种。</p>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="news_leftlisttime">
-									<p>2019-<br />05-22</p>
-								</div>
-								<div class="news_leftlistcon">
-									<h3>银行保函创新与颠覆：未来的工程担保市场是谁的天下？</h3>
-									<div class="news_leftlistconimg">
-										<img src="/images/xw10.png" />
-										<p>银行保函，是银行应开函申请人的申请，向受益人开具的有担保性质的书面承诺文件。其以银行信用为基础，担保在申请人未履行基础交易合同项下的责任或义务时，银行将代其履行一定金额、一定时限范围内的某种支付或经济赔偿责任。</p>
-									</div>
-								</div>
-							</li>
-
-						</ul>
-
-					</div>
+					<input type="hidden" id="startIndex"/>
 					<div class="paging_policy paging_policyatv">
-						<div class="pagger-box pagger" id="box"></div>
+						<div id="pager" style="text-align: center;"></div>
 					</div>
-					
 				</div>
                   <div class="new_right">
 						<div class="newsright">
-							<div class="mr-listone">相关新闻</div><div class="mr-listthr news-change" >换一换↺</div>
+							<div class="mr-listone">相关新闻</div><div class="mr-listthr news-change" onclick="exchange()">换一换↺</div>
 						<hr class="certer_left_con_nowhr">
-
 							<ul class="news-list-v show" >
-								<li>
-									<a href="#">国家发展改革委关于依法依规加强PPP项目投资和建设管理的通知</a>
-								</li>
-								<li>
-									<a href="#" >公开征求对《网络安全漏洞管理规定（征求意见稿）》的意见</a>
-								</li>
-								<li>
-									<a href="#">国务院办公厅转发国家发展改革委关于深化公共资源交易平台整合共享指导意见的通知</a>
-								</li>
-								<li>
-									<a href="#">北京市发展和改革委员会等八部门关于深化招投标领域“放管服”改革优化营商环境的通知</a>
-								</li>
-								<li>
-									<a href="#" >国家发展改革委办公厅关于进一步完善“信用中国”网站及地方信用门户网站行政处罚信息信用修复机制的通知</a>
-								</li>
-								<li>
-									<a href="#">国家发展改革委办公厅关于印发《公共资源交易平台服务标准（试行）》的通知</a>
-								</li>
-							</ul>
-							<ul class="news-list-v" >
-								<li>
-									<a href="#">中华人民共和国政府信息公开条例</a>
-								</li>
-								<li>
-									<a href="#">政府投资条例</a>
-								</li>
-								<li>
-									<a href="#">国务院办公厅关于全面开展工程建设项目审批制度改革的实施意见</a>
-								</li>
-								<li>
-									<a href="#">国家发展改革委住房城乡建设部关于推进全过程工程咨询服务发展的指导意见</a>
-								</li>
 							</ul>	
 						</div>	
 						 <div class="index_link">
@@ -186,53 +67,12 @@
 					</ul>
 		    	</div>
 			</div>
-
-
 		</div>
 		</div>
 		<footer></footer>
 		<div class="fixed"></div>
 	</body>
 	<script src="/js/bootstrap.js" type="text/javascript"></script>
-	<script>
-		//换一换
-		var $newsLists = $('.new_right').find('.news-list-v');
-
-		function changeNews() {
-			var $currentNews = $newsLists.filter('.show');
-			var $nextNews = $currentNews.next();
-
-			if($nextNews.length === 0) {
-				$nextNews = $newsLists.eq(0);
-			}
-
-			$newsLists.removeClass('show');
-			$nextNews.addClass('show');
-		}
-		$('.news-change').on('click', function() {
-			changeNews();
-		});
-	</script>
-	<script type="text/javascript" src="/js/paging.js"></script>
-	<script>
-		var setTotalCount = 1000;
-		$('#box').paging({
-			initPageNo: 1, // 初始页码
-			totalPages: 2, //总页数
-			totalCount: '合计' + setTotalCount + '条数据', // 条目总数
-			slideSpeed: 600, // 缓动速度。单位毫秒
-			jump: true, //是否支持跳转
-			callback: function(page) { // 回调函数
-				console.log(page);
-			}
-		})
-	</script>
-	<script>
-		$(".news_lefttitle").click(function() {
-			$(this).addClass("news_lefttitlenow").siblings().removeClass("news_lefttitlenow");
-			$(".news_lefttits").eq($(this).index()).addClass("news_lefttitlatv").siblings().removeClass("news_lefttitlatv");
-		})
-	</script>
  <script>$('.news_leftlistconimg p').each(function(){
  //设置显示获取字符串的字数  这个根绝要求 看需要大概显示几行
     var maxwidth=90;   
@@ -243,5 +83,134 @@
         $(this).html($(this).html()+'...');
     }
 });
+</script>
+<script type="text/javascript">
+	$(".news_lefttitle").click(function() {
+		$(this).addClass("news_lefttitlenow").siblings().removeClass("news_lefttitlenow");
+		$(".news_lefttits").eq($(this).index()).addClass("news_lefttitlatv").siblings().removeClass("news_lefttitlatv");
+		loadBusiness();
+		relatedNews();
+	})
+	$(function(){
+		loadBusiness();//政策法规和新闻
+		relatedNews();//相关新闻
+	})
+	function loadBusiness(){
+		var param={};
+	    param.startIndex=$('#startIndex').val();
+	    param.pageSize=3;
+	    param.type=$('.news_lefttitlenow').attr('data-code');
+	    $.ajax({
+	        type:"get",
+	        url:"http://192.168.19.189:8120/home/loadBusiness",
+	        data: param,
+	        dataType:"json",
+	        success:function(dataObj){
+	            if(dataObj!=null){
+	                var data=dataObj.data;
+	                $('.news_lefttitlatv').html('');
+	                var tableData=data.pageData;
+	                var num=tableData.length;
+	                var str='';
+	                if(num>0){
+	                    $.each(tableData,function(index,val){
+	                    	str+='<ul class="news_leftlist">'
+	                    	str+='<li onclick="newDetails('+val.id+')">';
+	                        str+='<div class="news_leftlisttime"><p>'+val.addTime+'</p></div>';
+	                        str+='<div class="news_leftlistcon">';
+	                        str+='	<div class="news_leftlistconimg">';
+	                        str+='    <h3 title="'+val.title+'">'+val.title+'</h3>';
+	                        str+='		<div class="news_leftlistconimg">';
+	                        str+='			<img src="http://192.168.19.189:8120'+val.cover+'" />';
+	                        str+='    		<p>'+val.content+'</p>';
+	                        str+='		</div>';
+	                        str+='	</div>';
+	                        str+='</div>';
+	                        str+='</li>';
+	                        str+="</ul>"
+	                    })
+	                }else{
+	                	if(param.type==1){
+	                		str+='<div style="line-height: 250px;text-align: center;font-size: 16px;color: #787675">';
+	                    	str+='暂无政策法规';
+	                    	str+='</div>';
+	                	}else{
+	                		str+='<div style="line-height: 250px;text-align: center;font-size: 16px;color: #787675">';
+	                    	str+='暂无新闻热点';
+	                    	str+='</div>';
+	                	}
+	                	
+	                }
+	                $('.news_lefttitlatv').append(str);
+	                //分页(如果总条数大于每页显示条数则显示分页栏)
+	                $('#pager').html('');
+	                if(data.totalCount>data.pageSize){
+	                     layui.use(['laypage', 'layer'], function(){
+	                          var laypage = layui.laypage
+	                          ,layer = layui.layer;
+	                            //自定义首页、尾页、上一页、下一页文本
+	                          laypage.render({
+	                            elem: 'pager'
+	                            ,first: '首页'
+	                            ,last: '尾页'
+	                            ,prev: '上一页'
+	                            ,next: '下一页'
+	                            ,count: data.totalCount
+	                            ,curr:  data.startIndex
+	                            ,limit: data.pageSize
+	                            ,layout:['prev', 'page','first','last', 'next', 'skip']
+	                            ,jump: function(obj, first){
+	                                if(!first){
+	                                    $('#startIndex').val(obj.curr);
+	                                    loadBusiness();
+	                                }
+	                            }
+	                        });
+	                    }) 
+	                }
+	            }
+	        }
+	    })
+	}
+	function relatedNews(){
+		var type=$('.news_lefttitlenow').attr('data-code');
+	    $.ajax({
+	        type:"get",
+	        url:"http://192.168.19.189:8120/home/selectNeweByType",
+	        data: {"type":type},
+	        dataType:"json",
+	        success:function(dataObj){
+	            if(dataObj!=null){
+	                var data=dataObj.data;
+	                $('.news-list-v').html('');
+	                var num=data.length;
+	                var str='';
+	                if(num==6){
+	                	$(".news-change").show();
+	                }else{
+	                	$(".news-change").hide();
+	                }
+	                if(num>0){
+	                    $.each(data,function(index,val){
+	                    	str+='<li>';
+	                        str+='    <a onclick="newDetails('+val.id+')" title="'+val.title+'">'+val.title+'</a>';
+	                        str+='</li>';
+	                    })
+	                }else{
+	               		str+='<div style="line-height: 250px;text-align: center;font-size: 16px;color: #787675">';
+	                   	str+='暂无相关新闻';
+	                   	str+='</div>';
+	                }
+	                $('.news-list-v').append(str);
+	            }
+	        }
+	    })
+	}
+	function  newDetails(newId){
+		window.location.href="/html/newsDetails.html?id="+newId+"&type="+$('.news_lefttitlenow').attr('data-code');
+	}
+	function exchange(){
+		relatedNews();
+	}
 </script>
 </html>
