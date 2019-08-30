@@ -152,12 +152,13 @@
 				</tr>
 				<tr>
 				<th>影像文件</th>
-				<td colspan="3">
+				<td>
 					<input type='file' id="imageFile" name='imageFile' accept='*.zip' onChange="handleConId_photo(this.files);" onMouseleave="getImageFile()"/>
 					<input type="hidden" name="fileKey" th:value="${bidPolicy.fileKey}"/>
 					<br/>
 					<i th:text="${errorMap['fileKey']}"></i>
 				</td>
+				<td><img id="fileImg" style="width: 120px;height: 125px;margin-top: 17px;background: #fff;"/></td>
 				</tr>
 		</table>
 		<div class="btn-bottom">
@@ -170,7 +171,7 @@
 <footer></footer>
 <div class="fixed"></div>
 </body>
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
 	Date.prototype.format = function(format) {
 		var date = {
 			"M+" : this.getMonth() + 1,
@@ -241,23 +242,32 @@
 		if($("#message").val()!=""){
 		    alert($("#message").val());
 		}
+		var fileKey=[[${bidPolicy.fileKey}]];
+		console.log(fileKey);
+		if(fileKey!=null&&fileKey!=""){
+			$("#fileImg").attr("src", "/images/a7.png");
+		}
 	})
 	//上传图片
 	function handleConId_photo(files){
 		var imgName = document.all.imageFile.value;
+		var ext="";
 		if(imgName==""){
-			alert("请选择需要上传的文件!");  
+			alert("请选择需要上传的文件!");
+			var fileTd=$("#fileImg").parent();
+			fileTd.html('<img id="fileImg" style="width: 120px;height: 125px;margin-top: 17px;background: #fff;">');
 	        return false; 
 		}else{
 			idx = imgName.lastIndexOf(".");   
 	        if (idx != -1){   
 	            ext = imgName.substr(idx+1).toUpperCase();   
 	            ext = ext.toLowerCase( ); 
-	            if (ext != 'jpg' && ext != 'png' && ext != 'jpeg' && ext != 'zip'){
-	                alert("只能上传.jpg .png .jpeg .zip类型的文件!"); 
+	            if (ext != 'jpg' && ext != 'png' && ext != 'jpeg'&& ext != 'bmp'&& ext != 'zip'){
+	                alert("只能上传.jpg .png .jpeg .bmp .zip类型的文件!"); 
 	                var file = document.getElementById('imageFile');
 	                file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
 	                file.outerHTML = file.outerHTML; //重新初始化了file的html
+	                $("#fileImg").attr("src", "/images/a7.png");
 	                return false;  
 	            }   
 	        }
@@ -279,7 +289,21 @@
 	        	var file = document.getElementById('imageFile');
                 file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
                 file.outerHTML = file.outerHTML; //重新初始化了file的html
+                $("#fileImg").attr("src", "/images/a7.png");
                 return false;  
+	        }
+	        var url = null;
+	        if (window.createObjectURL != undefined) { // basic
+	            url = window.createObjectURL(files[0]);
+	        } else if (window.URL != undefined) { // mozilla(firefox)
+	            url = window.URL.createObjectURL(files[0]);
+	        } else if (window.webkitURL != undefined) { // webkit or chrome
+	            url = window.webkitURL.createObjectURL(files[0]);
+	        }
+	        if(ext=="zip"){
+	        	$("#fileImg").attr("src", "/images/a7.png");
+	        }else{
+	        	$("#fileImg").attr("src", url);
 	        }
 		}
 	}
