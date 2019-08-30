@@ -494,7 +494,7 @@
 	                    $.each(tableData,function(index,val){
 	                    	str+='<div class="certer_news_leftli">';
 	                    	str+='	<div class="news_leftimg">';
-	                    	str+='		<img src="http://192.168.19.189:8120'+val.cover+'" />';
+	                    	str+='		<img src="'+publicUrl+val.cover+'" />';
 	                    	str+='	</div>';
 	                    	str+='	<div class="img-bottom">';
 	                    	str+='		<p>'+val.title+'</p>';
@@ -522,7 +522,7 @@
 	                    $.each(tableData,function(index,val){
 	                    	strs+='<li class="certer_news_rightli certer_news_rightlinow" onclick="newDetails('+val.id+')">';
 	                    	strs+='	<div class="certer_news_rightimg">';
-	                    	strs+='		<img src="http://192.168.19.189:8120'+val.cover+'" />';
+	                    	strs+='		<img src="'+publicUrl+val.cover+'" />';
 	                    	strs+='	</div>';
 	                    	strs+='	<div class="certer_news_rightw certer_news_rightlinows">';
 	                    	strs+='		<h4 title="'+val.title+'">'+val.title+'</h4>';
