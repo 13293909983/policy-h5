@@ -84,6 +84,7 @@
     }
 });
 </script>
+<script type="text/javascript" src="/js/url.js"></script>
 <script type="text/javascript">
 	$(".news_lefttitle").click(function() {
 		$(this).addClass("news_lefttitlenow").siblings().removeClass("news_lefttitlenow");
@@ -102,7 +103,7 @@
 	    param.type=$('.news_lefttitlenow').attr('data-code');
 	    $.ajax({
 	        type:"get",
-	        url:"http://39.100.55.200/home/loadBusiness",
+	        url:publicUrl+"/home/loadBusiness",
 	        data: param,
 	        dataType:"json",
 	        success:function(dataObj){
@@ -176,7 +177,7 @@
 		var type=$('.news_lefttitlenow').attr('data-code');
 	    $.ajax({
 	        type:"get",
-	        url:"http://39.100.55.200/home/selectNeweByType",
+	        url:publicUrl+"/home/selectNeweByType",
 	        data: {"type":type},
 	        dataType:"json",
 	        success:function(dataObj){

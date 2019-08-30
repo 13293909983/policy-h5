@@ -2,8 +2,6 @@
 
 <div class="foots">
 	<div class="ftBars">
-
-
 		<div class="foot_center">
 			<h3>反馈留言<br /><span>FEEDBACK MESSAGE</span></h3>
 			<div class="lianxi_form">
@@ -12,33 +10,35 @@
         	<div class="lianxi_left">
             <div class="input_boxs" >
                 <i class="icon icon01"></i>
-                <textarea placeholder="*名字" type="text"></textarea>
+                <textarea name="realName" id="realName" placeholder="*名字" type="text"></textarea>
             </div>
+            <span id="nameError" style="color: red;"></span>
             <div class="input_boxs">
                 <i class="icon icon02" ></i>
-                <textarea placeholder="*邮箱" type="text"></textarea>
+                <textarea name="email" id="email" placeholder="*邮箱" type="text"></textarea>
             </div>
+            <span id="emailError" style="color: red;"></span>
             <div class="input_boxs">
                 <i class="icon icon03"></i>
-                <textarea placeholder="*联系电话" type="text"></textarea>
-            
+                <textarea name="phone" id="phone" placeholder="*联系电话" type="text"></textarea>
             </div>
+            <span id="phoneError" style="color: red;"></span>
            </div>
            <div class="lianxi_right">
             <div class="input_boxs message_box">
                 <i class="icon  icon04" style="height:0.83rem"></i>
-                <textarea placeholder="*说点儿什么吧" style="height: 0.82rem;width: 3.65rem;"></textarea>
+                <textarea name="content" id="content" placeholder="*说点儿什么吧" style="height: 0.82rem;width: 3.65rem;"></textarea>
             </div>
+            <span id="contentError" style="color: red;"></span>
             <div class="message1one">
                 <span style="color:red">*</span>亲，留言的时候，要请留下你的姓名和联系方式哦~
             </div>
-            <div class="sentbtn_box">
+            <div class="sentbtn_box" onclick="send()">
                 <span>发送留言</span>
             </div>
             </div>
         </form>
     </div>
-
     </div>
 		</div>
 				<div class="foot_left">
@@ -76,12 +76,8 @@
 					    	</a></p>
 					    </div>
 				</li>
-          
-
 			</ul>
-		
 		</div>
-		
 		<div class="erweima">
 			<img src="/images/ewm.jpg" />
 			<p>【&nbsp;扫一扫&nbsp;】</p>
@@ -105,6 +101,7 @@
 	</div>
 	
 </div>
+<script type="text/javascript" src="/js/url.js"></script>
 <script>
 	$(".online").click(function() {
 
@@ -116,5 +113,79 @@ $(".closeTrigger").click(function() {
 		$(".contentBox").hide();
 	}
 });
-
+	function send(){//发送留言
+		var errorNum=0;
+		var realName=$('#realName').val();
+		if(realName==null||realName==''){
+			//.css("border","1px solid red")
+			$('#realName').parent().css("border","1px solid red");
+			$('#nameError').text('姓名不能为空');
+			errorNum+=1;
+		}
+		var email=$('#email').val();
+		if(email==null||email==''){
+			$('#email').parent().css("border","1px solid red");
+	        $('#emailError').text('邮箱不能为空');
+	        errorNum+=1;
+	    }
+		var phone=$('#phone').val();
+		if(phone==null||phone==''){
+			$('#phone').parent().css("border","1px solid red");
+	        $('#phoneError').text('联系方式不能为空');
+	        errorNum+=1;
+	    }
+		var content=$('#content').val();
+		if(content==null||content==''){
+			$('#content').parent().css("border","1px solid red");
+	        $('#contentError').text('留言内容不能为空');
+	        errorNum+=1;
+	    }
+		//前台验证未通过则不访问后台
+		if(errorNum>0)return false;
+		var param={realName:realName,email:email,phone:phone,content:content};
+		
+		$.ajax({
+			type:"post",
+			url:publicUrl+"/home/addUserMessage",
+			data: param,
+			dataType:'json',
+			success:function(data){
+				if(data.code==200){//添加成功
+					layer.msg(data.message,{time:2000,icon:6},function(){
+						//清空表单信息
+						$('#realName').val('');
+						$('#email').val('');
+						$('#phone').val('');
+						$('#content').val('');
+					});
+				}else{
+					if(data.message.indexOf('邮箱')>=0){
+						$('#email').parent().css("border","1px solid red");
+						$('#emailError').text(data.message);
+					}
+					if(data.message.indexOf('手机号')>=0){
+						$('#phone').parent().css("border","1px solid red");
+	                    $('#phoneError').text(data.message);
+	                }
+				}
+			}
+		})
+		
+	}
+	$('#realName').change(function(){
+		$('#nameError').text('');
+		$('#realName').parent().css("border","");
+	})
+	$('#email').change(function(){
+	    $('#emailError').text('');
+	    $('#email').parent().css("border","");
+	})
+	$('#phone').change(function(){
+	    $('#phoneError').text('');
+	    $('#phone').parent().css("border","");
+	})
+	$('#content').change(function(){
+	    $('#contentError').text('');
+	    $('#content').parent().css("border","");
+	})
 </script>

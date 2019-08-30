@@ -43,7 +43,8 @@
 .news_leftlistcon h3{
 	font-size: 0.18rem;
 	padding: 0.05rem;
-  overflow:hidden;
+	overflow:hidden;
+	width: 6.5rem;
     text-overflow:ellipsis;
     white-space:nowrap
 }

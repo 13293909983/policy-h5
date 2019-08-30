@@ -14,6 +14,7 @@
 <script src="js/bootstrap.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript" ></script>
 <script src="js/mov_port.js" type="text/javascript" ></script>
+<script src="js/layer/2.4/layer.js"></script>
 </head>
 <style>
     #move_port{
@@ -136,8 +137,8 @@
 				<div class="certer_left_con">
 					<div class="certer_left_conh3">
 						<h3>
-							<span class="certer_left_con_a certer_left_con_now">政策法规</span> <span
-								class="certer_left_con_a">新闻热点</span>
+							<span class="certer_left_con_a certer_left_con_now" data-code=1 >政策法规</span> 
+							<span class="certer_left_con_a" data-code=2 >新闻热点</span>
 						</h3>
 					</div>
 					<div class="more_news">
@@ -426,10 +427,8 @@
 	<footer></footer>
 	<div class="fixed"></div>
 </body>
-
 <script>
 	showSlide();
-
 	function showSlide() {
 		showInterval = setInterval(function() {
 			$('.certer_news_leftul').animate({
@@ -446,16 +445,6 @@
 	}
 </script>
 <script>
-	$(".certer_left_con_a").click(
-			function() {
-				$(this).addClass("certer_left_con_now").siblings().removeClass(
-						"certer_left_con_now");
-				$(".certer_left_news").eq($(this).index()).addClass(
-						"certer_left_newsnow").siblings().removeClass(
-						"certer_left_newsnow");
-			})
-</script>
-<script>
 	$('.new_wre p').each(function() {
 		//设置显示获取字符串的字数  这个根绝要求 看需要大概显示几行
 		var maxwidth = 40;
@@ -469,5 +458,94 @@
 </script>
 <script>
    move_obj("#move_port");
+</script>
+<script type="text/javascript" src="/js/url.js"></script>
+<script type="text/javascript">
+	$(".certer_left_con_a").click(
+		function() {
+			$(this).addClass("certer_left_con_now").siblings().removeClass(
+					"certer_left_con_now");
+			$(".certer_left_news").eq($(this).index()).addClass(
+					"certer_left_newsnow").siblings().removeClass(
+					"certer_left_newsnow");
+			relatedNews();
+		})
+	$(function(){
+		relatedNews();
+	})
+	function relatedNews(){
+		var param={};
+	    param.startIndex=1;
+	    param.pageSize=3;
+	    param.type=$('.certer_left_con_now').attr('data-code');
+	    $.ajax({
+	        type:"get",
+	        url:publicUrl+"/home/loadBusiness",
+	        data: param,
+	        dataType:"json",
+	        success:function(dataObj){
+	            if(dataObj!=null){
+	                var data=dataObj.data;
+	                $('.certer_news_leftul').html('');
+	                var tableData=data.pageData;
+	                var num=tableData.length;
+	                var str='';
+	                if(num>0){
+	                    $.each(tableData,function(index,val){
+	                    	str+='<div class="certer_news_leftli">';
+	                    	str+='	<div class="news_leftimg">';
+	                    	str+='		<img src="http://192.168.19.189:8120'+val.cover+'" />';
+	                    	str+='	</div>';
+	                    	str+='	<div class="img-bottom">';
+	                    	str+='		<p>'+val.title+'</p>';
+	                    	str+='	</div>';
+	                    	str+='	<div class="new_w">';
+	                    	str+='		<p class="new_time">时间：'+val.addTime+'</p>';
+	                    	str+='		<p class="new_from">来源：'+val.source+'</p>';
+	                    	str+='		<div class="new_wre">';
+	                    	str+='			<p>'+val.content+'</p>';
+	                    	str+='		</div>';
+	                    	str+='	</div>';
+	                    	str+='	<div class="new_more" onclick="newDetails('+val.id+')">了解更多</div>';
+	                        str+='</div>';
+	                    })
+	                }else{
+	               		str+='<div style="line-height: 250px;font-size: 16px;color: #787675">';
+	                   	str+='暂无相关新闻';
+	                   	str+='</div>';
+	                }
+	                $('.certer_news_leftul').append(str);
+	                
+	                $(".certer_news_rightul").html('');
+	                var strs='';
+	                if(num>0){
+	                    $.each(tableData,function(index,val){
+	                    	strs+='<li class="certer_news_rightli certer_news_rightlinow" onclick="newDetails('+val.id+')">';
+	                    	strs+='	<div class="certer_news_rightimg">';
+	                    	strs+='		<img src="http://192.168.19.189:8120'+val.cover+'" />';
+	                    	strs+='	</div>';
+	                    	strs+='	<div class="certer_news_rightw certer_news_rightlinows">';
+	                    	strs+='		<h4 title="'+val.title+'">'+val.title+'</h4>';
+	                    	strs+='		<p class="neww_time">时间：'+val.addTime+'</p>';
+	                    	strs+='		<p class="neww_from">来源：'+val.source+'</p>';
+	                    	strs+='		<div class="neww_wre">';
+	                    	strs+='			<p>'+val.content+'</p>';
+	                    	strs+='		</div>';
+	                    	strs+='	</div>';
+	                    	strs+='</li>';
+	                    })
+	                }else{
+	                	strs+='<div style="line-height: 250px;font-size: 16px;color: #787675">';
+	                	strs+='暂无相关新闻';
+	                	strs+='</div>';
+	                }
+	                $('.certer_news_rightul').append(strs);
+	            }
+	        }
+	    })
+	}
+	function  newDetails(newId){
+		window.location.href="/html/newsDetails.html?id="+newId+"&type="+$('.certer_left_con_now').attr('data-code');
+	}
 </script>
 </html>
