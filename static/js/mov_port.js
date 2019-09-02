@@ -35,7 +35,7 @@ function move_obj(obj, move_w, move_h, x, y, l, t, m) {
 		}, m);
 	});
 	
-	$(obj).append(close);
+	/*$(obj).append(close);
 	$(".close_port").css({
 		position: 'absolute',
 		display: 'none',
@@ -48,7 +48,7 @@ function move_obj(obj, move_w, move_h, x, y, l, t, m) {
 		textAlign: 'center',
 		lineHeight: '20px',
 		cursor: 'pointer'
-	});
+	});*/
 	$(obj).on('click', '.close_port', function() {
 		$(obj).find('.close_port').trigger('mouseover');
 		clearInterval(timer_move);

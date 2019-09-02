@@ -548,7 +548,7 @@ margin-top: 0.2rem;
 
 /*杩斿洖椤堕儴*/
 .fixed_top {
-	width: 2rem;
+	width: 3rem;
 	height: 2.40rem;
 	position: fixed;
 	bottom: 1rem;
@@ -562,7 +562,7 @@ margin-top: 0.2rem;
 }
 
 .fixed_top li {
-	width: 2rem;
+	width: 3rem;
 	height: 0.65rem;
 	font-size: 0.16rem;
 	color: #B80404;
@@ -571,7 +571,7 @@ margin-top: 0.2rem;
 .fixed_left {
 	line-height: 0.45rem;
 	float: left;
-	width: 1.45rem;
+	width: 2.45rem;
 	display: none;
 }
 

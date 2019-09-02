@@ -31,16 +31,34 @@
 	padding: 0 1rem;
 }
 
-.news_content {
+.news_content{
 	padding: 0.3rem 0;
 }
-
+.news_content p{
+	text-indent: 0 !important;
+}
+.news_contentlist{
+	width: 100%;
+}
+.news_contentlist p:first-child{ 
+   display: inline-block;
+}
+.news_contentlist p{
+   width: 50%;
+   float:left; 
+   padding: 0 0 0.3rem;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;   
+}
 .news_img {
 	width: 100%;
 	text-align: center;
 	margin: 0.2rem 0;
 }
-
+.news_contentlist a:hover{
+	color:#50a3ec;
+}
 .news_img img {
 	max-width: 100%;
 }

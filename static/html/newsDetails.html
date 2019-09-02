@@ -63,23 +63,27 @@
 		}else{
 			$("#h3").text("政策法规");
 		}
-		getNews(id);
+		getNews(id,type);
 		relatedNews(type);
 	})
-	function getNews(id){
+	function getNews(id,type){
 		 $.ajax({
 		        type:"get",
 		        url:publicUrl+"/home/loadBusinessById",
-		        data: {"id":id},
+		        data: {"id":id,"type":type},
 		        dataType:"json",
 		        success:function(dataObj){
 		        	 var data=dataObj.data;
+		        	 var business=data.business;//新闻详情
+		        	 var partOne=data.partOne;//上一篇信息
+		        	 var sequel = data.sequel;//下一篇
 		        	 if(data!=null){
 		        		 $('.news_left').html('');
 		        		 var str="";
-		        		 str+="<h3>"+data.title+"</h3>";
-		        		 str+='<p class="news_fromtime"><span>来源：'+data.source+'</span><span>时间：'+data.addTime+' </span></p>';
-		        		 str+='<div class="news_content">'+data.content+'</div>';
+		        		 str+="<h3>"+business.title+"</h3>";
+		        		 str+='<p class="news_fromtime"><span>来源：'+business.source+'</span><span>时间：'+business.addTime+' </span></p>';
+		        		 str+='<div class="news_content">'+business.content+'</div>';
+		        		 str+='<div class="news_contentlist"><p><a onclick="getNews('+partOne.id+','+partOne.type+')">上一篇：'+partOne.title+'</a></p> <p><a onclick="getNews('+sequel.id+','+sequel.type+')">下一篇：'+sequel.title+'</a></p></div>'
 		        		 $(".news_left").append(str);
 		        	 }
 		        	 
@@ -107,7 +111,7 @@
 	                if(num>0){
 	                    $.each(data,function(index,val){
 	                    	str+='<li>';
-	                        str+='    <a onclick="getNews('+val.id+')" title="'+val.title+'">'+val.title+'</a>';
+	                        str+='    <a onclick="getNews('+val.id+','+val.type+')" title="'+val.title+'">'+val.title+'</a>';
 	                        str+='</li>';
 	                    })
 	                }else{

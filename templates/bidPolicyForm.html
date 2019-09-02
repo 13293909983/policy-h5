@@ -376,7 +376,6 @@
 		//影像文件
 		var imageFile=$(":input[name='imageFile']").val();
 		var fileKey=$(":hidden[name='fileKey']").val();
-		console.log(fileKey);
 		if((imageFile=="" || imageFile==null) && (fileKey==undefined || fileKey=="")){
 			$(":input[name='imageFile']").parent().find("i").text("请上传影像文件");
 			i++;
