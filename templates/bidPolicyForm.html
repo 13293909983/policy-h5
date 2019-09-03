@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -242,7 +242,7 @@
 		if($("#message").val()!=""){
 		    alert($("#message").val());
 		}
-		var fileKey=[[${bidPolicy.fileKey}]];
+		var fileKey=$(":hidden[name='fileKey']").val();
 		if(fileKey!=null&&fileKey!=""){
 			$("#fileImg").attr("src", "/images/a7.png");
 		}
