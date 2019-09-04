@@ -457,6 +457,7 @@ $(".reg_show").click(function (){
 		var check=$("input[name='agree']").is(':checked');
 		if(!check){
 			layer.msg('请仔细阅读并同意《投保指南、投保须知、投保条款》', {icon: 5});
+			i++;
 		}
 		if(i>0){
 			return false;
