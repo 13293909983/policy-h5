@@ -292,7 +292,7 @@ $(".reg_show").click(function (){
 		if(retroactiveEnd!='' && retroactiveEnd!=''){
             var start = new Date(retroactiveStart.replace(/-/g, "/")).getTime();
             var end = new Date(retroactiveEnd.replace(/-/g, "/")).getTime();
-			var period=(end-start)/24 * 60 * 60 * 1000;
+			var period=(end-start)/(24 * 60 * 60 * 1000);
             $(":input[name='period']").val(period);
 		}
         $(":input[name='retroactiveStart']").change(retroactiveEvent).change();
