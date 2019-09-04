@@ -220,11 +220,14 @@
 					<td>
 						<input name="invoice.invoiceTitle" class="input-text" placeholder="请输入" th:value="${session.LOGIN_USER.organ.organName}" readonly>
 						<br/>
+						<i th:text="${errorMap['invoice.invoiceTitle']}"></i>
 					</td>
 					<td>手机号</td>
 					<td>
 						<input name="invoice.phone" class="input-text" placeholder="请输入" th:value="${session.LOGIN_USER.mobile}">
 						<br/>
+						<br/>
+						<i th:text="${errorMap['invoice.phone']}"></i>
 					</td>
 				</tr>
 				<tr>
