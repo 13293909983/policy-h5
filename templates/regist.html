@@ -39,11 +39,11 @@
 					<input name="mobile" th:value="${account.mobile}"/>
 					<i th:text="${errorMap['mobile']}">*</i>
 				</li>
-				<li>
+				<!-- <li>
 					<span>短信验证码</span>
 					<input name="smsCode"/>
 					<a href="#" class="yzm-btn">获取验证码</a>
-				</li>
+				</li> -->
 				<li>
 					<span>邮箱</span>
 					<input name="email" th:value="${account.email}"/>
@@ -57,12 +57,12 @@
 				<li>
 					<span>确认密码</span>
 					<input name="repeatPassword" th:value="${account.password}" type="password"/>
-					<i>*</i>
+					<!-- <i>*</i> -->
 				</li>
 				<li>
 					<span>图形验证码</span>
 					<input id="code_input" name="captcha"/>
-					<div style="float: right; margin-top: -0.22rem; margin-left: 0.10rem">
+					<div style="float: right; margin-top: 0.05rem; margin-left: 0.10rem">
 						<div id="v_container" style="height: 0.34rem; width: 100%;">
 							<img src="captcha.jpg" onclick="this.src='captcha.jpg?t='+new Date().getTime()" height="30px"/>
 						</div>
