@@ -137,9 +137,10 @@
 						<br/>
 						<i th:text="${errorMap['retroactiveStart']}"></i>
 					</td>
-					<td>投标终止日期</td>
+					<td>投标有效期</td>
 					<td>
-						<input name="retroactiveEnd" type="date" class="input-text"  th:value="${#dates.format(bidPolicy.retroactiveEnd,'yyyy-MM-dd')}" readonly>
+						<input name="period" type="number" class="input-text" value="90"/>天
+						<input name="retroactiveEnd" type="hidden" class="input-text"  th:value="${#dates.format(bidPolicy.retroactiveEnd,'yyyy-MM-dd')}">
 						<br/>
 						<i th:text="${errorMap['retroactiveEnd']}"></i>
 					</td>
@@ -272,18 +273,30 @@ $(".reg_show").click(function (){
 										.format("yyyy-MM-dd"));
 					}
 				}).change();
-		$(":input[name='retroactiveStart']").change(
-				function() {
-					if (this.value != "") {
-						$(":input[name='retroactiveEnd']").val(
-								new Date(
-										new Date(this.value.replace(/-/g, "/"))
-												.getTime()
-												+ 90 * 24 * 60 * 60 * 1000)
-										.format("yyyy-MM-dd"));
-					}
-				}
-		).change();
+        var retroactiveEvent=function() {
+            var period=$(":input[name='period']").val();
+            var retroactiveStart=$(":input[name='retroactiveStart']").val();
+            if (retroactiveStart != "" && period!="") {
+                $(":input[name='retroactiveEnd']").val(
+                    new Date(
+                        new Date(retroactiveStart.replace(/-/g, "/"))
+                            .getTime()
+                        + parseInt(period) * 24 * 60 * 60 * 1000)
+                        .format("yyyy-MM-dd"));
+            }else{
+                $(":input[name='retroactiveEnd']").val();
+			}
+        };
+        var retroactiveStart=$(":input[name='retroactiveStart']").val();
+		var retroactiveEnd=$(":input[name='retroactiveEnd']").val();
+		if(retroactiveEnd!='' && retroactiveEnd!=''){
+            var start = new Date(retroactiveStart.replace(/-/g, "/")).getTime();
+            var end = new Date(retroactiveEnd.replace(/-/g, "/")).getTime();
+			var period=(end-start)/24 * 60 * 60 * 1000;
+            $(":input[name='period']").val(period);
+		}
+        $(":input[name='retroactiveStart']").change(retroactiveEvent).change();
+        $(":input[name='period']").blur(retroactiveEvent).change();
 		//默认起保日期
 		$(":input[name='startDate']").val(
 				new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
