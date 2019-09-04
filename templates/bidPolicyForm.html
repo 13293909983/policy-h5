@@ -223,7 +223,7 @@
 					</td>
 					<td>手机号</td>
 					<td>
-						<input name="invoice.phone" class="input-text" placeholder="请输入" th:value="${bidPolicy.invoice.phone==null?session.LOGIN_USER.mobile:bidPolicy.invoice.phone}">
+						<input name="invoice.phone" class="input-text" placeholder="请输入" th:value="${bidPolicy.invoice==null||bidPolicy.invoice.phone==null?session.LOGIN_USER.mobile:bidPolicy.invoice.phone}">
 						<br/>
 						<br/>
 						<i th:text="${errorMap['invoice.phone']}"></i>
@@ -232,19 +232,19 @@
 				<tr>
 					<td>银行账号</td>
 					<td>
-						<input name="invoice.bankAccount" class="input-text" placeholder="请输入" th:value="${bidPolicy.invoice.bankAccount==null?session.LOGIN_USER.organ.bankRegNo:bidPolicy.invoice.bankAccount}">
+						<input name="invoice.bankAccount" class="input-text" placeholder="请输入" th:value="${bidPolicy.invoice==null||bidPolicy.invoice.bankAccount==null?session.LOGIN_USER.organ.bankRegNo:bidPolicy.invoice.bankAccount}">
 						<br/>
 					</td>
 					<td>纳税人识别号</td>
 					<td>
-						<input name="invoice.buyerTaxpayerIdentifyNumber" class="input-text" placeholder="请输入" th:value="${bidPolicy.invoice.buyerTaxpayerIdentifyNumber==null?session.LOGIN_USER.organ.taxregNo:bidPolicy.invoice.buyerTaxpayerIdentifyNumber}">
+						<input name="invoice.buyerTaxpayerIdentifyNumber" class="input-text" placeholder="请输入" th:value="${bidPolicy.invoice==null||bidPolicy.invoice.buyerTaxpayerIdentifyNumber==null?session.LOGIN_USER.organ.taxregNo:bidPolicy.invoice.buyerTaxpayerIdentifyNumber}">
 						<br/>
 					</td>
 				</tr>
 				<tr>
 					<td>地址与联系方式</td>
 					<td colspan="3">
-						<input name="invoice.addressAndPhone" class="input-text" placeholder="请输入" th:value="${bidPolicy.invoice.addressAndPhone==null?session.LOGIN_USER.organ.address:bidPolicy.invoice.addressAndPhone}" style="width:100%"/>
+						<input name="invoice.addressAndPhone" class="input-text" placeholder="请输入" th:value="${bidPolicy.invoice==null||bidPolicy.invoice.addressAndPhone==null?session.LOGIN_USER.organ.address:bidPolicy.invoice.addressAndPhone}" style="width:100%"/>
 					</td>
 				</tr>
 		</table>
