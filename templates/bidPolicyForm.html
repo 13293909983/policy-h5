@@ -218,7 +218,8 @@
 												+ 90 * 24 * 60 * 60 * 1000)
 										.format("yyyy-MM-dd"));
 					}
-				});
+				}
+		).change();
 		//默认起保日期
 		$(":input[name='startDate']").val(
 				new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
@@ -227,17 +228,19 @@
 				new Date(new Date().getTime() + 180 * 24 * 60 * 60 * 1000)
 						.format("yyyy-MM-dd"));
 		$(":input[name='electricPower']").blur(function() {
-			var electricPower = parseInt(this.value);
-			var sumPremium = 0;
-			if (electricPower > 0 && electricPower <= 100000) {
-				sumPremium = 600;
-			} else if (electricPower <= 200000) {
-				sumPremium = 800;
-			} else if (electricPower <= 800000) {
-				sumPremium = electricPower * 0.004;
+		    if(this.value!=""){
+                var electricPower = parseInt(this.value);
+                var sumPremium = 0;
+                if (electricPower > 0 && electricPower <= 100000) {
+                    sumPremium = 600;
+                } else if (electricPower <= 200000) {
+                    sumPremium = 800;
+                } else if (electricPower <= 800000) {
+                    sumPremium = electricPower * 0.004;
+                }
+                $(":input[name='sumPremium']").val(sumPremium);
 			}
-			$(":input[name='sumPremium']").val(sumPremium);
-		});
+		}).blur();
 		//全局错误提示
 		if($("#message").val()!=""){
 		    alert($("#message").val());
