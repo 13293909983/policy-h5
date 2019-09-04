@@ -117,13 +117,13 @@
 
 				</tr>
 				<tr>
-					<td>项目名称</td>
+					<td>投标项目名称</td>
 					<td>
 						<input name="certificateDepart" class="input-text" placeholder="请输入"  th:value="${bidPolicy.certificateDepart}" onChange="getCertificateDepart()">
 						<br/>
 						<i th:text="${errorMap['certificateDepart']}"></i>
 					</td>
-					<td>招标文件编号</td>
+					<td>招标项目编号</td>
 					<td>
 						<input name="certificateNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.certificateNo}" onChange="getCertificateNo()">
 						<br/>
@@ -454,8 +454,8 @@ $(".reg_show").click(function (){
 			i++;
 		}
 		//阅读并同意
-		var check=$("input[type='checkbox']").is(':checked');
-		if(check==false){
+		var check=$("input[name='agree']").is(':checked');
+		if(!check){
 			layer.msg('请仔细阅读并同意《投保指南、投保须知、投保条款》', {icon: 5});
 		}
 		if(i>0){
