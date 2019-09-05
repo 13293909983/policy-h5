@@ -45,8 +45,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="bidPolicy:${datagrid.rows}">
-					<td
-						th:text="${bidPolicy.policyNo!=null?bidPolicy.policyNo:bidPolicy.proposalNo}"></td>
+					<td th:text="${bidPolicy.policyNo!=null?bidPolicy.policyNo:bidPolicy.proposalNo}"></td>
 					<td th:text="${bidPolicy.insuredName}"></td>
 					<td th:text="${bidPolicy.certificateDepart}"></td>
 					<td th:text="${bidPolicy.certificateNo}"></td>
@@ -57,8 +56,9 @@
 					<td th:text="${bidPolicy.sumAmount}"></td>
 					<td th:text="${bidPolicy.sumPremium}"></td>
 					<td>
-						<span th:if="${bidPolicy.payResult=='00'}"  th:data-id="${bidPolicy.downloadUrl}" th:data-url="${bidPolicy.previewUrl}" onclick="lookss(this.getAttribute('data-id'),this.getAttribute('data-url'))">查看</span>
-						<a th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}"  target="_black">去支付</a>
+						<span th:if="${bidPolicy.payResult=='00'}"  th:data-id="${bidPolicy.downloadUrl}" th:data-url="${bidPolicy.previewUrl}" onclick="lookss(this.getAttribute('data-id'),this.getAttribute('data-url'))">查看保单</span>
+                        <span th:if="${bidPolicy.payResult=='00'}">查看发票</span>
+                        <a th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}"  target="_black">去支付</a>
 						<!--th:οnclick="'lookss(\''+${}+'\')'"  -->
 					</td>
 				</tr>
