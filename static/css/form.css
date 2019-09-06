@@ -25,7 +25,7 @@ border-bottom:1px solid #CCCCCC;
 	padding-left:0.2rem ; */
 	 height: 0.5rem;
     line-height: 0.5rem;
-    padding: 0 0.2rem;
+    padding: 0 0.1rem;
 }
 .formtables tr td:nth-child(odd){
 	font-size: 0.16rem;
@@ -108,7 +108,7 @@ background: #e5e5e5;
 	height: 0.4rem;
 	line-height: 0.4rem;
 	text-align: center;
-	padding: 0 0.2rem;
+	padding: 0 0.1rem;
 	font-size: 0.14rem;
 	color: #000;
 	border: 1px solid #DCDCDC;
