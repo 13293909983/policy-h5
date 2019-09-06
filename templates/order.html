@@ -56,7 +56,7 @@
 					<td th:text="${bidPolicy.sumAmount}"></td>
 					<td th:text="${bidPolicy.sumPremium}"></td>
 					<td>
-						<a th:if="${bidPolicy.payResult=='00'}"  th:data-id="${bidPolicy.downloadUrl}" th:data-url="${bidPolicy.previewUrl}" onclick="lookss(this.getAttribute('data-id'),this.getAttribute('data-url'))">查看保单</a><span th:if="${bidPolicy.payResult=='00'}"><br/></span>
+						<a th:if="${bidPolicy.payResult=='00'}"  th:data-id="${bidPolicy.downloadUrl}" th:data-url="${bidPolicy.previewUrl}" onclick="lookss(this.getAttribute('data-id'),this.getAttribute('data-url'))" style="background-color: #1060a5">查看保单</a><span th:if="${bidPolicy.payResult=='00'}"><br/></span>
                         <a th:if="${bidPolicy.payResult=='00'}" th:href="${'/invoice/'+bidPolicy.orderId+'.html'}" target="_blank">下载发票</a>
                         <a th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}"  target="_black">去支付</a>
 						<!--th:οnclick="'lookss(\''+${}+'\')'"  -->

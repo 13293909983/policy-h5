@@ -113,14 +113,14 @@ background: #e5e5e5;
 	color: #000;
 	border: 1px solid #DCDCDC;
 }
-.ddtables tr td span{
+/* .ddtables tr td span{
 	background-color: #337ab7;
 	color: #FFFFFF;
 	cursor:pointer;
 	width: 0.2rem;
 	padding: 0.05rem 0.2rem;
 	border-radius: 0.2rem ;
-}
+} */
 .ddtables tr td a{
 	background-color: #B80404;
 	color: #FFFFFF;
