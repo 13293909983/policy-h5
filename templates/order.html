@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>电子保函服务平台</title>
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/index.css" />
+        <link rel="stylesheet" href="css/form.css" />
+		<link rel="stylesheet" href="css/paging.css" />
+		<link rel="stylesheet" href="css/zhuce.css" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico">
+		<script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+		<script src="js/index.js" type="text/javascript"></script>
+		<script type="text/javascript" src="js/paging.js" ></script>
+		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+<body>
+<header></header>
+<div class="body_mian">
+	<div class="title_wrap">
+		<div class="title_nav">
+			<h3>我的订单</h3><img src="/images/xz.png" />
+		</div>
+		<table class="ddtables" cellspacing="0" cellpadding="0" >
+			<thead>
+				<tr>
+					<th>保单号/投保编号</th>
+	                <th>被保险人名称 </th>
+	                <th>项目名称</th>
+	                <th>招标文件编号</th>
+	                <th>起保日期</th>
+	                <th>终保日期</th>
+	                <th>保险金额</th>
+	                <th>保费</th>
+	                <th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="bidPolicy:${datagrid.rows}">
+					<td th:text="${bidPolicy.policyNo!=null?bidPolicy.policyNo:bidPolicy.proposalNo}"></td>
+					<td th:text="${bidPolicy.insuredName}"></td>
+					<td th:text="${bidPolicy.certificateDepart}"></td>
+					<td th:text="${bidPolicy.certificateNo}"></td>
+					<td
+						th:text="${#dates.format(bidPolicy.startDate,'yyyy-MM-dd')+' 00时'}"></td>
+					<td
+						th:text="${#dates.format(bidPolicy.endDate,'yyyy-MM-dd')+' 24时'}"></td>
+					<td th:text="${bidPolicy.sumAmount}"></td>
+					<td th:text="${bidPolicy.sumPremium}"></td>
+					<td>
+						<a th:if="${bidPolicy.payResult=='00'}"  th:data-id="${bidPolicy.downloadUrl}" th:data-url="${bidPolicy.previewUrl}" onclick="lookss(this.getAttribute('data-id'),this.getAttribute('data-url'))">查看保单</a><br/>
+                        <a th:if="${bidPolicy.payResult=='00'}" th:href="${'/invoice/'+bidPolicy.orderId+'.html'}" target="_blank">下载发票</a>
+                        <a th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}"  target="_black">去支付</a>
+						<!--th:οnclick="'lookss(\''+${}+'\')'"  -->
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="paging_policy paging_policyatv">
+			<div>
+				<ul class="pagination" th:if=" ${datagrid.total/datagrid.pageSize} gt '0'">
+					<li>
+						<a th:href="${'/order.html?page=0'+'&pageSize='+datagrid.pageSize}">&laquo;</a>
+					</li>
+					<li th:each="i:${#numbers.sequence(datagrid.page-5,datagrid.page)}" th:class="${datagrid.page==i?'active':''}" th:if="${i>=0}">
+						<a th:href="${'/order.html?page='+i+'&pageSize='+datagrid.pageSize}" th:text="${i+1}"></a>
+					</li>
+					<li th:each="i:${#numbers.sequence(datagrid.page+1,datagrid.page+5)}" th:class="${datagrid.page==i?'active':''}" th:if="${i<=(datagrid.total%datagrid.pageSize==0?(datagrid.total/datagrid.pageSize-1):(datagrid.total/datagrid.pageSize))}">
+						<a th:href="${'/order.html?page='+i+'&pageSize='+datagrid.pageSize}" th:text="${i+1}"></a>
+					</li>
+					<li>
+						<a th:href="${'/order.html?page='+(datagrid.total%datagrid.pageSize==0?datagrid.total/datagrid.pageSize-1:datagrid.total/datagrid.pageSize)+'&pageSize='+datagrid.pageSize}">&raquo;</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		
+		<div class="agree_wrap">
+				<div id="btn" class="btn_closes btn_open"> 
+					<img src="images/close.png" />
+				</div>
+				<div class="agree_all">
+					<div class="agree_content">
+	                     <h2>保函查看</h2>
+	                     <div class="noyzerr">
+							<img id="guarantee">
+							<h1></h1>
+						</div>
+						<div class="chakan_but">
+				        	<a class="chakan_down" >下载</a>
+				        </div>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
+<footer></footer>
+<div class="fixed"></div>
+<script type="text/javascript">
+	function lookss(url,srcUrl){//查看
+		if($(".agree_wrap").css("display")=="none"){
+	        $(".agree_wrap").show();
+	        $('#guarantee').attr('src',srcUrl);
+	        $('.chakan_down').attr('href',url+"?attname=baohan.pdf");
+	    }
+	}
+	$(".btn_open").click(function (){
+	    if($(".agree_wrap").css("display")=="block"){
+	        $(".agree_wrap").hide();
+	    }
+	});
+</script>
+</body>
+</html>
