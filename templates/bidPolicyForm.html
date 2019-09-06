@@ -379,9 +379,9 @@ $(".reg_show").click(function (){
        		.not(":input[name='invoice.addressAndPhone']")
        		.not(":input[name='invoice.invoiceTitle']")
        		.not(":input[name='invoice.phone']")
-       		.not(":input[name='agree']").attr("disabled",true);
+       		.not(":input[name='agree']").attr("readonly",true);
 			//把选择框改成禁用
-       		$('select').attr("disabled",true);
+       		$('select').attr("readonly",true);
 			//改input的禁用样式
        		$('input').not(":input[name='insuredAddress']")
        		.not(":input[name='imageFile']").not(":input[name='invoice.bankAccount']")
