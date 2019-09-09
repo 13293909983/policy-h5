@@ -350,11 +350,11 @@ $(".reg_show").click(function (){
                 var electricPower = parseInt(this.value);
                 var sumPremium = 0;
                 if (electricPower > 0 && electricPower <= 100000) {
-                    sumPremium = 600;
-                } else if (electricPower <= 200000) {
                     sumPremium = 800;
+                } else if (electricPower <= 200000) {
+                    sumPremium = 1000;
                 } else if (electricPower <= 800000) {
-                    sumPremium = electricPower * 0.004;
+                    sumPremium = electricPower * 0.008;
                 }
                 $(":input[name='sumPremium']").val(sumPremium);
 			}
