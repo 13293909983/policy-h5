@@ -370,7 +370,7 @@ $(".reg_show").click(function (){
 		}
 		//初始化查看是否有交易平台流水号
 		var sequenceNo=$("input[name='sequenceNo']").val();
-		console.log(sequenceNo);
+		//console.log(sequenceNo);
 		if(sequenceNo!=null&&sequenceNo!=""){
 			//如果有的话，把字段改成禁用
        		$('input').not(":input[name='insuredAddress']")
@@ -381,7 +381,7 @@ $(".reg_show").click(function (){
        		.not(":input[name='invoice.phone']")
        		.not(":input[name='agree']").attr("readonly",true);
 			//把选择框改成禁用
-       		$('select').attr("readonly",true);
+       		$('select').attr("disabled","disabled");
 			//改input的禁用样式
        		$('input').not(":input[name='insuredAddress']")
        		.not(":input[name='imageFile']").not(":input[name='invoice.bankAccount']")
@@ -562,6 +562,8 @@ $(".reg_show").click(function (){
 			layer.msg('请仔细阅读并同意《投保指南、投保须知、投保条款》', {icon: 5});
 			return false;
 		}
+		$('select').removeAttr("disabled");
+		//console.log($("form").serialize());
 		return true;
 	}
 	//被保险人名称
