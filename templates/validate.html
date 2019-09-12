@@ -73,6 +73,7 @@
 			<div class="noyzerr">
 				<img id="previewUrl" th:if="${bidPolicy!=null}" th:src="${bidPolicy.previewUrl}" style="cursor: pointer;"/>
 				<h1 th:if="${base64Data==null}" th:text="${message}"></h1>
+				<input type="hidden" th:value="${bidPolicy}" id="bidPolicy">
 				<input type="hidden" th:value="${bidPolicy.insuredName}" id="insuredName"><!--被保险人单位名称  -->
 				<input type="hidden" th:value="${bidPolicy.certificateDepart}" id="certificateDepart"><!--投标项目名称-->
 				<input type="hidden" th:value="${#dates.format(bidPolicy.startDate,'yyyy-MM-dd')}" id="startDate"><!--投保时间  -->
