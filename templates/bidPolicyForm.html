@@ -355,6 +355,7 @@ $(".reg_show").click(function (){
                     sumPremium = 800;
                 } else if (electricPower <= 800000) {
                     sumPremium = electricPower * 0.004;
+                    sumPremium=decimal(sumPremium,2);
                 }
                 $(":input[name='sumPremium']").val(sumPremium);
 			}
@@ -404,6 +405,11 @@ $(".reg_show").click(function (){
 			$('select').parent().css("cursor","not-allowed").css("background-color","#efefef");
 		}
 	})
+	//算保费金额，保留两位小数，四舍五入
+	function decimal(num,v){
+		var vv = Math.pow(10,v);
+		return Math.round(num*vv)/vv;
+	}
 	//上传图片
 	function handleConId_photo(files){
 		var imgName = document.all.imageFile.value;
