@@ -361,7 +361,7 @@ $(".reg_show").click(function (){
 						.format("yyyy-MM-dd"));
 		$(":input[name='electricPower']").blur(function() {
 		    if(this.value!=""){
-                var electricPower = parseInt(this.value);
+		    	var electricPower = parseInt(this.value);
                 var sumPremium = 0;
                 if (electricPower > 0 && electricPower <= 100000) {
                     sumPremium = 600;
@@ -369,6 +369,7 @@ $(".reg_show").click(function (){
                     sumPremium = 800;
                 } else if (electricPower <= 800000) {
                     sumPremium = electricPower * 0.004;
+                    sumPremium=decimal(sumPremium,2);
                 }
                 $(":input[name='sumPremium']").val(sumPremium);
 			}
@@ -384,7 +385,7 @@ $(".reg_show").click(function (){
 		}
 		//初始化查看是否有交易平台流水号
 		var sequenceNo=$("input[name='sequenceNo']").val();
-		console.log(sequenceNo);
+		//console.log(sequenceNo);
 		if(sequenceNo!=null&&sequenceNo!=""){
 			//如果有的话，把字段改成禁用
        		$('input').not(":input[name='insuredAddress']")
@@ -395,7 +396,7 @@ $(".reg_show").click(function (){
        		.not(":input[name='invoice.phone']")
        		.not(":input[name='agree']").attr("readonly",true);
 			//把选择框改成禁用
-       		$('select').attr("readonly",true);
+       		$('select').attr("disabled","disabled");
 			//改input的禁用样式
        		$('input').not(":input[name='insuredAddress']")
        		.not(":input[name='imageFile']").not(":input[name='invoice.bankAccount']")
@@ -418,6 +419,11 @@ $(".reg_show").click(function (){
 			$('select').parent().css("cursor","not-allowed").css("background-color","#efefef");
 		}
 	})
+	//算保费金额，保留两位小数，四舍五入
+	function decimal(num,v){
+		var vv = Math.pow(10,v);
+		return Math.round(num*vv)/vv;
+	}
 	//上传图片
 	function handleConId_photo(files){
 		var imgName = document.all.imageFile.value;
@@ -576,6 +582,8 @@ $(".reg_show").click(function (){
 			layer.msg('请仔细阅读并同意《投保指南、投保须知、投保条款》', {icon: 5});
 			return false;
 		}
+		$('select').removeAttr("disabled");
+		//console.log($("form").serialize());
 		return true;
 	}
 	//被保险人名称

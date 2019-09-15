@@ -21,6 +21,11 @@
 		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<style>
+			td{
+				word-break: break-all;
+			}
+		</style>
 	</head>
 <body>
 <header></header>
@@ -56,10 +61,9 @@
 					<td th:text="${bidPolicy.sumAmount}"></td>
 					<td th:text="${bidPolicy.sumPremium}"></td>
 					<td>
-						<span th:if="${bidPolicy.payResult=='00'}"  th:data-id="${bidPolicy.downloadUrl}" th:data-url="${bidPolicy.previewUrl}" onclick="lookss(this.getAttribute('data-id'),this.getAttribute('data-url'))">查看保单</span>
-                        <a th:if="${bidPolicy.payResult=='00'}" th:href="${'/invoice/'+bidPolicy.orderId+'.html'}" target="_blank">查看发票</a>
-                        <a th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}"  target="_black">去支付</a>
-						<!--th:οnclick="'lookss(\''+${}+'\')'"  -->
+						<a th:if="${bidPolicy.payResult=='00'}"  th:data-id="${bidPolicy.downloadUrl}" th:data-url="${bidPolicy.previewUrl}" onclick="lookss(this.getAttribute('data-id'),this.getAttribute('data-url'))" style="background-color: #1060a5">查看保函</a><span th:if="${bidPolicy.payResult=='00'}"><br/></span>
+                        <a th:if="${bidPolicy.payResult=='00'}" th:href="${'/invoice/'+bidPolicy.orderId+'.html'}" target="_blank">下载发票</a>
+                        <a th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}"  target="_blank">去支付</a>
 					</td>
 				</tr>
 			</tbody>
@@ -82,8 +86,6 @@
 				</ul>
 			</div>
 		</div>
-		
-		
 		<div class="agree_wrap">
 				<div id="btn" class="btn_closes btn_open"> 
 					<img src="images/close.png" />
