@@ -71,7 +71,7 @@
 				</form>
 			</div>
 			<div class="noyzerr">
-				<img id="previewUrl" th:if="${bidPolicy!=null}" th:src="${bidPolicy.previewUrl}" style="cursor: pointer;"/>
+				<img id="previewUrl" th:if="${bidPolicy!=null}" th:src="${bidPolicy.previewUrl}"/>
 				<h1 th:if="${base64Data==null}" th:text="${message}"></h1>
 				<div th:if="${bidPolicy!=null}" style="display: none">
 					<input type="hidden" th:value="${bidPolicy.insuredName}" id="insuredName"><!--被保险人单位名称  -->
@@ -100,6 +100,7 @@
 		var startDate=$("#startDate").val();//投保时间
 		var sumPremium=$("#sumPremium").val();//投保金额
 		if(insuredName!=null && insuredName!=""){
+			$('.noyzerr img').css("cursor","pointer");
 			$('.noyzerr img').mousefollow({
 				html: '<div  class="hidden-box"><div class="hiddenbox"  style="background: url('+previewUrl+')no-repeat left center;background-size: 40%;"><div class="text-desc"><h5>被保险人单位名称：</h5><p>'+insuredName+'</p><h5>投标项目名称：</h5><p>'+certificateDepart+'</p><h6>投保时间：</h6><p>'+startDate+'</p><h6>投保金额：</h6><p>'+sumPremium+'元</p></div></div></div>',
 				speed: 300,
