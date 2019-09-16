@@ -140,13 +140,13 @@
 				<tr>
 					<td><span class="span_color">*</span>&nbsp;资金来源</td>
 					<td>
-						<input name="fundSource" class="input-text" placeholder="请输入"  th:value="${bidPolicy.fundSource}" onChange="getCertificateDepart()">
+						<input name="fundSource" class="input-text" placeholder="请输入"  th:value="${bidPolicy.fundSource}" >
 						<br/>
 						<i th:text="${errorMap['fundSource']}"></i>
 					</td>
 					<td><span class="span_color">*</span>&nbsp;标段编号</td>
 					<td>
-						<input name="sectionNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.sectionNo}" onChange="getCertificateNo()">
+						<input name="sectionNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.sectionNo}" >
 						<br/>
 						<i th:text="${errorMap['sectionNo']}"></i>
 					</td>
