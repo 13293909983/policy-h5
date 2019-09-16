@@ -147,20 +147,20 @@ background: #e5e5e5;
 	width: 100%;
 }
 .chakan_but {
-    width: 1rem;
-	margin: 0.4rem auto;
-	height: 0.2rem;
+    width:1rem;
+	margin:0.4rem auto;
+	height:0.2rem;
 }
 .chakan_down,.chakan_copy {
-    background: #b80404;
-    width: 1rem;
+    background:#b80404;
+    width:1rem;
     height: 0.3rem;
     color: #FFFFFF;
     border-radius: 0.5rem;
-    font-size: 0.14rem;
-    cursor: pointer;
-    text-align: center;
-    line-height: 0.3rem;
+    font-size:0.14rem;
+    cursor:pointer;
+    text-align:center;
+    line-height:0.3rem;
 }
 .chakan_down{
 	float: left;
