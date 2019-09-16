@@ -88,7 +88,7 @@ background: #e5e5e5;
 
 
 
-/*我的订单*/
+/*鎴戠殑璁㈠崟*/
 .ddtables{
 	margin: 0.3rem auto;
 	border: 1px solid #DCDCDC;
@@ -147,9 +147,9 @@ background: #e5e5e5;
 	width: 100%;
 }
 .chakan_but {
-    width: 2rem;
-    margin: 0 auto;
-    height: 1rem;
+    width: 1rem;
+	margin: 0.4rem auto;
+	height: 0.2rem;
 }
 .chakan_down,.chakan_copy {
     background: #b80404;
