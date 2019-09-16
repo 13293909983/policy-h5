@@ -10,11 +10,14 @@
         <link rel="stylesheet" href="/css/form.css" />
         <link rel="stylesheet" href="/css/zhuce.css" />
         <link rel="stylesheet" href="/css/chanpin.css" />
+        <link rel="stylesheet" href="/css/metroStyle/metroStyle.css" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
 		<script src="/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 		<script src="/js/index.js" type="text/javascript"></script>
 		<script type="text/javascript" src="/js/paging.js" ></script>
 		<script src="/js/layer/2.4/layer.js"></script>
+		<script type="text/javascript" src="/js/jquery-1.4.4.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.ztree.all.js"></script>
 		<style>
 			 .fileinput-button {
 			 position: relative;  
@@ -64,6 +67,22 @@
 		  .span_color{
 		  	color:red;
 		  }
+		  .menuContent{
+		  	border: 1px solid #b5b5b5;
+		    overflow-y: auto;
+		    position: absolute;
+		    z-index: 9999;
+		    background: #fff;
+		  }
+         .ztree li a:hover {
+             text-decoration: none;
+         }
+         .ztree li {
+             line-height: 30px;
+         }
+         .ztree li span {
+             font-size: 14px;
+         }
 		</style>
 	</head>
 <body>
@@ -140,13 +159,13 @@
 				<tr>
 					<td><span class="span_color">*</span>&nbsp;资金来源</td>
 					<td>
-						<input name="fundSource" class="input-text" placeholder="请输入"  th:value="${bidPolicy.fundSource}" onChange="getCertificateDepart()">
+						<input name="fundSource" class="input-text" placeholder="请输入"  th:value="${bidPolicy.fundSource}" onChange="getFundSource()">
 						<br/>
 						<i th:text="${errorMap['fundSource']}"></i>
 					</td>
 					<td><span class="span_color">*</span>&nbsp;标段编号</td>
 					<td>
-						<input name="sectionNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.sectionNo}" onChange="getCertificateNo()">
+						<input name="sectionNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.sectionNo}" onChange="getSectionNo()">
 						<br/>
 						<i th:text="${errorMap['sectionNo']}"></i>
 					</td>
@@ -179,10 +198,15 @@
 					</td>
 					<td><span class="span_color">*</span>&nbsp;行业代码</td>
 					<td>
-						<select name="businesssource" class="select-form">
-							<option value="0000">请选择</option>
-						</select>
-						<br/>
+						<ul class="list">
+							<li class="title">
+								<input id="citySel" class="input-text" name="businesssource" type="text" th:value="${bidPolicy.businesssource}" placeholder="请选择行业代码"/>
+								&nbsp;<a id="menuBtn" onclick="showMenu(); return false;" style="background: url(/images/sanjiao.png) no-repeat right center;">&nbsp;&nbsp;&nbsp;</a>
+							</li>
+						</ul>
+						<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+							<ul id="tree" class="ztree" style="margin-top:0; width:330px;height: 300px;overflow-y: auto;"></ul>
+						</div>
 						<i th:text="${errorMap['businesssource']}"></i>
 					</td>
 				</tr>
@@ -195,7 +219,7 @@
 					</td>
 					<td><span class="span_color">*</span>&nbsp;保费金额</td>
 					<td>
-						<input name="sumPremium" type="number" class="input-text" th:value="${bidPolicy.sumPremium}" readonly/>
+						<input name="sumPremium" type="text" class="input-text" th:value="${bidPolicy.sumPremium}" readonly/>
 						<br/>
 						<i th:text="${errorMap['sumPremium']}"></i>
 					</td>
@@ -361,7 +385,7 @@ $(".reg_show").click(function (){
 						.format("yyyy-MM-dd"));
 		$(":input[name='electricPower']").blur(function() {
 		    if(this.value!=""){
-		    	var electricPower = parseInt(this.value);
+                var electricPower = parseInt(this.value);
                 var sumPremium = 0;
                 if (electricPower > 0 && electricPower <= 100000) {
                     sumPremium = 600;
@@ -370,6 +394,7 @@ $(".reg_show").click(function (){
                 } else if (electricPower <= 800000) {
                     sumPremium = electricPower * 0.004;
                     sumPremium=decimal(sumPremium,2);
+                    console.log(sumPremium);
                 }
                 $(":input[name='sumPremium']").val(sumPremium);
 			}
@@ -397,6 +422,8 @@ $(".reg_show").click(function (){
        		.not(":input[name='agree']").attr("readonly",true);
 			//把选择框改成禁用
        		$('select').attr("disabled","disabled");
+			//把行业代码的a标签改成禁用
+			$('#menuBtn').removeAttr('onclick');
 			//改input的禁用样式
        		$('input').not(":input[name='insuredAddress']")
        		.not(":input[name='imageFile']").not(":input[name='invoice.bankAccount']")
@@ -417,7 +444,12 @@ $(".reg_show").click(function (){
        		.css("cursor","not-allowed").css("background-color","#efefef");
        		//改select 上的td的禁用样式
 			$('select').parent().css("cursor","not-allowed").css("background-color","#efefef");
+			//把行业代码的a标签改成禁用样式
+			$('#menuBtn').css("cursor","not-allowed");
+			$(".list").parent().css("cursor","not-allowed").css("background-color","#efefef");
 		}
+		//初始化获取行业代码
+		getBusinesssource();
 	})
 	//算保费金额，保留两位小数，四舍五入
 	function decimal(num,v){
@@ -572,7 +604,32 @@ $(".reg_show").click(function (){
 			$(":input[name='invoice.phone']").parent().find("i").text("请输入正确的手机号");
 			i++;
 		}
-		
+		//行业代码选择
+		var businesssource=$("#citySel").val();
+		if(businesssource=="" || businesssource==null){
+			$(".list").parent().find("i").text("请选择行业代码");
+			i++;
+		}
+		//资金来源
+		var fundSource=$(":input[name='fundSource']").val();
+		var word="世界银行";;
+		var allb="亚洲基础设施投资银行";
+		if(fundSource==''||fundSource==null){
+			$(":input[name='fundSource']").parent().find("i").text("请输入资金来源");
+			i++;
+		}else if(fundSource==word){
+			$(":input[name='fundSource']").parent().find("i").text("世界银行不能投保");
+			i++
+		}else if(fundSource==allb){
+			$(":input[name='fundSource']").parent().find("i").text("亚洲基础设施投资银行不能投保");
+			i++
+		}
+		//标段编号
+		var sectionNo=$(":input[name='sectionNo']").val();
+		if(sectionNo==''||sectionNo==null){
+			$(":input[name='sectionNo']").parent().find("i").text("请输入标段编号");
+			i++
+		}
 		if(i>0){
 			return false;
 		}
@@ -583,7 +640,6 @@ $(".reg_show").click(function (){
 			return false;
 		}
 		$('select').removeAttr("disabled");
-		//console.log($("form").serialize());
 		return true;
 	}
 	//被保险人名称
@@ -656,12 +712,132 @@ $(".reg_show").click(function (){
 			$(".fileinput-button").parent().find("i").text("");
 		}
 	}
+	//资金来源
+	function getFundSource(){
+		var fundSource=$(":input[name='fundSource']").val();
+		if(fundSource!=''&&fundSource!=null){
+			$(":input[name='fundSource']").parent().find("i").text("");
+		}
+	}
+	//标段编号
+	function getSectionNo(){
+		var sectionNo=$(":input[name='sectionNo']").val();
+		if(sectionNo!=''&&sectionNo!=null){
+			$(":input[name='sectionNo']").parent().find("i").text("");
+		}
+	}
 	//发票手机号
 	function getPhone(){
 		var phone=$(":input[name='invoice.phone']").val();
 		if(phone!=''&&phone!=null){
 			$(":input[name='invoice.phone']").parent().find("i").text("");
 		}
+	}
+	var setting = {
+	    data: {
+		    simpleData: {
+		        enable: true
+		    }
+	    },
+	    callback: {
+			beforeClick: beforeClick,
+			onClick: onClick,
+			beforeExpand:beforeExpand
+		}
+	};
+	//获取行业代码
+	function getBusinesssource(){
+		 $.ajax({
+		        type:"get",
+		        url:"http://39.100.55.200:8220/homeController/selectIndustryType",
+		        data: {},
+		        dataType:"json",
+		        success:function(dataObj){
+		        	if(dataObj.code==200){
+		        		var businesssourceList=dataObj.data;
+		        		//加载ztree
+		        		$.fn.zTree.init($("#tree"), setting, businesssourceList);
+		        		//初始化给ztree赋值
+		        		ztreeClick();
+		        	}
+		        }
+		 })
+		
+	}
+	function beforeClick(treeId, treeNode) {
+		var check = (treeNode && !treeNode.isParent);
+		if (!check){
+			return false;
+		}
+		return check;
+	}
+	//节点展开前（左侧菜单树）
+	function beforeExpand(treeId, treeNode){
+	    singlePath(treeNode);
+	}
+	//保持展开单一节点
+	function singlePath(currNode) {
+	    var cLevel = currNode.level;
+	    //这里假设id是唯一的
+	    var cId = currNode.id;
+	    //此对象可以保存起来，没有必要每次查找
+	    var treeObj = $.fn.zTree.getZTreeObj('tree');
+	    //展开的所有节点，这是从父节点开始查找（也可以全文查找）
+	    var expandedNodes = treeObj.getNodesByParam("open", true, currNode.getParentNode());
+	    for(var i = expandedNodes.length - 1; i >= 0; i--){
+	        var node = expandedNodes[i];
+	        var level = node.level;
+	        var id = node.id;
+	        if (cId != id && level == cLevel) {
+	            treeObj.expandNode(node, false);
+	        }
+	    }
+	}
+	function onClick(e, treeId, treeNode) {
+		var zTree = $.fn.zTree.getZTreeObj("tree"),
+		nodes = zTree.getSelectedNodes(),
+		v = "";
+		nodes.sort(function compare(a,b){return a.id-b.id;});
+		for (var i=0, l=nodes.length; i<l; i++) {
+			v += nodes[i].name + ",";
+		}
+		if (v.length > 0 ) v = v.substring(0, v.length-1);
+		var cityObj = $("#citySel");
+		cityObj.attr("value", v);
+		//把行业代码提醒消息去掉
+		$(".list").parent().find("i").text("");
+		//关闭
+		hideMenu();
+	}
+	
+	function showMenu() {
+		var cityObj = $("#citySel");
+		var cityOffset = $("#citySel").offset();
+		$("#menuContent").css({left:cityOffset.left + "px"}).slideDown("fast");
+		$("body").bind("mousedown", onBodyDown);
+	}
+	function hideMenu() {
+		$("#menuContent").fadeOut("fast");
+		$("body").unbind("mousedown", onBodyDown);
+	}
+	function onBodyDown(event) {
+		if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+			hideMenu();
+		}
+	}
+	function ztreeClick(){
+		//var treeCode = "A010152";
+		var treeCode = $("#citySel").val();
+		if(treeCode.trim()!=""){
+	       	var tree = $.fn.zTree.getZTreeObj("tree");
+	        var strs = treeCode.split(",");
+	        for(var j=0;j<strs.length;j++){
+	            var node = tree.getNodeByParam("code",strs[j]);
+	            tree.selectNode(node , true,true); 
+	            var cityObj = $("#citySel");
+	    		cityObj.attr("value", node.name);
+	        }
+		 }
 	}
 </script>
 </html>

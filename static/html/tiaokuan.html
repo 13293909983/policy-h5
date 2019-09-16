@@ -186,7 +186,11 @@
 						<th>保险金额（万）</th>
 						<th>保费（元）</th>
 						<tr>
-							<td>0-10（含）</td>
+							<td>0-3（含）</td>
+							<td>保费500</td>
+						</tr>
+						<tr>
+							<td>3-10（含）</td>
 							<td>保费800</td>
 						</tr>
 						<tr>
@@ -195,7 +199,7 @@
 						</tr>
 						<tr>
 							<td>20（不含）-80（含）</td>
-							<td>保险金额x0.8%</td>
+							<td>保险金额x0.5%</td>
 						</tr>
 					</table>
 					</p>
@@ -212,9 +216,9 @@
 $(".btn_open").click(function (){
     if($(".agree_wrap").css("display")=="block"){
     	if($(this).val()=='同意'){
-    		$(':input[name=agree]').prop('checked',true);
+    		$(":input[name='agree']").attr('checked',true);
     	}else{
-    		$(':input[name=agree]').prop('checked',false);
+    		$(":input[name='agree']").attr('checked',false);
     	}
         $(".agree_wrap").hide();
     }
