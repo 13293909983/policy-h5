@@ -200,7 +200,8 @@
 					<td>
 						<ul class="list">
 							<li class="title">
-								<input id="citySel" class="input-text" name="businesssource" type="text" th:value="${bidPolicy.businesssource}" placeholder="请选择行业代码"/>
+								<input id="citySel" class="input-text"  type="text" placeholder="请选择行业代码"/>
+								<input type="hidden" name="businesssource" th:value="${bidPolicy.businesssource}"/>
 								&nbsp;<a id="menuBtn" onclick="showMenu(); return false;" style="background: url(/images/sanjiao.png) no-repeat right center;">&nbsp;&nbsp;&nbsp;</a>
 							</li>
 						</ul>
@@ -394,7 +395,6 @@ $(".reg_show").click(function (){
                 } else if (electricPower <= 800000) {
                     sumPremium = electricPower * 0.004;
                     sumPremium=decimal(sumPremium,2);
-                    console.log(sumPremium);
                 }
                 $(":input[name='sumPremium']").val(sumPremium);
 			}
@@ -630,6 +630,7 @@ $(".reg_show").click(function (){
 			$(":input[name='sectionNo']").parent().find("i").text("请输入标段编号");
 			i++
 		}
+		console.log($("input[name='businesssource']").val());
 		if(i>0){
 			return false;
 		}
@@ -797,13 +798,18 @@ $(".reg_show").click(function (){
 		var zTree = $.fn.zTree.getZTreeObj("tree"),
 		nodes = zTree.getSelectedNodes(),
 		v = "";
+		code=""
 		nodes.sort(function compare(a,b){return a.id-b.id;});
 		for (var i=0, l=nodes.length; i<l; i++) {
 			v += nodes[i].name + ",";
+			code+=nodes[i].code+","
 		}
 		if (v.length > 0 ) v = v.substring(0, v.length-1);
+		if (code.length > 0 ) code = code.substring(0, code.length-1);
 		var cityObj = $("#citySel");
 		cityObj.attr("value", v);
+		//给businesssource赋code值
+		$("input[name='businesssource']").attr("value",code);
 		//把行业代码提醒消息去掉
 		$(".list").parent().find("i").text("");
 		//关闭
@@ -827,7 +833,7 @@ $(".reg_show").click(function (){
 	}
 	function ztreeClick(){
 		//var treeCode = "A010152";
-		var treeCode = $("#citySel").val();
+		var treeCode = $("input[name='businesssource']").val();
 		if(treeCode.trim()!=""){
 	       	var tree = $.fn.zTree.getZTreeObj("tree");
 	        var strs = treeCode.split(",");
