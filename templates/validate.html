@@ -64,7 +64,7 @@
 		<div class="noyz">
 			<div th:if="${base64Data==null}" class="yz_input_box">
 				<form action="validate.html" method="GET" id="searchForm">
-					<input name="policyNo" class="yz_input_search" placeholder="保单号/投保编号[#验证码]">
+					<input name="policyNo" class="yz_input_search" placeholder="保单号[#验证码]">
 					<a class="header_search_box_btn" href="#" onclick="searchValidate()">
 						<img src="images/search01.png" />
 					</a>
@@ -77,7 +77,7 @@
 					<input type="hidden" th:value="${bidPolicy.insuredName}" id="insuredName"><!--被保险人单位名称  -->
 					<input type="hidden" th:value="${bidPolicy.certificateDepart}" id="certificateDepart"><!--投标项目名称-->
 					<input type="hidden" th:value="${#dates.format(bidPolicy.startDate,'yyyy-MM-dd')}" id="startDate"><!--投保时间  -->
-					<input type="hidden" th:value="${bidPolicy.sumPremium}" id="sumPremium"><!--投保金额  -->
+					<input type="hidden" th:value="${bidPolicy.electricPower}" id="electricPower"><!--投保金额  -->
 				</div>
 			</div>
 		</div>
@@ -98,11 +98,11 @@
 		var insuredName=$("#insuredName").val();//被保险人单位名称
 		var certificateDepart=$("#certificateDepart").val();//投标项目名称
 		var startDate=$("#startDate").val();//投保时间
-		var sumPremium=$("#sumPremium").val();//投保金额
+		var electricPower=$("#electricPower").val();//投保金额
 		if(insuredName!=null && insuredName!=""){
 			$('.noyzerr img').css("cursor","pointer");
 			$('.noyzerr img').mousefollow({
-				html: '<div  class="hidden-box"><div class="hiddenbox"  style="background: url('+previewUrl+')no-repeat left center;background-size: 40%;"><div class="text-desc"><h5>被保险人单位名称：</h5><p>'+insuredName+'</p><h5>投标项目名称：</h5><p>'+certificateDepart+'</p><h6>投保时间：</h6><p>'+startDate+'</p><h6>投保金额：</h6><p>'+sumPremium+'元</p></div></div></div>',
+				html: '<div  class="hidden-box"><div class="hiddenbox"  style="background: url('+previewUrl+')no-repeat left center;background-size: 40%;"><div class="text-desc"><h5>被保险人单位名称：</h5><p>'+insuredName+'</p><h5>投标项目名称：</h5><p>'+certificateDepart+'</p><h6>投保时间：</h6><p>'+startDate+'</p><h6>保证金金额：</h6><p>'+electricPower+'元</p></div></div></div>',
 				speed: 300,
 				zIndex: 100
 			});
