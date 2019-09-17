@@ -401,7 +401,7 @@ $(".reg_show").click(function (){
 		}).blur();
 		//全局错误提示
 		if($("#message").val()!=""){
-			layer.msg($("#message").val(), {icon: 2});
+			layer.alert($("#message").val(), {icon: 2});
 		}
 		var fileKey=$(":hidden[name='fileKey']").val();
 		if(fileKey!=null&&fileKey!=""){
