@@ -1,10 +1,10 @@
 $(function () {
     //头部
-    $('header').load('/html/header.html');
+    $('header').load('/static/html/header.html');
     //底部
-    $('footer').load('/html/footer.html');
-    $('.fixed').load('/html/fixedtop.html');
-    $('.tiaokuan').load('/html/tiaokuan.html');
+    $('footer').load('/static/html/footer.html');
+    $('.fixed').load('/static/html/fixedtop.html');
+    $('.tiaokuan').load('/static/html/tiaokuan.html');
     
 });
 (function(doc, win) {
