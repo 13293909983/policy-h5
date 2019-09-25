@@ -3,7 +3,7 @@
 	min-width: 15rem;
 	height: 100%;
 	min-height: 7.87rem;
-	background: url(../images/logobg.png) no-repeat center center;
+	background: url(/static/images/logobg.png) no-repeat center center;
 	background-size: cover;
 	position: relative;
 }
@@ -204,7 +204,7 @@
 	left: 0.13rem;
 	width: 0.14rem;
 	height: 0.12rem;
-	background: url(../images/icon_light.png) 0 -0.26rem;
+	background: url(/static/images/icon_light.png) 0 -0.26rem;
 	background-size: 0.34rem 4.71rem;
 }
 
@@ -215,7 +215,7 @@
 	width: 0.34rem;
 	height: 0.34rem;
 	cursor: pointer;
-	background: url(../images/icon_light.png) 0 -4.37rem;
+	background: url(/static/images/icon_light.png) 0 -4.37rem;
 	background-size: 0.34rem 4.71rem;
 }
 

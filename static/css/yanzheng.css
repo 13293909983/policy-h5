@@ -1,7 +1,7 @@
 .yz_wrap{
 	width: 13rem;
 	min-height: 6rem;
-	background: url(../images/yzbg.png) no-repeat center bottom;
+	background: url(/static/images/yzbg.png) no-repeat center bottom;
 }
 
 .yz_box {
@@ -63,15 +63,15 @@
 	
 }
 .num_box01{
-	background: url(../images/lj01.png) no-repeat center center;
+	background: url(/static/images/lj01.png) no-repeat center center;
 	background-size: cover;
 }
 .num_box02{
-	background: url(../images/lj02.png) no-repeat center bottom;
+	background: url(/static/images/lj02.png) no-repeat center bottom;
 	background-size: 99%;
 }
 .num_box03{
-	background: url(../images/lj03.png) no-repeat center center;
+	background: url(/static/images/lj03.png) no-repeat center center;
 	background-size: cover;
 }
 .num_box01 p,.num_box02 p,.num_box03 p{

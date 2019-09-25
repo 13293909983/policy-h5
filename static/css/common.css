@@ -60,7 +60,7 @@ input[type='checkbox']{
     cursor: pointer;
 }
 input[type='checkbox']:checked{
-    background: url(../images/yes.png)no-repeat center center;
+    background: url(/static/images/yes.png)no-repeat center center;
     background-size: 90%;
 }
 textarea{
@@ -244,7 +244,7 @@ html {
 
 .header_nav {
 	width: 100%;
-	background: #b80404 url(../images/dhbg.png) no-repeat center center;
+	background: #b80404 url(/static/images/dhbg.png) no-repeat center center;
 	height: 0.40rem;
 }
 
@@ -432,25 +432,25 @@ color: #FFFFFF;
 }
 .icon01{
 
-    background: #5E5E5E url(../images/lianxi01.png) no-repeat center center;
+    background: #5E5E5E url(/static/images/lianxi01.png) no-repeat center center;
     background-size: 60%;
 
 }
 .icon02{
 
-    background: #5E5E5E url(../images/lianxi02.png) no-repeat center center;
+    background: #5E5E5E url(/static/images/lianxi02.png) no-repeat center center;
     background-size: 60%;
 
 }
 .icon03{
 
-    background: #5E5E5E url(../images/lianxi03.png) no-repeat center center;
+    background: #5E5E5E url(/static/images/lianxi03.png) no-repeat center center;
     background-size: 60%;
 
 }
 .icon04{
 
-    background: #5E5E5E url(../images/lianxi04.png) no-repeat center center;
+    background: #5E5E5E url(/static/images/lianxi04.png) no-repeat center center;
     background-size: 60%;
 
 }
@@ -529,7 +529,7 @@ margin-top: 0.2rem;
     width: 114px;
     height: 28px;
     line-height: 28px;
-    background: #b80404 url(../images/redTitleBg.gif) repeat-x;
+    background: #b80404 url(/static/images/redTitleBg.gif) repeat-x;
     border-bottom: 2px solid #b80404;
     }
     .titleBox span{
@@ -598,62 +598,62 @@ margin-top: 0.2rem;
 }
 
 .fixed_gwc {
-	background: url(../images/gouwuche02.png) no-repeat center center;
+	background: url(/static/images/gouwuche02.png) no-repeat center center;
 	background-size: 70%;
 	background-color: #e5e5e5;
 }
 
 .fixed_lx {
-	background: url(../images/lx01.png) no-repeat center center;
+	background: url(/static/images/lx01.png) no-repeat center center;
 	background-size: 70%;
 	background-color: #e5e5e5;
 }
 
 .fixed_phone {
-	background: url(../images/ph01.png) no-repeat center center;
+	background: url(/static/images/ph01.png) no-repeat center center;
 	background-size: 70%;
 	background-color: #e5e5e5;
 }
 
 .fixed_bz {
-	background: url(../images/bz01.png) no-repeat center center;
+	background: url(/static/images/bz01.png) no-repeat center center;
 	background-size: 70%;
 	background-color: #e5e5e5;
 }
 
 .fixed_fh {
 	display: none;
-	background: url(../images/fh01.png) no-repeat center center;
+	background: url(/static/images/fh01.png) no-repeat center center;
 	background-size: 70%;
 	background-color: #e5e5e5;
 }
 
 .fixed_gwc:hover {
-	background: url(../images/gouwuche02.png) no-repeat center center;
+	background: url(/static/images/gouwuche02.png) no-repeat center center;
 	background-size: 70%;
 	background-color: #B80404;
 }
 
 .fixed_lx:hover {
-	background: url(../images/lx01.png) no-repeat center center;
+	background: url(/static/images/lx01.png) no-repeat center center;
 	background-size: 70%;
 	background-color: #B80404;
 }
 
 .fixed_phone:hover {
-	background: url(../images/ph01.png) no-repeat center center;
+	background: url(/static/images/ph01.png) no-repeat center center;
 	background-size: 70%;
 	background-color: #B80404;
 }
 
 .fixed_bz:hover {
-	background: url(../images/bz01.png) no-repeat center center;
+	background: url(/static/images/bz01.png) no-repeat center center;
 	background-size: 70%;
 	background-color: #B80404;
 }
 
 .fixed_fh:hover {
-	background: url(../images/fh01.png) no-repeat center center;
+	background: url(/static/images/fh01.png) no-repeat center center;
 	background-size: 70%;
 	background-color: #B80404;
 }

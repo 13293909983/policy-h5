@@ -13,7 +13,7 @@
 	display: block;
 }
 .news_lefttitlenow {
-	background: url(../images/sjxxs.png) no-repeat center bottom;
+	background: url(/static/images/sjxxs.png) no-repeat center bottom;
     padding-bottom: 0.1rem;
     color: #B80404;
 }

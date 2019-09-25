@@ -95,7 +95,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   }
 
   function getRandomImg() {
-    return './images/00' + getRandomNumberByRange(1,7) + '.jpg';
+    return '/static/images/00' + getRandomNumberByRange(1,7) + '.jpg';
   }
 
   function _draw(ctx, x, y, operation) {

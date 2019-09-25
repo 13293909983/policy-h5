@@ -5,16 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>电子保函服务平台</title>
+<link rel="stylesheet" href="/static/css/bootstrap.css">
 <link rel="stylesheet" href="/static/css/common.css" />
 <link rel="stylesheet" href="/static/css/index.css" />
 <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-<link rel="stylesheet" href="/static/css/bootstrap.css">
 <script src="/static/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script src="/static/js/bootstrap.js" type="text/javascript"></script>
 <script src="/static/js/bootstrap.min.js" type="text/javascript" ></script>
 <script src="/static/js/index.js" type="text/javascript"></script>
 <script src="/static/js/mov_port.js" type="text/javascript" ></script>
 <script src="/static/js/layer/2.4/layer.js"></script>
+<script src="/static/js/scroll.js" type="text/javascript" ></script>
 </head>
 <style>
     .carousel-item img{
@@ -95,49 +96,47 @@
 					</div>
 				</div>
 				<div class="certer_left_cp">
-					<ul>
-						<li>
-							<div class="cp_01">
-								<h3>投标保函</h3>
-								<a href="/bidPolicyForm.html">
-									<h4>[&nbsp;立即申请&nbsp;]</h4>
-								</a>
-							</div>
-						</li>
-						<li>
-							<div class="cp_02">
-								<h3>履约保函</h3>
-								<a>
-									<h4>[&nbsp;立即申请&nbsp;]</h4>
-								</a>
-							</div>
-						</li>
-						<li>
-							<div class="cp_03">
-								<h3>质量保函</h3>
-								<a>
-									<h4>[&nbsp;立即申请&nbsp;]</h4>
-								</a>
-							</div>
-						</li>
-						<li>
-							<div class="cp_04">
-								<h3>预付款保函</h3>
-								<a>
-									<h4>[&nbsp;立即申请&nbsp;]</h4>
-								</a>
-							</div>
-						</li>
-						<li>
-							<div class="cp_05">
-								<h3>农民工保函</h3>
-								<a>
-									<h4>[&nbsp;立即申请&nbsp;]</h4>
-								</a>
-							</div>
-						</li>
-
-					</ul>
+					<div class="container">
+						<section class="main">
+							<ul class="ch-grid">
+								<li>
+									<div class="ch-item ch-img-1">
+										<div class="ch-info">
+											<a href="/bidPolicyForm.html">立即申请</a>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="ch-item ch-img-2">
+										<div class="ch-info">
+											<a>立即申请</a>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="ch-item ch-img-3">
+										<div class="ch-info">
+											<a>立即申请</a>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="ch-item ch-img-4">
+										<div class="ch-info">
+											<a>立即申请</a>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="ch-item ch-img-5">
+										<div class="ch-info">
+											<a>立即申请</a>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</section>
+					</div>
 				</div>
 				<div class="certer_left_con">
 					<div class="certer_left_conh3">
@@ -349,6 +348,10 @@
 				</div>
 			</div>
 			<div class="certer_right">
+				<div class="index_group">
+						<a href="/html/content1.html">投标电子保函推进小组<span>详情&nbsp;»</span></a><br />
+						<a href="/html/content2.html">投标电子保函推进会<span>详情&nbsp;»</span></a>
+					</div>
 				<div class="index_login">
 					<div th:if="${session.LOGIN_USER==null}">
 						<div class="index_nologins">
@@ -428,6 +431,23 @@
 				</div>
 			</div>
 		</div>
+		<div class="notice_wrap">
+			<div class="swiper_wrap">
+				<div class="scroll">
+					<ul>
+						<li><img src="images/logo01.png" /></li>
+						<li><img src="images/logo02.png" /></li>
+						<li><img src="images/logo03.png" /></li>
+						<li><img src="images/logo04.png" /></li>
+						<li><img src="images/logo05.png" /></li>
+						<li><img src="images/logo06.png" /></li>
+						<li><img src="images/logo07.png" /></li>
+						<!-- <li><img src="images/logo08.png" /></li>
+						<li><img src="images/logo09.png" /></li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
 	<footer></footer>
 	<div class="fixed"></div>
@@ -476,6 +496,10 @@
 			relatedNews();
 		})
 	$(function(){
+		$('.scroll').scroll({
+			speed: 60, //数值越大，速度越快
+			direction: 'horizantal'
+		});
 		relatedNews();
 	})
 	function relatedNews(){
@@ -552,5 +576,6 @@
 	function  newDetails(newId){
 		window.location.href="/html/newsDetails.html?id="+newId+"&type="+$('.certer_left_con_now').attr('data-code');
 	}
+	
 </script>
 </html>
