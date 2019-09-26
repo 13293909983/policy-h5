@@ -388,12 +388,24 @@ $(".reg_show").click(function (){
 		    if(this.value!=""){
                 var electricPower = parseInt(this.value);
                 var sumPremium = 0;
-                if (electricPower > 0 && electricPower <= 100000) {
+                //原来的保费
+                /* if (electricPower > 0 && electricPower <= 100000) {
                     sumPremium = 600;
                 } else if (electricPower <= 200000) {
                     sumPremium = 800;
                 } else if (electricPower <= 800000) {
                     sumPremium = electricPower * 0.004;
+                    sumPremium=decimal(sumPremium,2);
+                } */
+                //更新的保费
+                if (electricPower > 0 && electricPower <= 30000) {
+                    sumPremium = 500;
+                } else if (electricPower > 30000 && electricPower <= 100000) {
+                    sumPremium = 800;
+                }else if(electricPower > 100000 && electricPower <= 200000){
+                	sumPremium = 1000;
+                } else if (electricPower <= 800000) {
+                    sumPremium = electricPower * 0.005;
                     sumPremium=decimal(sumPremium,2);
                 }
                 $(":input[name='sumPremium']").val(sumPremium);
@@ -630,7 +642,6 @@ $(".reg_show").click(function (){
 			$(":input[name='sectionNo']").parent().find("i").text("请输入标段编号");
 			i++
 		}
-		console.log($("input[name='businesssource']").val());
 		if(i>0){
 			return false;
 		}
