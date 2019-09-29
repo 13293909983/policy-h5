@@ -55,7 +55,6 @@
 					<td th:text="${(bidPolicy.policyNo!=null?bidPolicy.policyNo:bidPolicy.proposalNo)+'#'+bidPolicy.salt}"></td>
 					<td
 						th:text="${#dates.format(bidPolicy.saveTimes,'yyyy-MM-dd')+' 00时'}"></td>
-					<td
 					<td th:text="${bidPolicy.platformName}"></td>
 					<td th:text="${bidPolicy.insuredName}"></td>
 					<td th:text="${bidPolicy.certificateDepart}"></td>
