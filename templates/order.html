@@ -38,6 +38,8 @@
 			<thead>
 				<tr>
 					<th>保单号/投保编号</th>
+					<th>下单时间</th>
+					<th>下单来源</th>
 	                <th>被保险人名称 </th>
 	                <th>项目名称</th>
 	                <th>招标文件编号</th>
@@ -51,6 +53,10 @@
 			<tbody>
 				<tr th:each="bidPolicy:${datagrid.rows}">
 					<td th:text="${(bidPolicy.policyNo!=null?bidPolicy.policyNo:bidPolicy.proposalNo)+'#'+bidPolicy.salt}"></td>
+					<td
+						th:text="${#dates.format(bidPolicy.saveTimes,'yyyy-MM-dd')+' 00时'}"></td>
+					<td
+					<td th:text="${bidPolicy.platformName}"></td>
 					<td th:text="${bidPolicy.insuredName}"></td>
 					<td th:text="${bidPolicy.certificateDepart}"></td>
 					<td th:text="${bidPolicy.certificateNo}"></td>
