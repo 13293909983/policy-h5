@@ -52,7 +52,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="bidPolicy:${datagrid.rows}">
-					<td th:text="${(bidPolicy.policyNo!=null?bidPolicy.policyNo:bidPolicy.proposalNo)}"></td>
+					<td th:text="${(bidPolicy.policyNo!=null?bidPolicy.policyNo:bidPolicy.proposalNo)+'#'+bidPolicy.salt}"></td>
 					<td
 						th:text="${#dates.format(bidPolicy.saveTimes,'yyyy-MM-dd')+' 00时'}"></td>
 					<td th:text="${bidPolicy.platformName}"></td>
