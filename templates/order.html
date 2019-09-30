@@ -41,7 +41,7 @@
 					<th>订单编号</th>
 	                <th>项目名称</th>
 	                <th>交易平台</th>
-	                <th>保险金额(元)</th>
+	                <th>保费(元)</th>
 	                <th>申请时间</th>
 	                <th>是否支付</th>
 	                <th>订单详情</th>
@@ -54,8 +54,7 @@
 					<td th:text="${bidPolicy.orderId}"></td>
 					<td th:text="${bidPolicy.certificateDepart}"></td>
 					<td th:text="${bidPolicy.platformName}"></td>
-					<td th:text="${bidPolicy.sumAmount}"></td>
-					
+					<td th:text="${bidPolicy.sumPremium}"></td>
 					<td th:text="${#objects.nullSafe(#dates.format(bidPolicy.saveTimes,'yyyy-MM-dd HH:mm:ss'),'-')}"></td>
 					<td>
 						<a th:if="${bidPolicy.payResult==''}" target="_blank" th:href="${bidPolicy.payUrl}">去支付</a>
