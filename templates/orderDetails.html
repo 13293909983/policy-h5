@@ -33,7 +33,7 @@
 			</tr>
             <tr>
 				<th>验证码</th>
-				<td><span class="input-text" th:text="${#sets.contains(bidPolicy,'salt')?bidPolicy.salt:'-'}"></span></td>
+				<td><span class="input-text" th:text="${#objects.nullSafe(bidPolicy.salt,'-')}"></span></td>
 			</tr>
 			<tr>
 				<th>被保险人名称</th>
@@ -49,11 +49,11 @@
 			</tr>
 			<tr>
 				<th>标段编号</th>
-				<td><span class="input-text" th:text="${#sets.contains(bidPolicy,'sectionNo')?bidPolicy.sectionNo:'-'}"></span></td>
+				<td><span class="input-text" th:text="${#objects.nullSafe(bidPolicy.sectionNo,'-')}"></span></td>
 			</tr>
 			<tr>
 				<th>交易平台</th>
-				<td><span class="input-text" th:text="${#sets.contains(bidPolicy,'platformName')?bidPolicy.platformName:'-'}"></span></td>
+				<td><span class="input-text" th:text="${#objects.nullSafe(bidPolicy.platformName,'-')}"></span></td>
 			</tr>
 			<tr>
 				<th>开标时间</th>

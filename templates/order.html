@@ -55,7 +55,8 @@
 					<td th:text="${bidPolicy.certificateDepart}"></td>
 					<td th:text="${bidPolicy.platformName}"></td>
 					<td th:text="${bidPolicy.sumAmount}"></td>
-					<td th:text="${#sets.contains(bidPolicy,'saveTimes')?#dates.format(bidPolicy.saveTimes,'yyyy-MM-dd hh:mm:ss'):'-'}"></td>
+					
+					<td th:text="${#objects.nullSafe(#dates.format(bidPolicy.saveTimes,'yyyy-MM-dd HH:mm:ss'),'-')}"></td>
 					<td>
 						<a th:if="${bidPolicy.payResult==''}" target="_blank" th:href="${bidPolicy.payUrl}">去支付</a>
 						<span th:if="${bidPolicy.payResult=='00'}" style="background-color: transparent;color: #000000;">已支付</span>

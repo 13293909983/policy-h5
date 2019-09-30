@@ -31,7 +31,7 @@
 				<td><p>投保单号</p></td>
 				<td><span class="input-text" th:text="${bidPolicy.proposalNo}"></span></td>
 				<td><p>验证码</p></td>
-				<td><span class="input-text" th:text="${#sets.contains(bidPolicy,'salt')?bidPolicy.salt:'-'}"></span></td>
+				<td><span class="input-text" th:text="${#objects.nullSafe(bidPolicy.salt,'-')}"></span></td>
 			</tr>
 			<tr>
 				<th colspan="4">基本信息</th>
@@ -40,7 +40,7 @@
 				<td><p>被保险人名称</p></td>
 				<td><span class="input-text" th:text="${bidPolicy.insuredName}"></span>
 				<td>组织机构代码</td>
-				<td><span class="input-text" th:text="${bidPolicy.insuredName}"></span>
+				<td><span class="input-text" th:text="${bidPolicy.insuredIdNo}"></span>
 			</tr>
 			<tr>
 				<td>社会信用代码</td>
@@ -65,11 +65,11 @@
 			<tr>
 				<td>资金来源</td>
 				<td>
-					<span class="input-text" th:text="${#sets.contains(bidPolicy,'fundSource')?bidPolicy.fundSource:'-'}"></span>
+					<span class="input-text" th:text="${#objects.nullSafe(bidPolicy.fundSource,'-')}"></span>
 				</td>
 				<td>标段编号</td>
 				<td>
-					<span class="input-text" th:text="${#sets.contains(bidPolicy,'sectionNo')?bidPolicy.sectionNo:'-'}"></span>
+					<span class="input-text" th:text="${#objects.nullSafe(bidPolicy.sectionNo,'-')}"></span>
 				</td>
 			</tr>
 			<tr>
