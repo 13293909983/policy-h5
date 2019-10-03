@@ -44,7 +44,7 @@ button {
 
 input {
 	border: none;
-	font-family: "寰蒋闆呴粦";
+	font-family: "瀵邦喛钂嬮梿鍛寸拨";
 	outline: none;
 }
 input[type='checkbox']{
@@ -70,7 +70,7 @@ body {
 	min-width: 937px;
 	color: #000;
 	background: #FFF;
-	font-family: PingFangSC, Verdana, Arial, sans-serif, "Times New Roman", 瀹嬩綋;
+	font-family: PingFangSC, Verdana, Arial, sans-serif, "Times New Roman", 鐎瑰缍�;
 	font-size: 16px;
 	margin:  0 auto;
 }
@@ -135,7 +135,7 @@ html {
 	margin: 0 auto;
 }
 .title_nav{
-	padding: 0.6rem 0.3rem;
+	padding: 0.6rem 0.3rem 0.3rem;
 }
 .title_nav h3{
 	font-size: 0.20rem;
@@ -181,7 +181,7 @@ html {
 }
 
 .header_nava {
-	/* width: 3.00rem; */
+	/* width:聽3.00rem; */
 	 height:1.10rem;
 	 float:left;
 	 display:inline-block;
@@ -463,7 +463,7 @@ color: #FFFFFF;
     width: 1.87rem;
     border: none 0;
     padding-left: 0.13rem;
-    resize: none; /*鍥哄畾*/
+    resize: none; /*閸ュ搫鐣�*/
    background-color: #333333;
    outline: none;
 }
@@ -546,7 +546,7 @@ margin-top: 0.2rem;
 
 
 
-/*杩斿洖椤堕儴*/
+/*鏉╂柨娲栨い鍫曞劥*/
 .fixed_top {
 	width: 3rem;
 	height: 2.40rem;
@@ -662,7 +662,7 @@ input:-webkit-autofill , textarea:-webkit-autofill, select:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px transparent  inset !important;  
     background-color:transparent;  
     background-image: none;  
-    transition: background-color 50000s ease-in-out 0s; //背景色透明  生效时长  过渡效果  启用时延迟的时间  
+    transition: background-color 50000s ease-in-out 0s; //鑳屾櫙鑹查�忔槑  鐢熸晥鏃堕暱  杩囨浮鏁堟灉  鍚敤鏃跺欢杩熺殑鏃堕棿  
 }  
 input {  
      background-color:transparent;  

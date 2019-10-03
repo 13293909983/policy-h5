@@ -37,38 +37,31 @@
 		<table class="ddtables" cellspacing="0" cellpadding="0" >
 			<thead>
 				<tr>
-					<th>保单号/投保编号</th>
-					<th>下单时间</th>
-					<th>下单来源</th>
-	                <th>被保险人名称 </th>
+					<th>序号</th>
+					<th>订单编号</th>
 	                <th>项目名称</th>
-	                <th>招标文件编号</th>
-	                <th>起保日期</th>
-	                <th>终保日期</th>
-	                <th>保险金额</th>
-	                <th>保费</th>
-	                <th>操作</th>
+	                <th>交易平台</th>
+	                <th>保费(元)</th>
+	                <th>申请时间</th>
+	                <th>是否支付</th>
+	                <th>订单详情</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="bidPolicy:${datagrid.rows}">
-					<td th:text="${(bidPolicy.policyNo!=null?bidPolicy.policyNo:bidPolicy.proposalNo)+'#'+bidPolicy.salt}"></td>
-					<td
-						th:text="${#dates.format(bidPolicy.saveTimes,'yyyy-MM-dd')+' 00时'}"></td>
-					<td th:text="${bidPolicy.platformName}"></td>
-					<td th:text="${bidPolicy.insuredName}"></td>
+				<tr th:each="bidPolicy,bidPolicyStat:${datagrid.rows}">
+					<!-- <td th:text="${(bidPolicy.policyNo!=null?bidPolicy.policyNo:bidPolicy.proposalNo)+'#'+bidPolicy.salt }"></td> -->
+					<td th:text="${(bidPolicyStat.index+1)+(datagrid.page)*datagrid.pageSize}"></td>
+					<td th:text="${bidPolicy.orderId}"></td>
 					<td th:text="${bidPolicy.certificateDepart}"></td>
-					<td th:text="${bidPolicy.certificateNo}"></td>
-					<td
-						th:text="${#dates.format(bidPolicy.startDate,'yyyy-MM-dd')+' 00时'}"></td>
-					<td
-						th:text="${#dates.format(bidPolicy.endDate,'yyyy-MM-dd')+' 24时'}"></td>
-					<td th:text="${bidPolicy.sumAmount}"></td>
+					<td th:text="${bidPolicy.platformName}"></td>
 					<td th:text="${bidPolicy.sumPremium}"></td>
+					<td th:text="${#objects.nullSafe(#dates.format(bidPolicy.saveTimes,'yyyy-MM-dd HH:mm:ss'),'-')}"></td>
 					<td>
-						<a th:if="${bidPolicy.payResult=='00'}"  th:data-id="${bidPolicy.downloadUrl}" th:data-url="${bidPolicy.previewUrl}" onclick="lookss(this.getAttribute('data-id'),this.getAttribute('data-url'))" style="background-color: #1060a5">查看保函</a><span th:if="${bidPolicy.payResult=='00'}"><br/></span>
-                        <a th:if="${bidPolicy.payResult=='00'}" th:href="${'/invoice/'+bidPolicy.orderId+'.html'}" target="_blank">下载发票</a>
-                        <a th:if="${bidPolicy.payResult==''}" th:href="${bidPolicy.payUrl}"  target="_blank">去支付</a>
+						<a th:if="${bidPolicy.payResult==''}" target="_blank" th:href="${bidPolicy.payUrl}">去支付</a>
+						<span th:if="${bidPolicy.payResult=='00'}" style="background-color: transparent;color: #000000;">已支付</span>
+					</td>
+					<td>
+						<a th:href="${'/orderDetails/'+bidPolicy.orderId}" style="background-color: #1060a5;">查看</a>
 					</td>
 				</tr>
 			</tbody>
@@ -91,40 +84,24 @@
 				</ul>
 			</div>
 		</div>
-		<div class="agree_wrap">
-				<div id="btn" class="btn_closes btn_open"> 
-					<img src="/static/images/close.png" />
-				</div>
-				<div class="agree_all">
-					<div class="agree_content">
-	                     <h2>保函查看</h2>
-	                     <div class="noyzerr">
-							<img id="guarantee">
-							<h1></h1>
-						</div>
-						<div class="chakan_but">
-				        	<a class="chakan_down" >下载</a>
-				        </div>
-					</div>
-				</div>
-			</div>
 	</div>
 </div>
 <footer></footer>
 <div class="fixed"></div>
 <script type="text/javascript">
-	function lookss(url,srcUrl){//查看
-		if($(".agree_wrap").css("display")=="none"){
-	        $(".agree_wrap").show();
-	        $('#guarantee').attr('src',srcUrl);
-	        $('.chakan_down').attr('href',url+"?attname=baohan.pdf");
-	    }
-	}
 	$(".btn_open").click(function (){
 	    if($(".agree_wrap").css("display")=="block"){
 	        $(".agree_wrap").hide();
 	    }
 	});
+	$(function(){
+		$('tbody tr').mouseover(function(e) {
+	        $(this).siblings().stop().fadeTo(50,0.5);
+	    });
+		$('tbody tr').mouseout(function(e) {
+	        $(this).siblings().stop().fadeTo(50,1);
+	    });
+	})
 </script>
 </body>
 </html>
