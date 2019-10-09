@@ -376,6 +376,7 @@ float: right;
 .index_nologinbuts,.index_loginbuts {
 	width: 100%;
 	text-align: center;
+	margin-top: 0.2rem;
 }
 
 .index_nologinbut,.index_loginbut  {
@@ -491,7 +492,7 @@ outline: none;
 }
 .index_group a{
 	font-size: 0.16rem;
-	line-height: 0.4rem;
+	line-height: 0.8rem;
 	margin-left:1.2em ;
 	color: #B21F2D;
 	font-weight: bold;
