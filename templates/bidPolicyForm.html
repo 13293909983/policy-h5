@@ -129,6 +129,11 @@
 		.pay_gwcactivity{
 		 display: block;
 		}
+		.btnSubClass{
+		    background: #999999 !important;
+		    border-bottom: 0.03rem solid #999999 !importan;
+		    cursor: not-allowed !importan;
+		}
 		</style>
 	</head>
 <body>
@@ -270,7 +275,7 @@
 						<i th:text="${errorMap['sumPremium']}"></i>
 					</td>
 				</tr>
-				<tr>
+				<tr style="display: none">
 					<td><span class="span_color">*</span>&nbsp;起保日期</td>
 					<td>
 						<input name="startDate" type="date" style="width:1.74rem;" class="input-text" th:value="${#dates.format(bidPolicy.startDate,'yyyy-MM-dd')}" readonly/>
@@ -362,7 +367,8 @@
 				</div>
 			</div>
 			<div class="btn-bottom">
-				<button class="submit" onclick="submits()">提交</button>
+				<button id="btnSub" class="submit" onclick="submits()">提交</button>
+				<button class="btnSubClass" type="button" style="display: none;">提交</button>
 			</div>
 			</div>
 		</div>
@@ -457,8 +463,7 @@ $(".zhuyi_tk li").click(function(){
         $(":input[name='period']").blur(retroactiveEvent).change();
 		//默认起保日期
 		$(":input[name='startDate']").val(
-				new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
-						.format("yyyy-MM-dd"));
+				new Date(new Date().getTime()).format("yyyy-MM-dd"));
 		$(":input[name='endDate']").val(
 				new Date(new Date().getTime() + 180 * 24 * 60 * 60 * 1000)
 						.format("yyyy-MM-dd"));
@@ -740,6 +745,7 @@ $(".zhuyi_tk li").click(function(){
 			$(".zhuyi_wrap").show();
 			return false;
 		}
+		//提交的时候把select禁用去掉
 		$('select').removeAttr("disabled"); 
 		return true;
 	}
@@ -946,6 +952,8 @@ $(".zhuyi_tk li").click(function(){
 		 }
 	}
 	function submits(){
+		$('.btnSubClass').show();
+		$('#btnSub').hide();
 		$("form").submit();
 	}
 </script>
