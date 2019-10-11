@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>电子保函服务平台</title>
+		<link rel="stylesheet" href="/css/common.css" />
+		<link rel="stylesheet" href="/css/index.css" />
+        <link rel="stylesheet" href="/css/form.css" />
+        <link rel="stylesheet" href="/css/zhuce.css" />
+        <link rel="stylesheet" href="/css/chanpin.css" />
+        <link rel="stylesheet" href="/css/metroStyle/metroStyle.css" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+		<script src="/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+		<script src="/js/index.js" type="text/javascript"></script>
+		<script type="text/javascript" src="/js/paging.js" ></script>
+		<script src="/js/layer/2.4/layer.js"></script>
+		<script type="text/javascript" src="/js/jquery-1.4.4.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.ztree.all.js"></script>
+		<style>
+			 .fileinput-button {
+			 position: relative;  
+			 background: #2999d6; 
+			 width: 70px; 
+			 height: 30px; 
+			 color: #fff; 
+			 font-size: 14px; 
+			 text-align: center; 
+			 border: 0; 
+			 border-radius: 5%; 
+			 line-height: 30px;
+			 cursor: pointe;
+		 } 
+		 .fileinput-button:hover { 
+			background: #2999d6;
+		 } 
+		 .fileinput-button input { 
+			 position: absolute; 
+			 top: 0; 
+			 right: 0; 
+			 margin: 0; 
+			 opacity: 0; 
+			 -ms-filter: 'alpha(opacity=0)'; 
+			 font-size: 200px; 
+			 direction: ltr; 
+			 cursor: pointer; 
+			 width: 0.7rem;
+   			 height: 0.3rem;
+    		 overflow: hidden;
+		 } 
+		 #text{
+		     position: absolute;
+             top: 0;
+             left: 85px;
+             color: #000;
+             width: 2rem;
+             overflow: hidden;
+			 text-overflow: ellipsis;
+			 white-space: nowrap;
+			 text-align: left;
+			 
+         }
+         .product_cpright{
+			width: 100%;
+		  }
+		  .span_color{
+		  	color:red;
+		  }
+		  .menuContent{
+		  	border: 1px solid #b5b5b5;
+		    overflow-y: auto;
+		    position: absolute;
+		    z-index: 9999;
+		    background: #fff;
+		  }
+         .ztree li a:hover {
+             text-decoration: none;
+         }
+         .ztree li {
+             line-height: 30px;
+         }
+         .ztree li span {
+             font-size: 14px;
+         }
+		</style>
+	</head>
+<body>
+<header></header>
+<div class="body_mian">
+	<div class="title_wrap">
+		<div class="title_nav">
+			<h3>产品介绍</h3><img src="/images/xz.png" />
+			<h3>立即投保</h3><img src="/images/xz.png" />
+		</div>
+		<form method="post" action="/applyBidPolicy.json" onsubmit="return onCheck()" enctype="multipart/form-data">
+			<input type="hidden" th:value="${message}" id="message"/>
+			<!--交易平台流水号-->
+			<input type="hidden" th:value="${sequenceNo}" name="sequenceNo"/>
+			<table class="formtables" cellspacing="0" cellpadding="0">
+				<tr>
+					<th colspan="4">被保险人信息</th>
+
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;被保险人名称</td>
+					<td>
+						<input name="insuredName" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredName}" onChange="getInsuredName()">
+						<br/>
+						<i th:text="${errorMap['insuredName']}"></i>
+					</td>
+					<td><span class="span_color">*</span>&nbsp;组织机构代码</td>
+					<td>
+						<input name="insuredIdNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredIdNo}" onChange="getInsuredIdNo()">
+						<br/>
+						<i th:text="${errorMap['insuredIdNo']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;社会信用代码</td>
+					<td>
+						<input name="insuredSocialcode" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredSocialcode}" onChange="getInsuredSocialcode()">
+						<br/>
+						<i th:text="${errorMap['insuredSocialcode']}"></i>
+					</td>
+					<td><span class="span_color">*</span>&nbsp;联系电话</td>
+					<td>
+						<input name="insuredIdMobile" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredIdMobile}" onChange="getInsuredIdMobile()">
+						<br/>
+						<i th:text="${errorMap['insuredIdMobile']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<td>地址</td>
+					<td colspan="3">
+						<input name="insuredAddress" class="input-text input-textdz" placeholder="请输入" th:value="${bidPolicy.insuredAddress}">
+						<br/>
+						<i th:text="${errorMap['insuredAddress']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<th colspan="4">基本信息</th>
+
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;投标项目名称</td>
+					<td>
+						<input name="certificateDepart" class="input-text" placeholder="请输入"  th:value="${bidPolicy.certificateDepart}" onChange="getCertificateDepart()">
+						<br/>
+						<i th:text="${errorMap['certificateDepart']}"></i>
+					</td>
+					<td><span class="span_color">*</span>&nbsp;招标项目编号</td>
+					<td>
+						<input name="certificateNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.certificateNo}" onChange="getCertificateNo()">
+						<br/>
+						<i th:text="${errorMap['certificateNo']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;资金来源</td>
+					<td>
+						<input name="fundSource" class="input-text" placeholder="请输入"  th:value="${bidPolicy.fundSource}" onChange="getFundSource()">
+						<br/>
+						<i th:text="${errorMap['fundSource']}"></i>
+					</td>
+					<td><span class="span_color">*</span>&nbsp;标段编号</td>
+					<td>
+						<input name="sectionNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.sectionNo}" onChange="getSectionNo()">
+						<br/>
+						<i th:text="${errorMap['sectionNo']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;开标日期</td>
+					<td>
+						<input name="retroactiveStart" type="date" class="input-text"  th:value="${#dates.format(bidPolicy.retroactiveStart,'yyyy-MM-dd')}" onChange="getRetroactiveStart()">
+						<br/>
+						<i th:text="${errorMap['retroactiveStart']}"></i>
+					</td>
+					<td><span class="span_color">*</span>&nbsp;投标有效期</td>
+					<td>
+						<input name="period" type="number" class="input-text" value="90"/>天
+						<input name="retroactiveEnd" type="hidden" class="input-text"  th:value="${#dates.format(bidPolicy.retroactiveEnd,'yyyy-MM-dd')}">
+						<br/>
+						<i th:text="${errorMap['retroactiveEnd']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;项目类型</td>
+					<td>
+						<select name="officeType" class="select-form">
+							<option value="01" th:selected="${bidPolicy.officeType=='01'}">工程</option>
+							<option value="02" th:selected="${bidPolicy.officeType=='02'}">货物</option>
+							<option value="03" th:selected="${bidPolicy.officeType=='03'}">服务</option>
+						</select>
+						<br/>
+						<i th:text="${errorMap['officeType']}"></i>
+					</td>
+					<td><span class="span_color">*</span>&nbsp;行业代码</td>
+					<td>
+						<ul class="list">
+							<li class="title">
+								<input id="citySel" class="input-text"  type="text" placeholder="请选择行业代码"/>
+								<input type="hidden" name="businesssource" th:value="${bidPolicy.businesssource}"/>
+								&nbsp;<a id="menuBtn" onclick="showMenu(); return false;" style="background: url(/images/sanjiao.png) no-repeat right center;">&nbsp;&nbsp;&nbsp;</a>
+							</li>
+						</ul>
+						<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+							<ul id="tree" class="ztree" style="margin-top:0; width:330px;height: 300px;overflow-y: auto;"></ul>
+						</div>
+						<i th:text="${errorMap['businesssource']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;保证金金额</td>
+					<td>
+						<input name="electricPower" placeholder="请输入"  type="number" class="input-text" th:value="${bidPolicy.electricPower}" onChange="getElectricPower()">
+						<br/>
+						<i th:text="${errorMap['electricPower']}"></i>
+					</td>
+					<td><span class="span_color">*</span>&nbsp;保费金额</td>
+					<td>
+						<input name="sumPremium" type="text" class="input-text" th:value="${bidPolicy.sumPremium}" readonly/>
+						<br/>
+						<i th:text="${errorMap['sumPremium']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;起保日期</td>
+					<td>
+						<input name="startDate" type="date" style="width:1.74rem;" class="input-text" th:value="${#dates.format(bidPolicy.startDate,'yyyy-MM-dd')}" readonly/>
+						<input class="input-text" value="00" style="width:0.21rem" disabled/>&nbsp;&nbsp;时
+						<br/>
+						<i th:text="${errorMap['startDate']}"></i>
+					</td>
+					<td><span class="span_color">*</span>&nbsp;终保日期</td>
+					<td>
+						<input name="endDate" type="date" style="width:1.74rem;"  class="input-text" disabled/>
+						<input class="input-text" value="24" style="width:0.21rem;" disabled/>&nbsp;&nbsp;时
+					</td>
+				</tr>
+				<!-- <tr>
+					<th colspan="4">影像文件</th>
+				</tr> -->
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;上传文件</td>
+					<td colspan="3">
+						<div style="display:inline-block;"><img id="fileImg" style="width: 120px;height: 125px;margin-top: 17px;background: #fff;"/></div>
+						<div style="float: left;margin: 26px 34px 0 0;">
+							<div class="fileinput-button">上传文件
+								<span id="text">未选择文件</span>
+								<input type='file' id="imageFile" name='imageFile' accept='*.zip' onChange="handleConId_photo(this.files);" onMouseleave="getImageFile()"/>
+								<input type="hidden" name="fileKey" th:value="${bidPolicy.fileKey}"/>
+							</div>
+							<span style="display: block;color: red;font-size: 0.14rem;line-height: 0.25rem;margin-top: 0.10rem;">请将投保单位营业执照、pdf版的招标文件打包<br/>压缩成zip格式上传,文件大小最大为20M</span><!-- <br/> -->
+							<i th:text="${errorMap['fileKey']}"></i>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th colspan="4">发票信息</th>
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;发票抬头</td>
+					<td>
+						<input name="invoice.invoiceTitle" class="input-text" placeholder="请输入" th:value="${session.LOGIN_USER.organ.organName}">
+						<br/>
+						<i th:text="${errorMap['invoice.invoiceTitle']}"></i>
+					</td>
+					<td><span class="span_color">*</span>&nbsp;手机号</td>
+					<td>
+						<input name="invoice.phone" class="input-text" placeholder="请输入" th:value="${bidPolicy.invoice==null||bidPolicy.invoice.phone==null?session.LOGIN_USER.mobile:bidPolicy.invoice.phone}" onChange="getPhone()">
+						<br/>
+						<i th:text="${errorMap['invoice.phone']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<td>银行账号</td>
+					<td>
+						<input name="invoice.bankAccount" class="input-text" placeholder="请输入" th:value="${bidPolicy.invoice==null||bidPolicy.invoice.bankAccount==null?session.LOGIN_USER.organ.bankRegNo:bidPolicy.invoice.bankAccount}">
+						<br/>
+					</td>
+					<td>纳税人识别号</td>
+					<td>
+						<input name="invoice.buyerTaxpayerIdentifyNumber" class="input-text" placeholder="请输入" th:value="${bidPolicy.invoice==null||bidPolicy.invoice.buyerTaxpayerIdentifyNumber==null?session.LOGIN_USER.organ.taxregNo:bidPolicy.invoice.buyerTaxpayerIdentifyNumber}">
+						<br/>
+					</td>
+				</tr>
+				<tr>
+					<td>地址与联系方式</td>
+					<td colspan="3">
+						<input name="invoice.addressAndPhone" class="input-text" placeholder="请输入" th:value="${bidPolicy.invoice==null||bidPolicy.invoice.addressAndPhone==null?session.LOGIN_USER.organ.address:bidPolicy.invoice.addressAndPhone}" style="width:100%"/>
+					</td>
+				</tr>
+		</table>
+		<div class="margin-t-15" style="text-align: center;font-size: 0.20rem;">
+			<p><input type="checkbox" name="agree" style="margin-right: 0.16rem;margin-top: -0.03rem;"/>我已同意并阅读
+				<a class="color3 reg_show">《投保指南、投保须知、投保条款》</a></p>
+				<p style="margin: 0.15rem;font-size: 0.16rem;color: #989898;">注：如果投保人未能按照投保须知填写、确认投保相关信息，导致的后续损失，保险公司不承担赔偿责任。</p>
+		</div>
+		<div class="tiaokuan"></div>
+		<div class="btn-bottom">
+			<button class="quxiao" type="button" onclick="window.location.href = '/index.html'">取消</button>
+			<button class="submit">提交</button>
+		</div>
+	</form>
+	</div>
+</div>
+<footer></footer>
+<div class="fixed"></div>
+</body>
+<script>
+$(".reg_show").click(function (){
+    if($(".agree_wrap").css("display")=="none"){
+        $(".agree_wrap").show();
+    }
+});
+</script>
+<script type="text/javascript" th:inline="javascript">
+	Date.prototype.format = function(format) {
+		var date = {
+			"M+" : this.getMonth() + 1,
+			"d+" : this.getDate(),
+			"h+" : this.getHours(),
+			"m+" : this.getMinutes(),
+			"s+" : this.getSeconds(),
+			"q+" : Math.floor((this.getMonth() + 3) / 3),
+			"S+" : this.getMilliseconds()
+		};
+		if (/(y+)/i.test(format)) {
+			format = format.replace(RegExp.$1, (this.getFullYear() + '')
+					.substr(4 - RegExp.$1.length));
+		}
+		for ( var k in date) {
+			if (new RegExp("(" + k + ")").test(format)) {
+				format = format.replace(RegExp.$1,
+						RegExp.$1.length == 1 ? date[k] : ("00" + date[k])
+								.substr(("" + date[k]).length));
+			}
+		}
+		return format;
+	}
+	$(function() {
+		//根据起保日期生成终保日期
+		$(":input[name='startDate']").change(
+				function() {
+					if (this.value != "") {
+						$(":input[name='endDate']").val(
+								new Date(
+										new Date(this.value.replace(/-/g, "/"))
+												.getTime()
+												+ 179 * 24 * 60 * 60 * 1000)
+										.format("yyyy-MM-dd"));
+					}
+				}).change();
+        var retroactiveEvent=function() {
+            var period=$(":input[name='period']").val();
+            var retroactiveStart=$(":input[name='retroactiveStart']").val();
+            if (retroactiveStart != "" && period!="") {
+                $(":input[name='retroactiveEnd']").val(
+                    new Date(
+                        new Date(retroactiveStart.replace(/-/g, "/"))
+                            .getTime()
+                        + parseInt(period) * 24 * 60 * 60 * 1000)
+                        .format("yyyy-MM-dd"));
+            }else{
+                $(":input[name='retroactiveEnd']").val();
+			}
+        };
+        var retroactiveStart=$(":input[name='retroactiveStart']").val();
+		var retroactiveEnd=$(":input[name='retroactiveEnd']").val();
+		if(retroactiveEnd!='' && retroactiveEnd!=''){
+            var start = new Date(retroactiveStart.replace(/-/g, "/")).getTime();
+            var end = new Date(retroactiveEnd.replace(/-/g, "/")).getTime();
+			var period=(end-start)/(24 * 60 * 60 * 1000);
+            $(":input[name='period']").val(period);
+		}
+        $(":input[name='retroactiveStart']").change(retroactiveEvent).change();
+        $(":input[name='period']").blur(retroactiveEvent).change();
+		//默认起保日期
+		$(":input[name='startDate']").val(
+				new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+						.format("yyyy-MM-dd"));
+		$(":input[name='endDate']").val(
+				new Date(new Date().getTime() + 180 * 24 * 60 * 60 * 1000)
+						.format("yyyy-MM-dd"));
+		$(":input[name='electricPower']").blur(function() {
+		    if(this.value!=""){
+                var electricPower = parseInt(this.value);
+                var sumPremium = 0;
+                if (electricPower > 0 && electricPower <= 100000) {
+                    sumPremium = 600;
+                } else if (electricPower <= 200000) {
+                    sumPremium = 800;
+                } else if (electricPower <= 800000) {
+                    sumPremium = electricPower * 0.004;
+                    sumPremium=decimal(sumPremium,2);
+                }
+                $(":input[name='sumPremium']").val(sumPremium);
+			}
+		}).blur();
+		//全局错误提示
+		if($("#message").val()!=""){
+		    alert($("#message").val());
+		}
+		var fileKey=$(":hidden[name='fileKey']").val();
+		if(fileKey!=null&&fileKey!=""){
+			$("#fileImg").attr("src", "/images/a7.png");
+			$("#text").text("已选择文件");
+		}
+		//初始化查看是否有交易平台流水号
+		var sequenceNo=$("input[name='sequenceNo']").val();
+		//console.log(sequenceNo);
+		if(sequenceNo!=null&&sequenceNo!=""){
+			//如果有的话，把字段改成禁用
+       		$('input').not(":input[name='insuredAddress']")
+       		.not(":input[name='imageFile']").not(":input[name='invoice.bankAccount']")
+       		.not(":input[name='invoice.buyerTaxpayerIdentifyNumber']")
+       		.not(":input[name='invoice.addressAndPhone']")
+       		.not(":input[name='invoice.invoiceTitle']")
+       		.not(":input[name='invoice.phone']")
+       		.not(":input[name='agree']").attr("readonly",true);
+			//把选择框改成禁用
+       		$('select').attr("disabled","disabled");
+			//把行业代码的a标签改成禁用
+			$('#menuBtn').removeAttr('onclick');
+			//改input的禁用样式
+       		$('input').not(":input[name='insuredAddress']")
+       		.not(":input[name='imageFile']").not(":input[name='invoice.bankAccount']")
+       		.not(":input[name='invoice.buyerTaxpayerIdentifyNumber']")
+       		.not(":input[name='invoice.addressAndPhone']")
+       		.not(":input[name='invoice.invoiceTitle']")
+       		.not(":input[name='invoice.phone']")
+       		.not(":input[name='agree']").css("cursor","not-allowed");
+       		//改select的禁用样式
+			$('select').css("cursor","not-allowed").css("background-color","#efefef");
+			//改input 上的td的禁用样式
+       		$('input').not(":input[name='insuredAddress']")
+			.not(":input[name='imageFile']").not(":input[name='invoice.bankAccount']")
+       		.not(":input[name='invoice.buyerTaxpayerIdentifyNumber']")
+       		.not(":input[name='invoice.addressAndPhone']")
+       		.not(":input[name='invoice.invoiceTitle']")
+       		.not(":input[name='invoice.phone']").parent().not('form').not('p').not(".fileinput-button")
+       		.css("cursor","not-allowed").css("background-color","#efefef");
+       		//改select 上的td的禁用样式
+			$('select').parent().css("cursor","not-allowed").css("background-color","#efefef");
+			//把行业代码的a标签改成禁用样式
+			$('#menuBtn').css("cursor","not-allowed");
+			$(".list").parent().css("cursor","not-allowed").css("background-color","#efefef");
+		}
+		//初始化获取行业代码
+		getBusinesssource();
+	})
+	//算保费金额，保留两位小数，四舍五入
+	function decimal(num,v){
+		var vv = Math.pow(10,v);
+		return Math.round(num*vv)/vv;
+	}
+	//上传图片
+	function handleConId_photo(files){
+		var imgName = document.all.imageFile.value;
+		var ext="";
+		if(imgName==""){
+			layer.msg('请选择需要上传的文件!', {icon: 5});
+			var fileTd=$("#fileImg").parent();
+			fileTd.html('<img id="fileImg" style="width: 120px;height: 125px;margin-top: 17px;background: #fff;">');
+			$("#text").text("未选择文件");
+	        return false; 
+		}else{
+			idx = imgName.lastIndexOf(".");   
+	        if (idx != -1){   
+	            ext = imgName.substr(idx+1).toUpperCase();   
+	            ext = ext.toLowerCase( ); 
+	            if (ext != 'jpg' && ext != 'png' && ext != 'jpeg'&& ext != 'bmp'&& ext != 'zip'){
+	            	layer.msg('只能上传.jpg .png .jpeg .bmp .zip类型的文件!', {icon: 5});
+	                var file = document.getElementById('imageFile');
+	                file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
+	                file.outerHTML = file.outerHTML; //重新初始化了file的html
+	                $("#text").text("未选择文件");
+	                $("#fileImg").attr("src", "/images/a7.png");
+	                return false;  
+	            }   
+	        }
+	        //是否ie
+	        var isIE = /msie/i.test(navigator.userAgent) && !window.opera;  
+	        var fileSize = 0;       
+	        var filemaxsize = 1024*20*1024;//20M
+	        //获取file的大小
+	        if (isIE && !target.files){       
+	            var filePath = target.value;       
+	            var fileSystem = new ActiveXObject("Scripting.FileSystemObject");          
+	            var file = fileSystem.GetFile (filePath);       
+	            fileSize = file.Size;      
+	        } else { 
+	            fileSize = files[0].size;       
+	        }
+	        if(fileSize>filemaxsize){
+	        	layer.msg("文件大小不能超过20M！", {icon: 5});
+	        	var file = document.getElementById('imageFile');
+                file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
+                file.outerHTML = file.outerHTML; //重新初始化了file的html
+                $("#text").text("未选择文件");
+                $("#fileImg").attr("src", "/images/a7.png");
+                return false;  
+	        }
+	        var url = null;
+	        if (window.createObjectURL != undefined) { // basic
+	            url = window.createObjectURL(files[0]);
+	        } else if (window.URL != undefined) { // mozilla(firefox)
+	            url = window.URL.createObjectURL(files[0]);
+	        } else if (window.webkitURL != undefined) { // webkit or chrome
+	            url = window.webkitURL.createObjectURL(files[0]);
+	        }
+	        if(ext=="zip"){
+	        	$("#fileImg").attr("src", "/images/a7.png");
+	        }else{
+	        	$("#fileImg").attr("src", url);
+	        }
+	        $("#text").text(files[0].name);
+	        $("#text").attr("title",files[0].name);
+		}
+	}
+	function onCheck(){
+		var i=0;
+		//被保险人名称
+		var insuredName=$(":input[name='insuredName']").val();
+		if(insuredName=="" || insuredName==null){
+			$(":input[name='insuredName']").parent().find("i").text("请输入被保险人名称");
+			i++;
+		}
+		//组织机构代码
+		var insuredIdNo=$(":input[name='insuredIdNo']").val();
+		if(insuredIdNo=="" || insuredIdNo==null){
+			$(":input[name='insuredIdNo']").parent().find("i").text("请输入组织机构代码");
+			i++;
+		}
+		//社会信用代码
+		var insuredSocialcode=$(":input[name='insuredSocialcode']").val();
+		var regex =/^([0-9ABCDEFGHJKLMNPQRTUWXY]{2})([0-9]{6})([0-9ABCDEFGHJKLMNPQRTUWXY]{10})$/;
+		if(insuredSocialcode=="" || insuredSocialcode==null){
+			$(":input[name='insuredSocialcode']").parent().find("i").text("请输入社会信用代码");
+			i++;
+		}else if(!regex.test(insuredSocialcode)){
+			$(":input[name='insuredSocialcode']").parent().find("i").text("请输入正确的社会信用代码");
+			i++;
+		}
+		//联系电话
+		var insuredIdMobile=$(":input[name='insuredIdMobile']").val();
+		var phone=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+		if(insuredIdMobile=="" || insuredIdMobile==null){
+			$(":input[name='insuredIdMobile']").parent().find("i").text("请输入联系电话");
+			i++;
+		}else if(!phone.test(insuredIdMobile)){
+			$(":input[name='insuredIdMobile']").parent().find("i").text("请输入正确的联系电话");
+			i++;
+		}
+		//地址
+		/* var insuredAddress=$(":input[name='insuredAddress']").val();
+		if(insuredAddress=="" || insuredAddress==null){
+			$(":input[name='insuredAddress']").parent().find("i").text("请输入地址");
+			i++;
+		} */
+		//项目名称
+		var certificateDepart=$(":input[name='certificateDepart']").val();
+		if(certificateDepart=="" || certificateDepart==null){
+			$(":input[name='certificateDepart']").parent().find("i").text("请输入投标项目名称");
+			i++;
+		}
+		//招标文件编号
+		var certificateNo=$(":input[name='certificateNo']").val();
+		if(certificateNo=="" || certificateNo==null){
+			$(":input[name='certificateNo']").parent().find("i").text("请输入招标项目编号");
+			i++;
+		}
+		//开标日期
+		var retroactiveStart=$(":input[name='retroactiveStart']").val();
+		if(retroactiveStart=="" || retroactiveStart==null){
+			$(":input[name='retroactiveStart']").parent().find("i").text("请输入开标日期");
+			i++;
+		}
+		//保证金金额
+		var electricPower=$(":input[name='electricPower']").val();
+		if(electricPower=="" || electricPower==null){
+			$(":input[name='electricPower']").parent().find("i").text("请输入保证金金额");
+			i++;
+		}else if(600>electricPower){
+			$(":input[name='electricPower']").parent().find("i").text("保证金金额不得小于保费金额");
+			i++;
+		}
+		//影像文件
+		var imageFile=$(":input[name='imageFile']").val();
+		var fileKey=$(":hidden[name='fileKey']").val();
+		if((imageFile=="" || imageFile==null) && (fileKey==undefined || fileKey=="")){
+			$(".fileinput-button").parent().find("i").text("请上传影像文件");
+			i++;
+		}
+		//发票手机号
+		var phones=$(":input[name='invoice.phone']").val();
+		var phone=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+		if(phones=="" || phones==null){
+			$(":input[name='invoice.phone']").parent().find("i").text("请输入手机号");
+			i++;
+		}else if(!phone.test(phones)){
+			$(":input[name='invoice.phone']").parent().find("i").text("请输入正确的手机号");
+			i++;
+		}
+		//行业代码选择
+		var businesssource=$("#citySel").val();
+		if(businesssource=="" || businesssource==null){
+			$(".list").parent().find("i").text("请选择行业代码");
+			i++;
+		}
+		//资金来源
+		var fundSource=$(":input[name='fundSource']").val();
+		var word="世界银行";;
+		var allb="亚洲基础设施投资银行";
+		if(fundSource==''||fundSource==null){
+			$(":input[name='fundSource']").parent().find("i").text("请输入资金来源");
+			i++;
+		}else if(fundSource==word){
+			$(":input[name='fundSource']").parent().find("i").text("世界银行不能投保");
+			i++
+		}else if(fundSource==allb){
+			$(":input[name='fundSource']").parent().find("i").text("亚洲基础设施投资银行不能投保");
+			i++
+		}
+		//标段编号
+		var sectionNo=$(":input[name='sectionNo']").val();
+		if(sectionNo==''||sectionNo==null){
+			$(":input[name='sectionNo']").parent().find("i").text("请输入标段编号");
+			i++
+		}
+		console.log($("input[name='businesssource']").val());
+		if(i>0){
+			return false;
+		}
+		//阅读并同意
+		var check=$("input[name='agree']").is(':checked');
+		if(!check){
+			layer.msg('请仔细阅读并同意《投保指南、投保须知、投保条款》', {icon: 5});
+			return false;
+		}
+		$('select').removeAttr("disabled");
+		return true;
+	}
+	//被保险人名称
+	function getInsuredName(){
+		var insuredName=$(":input[name='insuredName']").val();
+		if(insuredName!=''&&insuredName!=null){
+			$(":input[name='insuredName']").parent().find("i").text("");
+		}
+	}
+	//组织机构代码
+	function getInsuredIdNo(){
+		var insuredIdNo=$(":input[name='insuredIdNo']").val();
+		if(insuredIdNo!=''&&insuredIdNo!=null){
+			$(":input[name='insuredIdNo']").parent().find("i").text("");
+		}
+	}
+	//社会信用代码
+	function getInsuredSocialcode(){
+		var insuredSocialcode=$(":input[name='insuredSocialcode']").val();
+		if(insuredSocialcode!=''&&insuredSocialcode!=null){
+			$(":input[name='insuredSocialcode']").parent().find("i").text("");
+		}
+	}
+	//联系电话
+	function getInsuredIdMobile(){
+		var insuredIdMobile=$(":input[name='insuredIdMobile']").val();
+		if(insuredIdMobile!=''&&insuredIdMobile!=null){
+			$(":input[name='insuredIdMobile']").parent().find("i").text("");
+		}
+	}
+	//地址
+	/* function getInsuredAddress(){
+		var insuredAddress=$(":input[name='insuredAddress']").val();
+		if(insuredAddress!=''&&insuredAddress!=null){
+			$(":input[name='insuredAddress']").parent().find("i").text("");
+		}
+	} */
+	//项目名称
+	function getCertificateDepart(){
+		var certificateDepart=$(":input[name='certificateDepart']").val();
+		if(certificateDepart!=''&&certificateDepart!=null){
+			$(":input[name='certificateDepart']").parent().find("i").text("");
+		}
+	}
+	//招标文件编号
+	function getCertificateNo(){
+		var certificateNo=$(":input[name='certificateNo']").val();
+		if(certificateNo!=''&&certificateNo!=null){
+			$(":input[name='certificateNo']").parent().find("i").text("");
+		}
+	}
+	//开标日期
+	function getRetroactiveStart(){
+		var retroactiveStart=$(":input[name='retroactiveStart']").val();
+		if(retroactiveStart!=''&&retroactiveStart!=null){
+			$(":input[name='retroactiveStart']").parent().find("i").text("");
+		}
+	}
+	//保证金金额
+	function getElectricPower(){
+		var electricPower=$(":input[name='electricPower']").val();
+		if(electricPower!=''&&electricPower!=null){
+			$(":input[name='electricPower']").parent().find("i").text("");
+		}
+	}
+	//影像文件
+	function getImageFile(){
+		var imageFile=$(":input[name='imageFile']").val();
+		if(imageFile!=''&&imageFile!=null){
+			$(".fileinput-button").parent().find("i").text("");
+		}
+	}
+	//资金来源
+	function getFundSource(){
+		var fundSource=$(":input[name='fundSource']").val();
+		if(fundSource!=''&&fundSource!=null){
+			$(":input[name='fundSource']").parent().find("i").text("");
+		}
+	}
+	//标段编号
+	function getSectionNo(){
+		var sectionNo=$(":input[name='sectionNo']").val();
+		if(sectionNo!=''&&sectionNo!=null){
+			$(":input[name='sectionNo']").parent().find("i").text("");
+		}
+	}
+	//发票手机号
+	function getPhone(){
+		var phone=$(":input[name='invoice.phone']").val();
+		if(phone!=''&&phone!=null){
+			$(":input[name='invoice.phone']").parent().find("i").text("");
+		}
+	}
+	var setting = {
+	    data: {
+		    simpleData: {
+		        enable: true
+		    }
+	    },
+	    callback: {
+			beforeClick: beforeClick,
+			onClick: onClick,
+			beforeExpand:beforeExpand
+		}
+	};
+	//获取行业代码
+	function getBusinesssource(){
+		 $.ajax({
+		        type:"get",
+		        url:"http://39.100.55.200:8220/homeController/selectIndustryType",
+		        data: {},
+		        dataType:"json",
+		        success:function(dataObj){
+		        	if(dataObj.code==200){
+		        		var businesssourceList=dataObj.data;
+		        		//加载ztree
+		        		$.fn.zTree.init($("#tree"), setting, businesssourceList);
+		        		//初始化给ztree赋值
+		        		ztreeClick();
+		        	}
+		        }
+		 })
+		
+	}
+	function beforeClick(treeId, treeNode) {
+		var check = (treeNode && !treeNode.isParent);
+		if (!check){
+			return false;
+		}
+		return check;
+	}
+	//节点展开前（左侧菜单树）
+	function beforeExpand(treeId, treeNode){
+	    singlePath(treeNode);
+	}
+	//保持展开单一节点
+	function singlePath(currNode) {
+	    var cLevel = currNode.level;
+	    //这里假设id是唯一的
+	    var cId = currNode.id;
+	    //此对象可以保存起来，没有必要每次查找
+	    var treeObj = $.fn.zTree.getZTreeObj('tree');
+	    //展开的所有节点，这是从父节点开始查找（也可以全文查找）
+	    var expandedNodes = treeObj.getNodesByParam("open", true, currNode.getParentNode());
+	    for(var i = expandedNodes.length - 1; i >= 0; i--){
+	        var node = expandedNodes[i];
+	        var level = node.level;
+	        var id = node.id;
+	        if (cId != id && level == cLevel) {
+	            treeObj.expandNode(node, false);
+	        }
+	    }
+	}
+	function onClick(e, treeId, treeNode) {
+		var zTree = $.fn.zTree.getZTreeObj("tree"),
+		nodes = zTree.getSelectedNodes(),
+		v = "";
+		code=""
+		nodes.sort(function compare(a,b){return a.id-b.id;});
+		for (var i=0, l=nodes.length; i<l; i++) {
+			v += nodes[i].name + ",";
+			code+=nodes[i].code+","
+		}
+		if (v.length > 0 ) v = v.substring(0, v.length-1);
+		if (code.length > 0 ) code = code.substring(0, code.length-1);
+		var cityObj = $("#citySel");
+		cityObj.attr("value", v);
+		//给businesssource赋code值
+		$("input[name='businesssource']").attr("value",code);
+		//把行业代码提醒消息去掉
+		$(".list").parent().find("i").text("");
+		//关闭
+		hideMenu();
+	}
+	
+	function showMenu() {
+		var cityObj = $("#citySel");
+		var cityOffset = $("#citySel").offset();
+		$("#menuContent").css({left:cityOffset.left + "px"}).slideDown("fast");
+		$("body").bind("mousedown", onBodyDown);
+	}
+	function hideMenu() {
+		$("#menuContent").fadeOut("fast");
+		$("body").unbind("mousedown", onBodyDown);
+	}
+	function onBodyDown(event) {
+		if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+			hideMenu();
+		}
+	}
+	function ztreeClick(){
+		//var treeCode = "A010152";
+		var treeCode = $("input[name='businesssource']").val();
+		if(treeCode.trim()!=""){
+	       	var tree = $.fn.zTree.getZTreeObj("tree");
+	        var strs = treeCode.split(",");
+	        for(var j=0;j<strs.length;j++){
+	            var node = tree.getNodeByParam("code",strs[j]);
+	            tree.selectNode(node , true,true); 
+	            var cityObj = $("#citySel");
+	    		cityObj.attr("value", node.name);
+	        }
+		 }
+	}
+</script>
+</html>

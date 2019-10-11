@@ -1,0 +1,720 @@
+	Date.prototype.format = function(format) {
+		var date = {
+			"M+" : this.getMonth() + 1,
+			"d+" : this.getDate(),
+			"h+" : this.getHours(),
+			"m+" : this.getMinutes(),
+			"s+" : this.getSeconds(),
+			"q+" : Math.floor((this.getMonth() + 3) / 3),
+			"S+" : this.getMilliseconds()
+		};
+		if (/(y+)/i.test(format)) {
+			format = format.replace(RegExp.$1, (this.getFullYear() + '')
+					.substr(4 - RegExp.$1.length));
+		}
+		for ( var k in date) {
+			if (new RegExp("(" + k + ")").test(format)) {
+				format = format.replace(RegExp.$1,
+						RegExp.$1.length == 1 ? date[k] : ("00" + date[k])
+								.substr(("" + date[k]).length));
+			}
+		}
+		return format;
+	}
+	$(function() {
+		//根据起保日期生成终保日期
+		$(":input[name='startDate']").change(
+				function() {
+					if (this.value != "") {
+						$(":input[name='endDate']").val(
+								new Date(
+										new Date(this.value.replace(/-/g, "/"))
+												.getTime()
+												+ 179 * 24 * 60 * 60 * 1000)
+										.format("yyyy-MM-dd"));
+					}
+				}).change();
+        var retroactiveEvent=function() {
+            var period=$(":input[name='period']").val();
+            var retroactiveStart=$(":input[name='retroactiveStart']").val();
+            if (retroactiveStart != "" && period!="") {
+                $(":input[name='retroactiveEnd']").val(
+                    new Date(
+                        new Date(retroactiveStart.replace(/-/g, "/"))
+                            .getTime()
+                        + parseInt(period) * 24 * 60 * 60 * 1000)
+                        .format("yyyy-MM-dd"));
+            }else{
+                $(":input[name='retroactiveEnd']").val();
+			}
+        };
+        var retroactiveStart=$(":input[name='retroactiveStart']").val();
+		var retroactiveEnd=$(":input[name='retroactiveEnd']").val();
+		if(retroactiveEnd!='' && retroactiveEnd!=''){
+            var start = new Date(retroactiveStart.replace(/-/g, "/")).getTime();
+            var end = new Date(retroactiveEnd.replace(/-/g, "/")).getTime();
+			var period=(end-start)/(24 * 60 * 60 * 1000);
+            $(":input[name='period']").val(period);
+		}
+        $(":input[name='retroactiveStart']").change(retroactiveEvent).change();
+        $(":input[name='period']").blur(retroactiveEvent).change();
+		//默认起保日期
+		$(":input[name='startDate']").val(
+				new Date(new Date().getTime()).format("yyyy-MM-dd"));
+		$(":input[name='endDate']").val(
+				new Date(new Date().getTime() + 180 * 24 * 60 * 60 * 1000)
+						.format("yyyy-MM-dd"));
+		$(":input[name='electricPower']").blur(function() {
+		    if(this.value!=""){
+                var electricPower = parseInt(this.value);
+                var sumPremium = 0;
+                //原来的保费
+                /* if (electricPower > 0 && electricPower <= 100000) {
+                    sumPremium = 600;
+                } else if (electricPower <= 200000) {
+                    sumPremium = 800;
+                } else if (electricPower <= 800000) {
+                    sumPremium = electricPower * 0.004;
+                    sumPremium=decimal(sumPremium,2);
+                } */
+                //更新的保费
+                if (electricPower > 0 && electricPower <= 30000) {
+                    sumPremium = 500;
+                } else if (electricPower > 30000 && electricPower <= 100000) {
+                    sumPremium = 800;
+                }else if(electricPower > 100000 && electricPower <= 200000){
+                	sumPremium = 1000;
+                } else if (electricPower <= 800000) {
+                    sumPremium = electricPower * 0.005;
+                    sumPremium=decimal(sumPremium,2);
+                }
+                $(":input[name='sumPremium']").val(sumPremium);
+			}
+		}).blur();
+		//全局错误提示
+		if($("#message").val()!=""){
+			layer.alert($("#message").val(), {icon: 2});
+		}
+		var fileKey=$(":hidden[name='fileKey']").val();
+		if(fileKey!=null&&fileKey!=""){
+			$("#fileImg").attr("src", "/static/images/a7.png");
+			$("#text").text("已选择文件");
+		}
+		//初始化查看是否有交易平台流水号
+		var sequenceNo=$("input[name='sequenceNo']").val();
+		//console.log(sequenceNo);
+		if(sequenceNo!=null&&sequenceNo!=""){
+			//如果有的话，把字段改成禁用
+       		$('input').not(":input[name='insuredAddress']")
+       		.not(":input[name='imageFile']").not(":input[name='invoice.bankAccount']")
+       		.not(":input[name='invoice.buyerTaxpayerIdentifyNumber']")
+       		.not(":input[name='invoice.addressAndPhone']")
+       		.not(":input[name='invoice.invoiceTitle']")
+       		.not(":input[name='invoice.phone']")
+       		.not(":input[name='agree']")
+       		.not("#regionSel").attr("readonly",true);
+			//把选择框改成禁用
+       		$('select').attr("disabled","disabled");
+			//把行业代码的a标签改成禁用
+			$('#menuBtn').removeAttr('onclick');
+			//改input的禁用样式
+       		$('input').not(":input[name='insuredAddress']")
+       		.not(":input[name='imageFile']").not(":input[name='invoice.bankAccount']")
+       		.not(":input[name='invoice.buyerTaxpayerIdentifyNumber']")
+       		.not(":input[name='invoice.addressAndPhone']")
+       		.not(":input[name='invoice.invoiceTitle']")
+       		.not(":input[name='invoice.phone']")
+       		.not(":input[name='agree']")
+       		.not("#regionSel").css("cursor","not-allowed");
+       		//改select的禁用样式
+			$('select').css("cursor","not-allowed").css("background-color","#efefef");
+			//改input 上的td的禁用样式
+       		$('input').not(":input[name='insuredAddress']")
+			.not(":input[name='imageFile']").not(":input[name='invoice.bankAccount']")
+       		.not(":input[name='invoice.buyerTaxpayerIdentifyNumber']")
+       		.not(":input[name='invoice.addressAndPhone']")
+       		.not(":input[name='invoice.invoiceTitle']")
+       		.not(":input[name='invoice.phone']").parent().not('form').not('p').not(".fileinput-button")
+       		.css("cursor","not-allowed").css("background-color","#efefef");
+       		//改select 上的td的禁用样式
+			$('select').parent().css("cursor","not-allowed").css("background-color","#efefef");
+			//把行业代码的a标签改成禁用样式
+			$('#menuBtn').css("cursor","not-allowed");
+			$(".list").parent().css("cursor","not-allowed").css("background-color","#efefef");
+			$("#regionSel").parent().removeAttr("style");
+			//交易平台传入修改为项目编号
+			$("#xmbh").text("项目编号");
+		}
+		//初始化获取行业代码
+		getBusinesssource();
+		//初始化鼠标移入移出事件
+		$('.zhuyi_tk li').mouseover(function(e) {
+	        $(this).siblings().stop().fadeTo(500,0.2);
+	    });
+		$('.zhuyi_tk li').mouseout(function(e) {
+	        $(this).siblings().stop().fadeTo(500,1);
+	    });
+		//初始化获取项目所在区域
+		getRegion();
+		//初始化根据所属区域的code给赋值
+		ztreeRegionClick();
+	})
+	//算保费金额，保留两位小数，四舍五入
+	function decimal(num,v){
+		var vv = Math.pow(10,v);
+		return Math.round(num*vv)/vv;
+	}
+	//上传图片
+	function handleConId_photo(files){
+		var imgName = document.all.imageFile.value;
+		var ext="";
+		if(imgName==""){
+			layer.msg('请选择需要上传的文件!', {icon: 5});
+			var fileTd=$("#fileImg").parent();
+			fileTd.html('<img id="fileImg" style="width: 120px;height: 125px;margin-top: 17px;background: #fff;">');
+			$("#text").text("未选择文件");
+	        return false; 
+		}else{
+			idx = imgName.lastIndexOf(".");   
+	        if (idx != -1){   
+	            ext = imgName.substr(idx+1).toUpperCase();   
+	            ext = ext.toLowerCase( ); 
+	            if (ext != 'jpg' && ext != 'png' && ext != 'jpeg'&& ext != 'bmp'&& ext != 'zip'){
+	            	layer.msg('只能上传.jpg .png .jpeg .bmp .zip类型的文件!', {icon: 0});
+	                var file = document.getElementById('imageFile');
+	                file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
+	                file.outerHTML = file.outerHTML; //重新初始化了file的html
+	                $("#text").text("未选择文件");
+	                $("#fileImg").attr("src", "/static/images/a7.png");
+	                return false;  
+	            }   
+	        }
+	        //是否ie
+	        var isIE = /msie/i.test(navigator.userAgent) && !window.opera;  
+	        var fileSize = 0;       
+	        var filemaxsize = 1024*20*1024;//20M
+	        //获取file的大小
+	        if (isIE && !target.files){       
+	            var filePath = target.value;       
+	            var fileSystem = new ActiveXObject("Scripting.FileSystemObject");          
+	            var file = fileSystem.GetFile (filePath);       
+	            fileSize = file.Size;      
+	        } else { 
+	            fileSize = files[0].size;       
+	        }
+	        if(fileSize>filemaxsize){
+	        	layer.msg("文件大小不能超过20M！", {icon: 0});
+	        	var file = document.getElementById('imageFile');
+                file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
+                file.outerHTML = file.outerHTML; //重新初始化了file的html
+                $("#text").text("未选择文件");
+                $("#fileImg").attr("src", "/static/images/a7.png");
+                return false;  
+	        }
+	        var url = null;
+	        if (window.createObjectURL != undefined) { // basic
+	            url = window.createObjectURL(files[0]);
+	        } else if (window.URL != undefined) { // mozilla(firefox)
+	            url = window.URL.createObjectURL(files[0]);
+	        } else if (window.webkitURL != undefined) { // webkit or chrome
+	            url = window.webkitURL.createObjectURL(files[0]);
+	        }
+	        if(ext=="zip"){
+	        	$("#fileImg").attr("src", "/static/images/a7.png");
+	        }else{
+	        	$("#fileImg").attr("src", url);
+	        }
+	        $("#text").text(files[0].name);
+	        $("#text").attr("title",files[0].name);
+		}
+	}
+	function onCheck(){
+		var i=0;
+		//被保险人名称
+		var insuredName=$(":input[name='insuredName']").val();
+		if(insuredName=="" || insuredName==null){
+			$(":input[name='insuredName']").parent().find("i").text("请输入被保险人名称");
+			i++;
+		}
+		//组织机构代码
+		var insuredIdNo=$(":input[name='insuredIdNo']").val();
+		if(insuredIdNo=="" || insuredIdNo==null){
+			$(":input[name='insuredIdNo']").parent().find("i").text("请输入组织机构代码");
+			i++;
+		}
+		//社会信用代码
+		var insuredSocialcode=$(":input[name='insuredSocialcode']").val();
+		var regex =/^([0-9ABCDEFGHJKLMNPQRTUWXY]{2})([0-9]{6})([0-9ABCDEFGHJKLMNPQRTUWXY]{10})$/;
+		if(insuredSocialcode=="" || insuredSocialcode==null){
+			$(":input[name='insuredSocialcode']").parent().find("i").text("请输入社会信用代码");
+			i++;
+		}else if(!regex.test(insuredSocialcode)){
+			$(":input[name='insuredSocialcode']").parent().find("i").text("请输入正确的社会信用代码");
+			i++;
+		}
+		//联系电话
+		var insuredIdMobile=$(":input[name='insuredIdMobile']").val();
+		var phone=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+		if(insuredIdMobile=="" || insuredIdMobile==null){
+			$(":input[name='insuredIdMobile']").parent().find("i").text("请输入联系电话");
+			i++;
+		}else if(!phone.test(insuredIdMobile)){
+			$(":input[name='insuredIdMobile']").parent().find("i").text("请输入正确的联系电话");
+			i++;
+		}
+		//地址
+		/* var insuredAddress=$(":input[name='insuredAddress']").val();
+		if(insuredAddress=="" || insuredAddress==null){
+			$(":input[name='insuredAddress']").parent().find("i").text("请输入地址");
+			i++;
+		} */
+		//项目名称
+		var certificateDepart=$(":input[name='certificateDepart']").val();
+		if(certificateDepart=="" || certificateDepart==null){
+			$(":input[name='certificateDepart']").parent().find("i").text("请输入投标项目名称");
+			i++;
+		}
+		//招标文件编号
+		var certificateNo=$(":input[name='certificateNo']").val();
+		if(certificateNo=="" || certificateNo==null){
+			$(":input[name='certificateNo']").parent().find("i").text("请输入招标项目编号");
+			i++;
+		}
+		//开标日期
+		var retroactiveStart=$(":input[name='retroactiveStart']").val();
+		if(retroactiveStart=="" || retroactiveStart==null){
+			$(":input[name='retroactiveStart']").parent().find("i").text("请输入开标日期");
+			i++;
+		}
+		//保证金金额
+		var electricPower=$(":input[name='electricPower']").val();
+		if(electricPower=="" || electricPower==null){
+			$(":input[name='electricPower']").parent().find("i").text("请输入保证金金额");
+			i++;
+		}else if(600>electricPower){
+			$(":input[name='electricPower']").parent().find("i").text("保证金金额不得小于保费金额");
+			i++;
+		}
+		//影像文件
+		var imageFile=$(":input[name='imageFile']").val();
+		var fileKey=$(":hidden[name='fileKey']").val();
+		if((imageFile=="" || imageFile==null) && (fileKey==undefined || fileKey=="")){
+			$(".fileinput-button").parent().find("i").text("请上传影像文件");
+			i++;
+		}
+		//发票手机号
+		var phones=$(":input[name='invoice.phone']").val();
+		var phone=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+		if(phones=="" || phones==null){
+			$(":input[name='invoice.phone']").parent().find("i").text("请输入手机号");
+			i++;
+		}else if(!phone.test(phones)){
+			$(":input[name='invoice.phone']").parent().find("i").text("请输入正确的手机号");
+			i++;
+		}
+		//行业代码选择
+		var businesssource=$("#citySel").val();
+		if(businesssource=="" || businesssource==null){
+			$(".list").parent().find("i").text("请选择行业代码");
+			i++;
+		}
+		//资金来源
+		var fundSource=$(":input[name='fundSource']").val();
+		var word="世界银行";;
+		var allb="亚洲基础设施投资银行";
+		if(fundSource==''||fundSource==null){
+			$(":input[name='fundSource']").parent().find("i").text("请输入资金来源");
+			i++;
+		}else if(fundSource==word){
+			$(":input[name='fundSource']").parent().find("i").text("世界银行不能投保");
+			i++
+		}else if(fundSource==allb){
+			$(":input[name='fundSource']").parent().find("i").text("亚洲基础设施投资银行不能投保");
+			i++
+		}
+		//标段编号
+		/*var sectionNo=$(":input[name='sectionNo']").val();
+		if(sectionNo==''||sectionNo==null){
+			$(":input[name='sectionNo']").parent().find("i").text("请输入标段编号");
+			i++
+		}*/
+		//项目所属地
+		var regionalism=$(":input[name='regionalism']").val();
+		if(regionalism=="" || regionalism==null){
+			$(".lists").parent().find("i").text("请选择项目所在区域");
+			i++;
+		}
+		if(i>0){
+			return false;
+		}
+		//阅读并同意
+		var check=$("input[name='agree']").is(':checked');
+		if(!check){
+			layer.msg('请仔细阅读并同意《投保指南、投保须知、投保条款》', {icon: 0});
+			return false;
+		}
+		if($(".zhuyi_wrap").css("display") == "none") {
+			$(".zhuyi_wrap").show();
+			return false;
+		}
+		//提交的时候把select禁用去掉
+		$('select').removeAttr("disabled"); 
+		return true;
+	}
+	//被保险人名称
+	function getInsuredName(){
+		var insuredName=$(":input[name='insuredName']").val();
+		if(insuredName!=''&&insuredName!=null){
+			$(":input[name='insuredName']").parent().find("i").text("");
+		}
+	}
+	//组织机构代码
+	function getInsuredIdNo(){
+		var insuredIdNo=$(":input[name='insuredIdNo']").val();
+		if(insuredIdNo!=''&&insuredIdNo!=null){
+			$(":input[name='insuredIdNo']").parent().find("i").text("");
+		}
+	}
+	//社会信用代码
+	function getInsuredSocialcode(){
+		var insuredSocialcode=$(":input[name='insuredSocialcode']").val();
+		if(insuredSocialcode!=''&&insuredSocialcode!=null){
+			$(":input[name='insuredSocialcode']").parent().find("i").text("");
+		}
+	}
+	//联系电话
+	function getInsuredIdMobile(){
+		var insuredIdMobile=$(":input[name='insuredIdMobile']").val();
+		if(insuredIdMobile!=''&&insuredIdMobile!=null){
+			$(":input[name='insuredIdMobile']").parent().find("i").text("");
+		}
+	}
+	//地址
+	/* function getInsuredAddress(){
+		var insuredAddress=$(":input[name='insuredAddress']").val();
+		if(insuredAddress!=''&&insuredAddress!=null){
+			$(":input[name='insuredAddress']").parent().find("i").text("");
+		}
+	} */
+	//项目名称
+	function getCertificateDepart(){
+		var certificateDepart=$(":input[name='certificateDepart']").val();
+		if(certificateDepart!=''&&certificateDepart!=null){
+			$(":input[name='certificateDepart']").parent().find("i").text("");
+		}
+	}
+	//招标文件编号
+	function getCertificateNo(){
+		var certificateNo=$(":input[name='certificateNo']").val();
+		//平台编号
+		var sequenceNo=$("input[name='sequenceNo']").val();
+		//给标段编号赋值
+		if(sequenceNo==null||sequenceNo==""){
+			$(":input[name='sectionNo']").val(certificateNo);
+		}
+		if(certificateNo!=''&&certificateNo!=null){
+			$(":input[name='certificateNo']").parent().find("i").text("");
+		}
+	}
+	//开标日期
+	function getRetroactiveStart(){
+		var retroactiveStart=$(":input[name='retroactiveStart']").val();
+		if(retroactiveStart!=''&&retroactiveStart!=null){
+			$(":input[name='retroactiveStart']").parent().find("i").text("");
+		}
+	}
+	//保证金金额
+	function getElectricPower(){
+		var electricPower=$(":input[name='electricPower']").val();
+		if(electricPower!=''&&electricPower!=null){
+			$(":input[name='electricPower']").parent().find("i").text("");
+		}
+	}
+	//影像文件
+	function getImageFile(){
+		var imageFile=$(":input[name='imageFile']").val();
+		if(imageFile!=''&&imageFile!=null){
+			$(".fileinput-button").parent().find("i").text("");
+		}
+	}
+	//资金来源
+	function getFundSource(){
+		var fundSource=$(":input[name='fundSource']").val();
+		if(fundSource!=''&&fundSource!=null){
+			$(":input[name='fundSource']").parent().find("i").text("");
+		}
+	}
+	//标段编号
+	/*function getSectionNo(){
+		var sectionNo=$(":input[name='sectionNo']").val();
+		if(sectionNo!=''&&sectionNo!=null){
+			$(":input[name='sectionNo']").parent().find("i").text("");
+		}
+	}*/
+	//发票手机号
+	function getPhone(){
+		var phone=$(":input[name='invoice.phone']").val();
+		if(phone!=''&&phone!=null){
+			$(":input[name='invoice.phone']").parent().find("i").text("");
+		}
+	}
+	//行业分类树
+	var setting = {
+	    data: {
+		    simpleData: {
+		        enable: true
+		    }
+	    },
+	    callback: {
+			beforeClick: beforeClick,
+			onClick: onClick,
+			beforeExpand:beforeExpand
+		}
+	};
+	//获取行业代码
+	function getBusinesssource(){
+		 $.ajax({
+		        type:"get",
+		        url:manageUrl+"/homeController/selectIndustryType",
+		        data: {},
+		        dataType:"json",
+		        success:function(dataObj){
+		        	if(dataObj.code==200){
+		        		var businesssourceList=dataObj.data;
+		        		//加载ztree
+		        		$.fn.zTree.init($("#tree"), setting, businesssourceList);
+		        		//初始化给ztree赋值
+		        		ztreeClick();
+		        	}
+		        }
+		 })
+		
+	}
+	function beforeClick(treeId, treeNode) {
+		var check = (treeNode && !treeNode.isParent);
+		if (!check){
+			return false;
+		}
+		return check;
+	}
+	//节点展开前（左侧菜单树）
+	function beforeExpand(treeId, treeNode){
+	    singlePath(treeNode);
+	}
+	//保持展开单一节点
+	function singlePath(currNode) {
+	    var cLevel = currNode.level;
+	    //这里假设id是唯一的
+	    var cId = currNode.id;
+	    //此对象可以保存起来，没有必要每次查找
+	    var treeObj = $.fn.zTree.getZTreeObj('tree');
+	    //展开的所有节点，这是从父节点开始查找（也可以全文查找）
+	    var expandedNodes = treeObj.getNodesByParam("open", true, currNode.getParentNode());
+	    for(var i = expandedNodes.length - 1; i >= 0; i--){
+	        var node = expandedNodes[i];
+	        var level = node.level;
+	        var id = node.id;
+	        if (cId != id && level == cLevel) {
+	            treeObj.expandNode(node, false);
+	        }
+	    }
+	}
+	function onClick(e, treeId, treeNode) {
+		var zTree = $.fn.zTree.getZTreeObj("tree"),
+		nodes = zTree.getSelectedNodes(),
+		v = "";
+		code=""
+		nodes.sort(function compare(a,b){return a.id-b.id;});
+		for (var i=0, l=nodes.length; i<l; i++) {
+			v += nodes[i].name + ",";
+			code+=nodes[i].code+","
+		}
+		if (v.length > 0 ) v = v.substring(0, v.length-1);
+		if (code.length > 0 ) code = code.substring(0, code.length-1);
+		var cityObj = $("#citySel");
+		cityObj.attr("value", v);
+		//给businesssource赋code值
+		$("input[name='businesssource']").attr("value",code);
+		//把行业代码提醒消息去掉
+		$(".list").parent().find("i").text("");
+		//关闭
+		hideMenu();
+	}
+	
+	function showMenu() {
+		var cityObj = $("#citySel");
+		var cityOffset = $("#citySel").offset();
+		$("#menuContent").css({left:cityOffset.left + "px"}).slideDown("fast");
+		$("body").bind("mousedown", onBodyDown);
+	}
+	function hideMenu() {
+		$("#menuContent").fadeOut("fast");
+		$("body").unbind("mousedown", onBodyDown);
+	}
+	function onBodyDown(event) {
+		if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+			hideMenu();
+		}
+	}
+	function ztreeClick(){
+		//var treeCode = "A010152";
+		var treeCode = $("input[name='businesssource']").val();
+		if(treeCode.trim()!=""){
+	       	var tree = $.fn.zTree.getZTreeObj("tree");
+	        var strs = treeCode.split(",");
+	        for(var j=0;j<strs.length;j++){
+	            var node = tree.getNodeByParam("code",strs[j]);
+	            tree.selectNode(node , true,true); 
+	            var cityObj = $("#citySel");
+	    		cityObj.attr("value", node.name);
+	        }
+		 }
+	}
+	function submits(){
+		$('.btnSubClass').show();
+		$('#btnSub').hide();
+		$("form").submit();
+	}
+	//项目所在区域的树
+	var settings = {
+	    data: {
+		    simpleData: {
+		        enable: true
+		    }
+	    },
+	    callback: {
+			beforeClick: beforeClick,
+			onClick: onRegionClick,
+			onExpand:onRegionExpand,
+			beforeExpand:beforeRegionExpand
+		}
+	};
+	//获取项目所在区域
+	function getRegion(){
+		 $.ajax({
+		        type:"get",
+		        url:manageUrl+"/homeController/selecFirsttList",
+		        data: {code:"CITY"},
+		        dataType:"json",
+		        success:function(dataObj){
+		        	if(dataObj.code==200){
+		        		var region = dataObj.data;
+		        		//加载ztree
+		        		$.fn.zTree.init($("#regionTree"), settings, region);
+		        	}
+		        }
+		 })
+	}
+	//点击显示树
+	function showRegion() {
+		var cityObj = $("#regionSel");
+		var cityOffset = $("#regionSel").offset();
+		$("#regionContent").css({left:cityOffset.left + "px"}).slideDown("fast");
+		$("body").bind("mousedown", onBodyDownRegion);
+	}
+	//展开事件
+	function onRegionExpand(e, treeId, treeNode) {
+		var param = {'id':treeNode.id};
+		var zTree = $.fn.zTree.getZTreeObj("regionTree");
+		var parentZNode = zTree.getNodeByParam("id", treeNode.id, null);//获取指定父节点
+		var childNodes = zTree.transformToArray(treeNode);//获取子节点集合
+	    //因为子节点还包括组织，所以这里需要筛选一下
+	    var key = false;
+	    for(var i in childNodes){
+	        if(childNodes[i].udn){//如果当前组织有终端 就不再加载
+	            key = true;
+	            break;
+	        }                  
+	    }
+	    if(!key){
+	    	$.ajax({
+            method:'post',
+            url:manageUrl+'/homeController/childrenList',
+            data:param,
+            success:function(res){
+            	if(res.code==200){
+            		//添加子节点
+            		if(res.data.length>0){
+            			var data = res.data;
+		        		for(var i in data){
+		                    var code = (data[i].code).substring((data[i].code).length - 7);                  
+		                    code = Number(code);
+		                    data[i].id = Number(data[i].id);
+		                    data[i].pId = code;
+		                }
+		        		zTree.addNodes(parentZNode,data, false);    //添加节点 
+            		}
+	        	}
+            }
+        })
+	}
+}
+	//点击事件
+	function onRegionClick(){
+		var zTree = $.fn.zTree.getZTreeObj("regionTree"),
+		nodes = zTree.getSelectedNodes(),
+		v = "";
+		code=""
+		nodes.sort(function compare(a,b){return a.id-b.id;});
+		for (var i=0, l=nodes.length; i<l; i++) {
+			v += nodes[i].name + ",";
+			code+=nodes[i].code+","
+		}
+		if (v.length > 0 ) v = v.substring(0, v.length-1);
+		if (code.length > 0 ) code = code.substring(0, code.length-1);
+		var cityObj = $("#regionSel");
+		cityObj.attr("value", v);
+		//给regionalism赋code值
+		$("input[name='regionalism']").attr("value",code);
+		//把提醒消息去掉
+		$(".lists").parent().find("i").text("");
+		//关闭
+		hideRegion();
+	}
+	function hideRegion() {
+		$("#regionContent").fadeOut("fast");
+		$("body").unbind("mousedown", onBodyDownRegion);
+	}
+	function onBodyDownRegion(event) {
+		if (!(event.target.id == "regionBtn" || event.target.id == "regionContent" || $(event.target).parents("#regionContent").length>0)) {
+			hideRegion();
+		}
+	}
+	//节点展开前（左侧菜单树）
+	function beforeRegionExpand(treeId, treeNode){
+	    singleRegionPath(treeNode);
+	}
+	//保持展开单一节点
+	function singleRegionPath(currNode) {
+	    var cLevel = currNode.level;
+	    //这里假设id是唯一的
+	    var cId = currNode.id;
+	    //此对象可以保存起来，没有必要每次查找
+	    var treeObj = $.fn.zTree.getZTreeObj('regionTree');
+	    //展开的所有节点，这是从父节点开始查找（也可以全文查找）
+	    var expandedNodes = treeObj.getNodesByParam("open", true, currNode.getParentNode());
+	    for(var i = expandedNodes.length - 1; i >= 0; i--){
+	        var node = expandedNodes[i];
+	        var level = node.level;
+	        var id = node.id;
+	        if (cId != id && level == cLevel) {
+	            treeObj.expandNode(node, false);
+	        }
+	    }
+	}
+	function ztreeRegionClick(){
+		var treeCode = $("input[name='regionalism']").val();
+		if(treeCode!=null && treeCode.trim()!=""){
+			$.ajax({
+	            method:'post',
+	            url:manageUrl+'/homeController/selectByCode',
+	            data:{"code":treeCode},
+	            success:function(res){
+	            	if(res.code==200){
+	            		$("#regionSel").attr("value", res.data.name);
+		        	}
+	            }
+	        })
+		 }
+	}
+	
