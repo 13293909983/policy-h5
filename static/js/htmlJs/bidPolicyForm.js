@@ -102,6 +102,7 @@
 		}
 		//初始化查看是否有交易平台流水号
 		var sequenceNo=$("input[name='sequenceNo']").val();
+		var sequenceNo=1;
 		//console.log(sequenceNo);
 		if(sequenceNo!=null&&sequenceNo!=""){
 			//如果有的话，把字段改成禁用
@@ -142,6 +143,7 @@
 			$('#menuBtn').css("cursor","not-allowed");
 			$(".list").parent().css("cursor","not-allowed").css("background-color","#efefef");
 			$("#regionSel").parent().removeAttr("style");
+			$("#regionSel").parents('tr').removeAttr("style");
 			//交易平台传入修改为项目编号
 			$("#xmbh").text("项目编号");
 		}
