@@ -102,7 +102,6 @@
 		}
 		//初始化查看是否有交易平台流水号
 		var sequenceNo=$("input[name='sequenceNo']").val();
-		var sequenceNo=1;
 		//console.log(sequenceNo);
 		if(sequenceNo!=null&&sequenceNo!=""){
 			//如果有的话，把字段改成禁用
