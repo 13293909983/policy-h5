@@ -57,7 +57,7 @@
 				<td>
 					<span class="input-text" th:text="${bidPolicy.certificateDepart}"></span>
 				</td>
-				<td>招标文件编号</td>
+				<td>文件编号</td>
 				<td>
 					<span class="input-text" th:text="${bidPolicy.certificateNo}"></span>
 				</td>
@@ -67,9 +67,14 @@
 				<td>
 					<span class="input-text" th:text="${#objects.nullSafe(bidPolicy.fundSource,'-')}"></span>
 				</td>
-				<td>标段编号</td>
+				<!-- <td>标段编号</td>
 				<td>
 					<span class="input-text" th:text="${#objects.nullSafe(bidPolicy.sectionNo,'-')}"></span>
+				</td> -->
+				<td>项目所在区域</td>
+				<td >
+					<input type="hidden" id="hiddenRegionalism" th:value="${bidPolicy.regionalism}">
+					<span class="input-text" id="regionalism"></span>
 				</td>
 			</tr>
 			<tr>
@@ -95,6 +100,7 @@
 					<span class="input-text" id="businesssource"></span>
 				</td>
 			</tr>
+			
 			<tr>
 				<td>保证金金额/元</td>
 				<td>
@@ -105,7 +111,7 @@
 					<span type="input-text" class="input-text" th:text="${bidPolicy.sumPremium}"></span>
 				</td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td>起保日期</td>
 				<td>
 					<span type="input-text" class="input-text" th:text="${#dates.format(bidPolicy.startDate,'yyyy-MM-dd')}"></span>
@@ -114,7 +120,7 @@
 				<td>
 					<span type="input-text" class="input-text" th:text="${#dates.format(bidPolicy.endDate,'yyyy-MM-dd')}"></span>
 				</td>
-			</tr>
+			</tr> -->
 			<tr>
 			<tbody th:if="${invoice!=null}">
 				<tr>
@@ -157,16 +163,30 @@ function getBusinesssource(){
 	var code=$("#hiddenBusiness").val();
 	 $.ajax({
 	        type:"get",
-	        url:manageUrl+"/homeController/selectByCode",
+	        url:manageUrl+"/homeController/getNameStrByCode",
 	        data: {code:code},
 	        dataType:"json",
 	        success:function(dataObj){
 	        	if(dataObj.code==200){
-	        		var businesssource=dataObj.data;
-	        		$("#businesssource").text(businesssource.name);
+	        		$("#businesssource").text(dataObj.data);
 	        	}
 	        }
 	 })
+	 var regionalism=$("#hiddenRegionalism").val();
+	 if(regionalism!=null && regionalism!=""){
+		 $.ajax({
+		        type:"get",
+		        url:manageUrl+"/homeController/getNameStrByCode",
+		        data: {code:regionalism},
+		        dataType:"json",
+		        success:function(dataObj){
+		        	if(dataObj.code==200){
+		        		$("#regionalism").text(dataObj.data);
+		        	}
+		        }
+		 })
+	 }
+	 
 }
 function myOrder(){
 	window.location.href="/order.html";

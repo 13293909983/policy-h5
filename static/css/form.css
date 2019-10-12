@@ -276,7 +276,8 @@ background: #e5e5e5;
 }
 
 .xqddtables tr th {
-	background: #e5e5e5
+	background: #e5e5e5;
+	width:2rem;
 }
 
 .xqddtables tr td {

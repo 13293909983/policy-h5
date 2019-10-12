@@ -602,6 +602,8 @@
 		        		var region = dataObj.data;
 		        		//加载ztree
 		        		$.fn.zTree.init($("#regionTree"), settings, region);
+		        		//默认展开山西省
+		        		getOpen();
 		        	}
 		        }
 		 })
@@ -612,6 +614,8 @@
 		var cityOffset = $("#regionSel").offset();
 		$("#regionContent").css({left:cityOffset.left + "px"}).slideDown("fast");
 		$("body").bind("mousedown", onBodyDownRegion);
+		//给默认定位到山西
+		document.getElementById('regionTree').scrollTop=150;
 	}
 	//展开事件
 	function onRegionExpand(e, treeId, treeNode) {
@@ -703,6 +707,7 @@
 	        }
 	    }
 	}
+	//给传过来的值 赋值
 	function ztreeRegionClick(){
 		var treeCode = $("input[name='regionalism']").val();
 		if(treeCode!=null && treeCode.trim()!=""){
@@ -717,5 +722,12 @@
 	            }
 	        })
 		 }
+	}
+	//默认展开山西省
+	function getOpen(){
+         var treeObj = $.fn.zTree.getZTreeObj("regionTree");  //得到该tree
+         var node = treeObj.getNodeByParam("code", "140000", null); //选中山西
+         var event=window.event || arguments.callee.caller.arguments[0];
+         onRegionExpand(event,'regionTree',node);
 	}
 	

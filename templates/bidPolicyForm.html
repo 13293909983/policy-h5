@@ -137,9 +137,9 @@
 		 display: block;
 		}
 		.btnSubClass{
-		    background: #999999;
-		    border-bottom: 0.03rem solid #999999;
-		    cursor: not-allowed;
+		    background: #999999 !important;
+		    border-bottom: 0.03rem solid #999999 !important;
+		    cursor: not-allowed !important;
 		}
 		</style>
 	</head>
@@ -225,7 +225,7 @@
 						<ul class="lists">
 							<li class="title">
 								<input id="regionSel" class="input-text"  type="text" placeholder="项目所在区域" autocomplete="off" readonly="readonly"/>
-								<input type="hidden" name="regionalism"/><!-- th:value="${bidPolicy.regionalism}" -->
+								<input type="hidden" name="regionalism" th:value="${bidPolicy.regionalism}"/>
 								&nbsp;<a id="regionBtn" onclick="showRegion(); return false;" style="background: url(/static/images/sanjiao.png) no-repeat right center;">&nbsp;&nbsp;&nbsp;</a>
 							</li>
 						</ul>
