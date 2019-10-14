@@ -1,5 +1,5 @@
 function DragImgUpload(id,options){this.me=$(id);var defaultOpt={boxWidth:'140px',boxHeight:'140px'}
-this.preview=$('<div id="preview"><img src="images/upload.png" class="img-responsive"  style="width: 100%;height: 100%;" alt="" title=""> </div>');this.opts=$.extend(true,defaultOpt,{},options);this.init();this.callback=this.opts.callback;}
+this.preview=$('<div id="preview"><img src="/static/images/upload.png" class="img-responsive"  style="width: 100%;height: 100%;" alt="" title=""> </div>');this.opts=$.extend(true,defaultOpt,{},options);this.init();this.callback=this.opts.callback;}
 DragImgUpload.prototype={init:function(){this.me.append(this.preview);this.me.append(this.fileupload);this.cssInit();this.eventClickInit();},cssInit:function(){this.me.css({'width':this.opts.boxWidth,'height':this.opts.boxHeight,'border':'1px solid #cccccc','padding':'5px','cursor':'pointer'})
 this.preview.css({'height':'100%','overflow':'hidden'})},onDragover:function(e){e.stopPropagation();e.preventDefault();e.dataTransfer.dropEffect='copy';},onDrop:function(e){var self=this;e.stopPropagation();e.preventDefault();var fileList=e.dataTransfer.files;if(fileList.length==0){return false;}
 if(fileList[0].type.indexOf('image')===-1){alert("您拖的不是图片！");return false;}
