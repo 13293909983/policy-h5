@@ -1,138 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>电子保函服务平台</title>
-		<link rel="stylesheet" href="/static/css/common.css" />
-		<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-		<link rel="stylesheet" href="/static/css/index.css" />
-        <link rel="stylesheet" href="/static/css/about.css" />
-		<script src="/static/js/jquery-1.9.1.min.js" type="text/javascript"></script>
-		<script src="/static/js/index.js" type="text/javascript"></script>
-<script type="text/javascript" src="/static/js/paging.js" ></script>
-	</head>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>电子保函服务平台</title>
+<link rel="stylesheet" href="/static/css/common.css" />
+<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+<link rel="stylesheet" href="/static/css/index.css" />
+<link rel="stylesheet" href="/static/css/about.css" />
+<script src="/static/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/static/js/index.js" type="text/javascript"></script>
+<script type="text/javascript" src="/static/js/paging.js"></script>
+</head>
+<style>
+#companyName {
+	width: 8rem;
+	overflow: hidden;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 0.2rem;
+}
+
+#companyName .prev {
+	display: none;
+	position: absolute;
+	top: 0;
+	/* width: 0.59rem; */
+	width: 0.2rem;
+	height: 88%;
+	box-shadow: 0 0 3px #c6c6c7;
+	background: #fff;
+	text-align: center;
+	font-size: 0;
+	left: 0;
+	border-right: 1px solid #e1e3e6;
+}
+
+#companyName .prev span {
+	display: inline-block;
+	vertical-align: middle;
+	width: 0.09rem;
+	height: 1rem;
+	background-repeat: no-repeat;
+	background-image: url(/static/images/arrow.svg);
+	background-position: 96.77% 25%;
+	background-size: initial;
+}
+
+#companyName .next span {
+	display: inline-block;
+	vertical-align: middle;
+	width: 0.09rem;
+	height: 1rem;
+	background-repeat: no-repeat;
+	background-image: url(../images/arrow.svg);
+	background-position: 61.29% 25%;
+	background-size: initial;
+}
+
+#companyName .next {
+	position: absolute;
+	top: 0;
+	width: 0.2rem;
+	height: 88%;
+	box-shadow: 0 0 0.03rem #c6c6c7;
+	background: #fff;
+	text-align: center;
+	font-size: 0;
+	right: 0;
+	border-left: 1px solid #e1e3e6;
+}
+</style>
 <body>
-<header></header>
-<div class="body_mian">
-	<div class="title_wrap">
-		<div class="title_nav">
-			<h3>关于我们</h3><img src="/static/images/xz.png" />
+	<header></header>
+	<div class="body_mian">
+		<div class="title_wrap">
+			<div class="title_nav">
+				<h3>关于我们</h3>
+				<img src="/static/images/xz.png" />
+			</div>
+			<div class="about_wrap">
+				<div class="about_wrapleft">
+					<ul>
+						<li class="about_wrapleftli about_wrapleftliatv">公司介绍</li>
+						<li class="about_wrapleftli">平台相关</li>
+						<li class="about_wrapleftli">帮助中心</li>
+					</ul>
+				</div>
+				<div class="about_wrapright">
+					<div class="about_right about_rightnow">
+						<div id="companyName">
+							<ul>
+								<li class="about_rightli about_rightliatv">中国人保财险</li>
+								<li class="about_rightli">太平洋保险</li>
+								<li class="about_rightli">中华联合财产保险</li>
+								<li class="about_rightli">中国大地财产保险</li>
+							</ul>
+						</div>
+						<div class="about_rightimg about_rightimgnow">
+							<img src="/static/images/about04.png" />
+						</div>
+						<div class="about_rightimg">
+							<img src="/static/images/about03.png" />
+						</div>
+						<div class="about_rightimg">
+							<img src="/static/images/about02.png" />
+						</div>
+						<div class="about_rightimg">
+							<img src="/static/images/about01.png" />
+						</div>
+					</div>
+					<div class="about_right">
+						<ul>
+							<li class="about_rightli about_rightliatv">平台介绍</li>
+							<li class="about_rightli">平台理念</li>
+							<li class="about_rightli">平台优势</li>
+							<li class="about_rightli">核心价值</li>
+
+						</ul>
+						<div class="about_righttext about_righttextnow">
+							<p>投保保函在线办理平台通过互联网手段对出具的投标保函进行全程电子化管理，可为全国各地投标企业提供安全、高效、便捷的投标保函办理服务。</p>
+						</div>
+						<div class="about_righttext">
+							<p>以“方便快捷、成熟稳定、安全可靠、 弹性高效、简单易用”为平台服务理念， 充分利用“互联网+”技术，
+								提高服务质量和效率；通过保险+服务+科技，实现跨界与融合，推动建筑产业提质增效，形成保险业与建筑产业的和谐发展。</p>
+						</div>
+						<div class="about_righttext">
+							<div class="about_righttextbg">
+								<img src="/static/images/ptys.png" />
+							</div>
+							<div class="about_righttextys">
+								<p>
+									办理过程简洁<br /> 全程追索、流程简便<br /> 操作简单
+								</p>
+							</div>
+							<div class="about_righttextzw">
+								<p>
+									支持在线验签，实时反馈保函<br />有效时间，进行真伪判断
+								</p>
+							</div>
+							<div class="about_righttextaq">
+								<p>
+									交易过程安全：应用SSL、CA认证、<br /> 硬件防火墙等多种技术手段，采取最<br />
+									严格的安全策略确保数据及时、准确
+								</p>
+							</div>
+							<div class="about_righttextsd">
+								<p>节约时间成本</p>
+							</div>
+						</div>
+						<div class="about_righttext">
+							<p>为公共资源交易中心提供投标履约保证保险（以下简称投标保函）产品服务支持，其价格合理、使用方便、内容真实、有过程轨迹追溯，
+								与企业间形成保函监管整个招投标全过程的信用体系；其次保函管理平台中，具有验真、存档、查询等功能，
+								对增强投标企业风控管理有很大帮助。</p>
+						</div>
+					</div>
+					<div class="about_right">
+						<ul>
+							<li class="about_rightli about_rightliatv">帮助中心</li>
+
+
+						</ul>
+						<div class="about_rightimg about_rightimgnow">
+							<div class="about_righttxt">
+								<p>
+									<b>Q:</b>"保证保险"是否具有效力？
+								</p>
+								<p>
+									<b>A:</b>建设工程保证保险保单与保证金、银行保函、担保公司保函等具有同等效力。
+								</p>
+								<br />
+								<p>
+									<b>Q:</b>投标保证保险提交材料后，出具保单需要多久时间？（投标常见问题）
+								</p>
+								<p>
+									<b>A:</b>在收到投保人相关材料后，于1个小时内决定是否承保并出具保函。
+								</p>
+								<br />
+								<p>
+									<b>Q:</b>履约保证保险提交材料后，出具保单需要多久时间？（履约常见问题）
+								</p>
+								<p>
+									<b>A:</b>在收到投保人相关材料后，于3~5个工作日内决定是否承保并出具保函
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-    <div class="about_wrap">
-    	<div class="about_wrapleft">
-    		<ul>
-    			<li class="about_wrapleftli about_wrapleftliatv">公司介绍</li>
-    			<li class="about_wrapleftli">平台相关</li>
-    			<li class="about_wrapleftli">帮助中心</li>
-    		</ul>
-    	</div>
-    	<div class="about_wrapright">
-    	      <div class="about_right about_rightnow">
-    	      	<ul>
-    			<li  class="about_rightli about_rightliatv">中国人保财险</li>
-    			<li   class="about_rightli">太平洋保险</li>
-    			<li   class="about_rightli">中华联合财产保险</li>
-    			<li   class="about_rightli">中国大地财产保险</li>
-    			
-    		</ul>
-    		<div class="about_rightimg about_rightimgnow">
-    			<img src="/static/images/about04.png" />
-    		</div>
-    		<div class="about_rightimg">
-    			<img src="/static/images/about03.png" />
-    		</div>
-    		<div class="about_rightimg">
-    			<img src="/static/images/about02.png" />
-    		</div>
-    		<div class="about_rightimg">
-    			<img src="/static/images/about01.png" />
-    		</div>
-    	      </div>
- <div class="about_right">
-	<ul>
-		<li class="about_rightli about_rightliatv">平台介绍</li>
-		<li class="about_rightli">平台理念</li>
-		<li class="about_rightli">平台优势</li>
-		<li class="about_rightli">核心价值</li>
 
-	</ul>
-	<div class="about_righttext about_righttextnow">
-        <p>投保保函在线办理平台通过互联网手段对出具的投标保函进行全程电子化管理，可为全国各地投标企业提供安全、高效、便捷的投标保函办理服务。</p>
 	</div>
-	<div class="about_righttext">
-        <p>以“方便快捷、成熟稳定、安全可靠、 弹性高效、简单易用”为平台服务理念， 充分利用“互联网+”技术，
-        提高服务质量和效率；通过保险+服务+科技，实现跨界与融合，推动建筑产业提质增效，形成保险业与建筑产业的和谐发展。</p>
-	</div>
-	<div class="about_righttext">
-       <div class="about_righttextbg">
-       	<img src="/static/images/ptys.png" />
-       </div> 
-       <div class="about_righttextys">
-       	<p>办理过程简洁<br />
-全程追索、流程简便<br />
-操作简单</p>
-       </div> 
-       <div class="about_righttextzw">
-       	<p>支持在线验签，实时反馈保函<br />有效时间，进行真伪判断</p>
-       </div> 
-       <div class="about_righttextaq">
-       	<p>交易过程安全：应用SSL、CA认证、<br />
-硬件防火墙等多种技术手段，采取最<br />
-严格的安全策略确保数据及时、准确</p>
-       </div> 
-       <div class="about_righttextsd">
-       	<p>节约时间成本</p>
-       </div> 
-	</div>
-	<div class="about_righttext">
-        <p>为公共资源交易中心提供投标履约保证保险（以下简称投标保函）产品服务支持，其价格合理、使用方便、内容真实、有过程轨迹追溯，
-        与企业间形成保函监管整个招投标全过程的信用体系；其次保函管理平台中，具有验真、存档、查询等功能， 
-        对增强投标企业风控管理有很大帮助。</p>
-	</div>
-</div>
- <div class="about_right">
-	<ul>
-		<li class="about_rightli about_rightliatv">帮助中心</li>
 
-
-	</ul>
-	<div class="about_rightimg about_rightimgnow">
-		<div class="about_righttxt">
-		<p><b>Q:</b>"保证保险"是否具有效力？</p>
-		<p><b>A:</b>建设工程保证保险保单与保证金、银行保函、担保公司保函等具有同等效力。</p>
-		<br />
-			<p><b>Q:</b>投标保证保险提交材料后，出具保单需要多久时间？（投标常见问题）</p>
-		<p><b>A:</b>在收到投保人相关材料后，于1个小时内决定是否承保并出具保函。</p>
-			<br />
-			<p><b>Q:</b>履约保证保险提交材料后，出具保单需要多久时间？（履约常见问题）</p>
-		<p><b>A:</b>在收到投保人相关材料后，于3~5个工作日内决定是否承保并出具保函</p>
-		</div>
-	</div>
-</div>
-    	</div>
-    </div>
-	</div>
-	
-</div>
-
-<footer></footer>
-<div class="fixed"></div>
+	<footer></footer>
+	<div class="fixed"></div>
 </body>
 <script src="/static/js/bootstrap.js" type="text/javascript"></script>
+<script type="text/javascript" src="/static/js/url.js"></script>
+<script type="text/javascript">
+	$(function() {
+		//初始化获取
+		company();
+		help();
+	})
+	function company() {
+		$.ajax({
+			type : "get",
+			url : manageUrl+"/homeController/selectCompany",
+			data:{"isShow":"1"},
+			dataType : "json",
+			success : function(dataObj) {
+				if (dataObj != null) {
+					var data = dataObj.data;
+					$('#companyName ul').html('');
+					$('#companyName').next().remove();
+					var num = data.length;
+					var str = '';
+					var strs = "";
+					if (num > 0) {
+						$.each(data,function(index, val) {
+							console.log(manageUrl+val.cover);
+							if (index == 0) {
+								str += '<li class="about_rightli about_rightliatv">'
+										+ val.name
+										+ '</li>';
+								strs += '<div class="about_rightimg about_rightimgnow">';
+
+							} else {
+								str += '<li class="about_rightli">'
+										+ val.name
+										+ '</li>';
+								strs += '<div class="about_rightimg">';
+							}
+							strs += '<img src="'+manageUrl+val.cover+'"/>';
+							strs += val.content;
+							strs += '</div>';
+
+						})
+					} else {
+						str += '<div style="line-height: 250px;text-align: center;font-size: 16px;color: #787675">';
+						str += '暂无公司介绍';
+						str += '</div>';
+					}
+					$('#companyName ul').append(str);
+					$('#companyName').after(strs);
+					$(".about_rightli").click(function() {
+						$(this).addClass("about_rightliatv").siblings().removeClass("about_rightliatv");
+						$(".about_rightimg").eq($(this).index()).addClass("about_rightimgnow").siblings().removeClass("about_rightimgnow");
+						$(".about_righttext").eq($(this).index()).addClass("about_righttextnow").siblings().removeClass("about_righttextnow");
+					})
+					//按钮箭头
+					var companyWidth=$("#companyName").width();
+					var catew = $('#companyName ul').width() - 150;
+					var cateLiw = 0;
+					$('#companyName li').each(function(index) {
+						//算li的总宽度
+						cateLiw += $(this).outerWidth();
+					})
+					//判断总长度够不够四个的长度
+					if(cateLiw/companyWidth>1){
+						var ss = "<a href='javascript:;' class='prev'><span></span></a><a href='javascript:;' class='next'><span></span></a>";
+						$("#companyName").append(ss);
+					}
+					var i = 0;
+					$('.next').click(function() {
+						if ((catew + 150) * i+ (catew + 150) >= cateLiw && parseInt(cateLiw/companyWidth)==1) {
+							$('#companyName ul').animate({
+								"margin-left" : -companyWidth/2/100 + 'rem'
+							}, 500)
+							i++;
+							$('.prev').show();
+							$('.next').hide();
+						} 
+					})
+					$('.prev').click(function() {
+						$('#companyName ul').animate({
+							"margin-left" : 0 + 'px'
+						}, 500)
+						$(this).hide();
+						$('.next').show();
+					})
+				}
+			}
+		})
+	}
+	function help() {
+		$.ajax({
+			type : "get",
+			url : manageUrl+"/homeController/selectHelp",
+			dataType : "json",
+			success : function(dataObj) {
+				if (dataObj != null) {
+					var data = dataObj.data;
+					$('.about_righttxt').html('');
+					var num = data.length;
+					var str = '';
+					if (num > 0) {
+						$.each(data, function(index, val) {
+							var answer = val.answer;
+							answer = answer.slice(0, 3) + '<b>A:</b>'
+									+ answer.slice(3);
+							str += '<p><b>Q:</b>' + val.question
+									+ '</p>';
+							str += '<p>' + answer + '</p>';
+							str += '<br/>';
+						})
+					} else {
+						str += '<div style="line-height: 250px;text-align: center;font-size: 16px;color: #787675">';
+						str += '暂帮助中心';
+						str += '</div>';
+					}
+					$('.about_righttxt').append(str);
+				}
+			}
+		})
+	}
+</script>
 <script>
-	  $(".about_wrapleftli").click(function() {
-    	$(this).addClass("about_wrapleftliatv").siblings().removeClass("about_wrapleftliatv");
-    	$(".about_right").eq($(this).index()).addClass("about_rightnow").siblings().removeClass("about_rightnow");
-    })
-	  $(".about_rightli").click(function() {
-    	$(this).addClass("about_rightliatv").siblings().removeClass("about_rightliatv");
-    	$(".about_rightimg").eq($(this).index()).addClass("about_rightimgnow").siblings().removeClass("about_rightimgnow");
-    	$(".about_righttext").eq($(this).index()).addClass("about_righttextnow").siblings().removeClass("about_righttextnow");
-    })
-
-
+	$(".about_wrapleftli").click(function() {
+		$(this).addClass("about_wrapleftliatv").siblings().removeClass("about_wrapleftliatv");
+		$(".about_right").eq($(this).index()).addClass("about_rightnow").siblings().removeClass("about_rightnow");
+	})
+	$(".about_rightli").click(function() {
+		$(this).addClass("about_rightliatv").siblings().removeClass("about_rightliatv");
+		$(".about_rightimg").eq($(this).index()).addClass("about_rightimgnow").siblings().removeClass("about_rightimgnow");
+		$(".about_righttext").eq($(this).index()).addClass("about_righttextnow").siblings().removeClass("about_righttextnow");
+	})
 </script>
 </html>

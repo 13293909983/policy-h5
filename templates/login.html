@@ -38,7 +38,6 @@
 					<div id="captcha"></div></div>
 				</div>
 				<div class="login_but">
-	
 					<input type="button" class="but" value="登录" name="">
 					<div th:if="${message!=null}" class="message">
 						<i th:text="${message}"></i>
@@ -64,9 +63,17 @@
   })
 
   $(".but").click(function (){
-    if($('.container').css("display")=="none"){
-        $('.container').show();
-    }
+	$(this).next().remove();
+	var username=$("input[name='username']").val();
+	var password=$("input[name='password']").val();
+	if(username!="" && password!=""){
+		if($('.container').css("display")=="none"){
+	        $('.container').show();
+	    }
+	}else{
+		$(this).after('<div class="message"><i>请输入用户名和密码</i></div>');
+	}
+    
 });
 </script>
 </html>

@@ -11,6 +11,8 @@
 }
 .about_rightnow{
 	display: block !important;
+	width: 8rem;
+    overflow: hidden;
 }
 .about_wrapleft ul{
 	width: 2rem;
@@ -33,9 +35,10 @@ font-weight: bold;
 }
 .about_right ul{
 	height:0.7rem;
+	width: 20rem;
 }
 .about_right ul li{
-	width: 2rem;
+	min-width: 2rem;
 	float: left;
 	padding: 0.2rem 0.3rem;
 	font-size: 0.16rem;
@@ -50,6 +53,13 @@ font-weight: bold;
 .about_rightimg{
 	display: none;
 	text-align: center;
+	width: 8rem;
+	padding-bottom:0.5rem ;
+}
+.about_rightimg p{
+	font-size: 0.16rem;
+	text-align: left;
+	line-height: 2em;
 }
 .about_rightimg img{
 	padding: 0.3rem;
@@ -78,6 +88,7 @@ font-weight: bold;
 	display: none;
 	width: 8rem;
     position: relative;
+    height: 5rem;
 }
 .about_righttext p{
 	text-indent: 2em;
@@ -92,9 +103,8 @@ font-weight: bold;
 	width: 3rem;
 	height: 3rem;
 	position: absolute;
-	top:50%;
 	left: 50%;
-	    margin-top: 0.5rem;
+	margin-top: 0.5rem;
     margin-left: -1.5rem;
 
 }
