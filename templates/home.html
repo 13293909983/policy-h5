@@ -108,10 +108,9 @@
                 validateCount:0
 			}
 		},
-		created(){
-            this.$http.get("/api/policy/statistics").then((response)=>{
+		created:function(){
+          this.$http.get("/api/policy/statistics").then(function(response){
 				if(response.body.success){
-				    console.log();
 					this.statistics=response.body.data;
 				}
 			});
