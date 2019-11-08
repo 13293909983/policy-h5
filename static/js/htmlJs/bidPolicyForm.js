@@ -231,9 +231,8 @@
 	    	oReq.onload = function (oEvent) {
 	    		//console.log(oEvent);
 	    		//alert(this.response)
-	    		var data=this.response;
+	    		var data =eval('('+this.response+')');
 	    		//如果成功则赋值
-	    		console.log(data);
 	    		if(data.code=="200"){
 	    			var fileKey=data.message.key;
 	    			console.log(fileKey);
