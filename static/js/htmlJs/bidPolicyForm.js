@@ -226,7 +226,7 @@
 	    	oReq.open("POST", 'http://www.sxdeliw.com/ecooperation/lshInsure/picinsure.do',true);
 	    	oReq.withCredentials = true;
 	    	oReq.upload.onprogress = function(event){
-	    		console.log(event);
+	    		//console.log(event);
 	    	};
 	    	oReq.onload = function (oEvent) {
 	    		//console.log(oEvent);
@@ -391,7 +391,8 @@
 		}
 		//提交的时候把select禁用去掉
 		$('select').removeAttr("disabled"); 
-		$(":input[name='imageFile']").prop("disabled",true);
+		//$(":input[name='imageFile']").prop("disabled",true);
+		$(":input[name='imageFile']").attr("disabled","disabled");
 		return true;
 	}
 	//被保险人名称
