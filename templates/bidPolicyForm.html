@@ -151,7 +151,7 @@
 			<h3>产品介绍</h3><img src="/static/images/xz.png" />
 			<h3>立即投保</h3><img src="/static/images/xz.png" />
 		</div>
-		<form method="post" action="/applyBidPolicy.json" onsubmit="return onCheck()" enctype="multipart/form-data">
+		<form method="post" action="/applyBidPolicy.json" onsubmit="return onCheck()">
 			<input type="hidden" th:value="${message}" id="message"/>
 			<!--交易平台流水号-->
 			<input type="hidden" th:value="${sequenceNo}" name="sequenceNo"/>
