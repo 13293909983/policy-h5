@@ -230,13 +230,11 @@
 	    	};
 	    	oReq.onload = function (oEvent) {
 	    		//console.log(oEvent);
-	    		//alert(this.response)
 				console.log(this.response);
 	    		var data =eval('('+this.response+')');
 	    		//如果成功则赋值
 	    		if(data.code=="200"){
 	    			var fileKey=data.message.key;
-	    			console.log(fileKey);
 	    			//把返回的key设置到隐藏的input上
 	    			$(":hidden[name='fileKey']").val(fileKey);
 	    			if(ext=="zip"){
