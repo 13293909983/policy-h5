@@ -223,7 +223,7 @@
 	        }
 	        //上传文件请求后台接口
 	        var oReq = new XMLHttpRequest();
-	    	oReq.open("POST", 'http://www.sxdeliw.com/ecooperation/lshInsure/picinsure.do',true);
+	    	oReq.open("POST", '/ecooperation/lshInsure/picinsure.do',true);
 	    	oReq.withCredentials = true;
 	    	oReq.upload.onprogress = function(event){
 	    		console.log(event);
