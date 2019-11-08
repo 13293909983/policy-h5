@@ -159,6 +159,8 @@
 		getRegion();
 		//初始化根据所属区域的code给赋值
 		ztreeRegionClick();
+		//隐藏进度条
+		$("#schedule").hide();
 	})
 	//算保费金额，保留两位小数，四舍五入
 	function decimal(num,v){
@@ -222,12 +224,52 @@
 	            url = window.webkitURL.createObjectURL(files[0]);
 	        }
 	        //上传文件请求后台接口
+	        var ot;
+	        var oloaded;
 	        var oReq = new XMLHttpRequest();
 	    	oReq.open("POST", '/ecooperation/lshInsure/picinsure.do',true);
 	    	oReq.withCredentials = true;
 	    	oReq.upload.onprogress = function(event){
 	    		//console.log(event);
+	    		$("#schedule").show();
+	    		var progressBar = document.getElementById("progressBar");
+	            var percentageDiv = document.getElementById("percentage");
+	             // event.total是需要传输的总字节，event.loaded是已经传输的字节。如果event.lengthComputable不为真，则event.total等于0
+	             if (event.lengthComputable) {//
+	                 progressBar.max = event.total;
+	                 progressBar.value = event.loaded;
+	                 percentageDiv.innerHTML = Math.round(event.loaded / event.total * 100) + "%";
+	             }
+	            var time = document.getElementById("time");
+	            var nt = new Date().getTime();//获取当前时间
+	            var pertime = (nt-ot)/1000; //计算出上次调用该方法时到现在的时间差，单位为s
+	            ot = new Date().getTime(); //重新赋值时间，用于下次计算
+	            
+	            var perload = event.loaded - oloaded; //计算该分段上传的文件大小，单位b       
+	            oloaded = event.loaded;//重新赋值已上传文件大小，用以下次计算
+	            //上传速度计算
+	            var speed = perload/pertime;//单位b/s
+	            var bspeed = speed;
+	            var units = 'b/s';//单位名称
+	            if(speed/1024>1){
+	                speed = speed/1024;
+	                units = 'k/s';
+	            }
+	            if(speed/1024>1){
+	                speed = speed/1024;
+	                units = 'M/s';
+	            }
+	            speed = speed.toFixed(1);
+	            //剩余时间
+	            var resttime = ((event.total-event.loaded)/bspeed).toFixed(1);
+	            time.innerHTML = '速度：'+speed+units+'，剩余时间：'+resttime+'s';
+	            if(bspeed==0)
+	            time.innerHTML = '上传已取消';
 	    	};
+	    	oReq.upload.onloadstart = function(){//上传开始执行方法
+                ot = new Date().getTime();   //设置上传开始时间
+                oloaded = 0;//设置上传开始时，以上传的文件大小为0
+            };
 	    	oReq.onload = function (oEvent) {
 	    		//console.log(oEvent);
 				console.log(this.response);
@@ -253,7 +295,8 @@
 	                file.outerHTML = file.outerHTML; //重新初始化了file的html
 	                $("#text").text("未选择文件");
 	                $("#fileImg").attr("src", "/static/images/a7.png");
-	                return false;  
+	                //隐藏进度条
+	                $("#schedule").hide();
 	    		}
 	    	};
 	    	oReq.send(files[0]);//向服务器发送请求

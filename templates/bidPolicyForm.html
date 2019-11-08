@@ -324,7 +324,12 @@
 								<input type='file' id="imageFile" name='imageFile' accept='*.zip' onChange="handleConId_photo(this.files);" onMouseleave="getImageFile()"/>
 								<input type="hidden" name="fileKey" th:value="${bidPolicy.fileKey}"/>
 							</div>
-							<span style="display: block;color: red;font-size: 0.14rem;line-height: 0.25rem;margin-top: 0.10rem;">请将投保单位营业执照、pdf版的招标文件打包<br/>压缩成zip格式上传,文件大小最大为20M</span><!-- <br/> -->
+							<span style="display: block;color: red;font-size: 0.14rem;line-height: 0.25rem;margin-top: 0.10rem;width: 347px;">请将投保单位营业执照、pdf版的招标文件打包<br/>压缩成zip格式上传,文件大小最大为20M</span><!-- <br/> -->
+							<div id="schedule" style="position: relative;width: 347px;">
+								<progress id="progressBar" value="0" max="100" style="width: 300px;height: 4px;background-color: #008000;position: absolute;top: 6px;"></progress>
+							    <span id="percentage" style="position: absolute;top: -6px;right: 0px;"></span>
+							    <span id="time" style="position:absolute;top: 12px;"></span><br/>
+						    </div>
 							<i th:text="${errorMap['fileKey']}"></i>
 						</div>
 					</td>
