@@ -231,6 +231,7 @@
 	    	oReq.onload = function (oEvent) {
 	    		//console.log(oEvent);
 	    		//alert(this.response)
+				console.log(this.response);
 	    		var data =eval('('+this.response+')');
 	    		//如果成功则赋值
 	    		if(data.code=="200"){
