@@ -212,6 +212,7 @@
                 $("#fileImg").attr("src", "/static/images/a7.png");
                 return false;  
 	        }
+	        //显示上传的文件
 	        var url = null;
 	        if (window.createObjectURL != undefined) { // basic
 	            url = window.createObjectURL(files[0]);
@@ -220,6 +221,35 @@
 	        } else if (window.webkitURL != undefined) { // webkit or chrome
 	            url = window.webkitURL.createObjectURL(files[0]);
 	        }
+	        //上传文件请求后台接口
+	        var oReq = new XMLHttpRequest();
+	    	oReq.open("POST", 'http://www.sxdeliw.com/ecooperation/lshInsure/picinsure.do',true);
+	    	oReq.withCredentials = true;
+	    	oReq.upload.onprogress = function(event){
+	    		console.log(event);
+	    	};
+	    	oReq.onload = function (oEvent) {
+	    		//console.log(oEvent);
+	    		//alert(this.response)
+	    		var data=this.response;
+	    		//如果成功则赋值
+	    		if(data.code=="200"){
+	    			var fileKey=data.message.key;
+	    			//把返回的key设置到隐藏的input上
+	    			$(":hidden[name='fileKey']").val(fileKey);
+	    		}else{
+	    			layer.msg("文件未上传成功，请重新上传", {icon: 0});
+	    			//把file设置为空的
+	    			$(":hidden[name='fileKey']").val("");
+	    			var file = document.getElementById('imageFile');
+	                file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
+	                file.outerHTML = file.outerHTML; //重新初始化了file的html
+	                $("#text").text("未选择文件");
+	                $("#fileImg").attr("src", "/static/images/a7.png");
+	                return false;  
+	    		}
+	    	};
+	    	oReq.send(files[0]);//向服务器发送请求
 	        if(ext=="zip"){
 	        	$("#fileImg").attr("src", "/static/images/a7.png");
 	        }else{
