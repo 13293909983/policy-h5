@@ -391,6 +391,7 @@
 		}
 		//提交的时候把select禁用去掉
 		$('select').removeAttr("disabled"); 
+		$(":input[name='imageFile']").prop("disabled",true);
 		return true;
 	}
 	//被保险人名称
