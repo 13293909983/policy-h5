@@ -233,10 +233,19 @@
 	    		//alert(this.response)
 	    		var data=this.response;
 	    		//如果成功则赋值
+	    		console.log(data);
 	    		if(data.code=="200"){
 	    			var fileKey=data.message.key;
+	    			console.log(fileKey);
 	    			//把返回的key设置到隐藏的input上
 	    			$(":hidden[name='fileKey']").val(fileKey);
+	    			if(ext=="zip"){
+	    	        	$("#fileImg").attr("src", "/static/images/a7.png");
+	    	        }else{
+	    	        	$("#fileImg").attr("src", url);
+	    	        }
+	    	        $("#text").text(files[0].name);
+	    	        $("#text").attr("title",files[0].name);
 	    		}else{
 	    			layer.msg("文件未上传成功，请重新上传", {icon: 0});
 	    			//把file设置为空的
@@ -250,13 +259,6 @@
 	    		}
 	    	};
 	    	oReq.send(files[0]);//向服务器发送请求
-	        if(ext=="zip"){
-	        	$("#fileImg").attr("src", "/static/images/a7.png");
-	        }else{
-	        	$("#fileImg").attr("src", url);
-	        }
-	        $("#text").text(files[0].name);
-	        $("#text").attr("title",files[0].name);
 		}
 	}
 	function onCheck(){
