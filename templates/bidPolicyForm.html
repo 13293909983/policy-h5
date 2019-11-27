@@ -162,6 +162,7 @@
 				<tr>
 					<td><span class="span_color">*</span>&nbsp;被保险人名称</td>
 					<td>
+						<input type="hidden" id="appliName" th:value="${bidPolicy.appliName}">
 						<input name="insuredName" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredName}" onChange="getInsuredName()">
 						<br/>
 						<i th:text="${errorMap['insuredName']}"></i>
@@ -372,7 +373,7 @@
 		</table>
 		<div class="margin-t-15" style="text-align: center;font-size: 0.20rem;">
 			<p><input type="checkbox" name="agree" style="margin-right: 0.16rem;margin-top: -0.03rem;"/>我已同意并阅读
-				<a class="color3 reg_show">《投保指南、投保须知、投保条款》</a></p>
+				<a class="color3 reg_show">《投保指南、投保须知、投保条款、收费标准》</a></p>
 				<p style="margin: 0.15rem;font-size: 0.16rem;color: #989898;">注：如果投保人未能按照投保须知填写、确认投保相关信息，导致的后续损失，保险公司不承担赔偿责任。</p>
 		</div>
 		<div class="tiaokuan"></div>

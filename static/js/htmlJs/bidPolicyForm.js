@@ -176,6 +176,9 @@
 			var fileTd=$("#fileImg").parent();
 			fileTd.html('<img id="fileImg" style="width: 120px;height: 125px;margin-top: 17px;background: #fff;">');
 			$("#text").text("未选择文件");
+			$("#text").attr("title","未选择文件");
+			//隐藏进度条
+			$("#schedule").hide();
 	        return false; 
 		}else{
 			idx = imgName.lastIndexOf(".");   
@@ -188,7 +191,10 @@
 	                file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
 	                file.outerHTML = file.outerHTML; //重新初始化了file的html
 	                $("#text").text("未选择文件");
+	                $("#text").attr("title","未选择文件");
 	                $("#fileImg").attr("src", "/static/images/a7.png");
+	                //隐藏进度条
+	        		$("#schedule").hide();
 	                return false;  
 	            }   
 	        }
@@ -306,8 +312,13 @@
 		var i=0;
 		//被保险人名称
 		var insuredName=$(":input[name='insuredName']").val();
+		var appliName=$("#appliName").val();
 		if(insuredName=="" || insuredName==null){
 			$(":input[name='insuredName']").parent().find("i").text("请输入被保险人名称");
+			i++;
+		}else if(insuredName==appliName){
+			//如果一致。提示不能提交
+			$(":input[name='insuredName']").parent().find("i").text("被保险人名称不能和保险人名称一致");
 			i++;
 		}
 		//组织机构代码
@@ -440,8 +451,13 @@
 	//被保险人名称
 	function getInsuredName(){
 		var insuredName=$(":input[name='insuredName']").val();
+	    var loginName=$(":input[name='invoice.invoiceTitle']").val();//当前登录人名称
 		if(insuredName!=''&&insuredName!=null){
 			$(":input[name='insuredName']").parent().find("i").text("");
+		}
+		//判断保险人名称和被保险人名称是否一致
+		if (insuredName==loginName){
+			$(":input[name='insuredName']").parent().find("i").text("被保险人名称不能和保险人名称一致");
 		}
 	}
 	//组织机构代码
