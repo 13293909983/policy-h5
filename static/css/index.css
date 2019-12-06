@@ -553,6 +553,7 @@ outline: none;
 .scroll ul li {
 	display: inline-block;
 	margin:0 0.3rem;
+	cursor: pointer;
 }
 
 .scroll ul img {

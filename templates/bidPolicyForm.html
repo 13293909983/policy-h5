@@ -151,11 +151,26 @@
 			<h3>产品介绍</h3><img src="/static/images/xz.png" />
 			<h3>立即投保</h3><img src="/static/images/xz.png" />
 		</div>
+		<div class="select-cho">
+			<p class="select-chop">已选择：</p>
+			<div class="visualSelect" data-id="0">
+			中国人民保险
+			</div>
+			<div id="selectContainerQcOhiqga" class="previewContainer" style="width: 10rem; height: 200px; position: absolute; top: 39px; left: 0px; z-index: 999; overflow: auto; display: none;">
+				<img src="/static/images/Insurance1.jpg" alt="中国人民保险" rel="0">
+				<img src="/static/images/Insurance2.jpg" alt="太平洋保险" rel="1">
+				<img src="/static/images/Insurance3.jpg" alt="中华保险" rel="2">
+				<img src="/static/images/Insurance4.jpg" alt="中国大地保险" rel="3">
+			</div>
+			<span>▼</span>
+		</div>
 		<form method="post" action="/applyBidPolicy.json" onsubmit="return onCheck()">
 			<input type="hidden" th:value="${message}" id="message"/>
+			<!-- 判断有没有错误信息 -->
+			<input type="hidden" th:value="${errorMap}" id="errorMap">
 			<!--交易平台流水号-->
 			<input type="hidden" th:value="${sequenceNo}" name="sequenceNo"/>
-			<table class="formtables" cellspacing="0" cellpadding="0">
+			<table class="formtables" cellspacing="0" cellpadding="0" id="formtables">
 				<tr>
 					<th colspan="4">被保险人信息</th>
 				</tr>
@@ -198,7 +213,6 @@
 				</tr>
 				<tr>
 					<th colspan="4">基本信息</th>
-
 				</tr>
 				<tr>
 					<td><span class="span_color">*</span>&nbsp;项目名称</td>
@@ -207,7 +221,7 @@
 						<br/>
 						<i th:text="${errorMap['certificateDepart']}"></i>
 					</td>
-					<td><span class="span_color">*</span>&nbsp;<span id="xmbh">文件编号</span></td>
+					<td><span class="span_color">*</span>&nbsp;<span id="xmbh">项目（文件）编号</span></td>
 					<td>
 						<input name="certificateNo" class="input-text" placeholder="请输入" th:value="${bidPolicy.certificateNo}" onChange="getCertificateNo()">
 						<br/>
@@ -326,7 +340,7 @@
 								<input type="hidden" name="fileKey" th:value="${bidPolicy.fileKey}"/>
 							</div>
 							<span style="display: block;color: red;font-size: 0.14rem;line-height: 0.25rem;margin-top: 0.10rem;width: 347px;">请将投保单位营业执照、pdf版的招标文件打包<br/>压缩成zip格式上传,文件大小最大为20M</span><!-- <br/> -->
-							<div id="schedule" style="position: relative;width: 347px;">
+							<div id="schedule" style="position: relative;width: 347px;display: none;">
 								<progress id="progressBar" value="0" max="100" style="width: 300px;height: 4px;background-color: #008000;position: absolute;top: 6px;"></progress>
 							    <span id="percentage" style="position: absolute;top: -6px;right: 0px;"></span>
 							    <span id="time" style="position:absolute;top: 12px;"></span><br/>
@@ -379,28 +393,28 @@
 		<div class="tiaokuan"></div>
 		<div class="btn-bottom">
 			<button class="quxiao" type="button" onclick="window.location.href = '/index.html'">取消</button>
-			<button class="submit">提交</button>
-		</div>
-		<div class="zhuyi_wrap">
-			<div class="zhuyi_tk">
-				<div class="pay_nav">
-				<h2>选择保险</h2>
-				<ul>     
-					<li><a><div class="pay_gwc pay_gwcactivity"></div><img src="/static/images/Insurance1.jpg" /></a></li>
-					<li><a><div class="pay_gwc"></div><img src="/static/images/Insurance2.jpg" /></a></li>
-					<li><a><div class="pay_gwc"></div><img src="/static/images/Insurance3.jpg" /></a></li>
-					<li><a><div class="pay_gwc"></div><img src="/static/images/Insurance4.jpg" /></a></li>
-				</ul>	
-				<div class="pay_close btn_open">
-				</div>
-			</div>
-			<div class="btn-bottom">
-				<button id="btnSub" class="submit" onclick="submits()">提交</button>
-				<button class="btnSubClass" type="button" style="display: none;">提交</button>
-			</div>
-			</div>
+			<button id="btnSub" class="submit" onclick="onCheck()">提交</button>
+			<button class="btnSubClass" type="button" style="display: none;">确定</button>
 		</div>
 	</form>
+	<div class="zhuyi_wrap">
+		<div class="zhuyi_tk">
+			<div class="pay_nav">
+			<h2>选择保险</h2>
+			<ul>     
+				<li><a><div class="pay_gwc pay_gwcactivity" data-id="0"></div><img src="/static/images/Insurance1.jpg" /></a></li>
+				<li><a><div class="pay_gwc" data-id="1"></div><img src="/static/images/Insurance2.jpg" /></a></li>
+				<li><a><div class="pay_gwc" data-id="2"></div><img src="/static/images/Insurance3.jpg" /></a></li>
+				<li><a><div class="pay_gwc" data-id="3"></div><img src="/static/images/Insurance4.jpg" /></a></li>
+			</ul>	
+			<!-- <div class="pay_close btn_open">
+			</div>-->
+		</div>
+		<div class="btn-bottom">
+			<button onclick="confirm()" style="background: #b80404;color: #fff;border-bottom: 0.03rem solid #e42323;margin-left: 0.01rem;">确定</button>
+		</div>
+		</div>
+	</div>
 	</div>
 </div>
 <footer></footer>
@@ -408,6 +422,15 @@
 </body>
 <script type="text/javascript" src="/static/js/url.js"></script>
 <script>
+//判断初始化要不要弹出选择投保公司
+$(function(){
+	console.log($("#errorMap").val()!="{}");
+	if($("#errorMap").val()!="{}"||$("#message").val()!=""){
+		$(".zhuyi_wrap").hide();
+	}else{
+		$(".zhuyi_wrap").show();
+	}
+})
 $(".reg_show").click(function (){
     if($(".agree_wrap").css("display")=="none"){
         $(".agree_wrap").show();
@@ -427,6 +450,126 @@ $(".zhuyi_tk li").click(function(){
         $(this).find(".pay_gwc").addClass("pay_gwcactivity");
     }
 })
+$(".visualSelect").click(function(){
+	$("#selectContainerQcOhiqga").show();
+})
+$("#selectContainerQcOhiqga img").click(function(){
+	var item = $(this).index();  //获取索引下标 也从0开始
+	if(item==1||item==2||item==3){
+    	layer.msg('此功能正在建设中', {icon: 0});
+    }else{
+    	$(".visualSelect").text($(this).attr("alt"));
+    	$(".visualSelect").attr("data-id",$(this).attr("rel"));
+    	var id=$(".visualSelect").attr("data-id");
+    	$('.watermark').remove();
+    	//水印替换
+    	var img='/static/images/Insurance'+(id*1+1)+'.jpg';
+    	watermark({},img);
+    	$("#selectContainerQcOhiqga").hide();
+    }
+})
+$('body').click(function(e) {
+    var target = $(e.target);
+    //点击其他位置隐藏选择保险
+    if(!target.is('.visualSelect')&&!target.is('.selectContainerQcOhiqga')) {
+        $('#selectContainerQcOhiqga').hide();
+    }
+});
+</script>
+<script type="text/javascript">
+	//加水印方法
+	function watermark(settings,img) {
+		//默认设置
+		var defaultSettings={
+			watermark_txt:"text",
+			watermark_x:2,//水印起始位置x轴坐标
+			watermark_y:0.85,//水印起始位置Y轴坐标
+			watermark_rows:2,//水印行数
+			watermark_cols:2,//水印列数
+			watermark_x_space:3.2,//水印x轴间隔150
+			watermark_y_space:4.50,//水印y轴间隔350
+			watermark_color:'#000000',//水印字体颜色
+			watermark_alpha:0.2,//水印透明度
+			watermark_fontsize:'18px',//水印字体大小
+			watermark_font:'微软雅黑',//水印字体
+			watermark_width:2.00,//水印宽度
+			watermark_height:1.20,//水印长度
+			watermark_angle:15//水印倾斜度数
+		};
+		//采用配置项替换默认值，作用类似jquery.extend
+		if(arguments.length>1&&typeof arguments[0] ==="object" ){
+			var src=arguments[0]||{};
+			for(key in src){
+				if(src[key]&&defaultSettings[key]&&src[key]===defaultSettings[key])
+					continue;
+				else if(src[key])
+					defaultSettings[key]=src[key];
+			}
+		}
+		var oTemp = document.createDocumentFragment();
+		var table=document.getElementById('formtables');
+		//获取页面最大宽度
+		var page_width = Math.max(table.scrollWidth,table.clientWidth);
+		//获取页面最大长度
+		var page_height = Math.max(table.scrollHeight,table.clientHeight);
+	
+		//如果将水印列数设置为0，或水印列数设置过大，超过页面最大宽度，则重新计算水印列数和水印x轴间隔
+		if (defaultSettings.watermark_cols == 0 || (parseInt(defaultSettings.watermark_x + defaultSettings.watermark_width *defaultSettings.watermark_cols + defaultSettings.watermark_x_space * (defaultSettings.watermark_cols - 1)) > page_width)) {
+			defaultSettings.watermark_cols = parseInt((page_width-defaultSettings.watermark_x+defaultSettings.watermark_x_space) / (defaultSettings.watermark_width + defaultSettings.watermark_x_space));
+			defaultSettings.watermark_x_space = parseInt((page_width - defaultSettings.watermark_x - defaultSettings.watermark_width * defaultSettings.watermark_cols) / (defaultSettings.watermark_cols - 1));
+		}
+		//如果将水印行数设置为0，或水印行数设置过大，超过页面最大长度，则重新计算水印行数和水印y轴间隔
+		if (defaultSettings.watermark_rows == 0 || (parseInt(defaultSettings.watermark_y + defaultSettings.watermark_height * defaultSettings.watermark_rows + defaultSettings.watermark_y_space * (defaultSettings.watermark_rows - 1)) > page_height)) {
+			defaultSettings.watermark_rows = parseInt((defaultSettings.watermark_y_space + page_height - defaultSettings.watermark_y) / (defaultSettings.watermark_height + defaultSettings.watermark_y_space));
+			defaultSettings.watermark_y_space = parseInt(((page_height - defaultSettings.watermark_y) - defaultSettings.watermark_height * defaultSettings.watermark_rows) / (defaultSettings.watermark_rows - 1));
+		}
+		var x;
+		var y;
+		for (var i = 0; i < defaultSettings.watermark_rows; i++) {
+			y = defaultSettings.watermark_y + (defaultSettings.watermark_y_space + defaultSettings.watermark_height) * i;
+			for (var j = 0; j < defaultSettings.watermark_cols; j++) {
+				x = defaultSettings.watermark_x + (defaultSettings.watermark_width + defaultSettings.watermark_x_space) * j;
+				var mask_div = document.createElement('img');
+				mask_div.id = 'mask_div' + i + j;
+				mask_div.src=img;
+				mask_div.className="watermark";
+				//设置水印div倾斜显示
+				mask_div.style.webkitTransform = "rotate(-" + defaultSettings.watermark_angle + "deg)";
+				mask_div.style.MozTransform = "rotate(-" + defaultSettings.watermark_angle + "deg)";
+				mask_div.style.msTransform = "rotate(-" + defaultSettings.watermark_angle + "deg)";
+				mask_div.style.OTransform = "rotate(-" + defaultSettings.watermark_angle + "deg)";
+				mask_div.style.transform = "rotate(-" + defaultSettings.watermark_angle + "deg)";
+				mask_div.style.visibility = "";
+				mask_div.style.position = "absolute";
+				mask_div.style.left = x + 'rem';
+				mask_div.style.top = y + 'rem';
+				mask_div.style.overflow = "hidden";
+				mask_div.style.zIndex = "-1";
+				//mask_div.style.border="solid #eee 1px";
+				mask_div.style.opacity = defaultSettings.watermark_alpha;
+				mask_div.style.fontSize = defaultSettings.watermark_fontsize;
+				mask_div.style.fontFamily = defaultSettings.watermark_font;
+				mask_div.style.color = defaultSettings.watermark_color;
+				mask_div.style.textAlign = "center";
+				mask_div.style.width = defaultSettings.watermark_width + 'rem';
+				mask_div.style.height = defaultSettings.watermark_height + 'rem';
+				mask_div.style.display = "block";
+				oTemp.appendChild(mask_div);
+			};
+		};
+		table.appendChild(oTemp);
+	}
+	window.onload=function(){
+		var img='/static/images/Insurance1.jpg';
+		watermark("",img);
+	};
+	window.onresize = function () {
+		$('.watermark').remove();
+		var id=$(".visualSelect").attr("data-id");
+		//水印替换
+		var img='/static/images/Insurance'+(id*1+1)+'.jpg';
+		watermark({watermark_y_space:5.50 },img)
+	};
 </script>
 <script type="text/javascript" src="/static/js/htmlJs/bidPolicyForm.js"></script>
 </html>

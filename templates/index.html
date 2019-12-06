@@ -434,7 +434,7 @@
 		<div class="notice_wrap">
 			<div class="swiper_wrap">
 				<div class="scroll">
-					<ul>
+					<ul id="dockingPlatform">
 						<li><img src="/static/images/logo01.png" /></li>
 						<li><img src="/static/images/logo02.png" /></li>
 						<li><img src="/static/images/logo03.png" /></li>
@@ -501,6 +501,8 @@
 			direction: 'horizantal'
 		});
 		relatedNews();
+		//获取对接平台
+		dockingPlatform();
 	})
 	function relatedNews(){
 		var param={};
@@ -576,6 +578,31 @@
 	function  newDetails(newId){
 		window.location.href="/static/html/newsDetails.html?id="+newId+"&type="+$('.certer_left_con_now').attr('data-code');
 	}
-	  
+	//动态获取对接平台
+	function dockingPlatform(){
+		 $.ajax({
+	        type:"get",
+	        url:manageUrl+"/homeController/selectDockList",
+	        data: {"status":1},
+	        dataType:"json",
+	        success:function(dataObj){
+	        	if(dataObj.code=200){
+	        		$("#dockingPlatform").html("");
+	        		var tableData=dataObj.data;
+	                var num=tableData.length;
+	                var str='';
+	                if(num>0){
+	                    $.each(tableData,function(index,val){
+	                    	str+='<li><img title="'+val.platform_name+'" src="'+manageUrl+''+val.platform_logo+'" onclick="platformUrl(\''+val.platform_url+'\')"/></li>';
+	                    })
+	                }
+	                $('#dockingPlatform').append(str);
+	        	}
+	        }
+		})
+	}
+	function platformUrl(item){
+		window.open(item);
+	}
 </script>
 </html>

@@ -30,13 +30,13 @@
 
 
 //   一键置顶
-    $(window).scroll(function () {
-        if ($(window).scrollTop() >= 100) {
-            $('#scrollTop').show()
-        } else {
-            $('#scrollTop').hide()
-        }
-    });
+   window.onscroll = function () {
+		if($(window).scrollTop() >= 100) {
+			$('#scrollTop').show()
+		} else {
+			$('#scrollTop').hide()
+		}
+	}
     $('#scrollTop').click(function () {
         $('body,html').animate({scrollTop: 0},500);
     });

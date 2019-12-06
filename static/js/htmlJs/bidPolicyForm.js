@@ -143,8 +143,6 @@
 			$(".list").parent().css("cursor","not-allowed").css("background-color","#efefef");
 			$("#regionSel").parent().removeAttr("style");
 			$("#regionSel").parents('tr').removeAttr("style");
-			//交易平台传入修改为项目编号
-			$("#xmbh").text("项目编号");
 		}
 		//初始化获取行业代码
 		getBusinesssource();
@@ -381,12 +379,12 @@
 			i++;
 		}
 		//影像文件
-		var imageFile=$(":input[name='imageFile']").val();
+		/*var imageFile=$(":input[name='imageFile']").val();
 		var fileKey=$(":hidden[name='fileKey']").val();
 		if((imageFile=="" || imageFile==null) && (fileKey==undefined || fileKey=="")){
 			$(".fileinput-button").parent().find("i").text("请上传影像文件");
 			i++;
-		}
+		}*/
 		//发票手机号
 		var phones=$(":input[name='invoice.phone']").val();
 		var phone=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
@@ -438,14 +436,14 @@
 			layer.msg('请仔细阅读并同意《投保指南、投保须知、投保条款》', {icon: 0});
 			return false;
 		}
-		if($(".zhuyi_wrap").css("display") == "none") {
-			$(".zhuyi_wrap").show();
-			return false;
-		}
 		//提交的时候把select禁用去掉
 		$('select').removeAttr("disabled"); 
 		//$(":input[name='imageFile']").prop("disabled",true);
 		$(":input[name='imageFile']").attr("disabled","disabled");
+		//显示灰色的禁用的样式
+		$('.btnSubClass').show();
+		//隐藏确定按钮
+		$('#btnSub').hide();
 		return true;
 	}
 	//被保险人名称
@@ -636,7 +634,7 @@
 	function showMenu() {
 		var cityObj = $("#citySel");
 		var cityOffset = $("#citySel").offset();
-		$("#menuContent").css({left:cityOffset.left + "px"}).slideDown("fast");
+		$("#menuContent").slideDown("fast");
 		$("body").bind("mousedown", onBodyDown);
 	}
 	function hideMenu() {
@@ -661,11 +659,6 @@
 	    		cityObj.attr("value", node.name);
 	        }
 		 }
-	}
-	function submits(){
-		$('.btnSubClass').show();
-		$('#btnSub').hide();
-		$("form").submit();
 	}
 	//项目所在区域的树
 	var settings = {
@@ -703,7 +696,8 @@
 	function showRegion() {
 		var cityObj = $("#regionSel");
 		var cityOffset = $("#regionSel").offset();
-		$("#regionContent").css({left:cityOffset.left + "px"}).slideDown("fast");
+		//.css({left:cityOffset.left + "px"})
+		$("#regionContent").slideDown("fast");
 		$("body").bind("mousedown", onBodyDownRegion);
 		//给默认定位到山西
 		document.getElementById('regionTree').scrollTop=150;
@@ -821,4 +815,23 @@
          var event=window.event || arguments.callee.caller.arguments[0];
          onRegionExpand(event,'regionTree',node);
 	}
-	
+	//弹框选择保险公司点击确定
+	function confirm(){
+		var value=$(".pay_gwcactivity").attr("data-id");
+		$(".visualSelect").attr("data-id",value);
+		if(value==0){
+			$(".visualSelect").text("中国人民保险");
+		}else if(value==1){
+			$(".visualSelect").text("太平洋保险");
+		}else if(value==2){
+			$(".visualSelect").text("中华保险");
+		}else if(value==3){
+			$(".visualSelect").text("中国大地保险");
+		}
+		//选择换水印
+		$('.watermark').remove();
+		var img='/static/images/Insurance'+(value*1+1)+'.jpg';
+		watermark({},img);
+		//隐藏弹框
+		$('.zhuyi_wrap').hide();
+	}
