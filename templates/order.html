@@ -53,14 +53,14 @@
 					<td th:text="${bidPolicy.sumPremium}"></td>
 					<td th:text="${#objects.nullSafe(#dates.format(bidPolicy.saveTimes,'yyyy-MM-dd HH:mm:ss'),'-')}"></td>
 					<td th:switch="${bidPolicy.orderStatus}">
-						<a th:case="'3'" target="_blank" th:href="${bidPolicy.payUrl}">去支付</a>
-						<span th:case="'5'" style="background-color: transparent;color: #000000;">已支付</span>
-						<span th:case="'*'" style="background-color: transparent;color: #000000;">审核中</span>
+						<a th:case="3" target="_blank" th:href="${bidPolicy.payUrl}">去支付</a>
+						<span th:case="5" style="background-color: transparent;color: #000000;">已支付</span>
+						<span th:case="*" style="background-color: transparent;color: #000000;">审核中</span>
 					</td>
 					<td th:switch="${bidPolicy.orderStatus}">
-						<a th:case="'1'" href="/bidPolicyError.html" style="background-color:#1060a5;">待确认</a>
-						<a th:case="'2'" href="/bidPolicyError.html" style="background-color:#1060a5;">待确认</a>
-						<a th:case="'*'" th:href="${'/orderDetails/'+bidPolicy.orderId}" style="background-color: #1060a5;">查看</a>
+						<a th:case="1" href="/bidPolicyError.html" style="background-color:#1060a5;">待确认</a>
+						<a th:case="2" href="/bidPolicyError.html" style="background-color:#1060a5;">待确认</a>
+						<a th:case="*" th:href="${'/orderDetails/'+bidPolicy.orderId}" style="background-color: #1060a5;">查看</a>
 					</td>
 				</tr>
 			</tbody>
