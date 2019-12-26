@@ -21,6 +21,24 @@
 		}
 		return format;
 	}
+	layui.use('laydate', function(){
+		  var laydate = layui.laydate;
+		  //常规用法
+		  laydate.render({
+		    elem: '#retroactiveStart',
+		    trigger: 'click', 
+		    min:minDate(),
+		    done:function(value,date){
+		    	//确定了消除错误提示
+		    	$(":input[name='retroactiveStart']").parent().parent().find("i").text("");
+		    }
+		  });
+	})
+	// 设置最小可选的日期
+	function minDate(){
+	    var now = new Date();
+	    return now.getFullYear()+"-" + (now.getMonth()+1) + "-" + now.getDate();
+	 }
 	$(function() {
 		//根据起保日期生成终保日期
 		$(":input[name='startDate']").change(
@@ -366,7 +384,7 @@
 		//开标日期
 		var retroactiveStart=$(":input[name='retroactiveStart']").val();
 		if(retroactiveStart=="" || retroactiveStart==null){
-			$(":input[name='retroactiveStart']").parent().find("i").text("请输入开标日期");
+			$(":input[name='retroactiveStart']").parent().parent().find("i").text("请输入开标日期");
 			i++;
 		}
 		//保证金金额
@@ -504,13 +522,6 @@
 		}
 		if(certificateNo!=''&&certificateNo!=null){
 			$(":input[name='certificateNo']").parent().find("i").text("");
-		}
-	}
-	//开标日期
-	function getRetroactiveStart(){
-		var retroactiveStart=$(":input[name='retroactiveStart']").val();
-		if(retroactiveStart!=''&&retroactiveStart!=null){
-			$(":input[name='retroactiveStart']").parent().find("i").text("");
 		}
 	}
 	//保证金金额
