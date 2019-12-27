@@ -31,6 +31,19 @@
 		    done:function(value,date){
 		    	//确定了消除错误提示
 		    	$(":input[name='retroactiveStart']").parent().parent().find("i").text("");
+		    	//给结束时间赋值
+		    	var period=$(":input[name='period']").val();
+	            var retroactiveStart=$(":input[name='retroactiveStart']").val();
+	            if (retroactiveStart != "" && period!="") {
+	                $(":input[name='retroactiveEnd']").val(
+	                    new Date(
+	                        new Date(retroactiveStart.replace(/-/g, "/"))
+	                            .getTime()
+	                        + parseInt(period) * 24 * 60 * 60 * 1000)
+	                        .format("yyyy-MM-dd"));
+	            }else{
+	                $(":input[name='retroactiveEnd']").val();
+				}
 		    }
 		  });
 	})
@@ -74,7 +87,7 @@
 			var period=(end-start)/(24 * 60 * 60 * 1000);
             $(":input[name='period']").val(period);
 		}
-        $(":input[name='retroactiveStart']").change(retroactiveEvent).change();
+        //$(":input[name='retroactiveStart']").change(retroactiveEvent).change();
         $(":input[name='period']").blur(retroactiveEvent).change();
 		//默认起保日期
 		$(":input[name='startDate']").val(
