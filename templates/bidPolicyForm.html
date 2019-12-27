@@ -159,10 +159,10 @@
 			中国人民保险
 			</div>
 			<div id="selectContainerQcOhiqga" class="previewContainer" style="width: 10rem; height: 200px; position: absolute; top: 39px; left: 0px; z-index: 999; overflow: auto; display: none;">
-				<img src="/static/images/Insurance1.jpg" alt="中国人民保险" rel="0" val="PICC">
-				<img src="/static/images/Insurance2.jpg" alt="太平洋保险" rel="1" val="CPIC">
-				<img src="/static/images/Insurance3.jpg" alt="中华保险" rel="2" val="CIC">
-				<img src="/static/images/Insurance4.jpg" alt="中国大地保险" rel="3" val="CCIC">
+				<img src="/static/images/Insurance1.jpg" alt="中国人民保险" rel="0" val="PICC" data-code="1521">
+				<img src="/static/images/Insurance2.jpg" alt="太平洋保险" rel="1" val="CPIC" data-code="1522">
+				<img src="/static/images/Insurance3.jpg" alt="中华保险" rel="2" val="CIC" data-code="1523">
+				<img src="/static/images/Insurance4.jpg" alt="中国大地保险" rel="3" val="CCIC" data-code="1524">
 			</div>
 			<span>▼</span>
 		</div>
@@ -264,7 +264,7 @@
 					<td><span class="span_color">*</span>&nbsp;开标日期</td>
 					<td>
 						<div class="layui-input-inline">
-					        <input name="retroactiveStart" id="retroactiveStart" type="text" class="input-text" placeholder="请选择开标时间" th:value="${#dates.format(bidPolicy.retroactiveStart,'yyyy-MM-dd')}" onChange="getRetroactiveStart()">
+					        <input name="retroactiveStart" id="retroactiveStart" type="text" class="input-text" placeholder="请选择开标时间" th:value="${#dates.format(bidPolicy.retroactiveStart,'yyyy-MM-dd')}" autocomplete="off" readonly="readonly">
 					    </div>
 						<br/>
 						<i th:text="${errorMap['retroactiveStart']}"></i>
@@ -407,10 +407,10 @@
 			<div class="pay_nav">
 			<h2>选择保险</h2>
 			<ul>     
-				<li><a><div class="pay_gwc pay_gwcactivity" data-id="0"></div><img src="/static/images/Insurance1.jpg" /></a></li>
-				<li><a><div class="pay_gwc" data-id="1"></div><img src="/static/images/Insurance2.jpg" /></a></li>
-				<li><a><div class="pay_gwc" data-id="2"></div><img src="/static/images/Insurance3.jpg" /></a></li>
-				<li><a><div class="pay_gwc" data-id="3"></div><img src="/static/images/Insurance4.jpg" /></a></li>
+				<li><a><div class="pay_gwc pay_gwcactivity" data-id="0"></div><img src="/static/images/Insurance1.jpg" val="PICC" data-code="1521"/></a></li>
+				<li><a><div class="pay_gwc" data-id="1"></div><img src="/static/images/Insurance2.jpg" val="CPIC" data-code="1522"/></a></li>
+				<li><a><div class="pay_gwc" data-id="2"></div><img src="/static/images/Insurance3.jpg" val="CIC" data-code="1523"/></a></li>
+				<li><a><div class="pay_gwc" data-id="3"></div><img src="/static/images/Insurance4.jpg" val="CCIC" data-code="1524"/></a></li>
 			</ul>	
 			<!-- <div class="pay_close btn_open">
 			</div>-->
@@ -446,18 +446,25 @@ $(".btn_open").click(function() {
 		$(".zhuyi_wrap").hide();
 	}
 });
+//默认初始化选择所属公司
 $(".zhuyi_tk li").click(function(){
     var item = $(this).index();  //获取索引下标 也从0开始
     if(item==2||item==3){
     	layer.msg('此功能正在建设中', {icon: 0});
     }else{
+    	var img=$(this).find("img");
     	$('.pay_gwc').removeClass("pay_gwcactivity");
         $(this).find(".pay_gwc").addClass("pay_gwcactivity");
+        //选择哪家公司给赋值
+        $("#insuranceCompany").val(img.attr("val"));
+        //切换条款
+        clause(img.attr("data-code"));
     }
 })
 $(".visualSelect").click(function(){
 	$("#selectContainerQcOhiqga").show();
 })
+//点击选择所属公司
 $("#selectContainerQcOhiqga img").click(function(){
 	var item = $(this).index();  //获取索引下标 也从0开始
 	if(item==2||item==3){
@@ -467,6 +474,8 @@ $("#selectContainerQcOhiqga img").click(function(){
     	$(".visualSelect").attr("data-id",$(this).attr("rel"));
     	var id=$(".visualSelect").attr("data-id");
     	$("#insuranceCompany").val($(this).attr("val"));
+    	 //切换条款
+        clause($(this).attr("data-code"));
     	$('.watermark').remove();
     	//水印替换
     	var img='/static/images/Insurance'+(id*1+1)+'.jpg';
