@@ -450,7 +450,7 @@ $(".btn_open").click(function() {
 //默认初始化选择所属公司
 $(".zhuyi_tk li").click(function(){
     var item = $(this).index();  //获取索引下标 也从0开始
-    if(item==3){
+    if(item==2){
     	layer.msg('此功能正在建设中', {icon: 0});
     }else{
     	var img=$(this).find("img");
@@ -468,7 +468,7 @@ $(".visualSelect").click(function(){
 //点击选择所属公司
 $("#selectContainerQcOhiqga img").click(function(){
 	var item = $(this).index();  //获取索引下标 也从0开始
-	if(item==2||item==3){
+	if(item==2){
     	layer.msg('此功能正在建设中', {icon: 0});
     }else{
     	$(".visualSelect").text($(this).attr("alt"));
