@@ -765,19 +765,19 @@
 }
 	//点击事件
 	function onRegionClick(){
-		var zTree = $.fn.zTree.getZTreeObj("regionTree"),
-		nodes = zTree.getSelectedNodes(),
-		v = "";
-		code=""
-		nodes.sort(function compare(a,b){return a.id-b.id;});
-		for (var i=0, l=nodes.length; i<l; i++) {
-			v += nodes[i].name + ",";
-			code+=nodes[i].code+","
+		var zTree = $.fn.zTree.getZTreeObj("regionTree");
+		nodes = zTree.getSelectedNodes();
+		var v = nodes[0].name;
+		var code=nodes[0].code;
+		var parentNode=nodes[0].getParentNode();
+		var name="";
+		if(parentNode!=null){
+			name=parentNode.getParentNode().name+"-"+parentNode.name+"-"+v;
+		}else{
+			name=parentNode.name+"-"+v;
 		}
-		if (v.length > 0 ) v = v.substring(0, v.length-1);
-		if (code.length > 0 ) code = code.substring(0, code.length-1);
 		var cityObj = $("#regionSel");
-		cityObj.attr("value", v);
+		cityObj.attr("value", name);
 		//给regionalism赋code值
 		$("input[name='regionalism']").attr("value",code);
 		//把提醒消息去掉

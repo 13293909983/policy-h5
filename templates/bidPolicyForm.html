@@ -156,7 +156,7 @@
 		<div class="select-cho">
 			<p class="select-chop">已选择：</p>
 			<div class="visualSelect" data-id="0">
-			中国人民保险
+				中国人民保险
 			</div>
 			<div id="selectContainerQcOhiqga" class="previewContainer" style="width: 10rem; height: 200px; position: absolute; top: 39px; left: 0px; z-index: 999; overflow: auto; display: none;">
 				<img src="/static/images/Insurance1.jpg" alt="中国人民保险" rel="0" val="PICC" data-code="1521">
@@ -436,6 +436,8 @@ $(function(){
 		$(".zhuyi_wrap").show();
 	}
     $(".visualSelect").text($("#selectContainerQcOhiqga img[val='"+$("#insuranceCompany").val()+"']").attr("alt"));
+    //默认保险公司的rel
+    $(".visualSelect").attr("data-id",$("#selectContainerQcOhiqga img[val='"+$("#insuranceCompany").val()+"']").attr("rel"));
 })
 $(".reg_show").click(function (){
     if($(".agree_wrap").css("display")=="none"){
@@ -576,7 +578,9 @@ $('body').click(function(e) {
 		table.appendChild(oTemp);
 	}
 	window.onload=function(){
-		var img='/static/images/Insurance1.jpg';
+		var id=$(".visualSelect").attr("data-id");
+		//水印替换
+		var img='/static/images/Insurance'+(id*1+1)+'.jpg';
 		watermark("",img);
 	};
 	window.onresize = function () {
