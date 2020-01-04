@@ -314,6 +314,7 @@
 	    			var fileKey=data.message.key;
 	    			//把返回的key设置到隐藏的input上
 	    			$(":hidden[name='fileKey']").val(fileKey);
+                    $(":hidden[name='fileKey']").attr("_val",fileKey);
 	    			if(ext=="zip"){
 	    	        	$("#fileImg").attr("src", "/static/images/a7.png");
 	    	        }else{
@@ -325,6 +326,7 @@
 	    			layer.msg("文件未上传成功，请重新上传", {icon: 0});
 	    			//把file设置为空的
 	    			$(":hidden[name='fileKey']").val("");
+                    $(":hidden[name='fileKey']").attr("_val","");
 	    			var file = document.getElementById('imageFile');
 	                file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
 	                file.outerHTML = file.outerHTML; //重新初始化了file的html

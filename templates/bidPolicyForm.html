@@ -334,7 +334,7 @@
 				<!-- <tr>
 					<th colspan="4">影像文件</th>
 				</tr> -->
-				<tr>
+				<tr id="file-row">
 					<td><span class="span_color">*</span>&nbsp;上传文件</td>
 					<td colspan="3">
 						<div style="display:inline-block;"><img id="fileImg" style="width: 120px;height: 125px;margin-top: 17px;background: #fff;"/></div>
@@ -452,17 +452,15 @@ $(".btn_open").click(function() {
 //默认初始化选择所属公司
 $(".zhuyi_tk li").click(function(){
     var item = $(this).index();  //获取索引下标 也从0开始
-    if(item==2){
-    	layer.msg('此功能正在建设中', {icon: 0});
-    }else{
-    	var img=$(this).find("img");
-    	$('.pay_gwc').removeClass("pay_gwcactivity");
-        $(this).find(".pay_gwc").addClass("pay_gwcactivity");
-        //选择哪家公司给赋值
-        $("#insuranceCompany").val(img.attr("val"));
-        //切换条款
-        clause(img.attr("data-code"));
-    }
+
+	var img=$(this).find("img");
+	$('.pay_gwc').removeClass("pay_gwcactivity");
+	$(this).find(".pay_gwc").addClass("pay_gwcactivity");
+	//选择哪家公司给赋值
+	$("#insuranceCompany").val(img.attr("val"));
+	//切换条款
+	clause(img.attr("data-code"));
+
 })
 $(".visualSelect").click(function(){
 	$("#selectContainerQcOhiqga").show();
@@ -470,21 +468,23 @@ $(".visualSelect").click(function(){
 //点击选择所属公司
 $("#selectContainerQcOhiqga img").click(function(){
 	var item = $(this).index();  //获取索引下标 也从0开始
-	if(item==2){
-    	layer.msg('此功能正在建设中', {icon: 0});
-    }else{
-    	$(".visualSelect").text($(this).attr("alt"));
-    	$(".visualSelect").attr("data-id",$(this).attr("rel"));
-    	var id=$(".visualSelect").attr("data-id");
-    	$("#insuranceCompany").val($(this).attr("val"));
-    	 //切换条款
-        clause($(this).attr("data-code"));
-    	$('.watermark').remove();
-    	//水印替换
-    	var img='/static/images/Insurance'+(id*1+1)+'.jpg';
-    	watermark({},img);
-    	$("#selectContainerQcOhiqga").hide();
-    }
+	$(".visualSelect").text($(this).attr("alt"));
+	$(".visualSelect").attr("data-id",$(this).attr("rel"));
+	var id=$(".visualSelect").attr("data-id");
+	$("#insuranceCompany").val($(this).attr("val"));
+	 //切换条款
+	clause($(this).attr("data-code"));
+	$('.watermark').remove();
+	//水印替换
+	var img='/static/images/Insurance'+(id*1+1)+'.jpg';
+	watermark({},img);
+	$("#selectContainerQcOhiqga").hide();
+    $("#file-row").toggle($("#insuranceCompany").val()=="PICC");
+    if($("#insuranceCompany").val()=="PICC"){
+        $(":hidden[name='fileKey']").val($(":hidden[name='fileKey']").attr("_val"));
+	}else{
+        $(":hidden[name='fileKey']").val("-");
+	}
 })
 $('body').click(function(e) {
     var target = $(e.target);
