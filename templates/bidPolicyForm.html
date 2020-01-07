@@ -438,6 +438,13 @@ $(function(){
     $(".visualSelect").text($("#selectContainerQcOhiqga img[val='"+$("#insuranceCompany").val()+"']").attr("alt"));
     //默认保险公司的rel
     $(".visualSelect").attr("data-id",$("#selectContainerQcOhiqga img[val='"+$("#insuranceCompany").val()+"']").attr("rel"));
+    //返回的如果是人保，就显示上传文件，否则不显示
+    $("#file-row").toggle($("#insuranceCompany").val()=="PICC");
+    if($("#insuranceCompany").val()=="PICC"){
+        $(":hidden[name='fileKey']").val($(":hidden[name='fileKey']").attr("_val"));
+	}else{
+        $(":hidden[name='fileKey']").val("-");
+	}
 })
 $(".reg_show").click(function (){
     if($(".agree_wrap").css("display")=="none"){
@@ -452,7 +459,6 @@ $(".btn_open").click(function() {
 //默认初始化选择所属公司
 $(".zhuyi_tk li").click(function(){
     var item = $(this).index();  //获取索引下标 也从0开始
-
 	var img=$(this).find("img");
 	$('.pay_gwc').removeClass("pay_gwcactivity");
 	$(this).find(".pay_gwc").addClass("pay_gwcactivity");
@@ -460,7 +466,13 @@ $(".zhuyi_tk li").click(function(){
 	$("#insuranceCompany").val(img.attr("val"));
 	//切换条款
 	clause(img.attr("data-code"));
-
+	//切换选择如果是人保，就显示上传文件，否则不显示
+	$("#file-row").toggle($("#insuranceCompany").val()=="PICC");
+    if($("#insuranceCompany").val()=="PICC"){
+        $(":hidden[name='fileKey']").val($(":hidden[name='fileKey']").attr("_val"));
+	}else{
+        $(":hidden[name='fileKey']").val("-");
+	}
 })
 $(".visualSelect").click(function(){
 	$("#selectContainerQcOhiqga").show();
@@ -479,6 +491,7 @@ $("#selectContainerQcOhiqga img").click(function(){
 	var img='/static/images/Insurance'+(id*1+1)+'.jpg';
 	watermark({},img);
 	$("#selectContainerQcOhiqga").hide();
+	//切换选择如果是人保，就显示上传文件，否则不显示
     $("#file-row").toggle($("#insuranceCompany").val()=="PICC");
     if($("#insuranceCompany").val()=="PICC"){
         $(":hidden[name='fileKey']").val($(":hidden[name='fileKey']").attr("_val"));
