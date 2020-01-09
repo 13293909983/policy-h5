@@ -824,11 +824,11 @@
 		if(treeCode!=null && treeCode.trim()!=""){
 			$.ajax({
 	            method:'post',
-	            url:manageUrl+'/homeController/selectByCode',
+	            url:manageUrl+'/homeController/getNameStrByCode',
 	            data:{"code":treeCode},
 	            success:function(res){
 	            	if(res.code==200){
-	            		$("#regionSel").attr("value", res.data.name);
+	            		$("#regionSel").attr("value", res.data);
 		        	}
 	            }
 	        })
