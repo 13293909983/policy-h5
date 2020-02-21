@@ -435,9 +435,6 @@ $(function(){
 	}else{
 		$(".zhuyi_wrap").show();
 	}
-    $(".visualSelect").text($("#selectContainerQcOhiqga img[val='"+$("#insuranceCompany").val()+"']").attr("alt"));
-    //默认保险公司的rel
-    $(".visualSelect").attr("data-id",$("#selectContainerQcOhiqga img[val='"+$("#insuranceCompany").val()+"']").attr("rel"));
     //返回的如果是人保，就显示上传文件，否则不显示
     $("#file-row").toggle($("#insuranceCompany").val()=="PICC");
     if($("#insuranceCompany").val()=="PICC"){
@@ -514,7 +511,7 @@ $('body').click(function(e) {
 		var defaultSettings={
 			watermark_txt:"text",
 			watermark_x:2,//水印起始位置x轴坐标
-			watermark_y:0.85,//水印起始位置Y轴坐标
+			watermark_y:1.4,//水印起始位置Y轴坐标0.85
 			watermark_rows:2,//水印行数
 			watermark_cols:2,//水印列数
 			watermark_x_space:3.2,//水印x轴间隔150

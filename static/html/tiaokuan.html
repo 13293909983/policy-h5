@@ -23,7 +23,8 @@
 <script type="text/javascript">
 $(function (){
 	//初始化默认查询人保
-	clause($("#selectContainerQcOhiqga img[val='"+$("#insuranceCompany").val()+"']").attr("data-code"));
+	console.log($(".pay_gwcactivity").next().attr("data-code"));
+	clause($(".pay_gwcactivity").next().attr("data-code"));
 })
 //加载条款
 function clause(companyId) {
