@@ -272,6 +272,8 @@
                 url:"/insure/upload",
 				type:"POST",
 				data:formData,
+                processData : false,
+                contentType : false,
 				success:function(data){
                     var fileKey=data.fileKey;
                     //把返回的key设置到隐藏的input上
