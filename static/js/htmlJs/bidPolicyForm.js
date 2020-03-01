@@ -265,7 +265,7 @@
             var ot;
             var oloaded;
             var formData = new FormData();
-	        //formData.enctype="multipart/form-data";
+	        formData.enctype="multipart/form-data";
             formData.append("imageFile",files[0]);
             formData.append("insuranceCompany",$("#insuranceCompany").val());
             $.ajax({
@@ -273,7 +273,7 @@
 				type:"POST",
 				data:formData,
                 processData : false,
-                contentType : false,
+                //contentType : false,
 				success:function(data){
                     var fileKey=data.fileKey;
                     //把返回的key设置到隐藏的input上
