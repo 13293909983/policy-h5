@@ -270,17 +270,37 @@
             $.ajax({
                 url:"/insure/upload?insuranceCompany="+$("#insuranceCompany").val(),
 				type:"POST",
-				data:formData,
+				//data:formData,
 				success:function(data){
-                	alert("success")
+                    var fileKey=data.fileKey;
+                    //把返回的key设置到隐藏的input上
+                    $(":hidden[name='fileKey']").val(fileKey);
+                    $(":hidden[name='fileKey']").attr("_val",fileKey);
+                    if(ext=="zip"){
+                        $("#fileImg").attr("src", "/static/images/a7.png");
+                    }else{
+                        $("#fileImg").attr("src", url);
+                    }
+                    $("#text").text(files[0].name);
+                    $("#text").attr("title",files[0].name);
 				},
 				error:function(e){
-					alert("error")
+                    layer.msg("文件未上传成功，请重新上传", {icon: 0});
+                    //把file设置为空的
+                    $(":hidden[name='fileKey']").val("");
+                    $(":hidden[name='fileKey']").attr("_val","");
+                    var file = document.getElementById('imageFile');
+                    file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
+                    file.outerHTML = file.outerHTML; //重新初始化了file的html
+                    $("#text").text("未选择文件");
+                    $("#fileImg").attr("src", "/static/images/a7.png");
+                    //隐藏进度条
+                    $("#schedule").hide();
 				},
 				xhr:function(){
                     var myXhr = $.ajaxSettings.xhr();
                     if (myXhr.upload) {
-                        myXhr.upload.onloadstart = function () {//上传开始执行方法
+                        /*myXhr.upload.onloadstart = function () {//上传开始执行方法
                             ot = new Date().getTime();   //设置上传开始时间
                             oloaded = 0;//设置上传开始时，以上传的文件大小为0
                         };
@@ -322,7 +342,7 @@
                             if(bspeed==0) {
                                 time.innerHTML = '上传已取消';
                             }
-                        }, false);
+                        }, false);*/
                     }
                     return myXhr;
 				}
