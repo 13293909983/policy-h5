@@ -265,10 +265,11 @@
             var ot;
             var oloaded;
             var formData = new FormData();
-	        formData.enctype="multipart/form-data";
+	        //formData.enctype="multipart/form-data";
             formData.append("imageFile",files[0]);
+            formData.append("insuranceCompany",$("#insuranceCompany").val());
             $.ajax({
-                url:"/insure/upload?insuranceCompany="+$("#insuranceCompany").val(),
+                url:"/insure/upload",
 				type:"POST",
 				data:formData,
 				success:function(data){
