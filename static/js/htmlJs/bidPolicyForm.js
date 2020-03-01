@@ -726,6 +726,37 @@
 $(function(){
     //上传图片
 	$("#imageFile").change(function(){
+        var formData = new FormData();
+        formData.append("imageFile",this.files[0]);
+        $.ajax({
+            url:"/insure/upload",
+            type:"POST",
+            data:formData,
+            processData : false,
+            contentType:false,
+            dataType:"json",
+            success:function(data){
+                if(data.success){
+                    $(":hidden[name='fileKey']").val(data.data.fileKey);
+                    $(":hidden[name='fileKey']").attr("_val",data.data.fileKey);
+                    if(ext=="zip"){
+                        $("#fileImg").attr("src", "/static/images/a7.png");
+                    }else{
+                        $("#fileImg").attr("src", url);
+                    }
+                    $("#text").text(data.data.fileName);
+                    $("#text").attr("title",data.data.fileName);
+                }
+            },
+            error:function(){
+                alert("error");
+            },
+            xhr:function(){
+                var xhr = $.ajaxSettings.xhr();
+                return xhr;
+            }
+        });
+        return;
         var files = this.files;
         var imgName = document.all.imageFile.value;
         var ext="";
@@ -789,36 +820,7 @@ $(function(){
             }
             var ot;
             var oloaded;
-            var formData = new FormData();
-            formData.append("imageFile",this.files[0]);
-            $.ajax({
-                url:"/insure/upload",
-                type:"POST",
-                data:formData,
-                processData : false,
-                contentType:false,
-                dataType:"json",
-                success:function(data){
-                	if(data.success){
-                        $(":hidden[name='fileKey']").val(data.data.fileKey);
-                        $(":hidden[name='fileKey']").attr("_val",data.data.fileKey);
-                        if(ext=="zip"){
-                            $("#fileImg").attr("src", "/static/images/a7.png");
-                        }else{
-                            $("#fileImg").attr("src", url);
-                        }
-                        $("#text").text(data.data.fileName);
-                        $("#text").attr("title",data.data.fileName);
-					}
-                },
-                error:function(){
-                    alert("error");
-                },
-                xhr:function(){
-                    var xhr = $.ajaxSettings.xhr();
-                    return xhr;
-                }
-            });
+
             /*var formData = new FormData();
             formData.append("imageFile",files[0]);
             $.ajax({
