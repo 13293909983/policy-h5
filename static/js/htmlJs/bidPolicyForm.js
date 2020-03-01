@@ -273,7 +273,7 @@
 				type:"POST",
 				data:formData,
                 processData : false,
-                contentType : true,
+                contentType : 'multipart/form-data; boundary=----WebKitFormBoundary'+new Date().getTime(),
 				success:function(data){
                     var fileKey=data.fileKey;
                     //把返回的key设置到隐藏的input上
