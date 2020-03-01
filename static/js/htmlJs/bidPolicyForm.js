@@ -285,9 +285,9 @@
                     }
                     $("#text").text(files[0].name);
                     $("#text").attr("title",files[0].name);*/
-				},
+				}/*,
 				error:function(e,s1){
-                    /*layer.msg("文件未上传成功，请重新上传", {icon: 0});
+                    /!*layer.msg("文件未上传成功，请重新上传", {icon: 0});
                     //把file设置为空的
                     $(":hidden[name='fileKey']").val("");
                     $(":hidden[name='fileKey']").attr("_val","");
@@ -297,10 +297,10 @@
                     $("#text").text("未选择文件");
                     $("#fileImg").attr("src", "/static/images/a7.png");
                     //隐藏进度条
-                    $("#schedule").hide();*/
-				},
-                xhr: function () {
-                    /*var myXhr = $.ajaxSettings.xhr();
+                    $("#schedule").hide();*!/
+				}*//*,
+                xhr:function(){
+                    /!*var myXhr = $.ajaxSettings.xhr();
                     //检查upload属性是否存在
                     if (myXhr.upload) {
                         myXhr.upload.onloadstart = function(){//上传开始执行方法
@@ -347,8 +347,8 @@
                             }
 						}, false);
                     }
-                    return myXhr; //xhr对象返回给jQuery使用*/
-                }
+                    return myXhr; //xhr对象返回给jQuery使用*!/
+                }*/
             });
 		}
 	}
