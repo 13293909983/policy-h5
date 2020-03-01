@@ -300,7 +300,7 @@
                     $("#schedule").hide();
 				},
                 xhr: function () {
-                    myXhr = $.ajaxSettings.xhr();
+                    var myXhr = $.ajaxSettings.xhr();
                     //检查upload属性是否存在
                     if (myXhr.upload) {
                         myXhr.upload.onloadstart = function(){//上传开始执行方法
