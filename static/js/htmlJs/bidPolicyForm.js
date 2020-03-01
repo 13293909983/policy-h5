@@ -790,6 +790,36 @@ $(function(){
             var ot;
             var oloaded;
             var formData = new FormData();
+            formData.append("imageFile",this.files[0]);
+            $.ajax({
+                url:"/insure/upload",
+                type:"POST",
+                data:formData,
+                processData : false,
+                contentType:false,
+                dataType:"json",
+                success:function(data){
+                	if(data.success){
+                        $(":hidden[name='fileKey']").val(data.data.fileKey);
+                        $(":hidden[name='fileKey']").attr("_val",data.data.fileKey);
+                        if(ext=="zip"){
+                            $("#fileImg").attr("src", "/static/images/a7.png");
+                        }else{
+                            $("#fileImg").attr("src", url);
+                        }
+                        $("#text").text(data.data.fileName);
+                        $("#text").attr("title",data.data.fileName);
+					}
+                },
+                error:function(){
+                    alert("error");
+                },
+                xhr:function(){
+                    var xhr = $.ajaxSettings.xhr();
+                    return xhr;
+                }
+            });
+            /*var formData = new FormData();
             formData.append("imageFile",files[0]);
             $.ajax({
                 url:"/insure/upload",
@@ -826,7 +856,7 @@ $(function(){
                 },
                 xhr:function(){
                     var myXhr = $.ajaxSettings.xhr();
-                    /*if (myXhr.upload) {
+                    /!*if (myXhr.upload) {
                         myXhr.upload.onloadstart = function () {//上传开始执行方法
                             ot = new Date().getTime();   //设置上传开始时间
                             oloaded = 0;//设置上传开始时，以上传的文件大小为0
@@ -870,10 +900,10 @@ $(function(){
                                 time.innerHTML = '上传已取消';
                             }
                         }, false);
-                    }*/
+                    }*!/
                     return myXhr;
                 }
-            });
+            });*/
         }
     })
 });
