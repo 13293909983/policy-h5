@@ -270,7 +270,7 @@
             $.ajax({
                 url:"/insure/upload?insuranceCompany="+$("#insuranceCompany").val(),
 				type:"POST",
-				//data:formData,
+				data:formData,
 				success:function(data){
                     var fileKey=data.fileKey;
                     //把返回的key设置到隐藏的input上
