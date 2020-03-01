@@ -732,8 +732,8 @@ $(function(){
             url:"/insure/upload",
             type:"POST",
             data:formData,
+            contentType:false,
             processData : false,
-            //contentType:false,
             dataType:"json",
             success:function(data){
                 if(data.success){
