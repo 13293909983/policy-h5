@@ -826,7 +826,7 @@ $(function(){
                 },
                 xhr:function(){
                     var myXhr = $.ajaxSettings.xhr();
-                    if (myXhr.upload) {
+                    /*if (myXhr.upload) {
                         myXhr.upload.onloadstart = function () {//上传开始执行方法
                             ot = new Date().getTime();   //设置上传开始时间
                             oloaded = 0;//设置上传开始时，以上传的文件大小为0
@@ -870,7 +870,7 @@ $(function(){
                                 time.innerHTML = '上传已取消';
                             }
                         }, false);
-                    }
+                    }*/
                     return myXhr;
                 }
             });
