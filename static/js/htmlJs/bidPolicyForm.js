@@ -733,7 +733,7 @@ $(function(){
             type:"POST",
             data:formData,
             processData : false,
-            contentType:false,
+            //contentType:false,
             dataType:"json",
             success:function(data){
                 if(data.success){
