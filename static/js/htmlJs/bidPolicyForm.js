@@ -272,7 +272,7 @@
                 type:"POST",
                 data:formData,
                 processData : false,
-                contentType:undefined,
+                contentType:false,
                 dataType:"json",
                 success:function(data){
                     var fileKey=data.fileKey;
