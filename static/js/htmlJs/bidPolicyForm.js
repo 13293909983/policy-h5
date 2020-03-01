@@ -268,12 +268,26 @@
 	        formData.enctype="multipart/form-data";
             formData.append("imageFile",files[0]);
             $.ajax({
-                type: "POST",
+                url:"/insure/upload?insuranceCompany="+$("#insuranceCompany").val(),
+				type:"POST",
+				success:function(data){
+                	alert("success")
+				},
+				error:function(e){
+					alert("error")
+				},
+				xhr:function(){
+                    var myXhr = $.ajaxSettings.xhr();
+                    alert(myXhr);
+				}
+			});
+            /*$.ajax({
+                type:"POST",
 				url:"/insure/upload?insuranceCompany="+$("#insuranceCompany").val(),
 				dataType:"json",
-                data: formData,
+                data:formData,
 				success:function(data){
-					/*alert(JSON.stringify(data));
+					/!*alert(JSON.stringify(data));
                     var fileKey=data.fileKey;
                     //把返回的key设置到隐藏的input上
                     $(":hidden[name='fileKey']").val(fileKey);
@@ -284,8 +298,8 @@
                         $("#fileImg").attr("src", url);
                     }
                     $("#text").text(files[0].name);
-                    $("#text").attr("title",files[0].name);*/
-				}/*,
+                    $("#text").attr("title",files[0].name);*!/
+				}/!*,
 				error:function(e,s1){
                     /!*layer.msg("文件未上传成功，请重新上传", {icon: 0});
                     //把file设置为空的
@@ -298,7 +312,7 @@
                     $("#fileImg").attr("src", "/static/images/a7.png");
                     //隐藏进度条
                     $("#schedule").hide();*!/
-				}*//*,
+				}*!//!*,
                 xhr:function(){
                     /!*var myXhr = $.ajaxSettings.xhr();
                     //检查upload属性是否存在
@@ -348,8 +362,8 @@
 						}, false);
                     }
                     return myXhr; //xhr对象返回给jQuery使用*!/
-                }*/
-            });
+                }*!/
+            });*/
 		}
 	}
 	function onCheck(){
