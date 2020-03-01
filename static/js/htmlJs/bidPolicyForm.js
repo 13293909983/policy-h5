@@ -265,7 +265,6 @@
             var ot;
             var oloaded;
             var formData = new FormData();
-	        formData.enctype="multipart/form-data";
             formData.append("imageFile",files[0]);
             formData.append("insuranceCompany",$("#insuranceCompany").val());
             $.ajax({
@@ -273,7 +272,7 @@
 				type:"POST",
 				data:formData,
                 processData : false,
-                contentType : 'multipart/form-data; boundary=----WebKitFormBoundary'+new Date().getTime(),
+                contentType : false,
 				success:function(data){
                     var fileKey=data.fileKey;
                     //把返回的key设置到隐藏的input上
@@ -303,7 +302,7 @@
 				xhr:function(){
                     var myXhr = $.ajaxSettings.xhr();
                     if (myXhr.upload) {
-                        /*myXhr.upload.onloadstart = function () {//上传开始执行方法
+                        myXhr.upload.onloadstart = function () {//上传开始执行方法
                             ot = new Date().getTime();   //设置上传开始时间
                             oloaded = 0;//设置上传开始时，以上传的文件大小为0
                         };
@@ -345,94 +344,11 @@
                             if(bspeed==0) {
                                 time.innerHTML = '上传已取消';
                             }
-                        }, false);*/
+                        }, false);
                     }
                     return myXhr;
 				}
 			});
-            /*$.ajax({
-                type:"POST",
-				url:"/insure/upload?insuranceCompany="+$("#insuranceCompany").val(),
-				dataType:"json",
-                data:formData,
-				success:function(data){
-					/!*alert(JSON.stringify(data));
-                    var fileKey=data.fileKey;
-                    //把返回的key设置到隐藏的input上
-                    $(":hidden[name='fileKey']").val(fileKey);
-                    $(":hidden[name='fileKey']").attr("_val",fileKey);
-                    if(ext=="zip"){
-                        $("#fileImg").attr("src", "/static/images/a7.png");
-                    }else{
-                        $("#fileImg").attr("src", url);
-                    }
-                    $("#text").text(files[0].name);
-                    $("#text").attr("title",files[0].name);*!/
-				}/!*,
-				error:function(e,s1){
-                    /!*layer.msg("文件未上传成功，请重新上传", {icon: 0});
-                    //把file设置为空的
-                    $(":hidden[name='fileKey']").val("");
-                    $(":hidden[name='fileKey']").attr("_val","");
-                    var file = document.getElementById('imageFile');
-                    file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
-                    file.outerHTML = file.outerHTML; //重新初始化了file的html
-                    $("#text").text("未选择文件");
-                    $("#fileImg").attr("src", "/static/images/a7.png");
-                    //隐藏进度条
-                    $("#schedule").hide();*!/
-				}*!//!*,
-                xhr:function(){
-                    /!*var myXhr = $.ajaxSettings.xhr();
-                    //检查upload属性是否存在
-                    if (myXhr.upload) {
-                        myXhr.upload.onloadstart = function(){//上传开始执行方法
-                            ot = new Date().getTime();   //设置上传开始时间
-                            oloaded = 0;//设置上传开始时，以上传的文件大小为0
-                        };
-                        //绑定progress事件的回调函数
-                        myXhr.upload.addEventListener('progress', function(event){
-							//console.log(event);
-                            $("#schedule").show();
-                            var progressBar = document.getElementById("progressBar");
-                            var percentageDiv = document.getElementById("percentage");
-                            // event.total是需要传输的总字节，event.loaded是已经传输的字节。如果event.lengthComputable不为真，则event.total等于0
-                            if (event.lengthComputable) {//
-                                progressBar.max = event.total;
-                                progressBar.value = event.loaded;
-                                percentageDiv.innerHTML = Math.round(event.loaded / event.total * 100) + "%";
-                            }
-                            var time = document.getElementById("time");
-                            var nt = new Date().getTime();//获取当前时间
-                            var pertime = (nt-ot)/1000; //计算出上次调用该方法时到现在的时间差，单位为s
-                            ot = new Date().getTime(); //重新赋值时间，用于下次计算
-
-                            var perload = event.loaded - oloaded; //计算该分段上传的文件大小，单位b
-                            oloaded = event.loaded;//重新赋值已上传文件大小，用以下次计算
-                            //上传速度计算
-                            var speed = perload/pertime;//单位b/s
-                            var bspeed = speed;
-                            var units = 'b/s';//单位名称
-                            if(speed/1024>1){
-                                speed = speed/1024;
-                                units = 'k/s';
-                            }
-                            if(speed/1024>1){
-                                speed = speed/1024;
-                                units = 'M/s';
-                            }
-                            speed = speed.toFixed(1);
-                            //剩余时间
-                            var resttime = ((event.total-event.loaded)/bspeed).toFixed(1);
-                            time.innerHTML = '速度：'+speed+units+'，剩余时间：'+resttime+'s';
-                            if(bspeed==0) {
-                                time.innerHTML = '上传已取消';
-                            }
-						}, false);
-                    }
-                    return myXhr; //xhr对象返回给jQuery使用*!/
-                }*!/
-            });*/
 		}
 	}
 	function onCheck(){
