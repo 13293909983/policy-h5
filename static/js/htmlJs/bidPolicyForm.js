@@ -266,13 +266,13 @@
             var oloaded;
             var formData = new FormData();
             formData.append("imageFile",files[0]);
-            formData.append("insuranceCompany",$("#insuranceCompany").val());
+            //formData.append("insuranceCompany",$("#insuranceCompany").val());
             $.ajax({
                 url:"/insure/upload",
-				type:"POST",
-				data:formData,
+                type:"POST",
+                data:formData,
                 processData : false,
-                contentType:false,
+                contentType:undefined,
                 dataType:"json",
                 success:function(data){
                     var fileKey=data.fileKey;
