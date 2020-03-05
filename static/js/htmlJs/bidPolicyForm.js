@@ -127,7 +127,7 @@
 			layer.alert($("#message").val(), {icon: 2});
 		}
 		var fileKey=$(":hidden[name='fileKey']").val();
-		if(fileKey!=null&&fileKey!=""){
+		if(fileKey!=null&&fileKey!=""&&fileKey!="-"){
 			$("#fileImg").attr("src", "/static/images/a7.png");
 			$("#text").text("已选择文件");
 		}
