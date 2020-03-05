@@ -847,6 +847,8 @@
 		$(".visualSelect").attr("data-id",value);
 		if(value==0){
 			$(".visualSelect").text("中国人民保险");
+			//如果初始化没有点击，默认给赋值
+			$(".pay_gwcactivity img").val("PICC");
 		}else if(value==1){
 			$(".visualSelect").text("太平洋保险");
 		}else if(value==2){
