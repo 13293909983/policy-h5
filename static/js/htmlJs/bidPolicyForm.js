@@ -127,7 +127,7 @@
 			layer.alert($("#message").val(), {icon: 2});
 		}
 		var fileKey=$(":hidden[name='fileKey']").val();
-		if(fileKey!=null&&fileKey!=""){
+		if(fileKey!=null&&fileKey!=""&&fileKey!="-"){
 			$("#fileImg").attr("src", "/static/images/a7.png");
 			$("#text").text("已选择文件");
 		}
@@ -708,6 +708,9 @@
 		$(".visualSelect").attr("data-id",value);
 		if(value==0){
 			$(".visualSelect").text("中国人民保险");
+			//如果初始化没有点击，默认给赋值并显示上传文件
+			$("#insuranceCompany").val("PICC");
+			$("#file-row").toggle($("#insuranceCompany").val()=="PICC");
 		}else if(value==1){
 			$(".visualSelect").text("太平洋保险");
 		}else if(value==2){
