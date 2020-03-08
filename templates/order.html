@@ -76,7 +76,7 @@
 						<a th:case="1" href="/bidPolicyError.html" style="background-color:#1060a5;">待确认</a>
 						<a th:case="2" href="/bidPolicyError.html" style="background-color:#1060a5;">待确认</a>
 						<a th:case="*" th:href="${'/orderDetails/'+bidPolicy.orderId}" style="background-color: #1060a5;">查看</a>
-						<a th:if="${bidPolicy.deletable}" style="background-color:#1060a5;">删除</a>
+						<a th:if="${bidPolicy.deletable}" style="background-color:#1060a5;" th:href="${'/policy/delete?orderId='+bidPolicy.orderId}">删除</a>
 					</td>
 				</tr>
 			</tbody>
