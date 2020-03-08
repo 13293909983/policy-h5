@@ -489,6 +489,19 @@ $(".btn_open").click(function (){
 	});
 	$(function(){
 		click();
+        $(":radio[name='organ.threeinone']").change(function(){
+            $(":input[name='organ.socialCreditCode']").prop("disabled",$(this).val()=="0").parent().toggle($(this).val()=="1");
+            $(":input[name='organ.organCode']").prop("disabled",$(this).val()=="1").parent().toggle($(this).val()=="0");
+            $(":input[name='organ.businessLicenceNo']").prop("disabled",$(this).val()=="1").parent().toggle($(this).val()=="0");
+            $(":input[name='organ.taxregNo']").prop("disabled",$(this).val()=="1").parent().toggle($(this).val()=="0");
+            $("#drop_area3").parent(".upload-boxone").toggle($(this).val()=="0");
+            $("#drop_area4").parent(".upload-boxone").toggle($(this).val()=="0");
+        });
+        $(":radio[name='organ.threeinone']:checked").change();
+        $(":radio[name='isLo']").change(function(){
+            $(".inform-box:eq(2)").toggle($(this).val()=="0").find(":input").prop("disabled",$(this).val()=="1");
+        });
+        $(":radio[name='isLo']:checked").change();
 	})
 	//提交验证
 	function onCheck(type){
