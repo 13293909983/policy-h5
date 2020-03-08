@@ -730,7 +730,7 @@ $(".btn_open").click(function (){
 		//密码
 		$("input[name='password']").blur("input propertychange",function(){
 			var password=$(':input[name=password]').val();
-			var passwordReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+			var passwordReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 			if(password=="" || password==null){
 				$(":input[name='password']").parent().find("i").text("请输入密码");
 			}else if(!passwordReg.test(password)){
