@@ -21,6 +21,7 @@
 		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="/static/js/layer/2.4/layer.js"></script>
 		<style type="text/css">
 			.platformName{
 				max-width: 100px;
@@ -53,6 +54,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="bidPolicy,bidPolicyStat:${datagrid.rows}">
+					<td><input type="hidden" th:value="${bidPolicy.insuranceCompany}"></td>
 					<!-- <td th:text="${(bidPolicy.policyNo!=null?bidPolicy.policyNo:bidPolicy.proposalNo)+'#'+bidPolicy.salt }"></td> -->
 					<td th:text="${(bidPolicyStat.index+1)+(datagrid.page)*datagrid.pageSize}"></td>
 					<td th:text="${bidPolicy.orderId}"></td>
@@ -76,7 +78,7 @@
 						<a th:case="1" href="/bidPolicyError.html" style="background-color:#1060a5;">待确认</a>
 						<a th:case="2" href="/bidPolicyError.html" style="background-color:#1060a5;">待确认</a>
 						<a th:case="*" th:href="${'/orderDetails/'+bidPolicy.orderId}" style="background-color: #1060a5;">查看</a>
-						<a th:if="${bidPolicy.deletable}" style="background-color:#1060a5;" th:href="${'/policy/delete?orderId='+bidPolicy.orderId}">删除</a>
+						<a th:if="${bidPolicy.deletable}" th:href="|javascript:deleteBidPolicy('${bidPolicy.orderId}');|">删除</a>
 					</td>
 				</tr>
 			</tbody>
@@ -116,7 +118,21 @@
 		$('tbody tr').mouseout(function(e) {
 	        $(this).siblings().stop().fadeTo(50,1);
 	    });
+		
 	})
+	//删除
+	function deleteBidPolicy(orderId){
+		layer.confirm("您确定删除吗？",function () {
+			$.ajax({
+	            method:'get',
+	            url:'/policy/delete',
+	            data:{"orderId":orderId},
+	            success:function(res){
+	            	console.log(res);
+	            }
+	        })
+		})
+	}
 </script>
 </body>
 </html>
