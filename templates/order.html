@@ -54,7 +54,6 @@
 			</thead>
 			<tbody>
 				<tr th:each="bidPolicy,bidPolicyStat:${datagrid.rows}">
-					<td><input type="hidden" th:value="${bidPolicy.insuranceCompany}"></td>
 					<!-- <td th:text="${(bidPolicy.policyNo!=null?bidPolicy.policyNo:bidPolicy.proposalNo)+'#'+bidPolicy.salt }"></td> -->
 					<td th:text="${(bidPolicyStat.index+1)+(datagrid.page)*datagrid.pageSize}"></td>
 					<td th:text="${bidPolicy.orderId}"></td>
@@ -123,14 +122,7 @@
 	//删除
 	function deleteBidPolicy(orderId){
 		layer.confirm("您确定删除吗？",function () {
-			$.ajax({
-	            method:'get',
-	            url:'/policy/delete',
-	            data:{"orderId":orderId},
-	            success:function(res){
-	            	console.log(res);
-	            }
-	        })
+			location.href="/policy/delete?orderId="+orderId;
 		})
 	}
 </script>
