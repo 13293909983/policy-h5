@@ -798,6 +798,7 @@ $(function(){
                 contentType:false,
                 dataType:"json",
                 success:function(data){
+                	console.log(data);
                     var fileKey=data.data.fileKey;
                     //把返回的key设置到隐藏的input上
                     $(":hidden[name='fileKey']").val(fileKey);
