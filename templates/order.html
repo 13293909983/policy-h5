@@ -23,7 +23,7 @@
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="/static/js/layer/2.4/layer.js"></script>
 		<style type="text/css">
-			.platform{
+			.platformName{
 				max-width: 100px;
 				overflow: hidden;
 				text-overflow: ellipsis;
@@ -57,11 +57,15 @@
 					<!-- <td th:text="${(bidPolicy.policyNo!=null?bidPolicy.policyNo:bidPolicy.proposalNo)+'#'+bidPolicy.salt }"></td> -->
 					<td th:text="${(bidPolicyStat.index+1)+(datagrid.page)*datagrid.pageSize}"></td>
 					<td th:text="${bidPolicy.orderId}"></td>
-					<td class="platform">
-						<input type="hidden" th:value="${bidPolicy}">
+					<td th:switch="${bidPolicy.insuranceCompany}">
+						<span th:case="PICC" style="background-color: transparent;color: #000000;">中国人民保险</span>
+						<span th:case="CPIC" style="background-color: transparent;color: #000000;">太平洋保险</span>
+						<span th:case="CIC" style="background-color: transparent;color: #000000;">中华保险</span>
+						<span th:case="CCIC" style="background-color: transparent;color: #000000;">中国大地保险</span>
+						<span th:case="*" style="background-color: transparent;color: #000000;">其他</span>
 					</td>
 					<td th:text="${bidPolicy.certificateDepart}"></td>
-					<td class="platform" th:text="${bidPolicy.platformName}" th:title="${bidPolicy.platformName}"></td>
+					<td class="platformName" th:text="${bidPolicy.platformName}" th:title="${bidPolicy.platformName}"></td>
 					<td th:text="${bidPolicy.sumPremium}"></td>
 					<td th:text="${#objects.nullSafe(#dates.format(bidPolicy.saveTimes,'yyyy-MM-dd HH:mm:ss'),'-')}"></td>
 					<td th:switch="${bidPolicy.orderStatus}" style="width:110px;">
