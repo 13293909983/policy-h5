@@ -23,7 +23,7 @@
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="/static/js/layer/2.4/layer.js"></script>
 		<style type="text/css">
-			.platformName{
+			.platform{
 				max-width: 100px;
 				overflow: hidden;
 				text-overflow: ellipsis;
@@ -57,9 +57,11 @@
 					<!-- <td th:text="${(bidPolicy.policyNo!=null?bidPolicy.policyNo:bidPolicy.proposalNo)+'#'+bidPolicy.salt }"></td> -->
 					<td th:text="${(bidPolicyStat.index+1)+(datagrid.page)*datagrid.pageSize}"></td>
 					<td th:text="${bidPolicy.orderId}"></td>
-					<td class="insuranceCompany" th:text="${bidPolicy.insuranceCompanyName}" th:title="${bidPolicy.insuranceCompanyName}"></td>
+					<td class="platform">
+						<input type="hidden" th:value="${bidPolicy}">
+					</td>
 					<td th:text="${bidPolicy.certificateDepart}"></td>
-					<td class="platformName" th:text="${bidPolicy.platformName}" th:title="${bidPolicy.platformName}"></td>
+					<td class="platform" th:text="${bidPolicy.platformName}" th:title="${bidPolicy.platformName}"></td>
 					<td th:text="${bidPolicy.sumPremium}"></td>
 					<td th:text="${#objects.nullSafe(#dates.format(bidPolicy.saveTimes,'yyyy-MM-dd HH:mm:ss'),'-')}"></td>
 					<td th:switch="${bidPolicy.orderStatus}" style="width:110px;">
