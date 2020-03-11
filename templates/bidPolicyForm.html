@@ -264,7 +264,7 @@
 					<td><span class="span_color">*</span>&nbsp;开标日期</td>
 					<td>
 						<div class="layui-input-inline">
-					        <input name="retroactiveStart" id="retroactiveStart" type="text" class="input-text" placeholder="请选择开标时间" th:value="${#dates.format(bidPolicy.retroactiveStart,'yyyy-MM-dd')}" autocomplete="off" readonly="readonly">
+					        <input name="retroactiveStart" id="retroactiveStart" type="text" class="input-text" placeholder="请选择开标时间" th:value="${bidPolicy.retroactiveStart}" autocomplete="off" readonly="readonly">
 					    </div>
 						<br/>
 						<i th:text="${errorMap['retroactiveStart']}"></i>
