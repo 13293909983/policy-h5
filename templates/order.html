@@ -57,13 +57,7 @@
 					<!-- <td th:text="${(bidPolicy.policyNo!=null?bidPolicy.policyNo:bidPolicy.proposalNo)+'#'+bidPolicy.salt }"></td> -->
 					<td th:text="${(bidPolicyStat.index+1)+(datagrid.page)*datagrid.pageSize}"></td>
 					<td th:text="${bidPolicy.orderId}"></td>
-					<td th:switch="${bidPolicy.insuranceCompany}">
-						<span th:case="PICC" style="background-color: transparent;color: #000000;">中国人民保险</span>
-						<span th:case="CPIC" style="background-color: transparent;color: #000000;">太平洋保险</span>
-						<span th:case="CIC" style="background-color: transparent;color: #000000;">中华保险</span>
-						<span th:case="CCIC" style="background-color: transparent;color: #000000;">中国大地保险</span>
-						<span th:case="*" style="background-color: transparent;color: #000000;">其他</span>
-					</td>
+					<td class="insuranceCompany" th:text="${bidPolicy.insuranceCompanyName}" th:title="${bidPolicy.insuranceCompanyName}"></td>
 					<td th:text="${bidPolicy.certificateDepart}"></td>
 					<td class="platformName" th:text="${bidPolicy.platformName}" th:title="${bidPolicy.platformName}"></td>
 					<td th:text="${bidPolicy.sumPremium}"></td>
