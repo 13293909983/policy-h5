@@ -431,6 +431,8 @@
 //判断初始化要不要弹出选择投保公司
 $(function(){
 	console.log($("#errorMap").val()!="{}");
+	//默认给_val赋值
+	$(":hidden[name='fileKey']").attr("_val",$(":hidden[name='fileKey']").val());
 	if($("#errorMap").val()!="{}"||$("#message").val()!=""){
 		$(".zhuyi_wrap").hide();
 	}else{
