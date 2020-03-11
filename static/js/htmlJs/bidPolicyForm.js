@@ -332,6 +332,8 @@
 		}
 		//提交的时候把select禁用去掉
 		$('select').removeAttr("disabled"); 
+		//把时间控件的禁用去掉
+		$(":input[name='retroactiveStart']").removeAttr("disabled"); 
 		//$(":input[name='imageFile']").prop("disabled",true);
 		$(":input[name='imageFile']").attr("disabled","disabled");
 		//显示灰色的禁用的样式
