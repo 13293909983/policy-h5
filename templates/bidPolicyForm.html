@@ -430,6 +430,8 @@
 //判断初始化要不要弹出选择投保公司
 $(function(){
 	console.log($("#errorMap").val()!="{}");
+	//默认给_val赋值
+	$(":hidden[name='fileKey']").attr("_val",$(":hidden[name='fileKey']").val());
 	if($("#errorMap").val()!="{}"||$("#message").val()!=""){
 		$(".zhuyi_wrap").hide();
 	}else{
@@ -456,7 +458,7 @@ $(".btn_open").click(function() {
 //默认初始化选择所属公司
 $(".zhuyi_tk li").click(function(){
     var item = $(this).index();  //获取索引下标 也从0开始
-	if(item==2||item==3){
+	if(item==1||item==2||item==3){
 		layer.msg("此功能正在建设中！", {icon: 0});
 	}else{
 		var img=$(this).find("img");
@@ -481,7 +483,7 @@ $(".visualSelect").click(function(){
 //点击选择所属公司
 $("#selectContainerQcOhiqga img").click(function(){
 	var item = $(this).index();  //获取索引下标 也从0开始
-	if(item==2||item==3){
+	if(item==1||item==2||item==3){
 		layer.msg("此功能正在建设中！", {icon: 0});
 	}else{
 		$(".visualSelect").text($(this).attr("alt"));

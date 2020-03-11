@@ -174,6 +174,10 @@
 			$(".list").parent().css("cursor","not-allowed").css("background-color","#efefef");
 			$("#regionSel").parent().removeAttr("style");
 			$("#regionSel").parents('tr').removeAttr("style");
+			//把开标时间的td禁用
+			$(":input[name='retroactiveStart']").parents("td").css("cursor","not-allowed").css("background-color","#efefef");
+			//把开标时间的laydate禁用
+			$(":input[name='retroactiveStart']").attr("disabled","disabled");
 		}
 		//初始化获取行业代码
 		getBusinesssource();
@@ -328,6 +332,8 @@
 		}
 		//提交的时候把select禁用去掉
 		$('select').removeAttr("disabled"); 
+		//把时间控件的禁用去掉
+		$(":input[name='retroactiveStart']").removeAttr("disabled"); 
 		//$(":input[name='imageFile']").prop("disabled",true);
 		$(":input[name='imageFile']").attr("disabled","disabled");
 		//显示灰色的禁用的样式
