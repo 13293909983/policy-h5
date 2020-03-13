@@ -232,10 +232,11 @@
 		//联系电话
 		var insuredIdMobile=$(":input[name='insuredIdMobile']").val();
 		var phone=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+		var mobel=/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/;
 		if(insuredIdMobile=="" || insuredIdMobile==null){
 			$(":input[name='insuredIdMobile']").parent().find("i").text("请输入联系电话");
 			i++;
-		}else if(!phone.test(insuredIdMobile)){
+		}else if(!phone.test(insuredIdMobile) && !mobel.test(insuredIdMobile)){
 			$(":input[name='insuredIdMobile']").parent().find("i").text("请输入正确的联系电话");
 			i++;
 		}
