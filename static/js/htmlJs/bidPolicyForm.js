@@ -742,6 +742,9 @@ $(function(){
             fileTd.html('<img id="fileImg" style="width: 120px;height: 125px;margin-top: 17px;background: #fff;">');
             $("#text").text("未选择文件");
             $("#text").attr("title","未选择文件");
+            //把file设置为空的
+            $(":hidden[name='fileKey']").val("");
+            $(":hidden[name='fileKey']").attr("_val","");
             //隐藏进度条
             $("#schedule").hide();
             return false;
@@ -752,6 +755,9 @@ $(function(){
                 ext = ext.toLowerCase( );
                 if (ext != 'jpg' && ext != 'png' && ext != 'jpeg'&& ext != 'bmp'&& ext != 'zip'){
                     layer.msg('只能上传.jpg .png .jpeg .bmp .zip类型的文件!', {icon: 0});
+                    //把file设置为空的
+                    $(":hidden[name='fileKey']").val("");
+                    $(":hidden[name='fileKey']").attr("_val","");
                     var file = document.getElementById('imageFile');
                     file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
                     //file.outerHTML = file.outerHTML; //重新初始化了file的html
@@ -778,6 +784,9 @@ $(function(){
             }
             if(fileSize>filemaxsize){
                 layer.msg("文件大小不能超过20M！", {icon: 0});
+                //把file设置为空的
+                $(":hidden[name='fileKey']").val("");
+                $(":hidden[name='fileKey']").attr("_val","");
                 var file = document.getElementById('imageFile');
                 file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
                 //file.outerHTML = file.outerHTML; //重新初始化了file的html
