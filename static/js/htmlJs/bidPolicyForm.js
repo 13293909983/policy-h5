@@ -240,6 +240,7 @@
 			$(":input[name='insuredIdMobile']").parent().find("i").text("请输入正确的联系电话");
 			i++;
 		}
+		//电子保险保函
 		//地址
 		/* var insuredAddress=$(":input[name='insuredAddress']").val();
 		if(insuredAddress=="" || insuredAddress==null){
@@ -753,7 +754,7 @@ $(function(){
                     layer.msg('只能上传.jpg .png .jpeg .bmp .zip类型的文件!', {icon: 0});
                     var file = document.getElementById('imageFile');
                     file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
-                    file.outerHTML = file.outerHTML; //重新初始化了file的html
+                    //file.outerHTML = file.outerHTML; //重新初始化了file的html
                     $("#text").text("未选择文件");
                     $("#text").attr("title","未选择文件");
                     $("#fileImg").attr("src", "/static/images/a7.png");
@@ -779,7 +780,7 @@ $(function(){
                 layer.msg("文件大小不能超过20M！", {icon: 0});
                 var file = document.getElementById('imageFile');
                 file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
-                file.outerHTML = file.outerHTML; //重新初始化了file的html
+                //file.outerHTML = file.outerHTML; //重新初始化了file的html
                 $("#text").text("未选择文件");
                 $("#fileImg").attr("src", "/static/images/a7.png");
                 return false;
@@ -825,7 +826,7 @@ $(function(){
                     $(":hidden[name='fileKey']").attr("_val","");
                     var file = document.getElementById('imageFile');
                     file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
-                    file.outerHTML = file.outerHTML; //重新初始化了file的html
+                    //file.outerHTML = file.outerHTML; //重新初始化了file的html
                     $("#text").text("未选择文件");
                     $("#fileImg").attr("src", "/static/images/a7.png");
                     //隐藏进度条
