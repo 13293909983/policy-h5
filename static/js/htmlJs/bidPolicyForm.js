@@ -33,11 +33,10 @@
 		    	$(":input[name='retroactiveStart']").parent().parent().find("i").text("");
 		    	//给结束时间赋值
 		    	var period=$(":input[name='period']").val();
-	            var retroactiveStart=$(":input[name='retroactiveStart']").val();
-	            if (retroactiveStart != "" && period!="") {
+	            if (value != "" && period!="") {
 	                $(":input[name='retroactiveEnd']").val(
 	                    new Date(
-	                        new Date(retroactiveStart.replace(/-/g, "/"))
+	                        new Date(value.replace(/-/g, "/"))
 	                            .getTime()
 	                        + parseInt(period) * 24 * 60 * 60 * 1000)
 	                        .format("yyyy-MM-dd"));
