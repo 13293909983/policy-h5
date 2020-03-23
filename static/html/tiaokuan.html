@@ -23,8 +23,18 @@
 <script type="text/javascript">
 $(function (){
 	//初始化默认查询人保
-	console.log($(".pay_gwcactivity").next().attr("data-code"));
-	clause($(".pay_gwcactivity").next().attr("data-code"));
+	var insuranceCompany=$("#insuranceCompany").val();
+    if(insuranceCompany!=null && insuranceCompany!=""){
+    	$("#selectContainerQcOhiqga img").each(function(){
+    		var value=$(this).attr("val");
+    		if(insuranceCompany==value){
+    			//切换条款
+    			clause($(this).attr("data-code"));
+    		}
+    	})
+    }else{
+    	clause($(".pay_gwcactivity").next().attr("data-code"));
+    }
 })
 //加载条款
 function clause(companyId) {

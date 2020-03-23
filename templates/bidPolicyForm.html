@@ -444,6 +444,22 @@ $(function(){
 	}else{
         $(":hidden[name='fileKey']").val("-");
 	}
+    //初始化默认选择人保，如果insuranceCompany有值，则给选择框上赋值
+    var insuranceCompany=$("#insuranceCompany").val();
+    if(insuranceCompany!=null && insuranceCompany!=""){
+    	$("#selectContainerQcOhiqga img").each(function(){
+    		var value=$(this).attr("val");
+    		if(insuranceCompany==value){
+    			$(".visualSelect").text($(this).attr("alt"));
+    			var rel=$(this).attr("rel");
+    			$(".visualSelect").attr("data-id",rel);
+    			$('.watermark').remove();
+    			//水印替换
+    			var img='/static/images/Insurance'+(rel*1+1)+'.jpg';
+    			watermark({},img);
+    		}
+    	})
+    }
 })
 $(".reg_show").click(function (){
     if($(".agree_wrap").css("display")=="none"){
