@@ -134,6 +134,7 @@
        		.not(":input[name='invoice.phone']")
        		.not(":input[name='agree']")
        		.not(":input[name='fundSource']")
+       		.not("input[name='email']")
        		.not("#citySel").attr("readonly",true);
 			//把选择框改成禁用
        		$('select').attr("disabled","disabled");
@@ -146,6 +147,7 @@
        		.not(":input[name='invoice.phone']")
        		.not(":input[name='agree']")
        		.not(":input[name='fundSource']")
+       		.not("input[name='email']")
        		.not("#citySel").css("cursor","not-allowed");
        		//改select的禁用样式
 			$('select').css("cursor","not-allowed").css("background-color","#efefef");
@@ -156,7 +158,8 @@
        		.not(":input[name='invoice.addressAndPhone']")
        		.not(":input[name='invoice.invoiceTitle']")
        		.not(":input[name='invoice.phone']")
-       		.not(":input[name='fundSource']").parent().not('form').not('p').not(".fileinput-button")
+       		.not(":input[name='fundSource']")
+       		.not("input[name='email']").parent().not('form').not('p').not(".fileinput-button")
        		.css("cursor","not-allowed").css("background-color","#efefef");
        		$(":input[name='fundSource']").parent().parent().removeAttr("style");
        		$("#regionContent").parent().css("cursor","not-allowed").css("background-color","#efefef");
@@ -194,7 +197,7 @@
 		var i=0;
 		//被保险人名称
 		var insuredName=$(":input[name='insuredName']").val();
-		var appliName=$("#appliName").val();
+		var appliName=$("input[name='organ.organName']").val();
 		if(insuredName=="" || insuredName==null){
 			$(":input[name='insuredName']").parent().find("i").text("请输入被保险人名称");
 			i++;
@@ -291,6 +294,12 @@
 		var regionalism=$(":input[name='regionalism']").val();
 		if(regionalism=="" || regionalism==null){
 			$(".lists").parent().find("i").text("请选择项目所在区域");
+			i++;
+		}
+		//投保人邮箱
+		var email=$(":input[name='email']").val();
+		if(email=="" || email==null){
+			$(":input[name='email']").parent().find("i").text("请输入投保人邮箱");
 			i++;
 		}
 		if(i>0){
@@ -395,6 +404,12 @@
 			$(":input[name='invoice.phone']").parent().find("i").text("");
 		}
 	}
+	$(":input[name='email']").change(function(){
+		//投保人邮箱
+		if($(this)!="" || $(this)!=null){
+			 $(this).parent().find("i").text("");
+		}
+	})
 	//行业分类树
 	var setting = {
 	    data: {

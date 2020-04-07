@@ -175,17 +175,6 @@
 			<input type="hidden" th:value="${bidPolicy.platformCode}" name="platformCode"/>
 			<!--交易平台流水号-->
 			<input type="hidden" th:value="${sequenceNo}" name="sequenceNo"/>
-			<!--  投保人信息-->
-			<!-- 名称 -->
-			<input type="hidden" th:value="${bidPolicy.appliName}" name="organ.organName"/>
-			<!-- 组织机构代码 -->
-			<input type="hidden" th:value="${bidPolicy.appliIdNo}" name="organ.organCode"/>
-			<!-- 社会信用代码 -->
-			<input type="hidden" th:value="${bidPolicy.appliSocialcode}" name="organ.socialCreditCode"/>
-			<!--手机号  -->
-			<input type="hidden" th:value="${bidPolicy.appliIdMobile}" name="operator.Phone"/>
-			<!-- 邮箱 -->
-			<input type="hidden" th:value="${bidPolicy.appliIdEmail}" name="email"/>
 			<table class="formtables" cellspacing="0" cellpadding="0" id="formtables">
 				<tr>
 					<th colspan="4">被保险人信息</th>
@@ -193,7 +182,6 @@
 				<tr>
 					<td><span class="span_color">*</span>&nbsp;被保险人名称</td>
 					<td>
-						<input type="hidden" id="appliName" th:value="${bidPolicy.appliName}">
 						<input name="insuredName" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredName}" onChange="getInsuredName()">
 						<br/>
 						<i th:text="${errorMap['insuredName']}"></i>
@@ -225,6 +213,45 @@
 						<input name="insuredAddress" class="input-text input-textdz" placeholder="请输入" th:value="${bidPolicy.insuredAddress}">
 						<br/>
 						<i th:text="${errorMap['insuredAddress']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<th colspan="4">投保人信息</th>
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;投保人名称</td>
+					<td>
+						<input name="organ.organName" class="input-text" placeholder="请输入" th:value="${bidPolicy.appliName}">
+						<br/>
+						<i th:text="${errorMap['appliName']}"></i>
+					</td>
+					<td><span class="span_color">*</span>&nbsp;组织机构代码</td>
+					<td>
+						<input name="organ.organCode" class="input-text" placeholder="请输入" th:value="${bidPolicy.appliIdNo}">
+						<br/>
+						<i th:text="${errorMap['appliIdNo']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;社会信用代码</td>
+					<td>
+						<input name="organ.socialCreditCode" class="input-text" placeholder="请输入" th:value="${bidPolicy.appliSocialcode}">
+						<br/>
+						<i th:text="${errorMap['appliSocialcode']}"></i>
+					</td>
+					<td><span class="span_color">*</span>&nbsp;手机号</td>
+					<td>
+						<input name="operator.Phone" class="input-text" placeholder="请输入" th:value="${bidPolicy.appliIdMobile}">
+						<br/>
+						<i th:text="${errorMap['appliIdMobile']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;邮箱</td>
+					<td colspan="3">
+						<input name="email" class="input-text input-textdz" placeholder="请输入" th:value="${bidPolicy.appliIdEmail}">
+						<br/>
+						<i th:text="${errorMap['email']}"></i>
 					</td>
 				</tr>
 				<tr>
