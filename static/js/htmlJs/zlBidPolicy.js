@@ -134,7 +134,8 @@
        		.not(":input[name='invoice.phone']")
        		.not(":input[name='agree']")
        		.not(":input[name='fundSource']")
-       		.not("input[name='email']")
+       		.not(":input[name='email']")
+       		.not(":input[name='insuredIdMobile']")
        		.not("#citySel").attr("readonly",true);
 			//把选择框改成禁用
        		$('select').attr("disabled","disabled");
@@ -147,7 +148,8 @@
        		.not(":input[name='invoice.phone']")
        		.not(":input[name='agree']")
        		.not(":input[name='fundSource']")
-       		.not("input[name='email']")
+       		.not(":input[name='email']")
+       		.not(":input[name='insuredIdMobile']")
        		.not("#citySel").css("cursor","not-allowed");
        		//改select的禁用样式
 			$('select').css("cursor","not-allowed").css("background-color","#efefef");
@@ -159,7 +161,8 @@
        		.not(":input[name='invoice.invoiceTitle']")
        		.not(":input[name='invoice.phone']")
        		.not(":input[name='fundSource']")
-       		.not("input[name='email']").parent().not('form').not('p').not(".fileinput-button")
+       		.not(":input[name='email']")
+       		.not(":input[name='insuredIdMobile']").parent().not('form').not('p').not(".fileinput-button")
        		.css("cursor","not-allowed").css("background-color","#efefef");
        		$(":input[name='fundSource']").parent().parent().removeAttr("style");
        		$("#regionContent").parent().css("cursor","not-allowed").css("background-color","#efefef");
