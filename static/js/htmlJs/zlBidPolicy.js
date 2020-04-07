@@ -706,7 +706,7 @@ $(function(){
                 ext = imgName.substr(idx+1).toUpperCase();
                 ext = ext.toLowerCase( );
                 if (ext != 'zip'){
-                    layer.msg('.zip类型的文件!', {icon: 0});
+                    layer.msg('只能上传.zip类型的文件!', {icon: 0});
                     //把file设置为空的
                     $(":hidden[name='fileKey']").val("");
                     $(":hidden[name='fileKey']").attr("_val","");
