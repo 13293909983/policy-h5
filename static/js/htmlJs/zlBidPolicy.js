@@ -259,7 +259,7 @@
 		if(electricPower=="" || electricPower==null){
 			$(":input[name='electricPower']").parent().find("i").text("请输入保证金金额");
 			i++;
-		}else if(600>electricPower){
+		}else if(500>electricPower){
 			$(":input[name='electricPower']").parent().find("i").text("保证金金额不得小于保费金额");
 			i++;
 		}
