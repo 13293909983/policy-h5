@@ -816,9 +816,10 @@ $(function(){
                 success:function(data){
                 	console.log(data);
                     var fileKey=data.data.fileKey;
+                    var fileName=data.data.fileName;
                     //把返回的key设置到隐藏的input上
-                    $(":hidden[name='fileKey']").val(fileKey);
-                    $(":hidden[name='fileKey']").attr("_val",fileKey);
+                    $(":hidden[name='fileKey']").val(fileName);
+                    $(":hidden[name='fileKey']").attr("_val",fileName);
                     if(ext=="zip"){
                         $("#fileImg").attr("src", "/static/images/a7.png");
                     }else{
