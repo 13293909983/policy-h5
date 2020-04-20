@@ -762,7 +762,7 @@ $(function(){
                     //file.outerHTML = file.outerHTML; //重新初始化了file的html
                     $("#text").text("未选择文件");
                     $("#text").attr("title","未选择文件");
-                    $("#fileImg").attr("src", "/static/images/a7.png");
+                    $("#fileImg").attr("src", "/static/images/white.png");
                     //隐藏进度条
                     $("#schedule").hide();
                     return false;
@@ -790,7 +790,7 @@ $(function(){
                 file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
                 //file.outerHTML = file.outerHTML; //重新初始化了file的html
                 $("#text").text("未选择文件");
-                $("#fileImg").attr("src", "/static/images/a7.png");
+                $("#fileImg").attr("src", "/static/images/white.png");
                 return false;
             }
             //显示上传的文件
@@ -815,18 +815,21 @@ $(function(){
                 dataType:"json",
                 success:function(data){
                 	console.log(data);
-                    var fileKey=data.data.fileKey;
-                    var fileName=data.data.fileName;
-                    //把返回的key设置到隐藏的input上
-                    $(":hidden[name='fileKey']").val(fileName);
-                    $(":hidden[name='fileKey']").attr("_val",fileName);
-                    if(ext=="zip"){
-                        $("#fileImg").attr("src", "/static/images/a7.png");
-                    }else{
-                        $("#fileImg").attr("src", url);
-                    }
-                    $("#text").text(files[0].name);
-                    $("#text").attr("title",files[0].name);
+                	if(data.success){
+                		var fileKey=data.data.fileKey;
+                        var fileName=data.data.fileName;
+                        //把返回的key设置到隐藏的input上
+                        $(":hidden[name='fileKey']").val(fileName);
+                        $(":hidden[name='fileKey']").attr("_val",fileName);
+                        if(ext=="zip"){
+                            $("#fileImg").attr("src", "/static/images/a7.png");
+                        }else{
+                            $("#fileImg").attr("src", url);
+                        }
+                        $("#text").text(files[0].name);
+                        $("#text").attr("title",files[0].name);
+                        $("#schedule").next().text("");
+                	}
                 },
                 error:function(e){
                     layer.msg("文件未上传成功，请重新上传", {icon: 0});
@@ -837,7 +840,7 @@ $(function(){
                     file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
                     //file.outerHTML = file.outerHTML; //重新初始化了file的html
                     $("#text").text("未选择文件");
-                    $("#fileImg").attr("src", "/static/images/a7.png");
+                    $("#fileImg").attr("src", "/static/images/white.png");
                     //隐藏进度条
                     $("#schedule").hide();
                 },
