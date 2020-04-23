@@ -474,27 +474,13 @@ $(".btn_open").click(function() {
 //默认初始化选择所属公司
 $(".zhuyi_tk li").click(function(){
     var item = $(this).index();  //获取索引下标 也从0开始
-    /* if(item==1||item==2){
-		layer.msg("此功能正在建设中！", {icon: 0});
-	}else{ */
-		var img=$(this).find("img");
-		$('.pay_gwc').removeClass("pay_gwcactivity");
-		$(this).find(".pay_gwc").addClass("pay_gwcactivity");
-		//选择哪家公司给赋值
-		$("#insuranceCompany").val(img.attr("val"));
-		//切换条款
-		clause(img.attr("data-code"));
-		//切换保险公司把文件清除，再重新上传
-		if($(":hidden[name='fileKey']")!=null||$(":hidden[name='fileKey']")!=""){
-			$(":hidden[name='fileKey']").val("");
-	        $(":hidden[name='fileKey']").attr("_val","");
-	        var file = document.getElementById('imageFile');
-	        file.value = '';
-	        $("#text").text("未选择文件");
-	        $("#fileImg").attr("src", "/static/images/white.png");
-		}
-		
-	//}
+	var img=$(this).find("img");
+	$('.pay_gwc').removeClass("pay_gwcactivity");
+	$(this).find(".pay_gwc").addClass("pay_gwcactivity");
+	//选择哪家公司给赋值
+	$("#insuranceCompany").val(img.attr("val"));
+	//切换条款
+	clause(img.attr("data-code"));
 })
 $(".visualSelect").click(function(){
 	$("#selectContainerQcOhiqga").show();
@@ -505,17 +491,26 @@ $("#selectContainerQcOhiqga img").click(function(){
 	/* if(item==1||item==2){
 		layer.msg("此功能正在建设中！", {icon: 0});
 	}else{ */
-		$(".visualSelect").text($(this).attr("alt"));
-		$(".visualSelect").attr("data-id",$(this).attr("rel"));
-		var id=$(".visualSelect").attr("data-id");
-		$("#insuranceCompany").val($(this).attr("val"));
-		 //切换条款
-		clause($(this).attr("data-code"));
-		$('.watermark').remove();
-		//水印替换
-		var img='/static/images/Insurance'+(id*1+1)+'.jpg';
-		watermark({},img);
-		$("#selectContainerQcOhiqga").hide();
+	$(".visualSelect").text($(this).attr("alt"));
+	$(".visualSelect").attr("data-id",$(this).attr("rel"));
+	var id=$(".visualSelect").attr("data-id");
+	$("#insuranceCompany").val($(this).attr("val"));
+	 //切换条款
+	clause($(this).attr("data-code"));
+	$('.watermark').remove();
+	//水印替换
+	var img='/static/images/Insurance'+(id*1+1)+'.jpg';
+	watermark({},img);
+	$("#selectContainerQcOhiqga").hide();
+	//切换保险公司把文件清除，再重新上传
+	if($(":hidden[name='fileKey']")!=null||$(":hidden[name='fileKey']")!=""){
+		$(":hidden[name='fileKey']").val("");
+        $(":hidden[name='fileKey']").attr("_val","");
+        var file = document.getElementById('imageFile');
+        file.value = '';
+        $("#text").text("未选择文件");
+        $("#fileImg").attr("src", "/static/images/white.png");
+	}
 	//}
 })
 $('body').click(function(e) {
