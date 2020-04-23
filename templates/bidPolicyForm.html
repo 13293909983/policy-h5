@@ -484,6 +484,16 @@ $(".zhuyi_tk li").click(function(){
 		$("#insuranceCompany").val(img.attr("val"));
 		//切换条款
 		clause(img.attr("data-code"));
+		//切换保险公司把文件清除，再重新上传
+		if($(":hidden[name='fileKey']")!=null||$(":hidden[name='fileKey']")!=""){
+			$(":hidden[name='fileKey']").val("");
+	        $(":hidden[name='fileKey']").attr("_val","");
+	        var file = document.getElementById('imageFile');
+	        file.value = '';
+	        $("#text").text("未选择文件");
+	        $("#fileImg").attr("src", "/static/images/white.png");
+		}
+		
 	//}
 })
 $(".visualSelect").click(function(){
