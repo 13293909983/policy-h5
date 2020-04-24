@@ -503,7 +503,8 @@ $("#selectContainerQcOhiqga img").click(function(){
 	watermark({},img);
 	$("#selectContainerQcOhiqga").hide();
 	//切换保险公司把文件清除，再重新上传
-	if($(":hidden[name='fileKey']")!=null||$(":hidden[name='fileKey']")!=""){
+	var fileKey=$(":hidden[name='fileKey']").val();
+	if(fileKey!=null&&fileKey!=""&&fileKey!="-"){
 		$(":hidden[name='fileKey']").val("");
         $(":hidden[name='fileKey']").attr("_val","");
         var file = document.getElementById('imageFile');
