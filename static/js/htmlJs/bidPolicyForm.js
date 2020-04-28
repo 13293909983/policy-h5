@@ -98,15 +98,6 @@
 		    if(this.value!=""){
                 var electricPower = parseInt(this.value);
                 var sumPremium = 0;
-                //原来的保费
-                /* if (electricPower > 0 && electricPower <= 100000) {
-                    sumPremium = 600;
-                } else if (electricPower <= 200000) {
-                    sumPremium = 800;
-                } else if (electricPower <= 800000) {
-                    sumPremium = electricPower * 0.004;
-                    sumPremium=decimal(sumPremium,2);
-                } */
                 //更新的保费
                 if (electricPower > 0 && electricPower <= 30000) {
                     sumPremium = 500;
@@ -262,6 +253,14 @@
 		var retroactiveStart=$(":input[name='retroactiveStart']").val();
 		if(retroactiveStart=="" || retroactiveStart==null){
 			$(":input[name='retroactiveStart']").parent().parent().find("i").text("请输入开标日期");
+			i++;
+		}
+		var myDate = new Date();
+		var time=myDate.getFullYear() + "/" + (myDate.getMonth() + 1) + "/" + myDate.getDate();
+		var myTime=new Date(time);
+		var start=new Date(retroactiveStart.replace(/-/g, "/"));
+		if(Math.sign(myTime.getTime()-start.getTime())==1){
+			$(":input[name='retroactiveStart']").parent().parent().find("i").text("开标时间不得低于当前时间");
 			i++;
 		}
 		//保证金金额
@@ -590,7 +589,7 @@
 		$("#regionContent").slideDown("fast");
 		$("body").bind("mousedown", onBodyDownRegion);
 		//给默认定位到山西
-		document.getElementById('regionTree').scrollTop=150;
+		document.getElementById('regionTree').scrollTop=100;
 	}
 	//展开事件
 	function onRegionExpand(e, treeId, treeNode) {
