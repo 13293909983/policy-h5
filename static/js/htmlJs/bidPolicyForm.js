@@ -119,7 +119,7 @@
 		var fileKey=$(":hidden[name='fileKey']").val();
 		if(fileKey!=null&&fileKey!=""&&fileKey!="-"){
 			$("#fileImg").attr("src", "/static/images/a7.png");
-			$("#text").text("已选择文件");
+			$("#text").text("文件已上传");
 		}
 		//初始化查看是否有交易平台流水号
 		var sequenceNo=$("input[name='sequenceNo']").val();
