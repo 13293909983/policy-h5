@@ -807,17 +807,21 @@ $(function(){
                 dataType:"json",
                 success:function(data){
                 	console.log(data);
-                    var fileKey=data.data.fileKey;
-                    //把返回的key设置到隐藏的input上
-                    $(":hidden[name='fileKey']").val(fileKey);
-                    $(":hidden[name='fileKey']").attr("_val",fileKey);
-                    if(ext=="zip"){
-                        $("#fileImg").attr("src", "/static/images/a7.png");
-                    }else{
-                        $("#fileImg").attr("src", url);
-                    }
-                    $("#text").text(files[0].name);
-                    $("#text").attr("title",files[0].name);
+                    if(data.success){
+                		var fileKey=data.data.fileKey;
+                        var fileName=data.data.fileName;
+                        //把返回的key设置到隐藏的input上
+                        $(":hidden[name='fileKey']").val(fileName);
+                        $(":hidden[name='fileKey']").attr("_val",fileName);
+                        if(ext=="zip"){
+                            $("#fileImg").attr("src", "/static/images/a7.png");
+                        }else{
+                            $("#fileImg").attr("src", url);
+                        }
+                        $("#text").text(files[0].name);
+                        $("#text").attr("title",files[0].name);
+                        $("#schedule").next().text("");
+                	}
                 },
                 error:function(e){
                     layer.msg("文件未上传成功，请重新上传", {icon: 0});
