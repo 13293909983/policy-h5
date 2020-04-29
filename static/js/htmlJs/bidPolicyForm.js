@@ -732,6 +732,7 @@
 $(function(){
     //上传图片
 	$("#imageFile").change(function(){
+		var insuranceCompany=$("#insuranceCompany").val();
         var files = this.files;
         var imgName = document.all.imageFile.value;
         var ext="";
@@ -798,7 +799,7 @@ $(function(){
             var formData = new FormData();
             formData.append("imageFile",files[0]);
             $.ajax({
-                url:"/insure/upload",
+                url:"/insure/upload?insuranceCompany="+insuranceCompany,
                 type:"POST",
                 data:formData,
                 processData : false,
