@@ -4,6 +4,7 @@ $(function() {
 	//底部
 	$('footer').load('/static/html/footer.html');
 	$('.fixed').load('/static/html/fixedtop.html');
+	$('.tiaokuan').load('/static/html/tiaokuan.html');
 
 });
 (function(doc, win) {
