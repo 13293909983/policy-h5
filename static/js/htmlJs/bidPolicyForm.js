@@ -818,9 +818,11 @@ $(function(){
                 	if(data.success){
                 		var fileKey=data.data.fileKey;
                         var fileName=data.data.fileName;
+                        var fileUrl=data.data.fileUrl;
                         //把返回的key设置到隐藏的input上
                         $(":hidden[name='fileKey']").val(fileName);
                         $(":hidden[name='fileKey']").attr("_val",fileName);
+                        $(":hidden[name='fileUrl']").val(fileUrl);
                         if(ext=="zip"){
                             $("#fileImg").attr("src", "/static/images/a7.png");
                         }else{
@@ -836,6 +838,7 @@ $(function(){
                     //把file设置为空的
                     $(":hidden[name='fileKey']").val("");
                     $(":hidden[name='fileKey']").attr("_val","");
+                    $(":hidden[name='fileUrl']").val("");
                     var file = document.getElementById('imageFile');
                     file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
                     //file.outerHTML = file.outerHTML; //重新初始化了file的html
