@@ -166,13 +166,14 @@
 			</div>
 			<span>▼</span>
 		</div>
-		<form method="post" action="/applyBidPolicy.json" onsubmit="return onCheck()" target="form_iframe">
+		<form method="post" action="/applyBidPolicy.json" onsubmit="return onCheck()">
 			<input type="hidden" th:value="${bidPolicy.insuranceCompany}" name="insuranceCompany" id="insuranceCompany"/>
 			<input type="hidden" th:value="${message}" id="message"/>
 			<!-- 判断有没有错误信息 -->
 			<input type="hidden" th:value="${errorMap}" id="errorMap">
 			<!--交易平台流水号-->
 			<input type="hidden" th:value="${sequenceNo}" name="sequenceNo"/>
+			<input type="hidden" th:value="${bidPolicy}"/>
 			<table class="formtables" cellspacing="0" cellpadding="0" id="formtables">
 				<tr>
 					<th colspan="4">被保险人信息</th>
@@ -423,7 +424,6 @@
 	</div>
 	</div>
 </div>
-<iframe id="form_iframe" name="form_iframe" style="display:none;"></iframe> 
 <footer></footer>
 <div class="fixed"></div>
 </body>
