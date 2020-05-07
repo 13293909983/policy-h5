@@ -590,7 +590,7 @@
 		$("#regionContent").slideDown("fast");
 		$("body").bind("mousedown", onBodyDownRegion);
 		//给默认定位到山西
-		document.getElementById('regionTree').scrollTop=150;
+		document.getElementById('regionTree').scrollTop=100;
 	}
 	//展开事件
 	function onRegionExpand(e, treeId, treeNode) {

@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>电子保函服务平台</title>
-<link rel="stylesheet" href="/static/css/common.css" />
-<link rel="stylesheet" href="/static/css/index.css" />
-<link rel="stylesheet" href="/static/css/zhuce.css" />
-<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-<script src="/static/js/jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="/static/js/index.js" type="text/javascript"></script>
-<script type="text/javascript" src="/static/js/paging.js" ></script>
-<script src="/static/js/layer/2.4/layer.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>电子保险保函</title>
+	<link rel="stylesheet" href="/static/css/common.css" />
+	<link rel="stylesheet" href="/static/css/index.css" />
+	<link rel="stylesheet" href="/static/css/zhuce.css" />
+	<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+	<script src="/static/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+	<script src="/static/js/index.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/static/js/paging.js" ></script>
+	<script src="/static/js/layer/2.4/layer.js"></script>
 <style type="text/css">
 	strong{
 		color: #e04646;
@@ -167,7 +166,7 @@
 					<div class="upload-box">
 						<div class="upload-boxone">
 							<div id="drop_area"></div>
-							<p><strong>*</strong>&nbsp;营业执照副本复印件加盖公章</p>
+							<p><strong>*</strong>&nbsp;营业执照副本复印件</p>
 							<i th:text="${errorMap['organ.businessLicenceImg']}"></i>
 							<input name="organ.businessLicenceImg" type="hidden" th:value="${account.organ.businessLicenceImg}"/>
 						</div>
@@ -183,16 +182,16 @@
 						</div>-->
 						<div class="upload-boxone" style="display: none">
 							<div id="drop_area3"></div>
-							<p><strong>*</strong>&nbsp;税务登记证复印件加盖公章</p>
+							<p><strong>*</strong>&nbsp;税务登记证复印件</p>
 							<input name="organ.taxregCertImg" type="hidden" th:value="${account.organ.taxregCertImg}"/>
 						</div>
 						<div class="upload-boxone" style="display: none">
 							<div id="drop_area4"></div>
-							<p><strong>*</strong>&nbsp;组织机构代码证复印件加盖公章</p>
+							<p><strong>*</strong>&nbsp;组织机构代码证复印件</p>
 							<input name="organ.orgnizationCertImg" type="hidden" th:value="${account.organ.orgnizationCertImg}"/>
 						</div>
 						<div class="zhu" style="clear: both;">
-							注：必须填，所传证件必须都加盖公章，图片格式支持：jpg,jpeg,png,大小不能超过2M
+							注：必须填，图片格式支持：jpg,jpeg,png,大小不能超过2M
 							<br/>
 							
 							<i th:text="${errorMap['organ.bankRegCertImg']}" style="display: none"></i>
@@ -207,22 +206,22 @@
 				<div class="zhuce">
 					<p>3</p>
 				</div>
-				<h3>授权担保人信息</h3>
+				<h3>授权担保人\法人信息</h3>
 			</div>
 			<ul class="reg-ul">
 				<li>
-					<span>运营人姓名</span>
-					<input name="operator.realName" placeholder="运营人姓名" th:value="${account.operator.realName}"/>
+					<span>姓名</span>
+					<input name="operator.realName" placeholder="请输入姓名" th:value="${account.operator.realName}"/>
 					<strong>*</strong><i th:text="${errorMap['operator.realName']}"></i>
 				</li>
 				<li>
-					<span>运营人电话</span>
-					<input name="operator.phone" placeholder="请输入运营人电话" th:value="${account.operator.phone}"/>
+					<span>电话</span>
+					<input name="operator.phone" placeholder="请输入电话" th:value="${account.operator.phone}"/>
 					<strong>*</strong><i th:text="${errorMap['operator.phone']}"></i>
 				</li>
 				<li>
 					<span>身份证号</span>
-					<input name="operator.identityNo" placeholder="请输入运营人身份证号" class="input-long" th:value="${account.operator.identityNo}"/>
+					<input name="operator.identityNo" placeholder="请输入身份证号" class="input-long" th:value="${account.operator.identityNo}"/>
 					<strong>*</strong><i th:text="${errorMap['operator.identityNo']}"></i>
 				</li>
 				<div class="upload-img">
@@ -230,18 +229,18 @@
 					<div class="upload-box">
 						<div class="upload-boxone">
 							<div id="drop_area5"></div>
-							<p><strong>*</strong>&nbsp;运营人身份证正反面复印在一页，加盖公章</p>
+							<p><strong>*</strong>&nbsp;身份证正面复印件</p>
 							<i th:text="${errorMap['operator.identityCardImg']}"></i>
 							<input name="operator.identityCardImg" type="hidden" th:value="${account.operator.identityCardImg}"/>
 						</div>
 						<div class="upload-boxone">
 							<div id="drop_area6"></div>
-							<p><strong>*</strong>&nbsp;公司授权运营人运营授权书，加盖公章</p>
+							<p><strong>*</strong>&nbsp;身份证反面复印件</p>
 							<i th:text="${errorMap['certificateImg']}"></i>
 							<input name="certificateImg" type="hidden" th:value="${account.certificateImg}"/>
 						</div>
 						<div class="zhu" style="clear: both;">
-							注：必须填，所传证件必须都加盖公章，图片格式支持：jpg,jpeg,png,大小不能超过2M
+							注：必须填，图片格式支持：jpg,jpeg,png,大小不能超过2M
 							<br/>
 						</div>
 					</div>
@@ -257,7 +256,7 @@
 					
 					<div class="agree_content">
 	                     <h2>用户服务协议</h2>
-						<p>欢迎“您”（以下或称“用户”）与我方“山西德利伟科技有限公司”（以下称“本公司”）共同签署《用户服务协议》（以下称“本协议”），本协议阐述之条款和条件适用于您使用（所涉域名为sxdeliw.com下同）所提供的在山西省招投标市场中进行在线信息发布、保函交易、保函查验和各项服务(下称“服务”)。</p>
+						<p>欢迎“您”（以下或称“用户”）与我方“电子保险保函”（以下称“本公司”）共同签署《用户服务协议》（以下称“本协议”），本协议阐述之条款和条件适用于您使用（所涉域名为sxdeliw.com下同）所提供的在山西省招投标市场中进行在线信息发布、保函交易、保函查验和各项服务(下称“服务”)。</p>
 						<h4>1.接受条款</h4>
 						<p>以任何方式进入网站即表示您已充分阅读、理解并同意接受本协议的条款和条件。本公司有权根据业务需要酌情修订“条款”，并在网站上予以公告。如您不同意相关修订，请您立即停止使用“服务”。经修订的“条款”一经在网站公布，即产生效力。如您继续使用“服务”，则将视为您已接受经修订的“条款”，当您与本公司发生争议时，应以最新的“条款”为准。 本服务协议内容包括协议正文及所有网站已发布的各类规则。所有规则为协议不可分割的一部分，与协议正文具有同等法律效力。</p>
 						<h4>2.服务使用对象</h4>
@@ -270,7 +269,7 @@
 						<p>“您的资料”包括您在注册、交易或列举产品过程中、在任何公开信息场合或通过任何电子邮件形式，向本公司或其他用户提供的任何资料，包括数据、文本、软件、音乐、声响、照片、图画、影像、词句或其他材料。您应对“您的资料”负全部责任，而本公司仅作为您在网上发布和刊登“您的资料”的被动渠道。但是，倘若本公司认为“您的资料”可能使本公司承担任何法律或道义上的责任，或可能使本公司(全部或部分地)失去本公司的互联网服务供应商或其他供应商的服务，或您未在本公司规定的期限内登录或再次登录网站，则本公司可自行全权决定对“您的资料”采取本公司认为必要或适当的任何行动，包括但不限于删除该类资料。您应保证您对提交给本公司的“您的资料”拥有全部权利，包括全部版权。您确认，本公司没有责任去认定或决定您提交给本公司的资料哪些是应当受到保护的，对享有“服务”的其他用户使用“您的资料”，本公司也不必负责。</p>
 						<h4>5.1注册义务</h4>
 						<p>如您在网站注册，您同意：(a)根据网站刊载的企业资料表格的要求，提供关于您的真实、准确、完整和反映当前情况的资料；(b)维持并及时更新企业资料（包括但不限企业工商信息和联系人信息等），使其保持真实、准确、完整和反映当前情况。倘若您提供任何不真实、不准确、不完整或不能反映当前情况的资料，或本公司有合理理由怀疑该等资料不真实、不准确、不完整或不能反映当前情况，本公司有权暂停或终止您的注册身份或账号服务，并拒绝您在目前或将来对“服务”(或其任何部分)以任何形式使用。</p>
-						<p>如您以本公司旗下保函查验平台会员身份以您保函查验平台帐号和密码，或以电子保函服务平台会员身份以您电子保函服务平台帐号和密码登录网站，则您在此不可撤销地明确授权本公司自保函查验平台或电子保函服务平台获取您在保函查验平台或电子保函服务平台的注册信息、交易/支付数据等信息和数据，并不会就此要求本公司承担任何违约或侵权责任。您在网站完成注册后，在您的授权下，同意配合本公司完成您的CA认证手续，用于签订电子合同和开具电子保函。</p>
+						<p>如您以本公司旗下保函查验平台会员身份以您保函查验平台帐号和密码，或以电子保险保函会员身份以您电子保险保函帐号和密码登录网站，则您在此不可撤销地明确授权本公司自保函查验平台或电子保函服务平台获取您在保函查验平台或电子保函服务平台的注册信息、交易/支付数据等信息和数据，并不会就此要求本公司承担任何违约或侵权责任。您在网站完成注册后，在您的授权下，同意配合本公司完成您的CA认证手续，用于签订电子合同和开具电子保函。</p>
 						<h4>5.2会员注册名、密码保密</h4>
 						<p>在您按照注册页面提示填写信息、阅读并同意本协议并完成全部注册程序后或以其他本公司允许的方式实际使用网站服务时，您即成为网站会员（亦称会员），本公司根据会员注册名和密码确认您的身份。您须自行负责对您的会员注册名和密码保密，且须对您在会员注册名和密码下发生的所有活动（包括但不限于发布信息资料、网上点击同意或提交各类规则协议、网上续签协议或购买服务等）承担责任。您同意：(a)如发现任何人未经授权使用您的会员注册名或密码，或发生违反保密规定的任何其他情况，您会立即通知本公司；及(b)确保您在每个上网时段结束时，以正确步骤离开网站。本公司不能也不会对因您未能遵守本款规定而发生的任何损失或损毁负责。您理解本公司对您的请求采取行动需要合理时间，本公司对在采取行动前已经产生的后果（包括但不限于您的任何损失）不承担任何责任。</p>
 						<h4>5.3关于您的资料的规则</h4>
@@ -351,10 +350,10 @@
 						<h4>22.诉讼</h4>
 						<p>因本协议或本公司服务所引起或与其有关的任何争议应向人民法院提起诉讼，并以中华人民共和国法律为管辖法律。</p>
 						<h4>23.附则</h4>
-						<p>23.1本协议解释权及修订权归山西德利伟科技有限公司所有。</p>
+						<p>23.1本协议解释权及修订权归电子保险保函所有。</p>
 						<p>23.2本协议及修订后的条款于公示中指定日期起生效。</p>
 						<p>23.3若您和本公司之间发生任何纠纷或争议，首先应友好协商解决；协商不成的，您同意将纠纷或争议提交本公司住所地有管辖权的人民法院管辖。</p>
-						<h3 style="text-align: right;">山西德利伟科技有限公司</h3>
+						<h3 style="text-align: right;">电子保险保函</h3>
 						<p style="text-align: right;">2019年5月17日</p>
 						<div class="agree_but">
 							<input type="button" value="同意"  name=""  class="btn_op"/>
@@ -636,7 +635,7 @@ $(".btn_open").click(function (){
 		//运营人名称
 		var realName=$(":input[name='operator.realName']").val();
 		if(realName=="" || realName==null){
-			$(":input[name='operator.realName']").parent().find("i").text("请输入运营人名称");
+			$(":input[name='operator.realName']").parent().find("i").text("请输入名称");
 			i++;
 		}else{
 			$(":input[name='operator.realName']").parent().find("i").text("");
@@ -645,10 +644,10 @@ $(".btn_open").click(function (){
 		var phone=$(":input[name='operator.phone']").val();
 		var phoneRe=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
 		if(phone=="" || phone==null){
-			$(":input[name='operator.phone']").parent().find("i").text("请输入运营人电话");
+			$(":input[name='operator.phone']").parent().find("i").text("请输入电话");
 			i++;
 		}else if(!phoneRe.test(phone)){
-			$(":input[name='operator.phone']").parent().find("i").text("请输入正确的运营人电话");
+			$(":input[name='operator.phone']").parent().find("i").text("请输入正确的电话");
 			i++;
 		}else{
 			$(":input[name='operator.phone']").parent().find("i").text("");
@@ -674,13 +673,13 @@ $(".btn_open").click(function (){
 		//运营人身份证
 		var identityCardImg=$(":input[name='operator.identityCardImg']").val();
 		if(identityCardImg=="" || identityCardImg==null){
-			$("#drop_area5").parent().find("i").text("* 请上传运营人身份证");
+			$("#drop_area5").parent().find("i").text("* 请上传身份证正面复印件");
 			i++;
 		}
 		//公司授权运营人授权书
 		var certificateImg=$(":input[name='certificateImg']").val();
 		if(certificateImg=="" || certificateImg==null){
-			$("#drop_area6").parent().find("i").text("* 请上传公司授权运营人授权书");
+			$("#drop_area6").parent().find("i").text("* 请上传身份证反面复印件");
 			i++;
 		}
 		if(i>0){
@@ -821,7 +820,7 @@ $(".btn_open").click(function (){
 		$("input[name='operator.realName']").blur("input propertychange",function(){
 			var realName=$(":input[name='operator.realName']").val();
 			if(realName=="" || realName==null){
-				$(":input[name='operator.realName']").parent().find("i").text("请输入运营人名称");
+				$(":input[name='operator.realName']").parent().find("i").text("请输入名称");
 			}else{
 				$(":input[name='operator.realName']").parent().find("i").text("");
 			}
@@ -831,9 +830,9 @@ $(".btn_open").click(function (){
 			var phone=$(":input[name='operator.phone']").val();
 			var phoneRe=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
 			if(phone=="" || phone==null){
-				$(":input[name='operator.phone']").parent().find("i").text("请输入运营人电话");
+				$(":input[name='operator.phone']").parent().find("i").text("请输入电话");
 			}else if(!phoneRe.test(phone)){
-				$(":input[name='operator.phone']").parent().find("i").text("请输入正确的运营人电话");
+				$(":input[name='operator.phone']").parent().find("i").text("请输入正确的电话");
 			}else{
 				$(":input[name='operator.phone']").parent().find("i").text("");
 			}
