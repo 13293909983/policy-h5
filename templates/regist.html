@@ -166,7 +166,7 @@
 					<div class="upload-box">
 						<div class="upload-boxone">
 							<div id="drop_area"></div>
-							<p><strong>*</strong>&nbsp;营业执照副本复印件加盖公章</p>
+							<p><strong>*</strong>&nbsp;营业执照副本复印件</p>
 							<i th:text="${errorMap['organ.businessLicenceImg']}"></i>
 							<input name="organ.businessLicenceImg" type="hidden" th:value="${account.organ.businessLicenceImg}"/>
 						</div>
@@ -182,16 +182,16 @@
 						</div>-->
 						<div class="upload-boxone" style="display: none">
 							<div id="drop_area3"></div>
-							<p><strong>*</strong>&nbsp;税务登记证复印件加盖公章</p>
+							<p><strong>*</strong>&nbsp;税务登记证复印件</p>
 							<input name="organ.taxregCertImg" type="hidden" th:value="${account.organ.taxregCertImg}"/>
 						</div>
 						<div class="upload-boxone" style="display: none">
 							<div id="drop_area4"></div>
-							<p><strong>*</strong>&nbsp;组织机构代码证复印件加盖公章</p>
+							<p><strong>*</strong>&nbsp;组织机构代码证复印件</p>
 							<input name="organ.orgnizationCertImg" type="hidden" th:value="${account.organ.orgnizationCertImg}"/>
 						</div>
 						<div class="zhu" style="clear: both;">
-							注：必须填，所传证件必须都加盖公章，图片格式支持：jpg,jpeg,png,大小不能超过2M
+							注：必须填，图片格式支持：jpg,jpeg,png,大小不能超过2M
 							<br/>
 							
 							<i th:text="${errorMap['organ.bankRegCertImg']}" style="display: none"></i>
@@ -206,22 +206,22 @@
 				<div class="zhuce">
 					<p>3</p>
 				</div>
-				<h3>授权担保人信息</h3>
+				<h3>授权担保人\法人信息</h3>
 			</div>
 			<ul class="reg-ul">
 				<li>
-					<span>运营人姓名</span>
-					<input name="operator.realName" placeholder="运营人姓名" th:value="${account.operator.realName}"/>
+					<span>姓名</span>
+					<input name="operator.realName" placeholder="请输入姓名" th:value="${account.operator.realName}"/>
 					<strong>*</strong><i th:text="${errorMap['operator.realName']}"></i>
 				</li>
 				<li>
-					<span>运营人电话</span>
-					<input name="operator.phone" placeholder="请输入运营人电话" th:value="${account.operator.phone}"/>
+					<span>电话</span>
+					<input name="operator.phone" placeholder="请输入电话" th:value="${account.operator.phone}"/>
 					<strong>*</strong><i th:text="${errorMap['operator.phone']}"></i>
 				</li>
 				<li>
 					<span>身份证号</span>
-					<input name="operator.identityNo" placeholder="请输入运营人身份证号" class="input-long" th:value="${account.operator.identityNo}"/>
+					<input name="operator.identityNo" placeholder="请输入身份证号" class="input-long" th:value="${account.operator.identityNo}"/>
 					<strong>*</strong><i th:text="${errorMap['operator.identityNo']}"></i>
 				</li>
 				<div class="upload-img">
@@ -229,18 +229,18 @@
 					<div class="upload-box">
 						<div class="upload-boxone">
 							<div id="drop_area5"></div>
-							<p><strong>*</strong>&nbsp;运营人身份证正面复印件，加盖公章</p>
+							<p><strong>*</strong>&nbsp;身份证正面复印件</p>
 							<i th:text="${errorMap['operator.identityCardImg']}"></i>
 							<input name="operator.identityCardImg" type="hidden" th:value="${account.operator.identityCardImg}"/>
 						</div>
 						<div class="upload-boxone">
 							<div id="drop_area6"></div>
-							<p><strong>*</strong>&nbsp;运营人身份证反面复印件，加盖公章</p>
+							<p><strong>*</strong>&nbsp;身份证反面复印件</p>
 							<i th:text="${errorMap['certificateImg']}"></i>
 							<input name="certificateImg" type="hidden" th:value="${account.certificateImg}"/>
 						</div>
 						<div class="zhu" style="clear: both;">
-							注：必须填，所传证件必须都加盖公章，图片格式支持：jpg,jpeg,png,大小不能超过2M
+							注：必须填，图片格式支持：jpg,jpeg,png,大小不能超过2M
 							<br/>
 						</div>
 					</div>
@@ -635,7 +635,7 @@ $(".btn_open").click(function (){
 		//运营人名称
 		var realName=$(":input[name='operator.realName']").val();
 		if(realName=="" || realName==null){
-			$(":input[name='operator.realName']").parent().find("i").text("请输入运营人名称");
+			$(":input[name='operator.realName']").parent().find("i").text("请输入名称");
 			i++;
 		}else{
 			$(":input[name='operator.realName']").parent().find("i").text("");
@@ -644,10 +644,10 @@ $(".btn_open").click(function (){
 		var phone=$(":input[name='operator.phone']").val();
 		var phoneRe=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
 		if(phone=="" || phone==null){
-			$(":input[name='operator.phone']").parent().find("i").text("请输入运营人电话");
+			$(":input[name='operator.phone']").parent().find("i").text("请输入电话");
 			i++;
 		}else if(!phoneRe.test(phone)){
-			$(":input[name='operator.phone']").parent().find("i").text("请输入正确的运营人电话");
+			$(":input[name='operator.phone']").parent().find("i").text("请输入正确的电话");
 			i++;
 		}else{
 			$(":input[name='operator.phone']").parent().find("i").text("");
@@ -673,13 +673,13 @@ $(".btn_open").click(function (){
 		//运营人身份证
 		var identityCardImg=$(":input[name='operator.identityCardImg']").val();
 		if(identityCardImg=="" || identityCardImg==null){
-			$("#drop_area5").parent().find("i").text("* 请上传运营人身份证正面复印件");
+			$("#drop_area5").parent().find("i").text("* 请上传身份证正面复印件");
 			i++;
 		}
 		//公司授权运营人授权书
 		var certificateImg=$(":input[name='certificateImg']").val();
 		if(certificateImg=="" || certificateImg==null){
-			$("#drop_area6").parent().find("i").text("* 请上传运营人身份证反面复印件");
+			$("#drop_area6").parent().find("i").text("* 请上传身份证反面复印件");
 			i++;
 		}
 		if(i>0){
@@ -820,7 +820,7 @@ $(".btn_open").click(function (){
 		$("input[name='operator.realName']").blur("input propertychange",function(){
 			var realName=$(":input[name='operator.realName']").val();
 			if(realName=="" || realName==null){
-				$(":input[name='operator.realName']").parent().find("i").text("请输入运营人名称");
+				$(":input[name='operator.realName']").parent().find("i").text("请输入名称");
 			}else{
 				$(":input[name='operator.realName']").parent().find("i").text("");
 			}
@@ -830,9 +830,9 @@ $(".btn_open").click(function (){
 			var phone=$(":input[name='operator.phone']").val();
 			var phoneRe=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
 			if(phone=="" || phone==null){
-				$(":input[name='operator.phone']").parent().find("i").text("请输入运营人电话");
+				$(":input[name='operator.phone']").parent().find("i").text("请输入电话");
 			}else if(!phoneRe.test(phone)){
-				$(":input[name='operator.phone']").parent().find("i").text("请输入正确的运营人电话");
+				$(":input[name='operator.phone']").parent().find("i").text("请输入正确的电话");
 			}else{
 				$(":input[name='operator.phone']").parent().find("i").text("");
 			}

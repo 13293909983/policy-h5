@@ -340,9 +340,6 @@
 		$('.btnSubClass').show();
 		//隐藏确定按钮
 		$('#btnSub').hide();
-		console.log($(":input[name='retroactiveStart']").val());
-		console.log($(":input[name='officeType']").val());
-		console.log($('form').serializeArray());
 		return true;
 	}
 	//被保险人名称
