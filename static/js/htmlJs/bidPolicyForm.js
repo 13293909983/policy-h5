@@ -337,9 +337,12 @@
 		//$(":input[name='imageFile']").prop("disabled",true);
 		$(":input[name='imageFile']").attr("disabled","disabled");
 		//显示灰色的禁用的样式
-		$('.btnSubClass').show();
+		//$('.btnSubClass').show();
 		//隐藏确定按钮
-		$('#btnSub').hide();
+		//$('#btnSub').hide();
+		console.log($(":input[name='retroactiveStart']").val());
+		console.log($(":input[name='officeType']").val());
+		console.log($('form').serializeArray());
 		return true;
 	}
 	//被保险人名称
