@@ -343,7 +343,7 @@
 								<span id="text">未选择文件</span>
 								<input type='file' id="imageFile" name='imageFile' accept='*.zip' onMouseleave="getImageFile()"/>
 								<input type="hidden" name="fileKey" th:value="${bidPolicy.fileKey}"/>
-								<input type="hidden" name="imageFile" th:value="${bidPolicy.imageFile}"/>
+								<input type="hidden" name="imageFile"/>
 							</div>
 							<span style="display: block;color: red;font-size: 0.14rem;line-height: 0.25rem;margin-top: 0.10rem;width: 347px;">请将投保单位营业执照、pdf版的招标文件打包<br/>压缩成zip格式上传,文件大小最大为20M</span><!-- <br/> -->
 							<div id="schedule" style="position: relative;width: 347px;display: none;">
