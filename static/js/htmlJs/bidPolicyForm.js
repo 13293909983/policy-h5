@@ -340,6 +340,9 @@
 		$('.btnSubClass').show();
 		//隐藏确定按钮
 		$('#btnSub').hide();
+		console.log($(":input[name='retroactiveStart']").val());
+		console.log($(":input[name='officeType']").val());
+		console.log($('form').serializeArray());
 		return true;
 	}
 	//被保险人名称
@@ -744,6 +747,7 @@ $(function(){
             //把file设置为空的
             $(":hidden[name='fileKey']").val("");
             $(":hidden[name='fileKey']").attr("_val","");
+            $(":hidden[name='imageFile']").val("");
             //隐藏进度条
             $("#schedule").hide();
             return false;
@@ -757,6 +761,7 @@ $(function(){
                     //把file设置为空的
                     $(":hidden[name='fileKey']").val("");
                     $(":hidden[name='fileKey']").attr("_val","");
+                    $(":hidden[name='imageFile']").val("");
                     var file = document.getElementById('imageFile');
                     file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
                     //file.outerHTML = file.outerHTML; //重新初始化了file的html
@@ -786,6 +791,7 @@ $(function(){
                 //把file设置为空的
                 $(":hidden[name='fileKey']").val("");
                 $(":hidden[name='fileKey']").attr("_val","");
+                $(":hidden[name='imageFile']").val("");
                 var file = document.getElementById('imageFile');
                 file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
                 //file.outerHTML = file.outerHTML; //重新初始化了file的html
@@ -822,7 +828,7 @@ $(function(){
                         //把返回的key设置到隐藏的input上
                         $(":hidden[name='fileKey']").val(fileName);
                         $(":hidden[name='fileKey']").attr("_val",fileName);
-                        $(":hidden[name='fileUrl']").val(fileUrl);
+                        $(":hidden[name='imageFile']").val(fileUrl);
                         if(ext=="zip"){
                             $("#fileImg").attr("src", "/static/images/a7.png");
                         }else{
@@ -838,7 +844,7 @@ $(function(){
                     //把file设置为空的
                     $(":hidden[name='fileKey']").val("");
                     $(":hidden[name='fileKey']").attr("_val","");
-                    $(":hidden[name='fileUrl']").val("");
+                    $(":hidden[name='imageFile']").val("");
                     var file = document.getElementById('imageFile');
                     file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
                     //file.outerHTML = file.outerHTML; //重新初始化了file的html
