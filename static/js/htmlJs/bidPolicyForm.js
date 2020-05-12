@@ -736,7 +736,10 @@ $(function(){
 	$("#imageFile").change(function(){
 		var insuranceCompany=$("#insuranceCompany").val();
         var files = this.files;
-        var imgName = document.all.imageFile.value;
+        var imgName="";
+        if(files.length>0){
+        	imgName=files[0].name;
+        }
         var ext="";
         if(imgName==""){
             layer.msg('请选择需要上传的文件!', {icon: 5});
