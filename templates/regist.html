@@ -507,7 +507,7 @@ $(".btn_open").click(function (){
 	    },
 	    success: function (e) {//验证通过后清除验证
 	    	if($(e).is(':hidden')){
-	    		$(e).parent().find(".drop_area").addClass('has-error');
+	    		$(e).parent().find(".drop_area").removeClass('has-error');
 	    	}else{
 	    		$(e).parent().find("input").removeClass('has-error');
 	    	}
