@@ -13,6 +13,7 @@
 	<script src="/static/js/index.js" type="text/javascript"></script>
 	<script type="text/javascript" src="/static/js/paging.js" ></script>
 	<script src="/static/js/layer/2.4/layer.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.validate.min.js"></script>
 <style type="text/css">
 	strong{
 		color: #e04646;
@@ -27,6 +28,16 @@
 	    margin-left: 0.05rem;
 	    float: left;
 	}
+	label{
+		ist-style: none;
+	    font-size: 0.12rem;
+	    color: #e04646;
+	    margin-left: 0.05rem;
+	    float: left;
+	}
+	.has-error{
+		border-color: #e04646 !important;;
+	}
 </style>
 </head>
 <body>
@@ -36,22 +47,32 @@
 		<div class="title_nav">
 			<h3>注册</h3><img src="/static/images/xz.png" />
 		</div>
-		<form action="/regist.html" method="POST" onsubmit="return onCheck()">
+		<form action="/regist.html" method="POST" onsubmit="return onCheck()" id="registUser">
 			<div class="zhuce_wrap">
-				<div class="zhuce">
+				<!-- <div class="zhuce">
 					<p>1</p>
-				</div>
-				<h3>个人信息</h3>
+				</div> -->
+				<h3>注册信息</h3>
 			</div>
 			<ul class="login-ul">
 				<li>
-					<span>用户名</span>
-					<input name="username" placeholder="" th:value="${account.username}"/>
-					<strong>*</strong><i th:text="${errorMap['username']==null?'将会成为您唯一的登入名':errorMap['username']}"></i>
+					<span>企业名称</span>
+					<input placeholder="请输入企业注册名称" name="organ.organName" class="input-long"th:value="${account.organ.organName}"/> 
+					<strong>*</strong><i th:text="${errorMap['organ.organName']}"></i>
+				</li>
+				<li>
+					<span>统一信用代码</span>
+					<input placeholder="请输入统一信用代码" name="organ.socialCreditCode" class="input-long" th:value="${account.organ.socialCreditCode}"/>
+					<strong>*</strong><i th:text="${errorMap['organ.socialCreditCode']}"></i>
+				</li>
+				<li>
+					<span>用户名/登录名</span>
+					<input placeholder="请输入用户名/登录名" name="username" th:value="${account.username}"/>
+					<strong>*</strong><i th:text="${errorMap['username']}"></i>
 				</li>
 				<li>
 					<span>手机号</span>
-					<input name="mobile" th:value="${account.mobile}"/>
+					<input placeholder="请输入手机号" name="mobile" th:value="${account.mobile}"/>
 					<strong>*</strong><i th:text="${errorMap['mobile']}"></i>
 				</li>
 				<!-- <li>
@@ -66,175 +87,41 @@
 				</li>
 				<li>
 					<span>密码</span>
-					<input name="password" th:value="${account.password}" type="password"/>
+					<input placeholder="请输入密码" name="password" id="password" th:value="${account.password}" type="password"/>
 					<strong>*</strong><i th:text="${errorMap['password']==null?'必须多于8个字符，并包含大写，小写字母和数字':errorMap['password']}"></i>
 				</li>
 				<li>
 					<span>确认密码</span>
-					<input name="repeatPassword" th:value="${account.password}" type="password"/>
+					<input placeholder="请再次输入密码" name="repeatPassword"  th:value="${account.password}" type="password"/>
 					<strong>*</strong><i></i>
 				</li>
 				<li>
 					<span>图形验证码</span>
-					<input id="code_input" name="captcha"/>
-					<div style="float: right; margin-top: 0.05rem; margin-left: 0.10rem">
+					<input placeholder="请输入验证码" id="code_input" name="captcha"/>
+					<div style="float: right; margin-top: -0.03rem; margin-left: 0.10rem">
 						<div id="v_container" style="height: 0.34rem; width: 100%;">
-							<img src="captcha.jpg" onclick="this.src='captcha.jpg?t='+new Date().getTime()" height="30px"/>
+							<img src="captcha.jpg" onclick="this.src='captcha.jpg?t='+new Date().getTime()" height="50px" style="cursor: pointer;"/>
 						</div>
 					</div>
 					<strong>*</strong><i th:text="${errorMap['captcha']}"></i>
 				</li>
-			</ul>
-			<div class="zhuce_wrap">
-				<div class="zhuce">
-					<p>2</p>
-				</div>
-				<h3>企业信息</h3>
-			</div>
-			<ul class="reg-ul">
-				<li>
-					<span>认证类型</span>
-					<label>
-						<input type="radio" name="organ.gradeId" value = "1" checked>非担保机构
-						<input type="radio" name="organ.gradeId" value = "2" disabled>担保机构
-					</label>
-					<i>*</i>
-				</li>
-				<li>
-					<span>机构类型</span>
-					<select name="organ.industryType">
-						<option value="">请选择机构类型</option>
-						<option value="1" th:selected="${account.organ.industryType=='1'}">承建单位/承包商/供货商</option>
-						<option value="2" th:selected="${account.organ.industryType=='2'}">建设单位/业主/开发商</option>
-						<option value="5" th:selected="${account.organ.industryType=='5'}">交易中心</option>
-						<option value="6" th:selected="${account.organ.industryType=='6'}">招标代理</option>
-					</select>
-					<strong>*</strong><i th:text="${errorMap['organ.industryType']}"></i>
-				</li>
-				<li>
-					<span>企业名称</span>
-					<input placeholder="请输入企业注册名称" name="organ.organName" class="input-long" th:value="${account.organ.organName}"/> 
-					<strong>*</strong><i th:text="${errorMap['organ.organName']}"></i>
-				</li>
-				<li>
-					<span>企业地址</span>
-					<input placeholder="请输入企业地址" name="organ.address" class="input-long" th:value="${account.organ.address}"/>
-					<strong>*</strong><i th:text="${errorMap['organ.address']}"></i>
-				</li>
-				<!-- <li>
-					<span>开户许可证</span>
-					<input placeholder="请输入开户许可证核准号" />
-					<i>*</i>
-				</li> -->
-				<li style="position: relative;">
-					<span>注册资本</span>
-					<input  name="organ.regMoney" placeholder="请输入注册资本" th:value="${account.organ.regMoney}"/>
-					<b class="label-b">万元</b>
-					<strong>*</strong><i th:text="${errorMap['organ.regMoney']}"></i>
-				</li>
-				<li>
-					<span>组织形式</span>
-					<select name="organ.organForm">
-						<option value="">请选择组织形式</option>
-						<option value="1" th:selected="${account.organ.organForm=='1'?true:false}">国有或国有控股</option>
-						<option value="2" th:selected="${account.organ.organForm=='2'?true:false}">股份有限公司</option>
-						<option value="3" th:selected="${account.organ.organForm=='3'?true:false}">有限责任公司</option>
-						<option value="4" th:selected="${account.organ.organForm=='4'?true:false}">中外合资</option>
-						<option value="5" th:selected="${account.organ.organForm=='5'?true:false}">外商融资</option>
-						<option value="6" th:selected="${account.organ.organForm=='6'?true:false}">股份合作</option>
-						<option value="7" th:selected="${account.organ.organForm=='7'?true:false}">集体</option>
-						<option value="8" th:selected="${account.organ.organForm=='8'?true:false}">合伙</option>
-						<option value="9" th:selected="${account.organ.organForm=='9'?true:false}">其他</option>
-					</select>
-					<strong>*</strong><i th:text="${errorMap['organ.organForm']}"></i>
-				</li>
-				<li>
-					<span>三证合一</span>
-					<label> 
-						<input type="radio" name="organ.threeinone" value = "1" th:checked="${account.organ.threeinone==null||account.organ.threeinone=='1'}">是
-						<input type="radio" name="organ.threeinone" value = "0" th:checked="${account.organ.threeinone=='0'}">否
-					</label> 
-					<i>*</i>
-				</li>
-				<li>
-					<span>信用代码</span>
-					<input placeholder="请输入统一信用代码" name="organ.socialCreditCode" class="input-long" th:value="${account.organ.socialCreditCode}"/>
-					<strong>*</strong><i th:text="${errorMap['organ.socialCreditCode']}"></i>
-				</li>
 				<div class="upload-img">
 					<span>上传证件</span>
 					<div class="upload-box">
 						<div class="upload-boxone">
-							<div id="drop_area"></div>
+							<div id="drop_area" class="drop_area"></div>
 							<p><strong>*</strong>&nbsp;营业执照副本复印件</p>
 							<i th:text="${errorMap['organ.businessLicenceImg']}"></i>
 							<input name="organ.businessLicenceImg" type="hidden" th:value="${account.organ.businessLicenceImg}"/>
 						</div>
-						<!--<div class="upload-boxone">
-							<div id="drop_area1"></div>
-							<p>银行开户许可证复印件加盖公章</p>
-							<input name="organ.bankRegCertImg" type="hidden" th:value="${account.organ.bankRegCertImg}"/>
-						</div>-->
-						<!--<div class="upload-boxone">
-							<div id="drop_area2"></div>
-							<p>法人身份证正反面复印在一页，加盖公章</p>
-							<input name="legal.identityCardImg" type="hidden" th:value="${account.legal.identityCardImg}"/>
-						</div>-->
-						<div class="upload-boxone" style="display: none">
-							<div id="drop_area3"></div>
-							<p><strong>*</strong>&nbsp;税务登记证复印件</p>
-							<input name="organ.taxregCertImg" type="hidden" th:value="${account.organ.taxregCertImg}"/>
-						</div>
-						<div class="upload-boxone" style="display: none">
-							<div id="drop_area4"></div>
-							<p><strong>*</strong>&nbsp;组织机构代码证复印件</p>
-							<input name="organ.orgnizationCertImg" type="hidden" th:value="${account.organ.orgnizationCertImg}"/>
-						</div>
-						<div class="zhu" style="clear: both;">
-							注：必须填，图片格式支持：jpg,jpeg,png,大小不能超过2M
-							<br/>
-							
-							<i th:text="${errorMap['organ.bankRegCertImg']}" style="display: none"></i>
-							<i th:text="${errorMap['legal.identityCardImg']}" style="display: none"></i>
-							<i th:text="${errorMap['organ.taxregCertImg']}" style="display: none"></i>
-							<i th:text="${errorMap['organ.orgnizationCertImg']}" style="display: none"></i>
-						</div>
-					</div>
-				</div>
-			</ul>
-			<div class="zhuce_wrap">
-				<div class="zhuce">
-					<p>3</p>
-				</div>
-				<h3>授权担保人\法人信息</h3>
-			</div>
-			<ul class="reg-ul">
-				<li>
-					<span>姓名</span>
-					<input name="operator.realName" placeholder="请输入姓名" th:value="${account.operator.realName}"/>
-					<strong>*</strong><i th:text="${errorMap['operator.realName']}"></i>
-				</li>
-				<li>
-					<span>电话</span>
-					<input name="operator.phone" placeholder="请输入电话" th:value="${account.operator.phone}"/>
-					<strong>*</strong><i th:text="${errorMap['operator.phone']}"></i>
-				</li>
-				<li>
-					<span>身份证号</span>
-					<input name="operator.identityNo" placeholder="请输入身份证号" class="input-long" th:value="${account.operator.identityNo}"/>
-					<strong>*</strong><i th:text="${errorMap['operator.identityNo']}"></i>
-				</li>
-				<div class="upload-img">
-					<span>上传证件</span>
-					<div class="upload-box">
 						<div class="upload-boxone">
-							<div id="drop_area5"></div>
+							<div id="drop_area5" class="drop_area"></div>
 							<p><strong>*</strong>&nbsp;身份证正面复印件</p>
 							<i th:text="${errorMap['operator.identityCardImg']}"></i>
 							<input name="operator.identityCardImg" type="hidden" th:value="${account.operator.identityCardImg}"/>
 						</div>
 						<div class="upload-boxone">
-							<div id="drop_area6"></div>
+							<div id="drop_area6" class="drop_area"></div>
 							<p><strong>*</strong>&nbsp;身份证反面复印件</p>
 							<i th:text="${errorMap['certificateImg']}"></i>
 							<input name="certificateImg" type="hidden" th:value="${account.certificateImg}"/>
@@ -253,7 +140,6 @@
 				<div id="btn" class="btn_closes btn_open"> <img src="/static/images/close.png" />
 					</div>
 				<div class="agree_all">
-					
 					<div class="agree_content">
 	                     <h2>用户协议须知</h2>
 						<p>欢迎“您”（以下或称“用户”）与我方“电子保险保函”（以下称“本公司”）共同签署《用户协议须知》（以下称“本协议”），本协议阐述之条款和条件适用于您使用（所涉域名为sxdeliw.com下同）所提供的在山西省招投标市场中进行在线信息发布、保函交易、保函查验和各项服务(下称“服务”)。</p>
@@ -387,18 +273,6 @@ $(".btn_open").click(function (){
 
 <!--验证码--> 
 <script src="/static/js/gVerify.js"></script>
-<script>
-	/* var verifyCode = new GVerify("v_container");
-
-	document.getElementById("my_button").onclick = function(){
-		var res = verifyCode.validate(document.getElementById("code_input").value);
-		if(res){
-			alert("验证正确");
-		}else{
-			alert("验证码错误");
-		}
-	} */
-</script>
 <!--上传图片-->
 <script src="/static/js/upload.js"></script>
 <script type="text/javascript">
@@ -451,7 +325,10 @@ $(".btn_open").click(function (){
 	                contentType: false,
 	                success:function(result){
 	                    if(result.success){
-	                        $(input).val(result.data)
+	                        $(input).val(result.data);
+	                        //把图片验证去掉
+	                        $(area).removeClass('has-error');
+	            			$(input).next().remove();
 	                    }
 	                }
 	            })
@@ -462,10 +339,6 @@ $(".btn_open").click(function (){
 		}
 	}
 	initDragImgUpload("#drop_area",":input[name='organ.businessLicenceImg']");
-	/*initDragImgUpload("#drop_area1",":input[name='organ.bankRegCertImg']");
-	initDragImgUpload("#drop_area2",":input[name='legal.identityCardImg']");*/
-	initDragImgUpload("#drop_area3",":input[name='organ.taxregCertImg']");
-	initDragImgUpload("#drop_area4",":input[name='organ.orgnizationCertImg']");
 	initDragImgUpload("#drop_area5",":input[name='operator.identityCardImg']");
 	initDragImgUpload("#drop_area6",":input[name='certificateImg']");
 	
@@ -486,368 +359,183 @@ $(".btn_open").click(function (){
 	    }
 	});
 	$(function(){
-		click();
-        $(":radio[name='organ.threeinone']").change(function(){
-            $(":input[name='organ.socialCreditCode']").prop("disabled",$(this).val()=="0").parent().toggle($(this).val()=="1");
-            $(":input[name='organ.organCode']").prop("disabled",$(this).val()=="1").parent().toggle($(this).val()=="0");
-            $(":input[name='organ.businessLicenceNo']").prop("disabled",$(this).val()=="1").parent().toggle($(this).val()=="0");
-            $(":input[name='organ.taxregNo']").prop("disabled",$(this).val()=="1").parent().toggle($(this).val()=="0");
-            $("#drop_area3").parent(".upload-boxone").toggle($(this).val()=="0");
-            $("#drop_area4").parent(".upload-boxone").toggle($(this).val()=="0");
-        });
-        $(":radio[name='organ.threeinone']:checked").change();
-        $(":radio[name='isLo']").change(function(){
-            $(".inform-box:eq(2)").toggle($(this).val()=="0").find(":input").prop("disabled",$(this).val()=="1");
-        });
-        $(":radio[name='isLo']:checked").change();
+		jQuery.validator.addMethod("isMobile", function(value, element) {
+	        var mobile = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+	        return this.optional(element)||(mobile.test(value));
+	    }, "请填写正确的手机号码");
+		//组织机构代码
+		jQuery.validator.addMethod("isOrganizing", function(value, element) {
+	        var organizing = /^([0-9ABCDEFGHJKLMNPQRTUWXY]{2})([0-9]{6})([0-9ABCDEFGHJKLMNPQRTUWXY]{10})$/;
+	        return this.optional(element)||(organizing.test(value));
+	    }, "请填写正确的统一信用代码");
+		jQuery.validator.addMethod("isEmail", function(value, element) {
+	        var email = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)/;
+	        return this.optional(element)||(email.test(value));
+	    }, "请填写正确的邮箱");
 	})
 	//提交验证
 	function onCheck(type){
-		var i=0;
-		//用户名注册验证
-		var username=$(':input[name=username]').val();
-		if(username==null ||username ==""){
-			$(":input[name='username']").parent().find("i").text("请输入用户名");
-			i++;
-		}else{
-			$(":input[name='username']").parent().find("i").text("将会成为您唯一的登入名");
+		if($('#registUser').valid()){
+			var check=$("input[name='agree']").is(':checked');
+			if(!check){
+				layer.msg('请勾选同意《用户协议须知》', {icon: 0});
+				return false;
+			}
+			return true;
 		}
-		//手机号验证
-		var mobile=$(':input[name=mobile]').val();
-		var phone=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
-		if(mobile=="" || mobile==null){
-			$(":input[name='mobile']").parent().find("i").text("请输入手机号");
-			i++;
-		}else if(!phone.test(mobile)){
-			$(":input[name='mobile']").parent().find("i").text("请输入正确的手机号");
-			i++;
-		}else{
-			$(":input[name='mobile']").parent().find("i").text("");
-		}
-		//邮箱
-		var email=$(':input[name=email]').val();
-		var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
-		if(email=="" || email==null){
-			$(":input[name='email']").parent().find("i").text("请输入邮箱");
-			i++;
-		}else if(!reg.test(email)){
-			$(":input[name='email']").parent().find("i").text("请输入正确的邮箱");
-			i++;
-		}else{
-			$(":input[name='email']").parent().find("i").text("");
-		}
-		//邮箱
-		var email=$(':input[name=email]').val();
-		var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
-		if(email=="" || email==null){
-			$(":input[name='email']").parent().find("i").text("请输入邮箱");
-			i++;
-		}else if(!reg.test(email)){
-			$(":input[name='email']").parent().find("i").text("请输入正确的邮箱");
-			i++;
-		}else{
-			$(":input[name='email']").parent().find("i").text("");
-		}
-		//密码
-		var password=$(':input[name=password]').val();
-		var passwordReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-		if(password=="" || password==null){
-			$(":input[name='password']").parent().find("i").text("请输入密码");
-			i++;
-		}else if(!passwordReg.test(password)){
-			$(":input[name='password']").parent().find("i").text("必须多于8个字符，并包含大写，小写字母和数字");
-			i++;
-		}else{
-			$(":input[name='password']").parent().find("i").text("");
-		}
-		//再次输入密码
-		var repeatPassword=$(':input[name=repeatPassword]').val();
-		if(repeatPassword=="" || repeatPassword==null){
-			$(":input[name='repeatPassword']").parent().find("i").text("请输入确认密码");
-			i++;
-		}else if(password!=repeatPassword){
-			$(":input[name='repeatPassword']").parent().find("i").text("两次输入的密码不相同，请重新输入");
-			i++;
-		}else{
-			$(":input[name='repeatPassword']").parent().find("i").text("");
-		}
-		//验证码
-		var codeInput=$(':input[name=captcha]').val();
-		if(codeInput=="" || codeInput==null){
-			$(":input[name='captcha']").parent().find("i").text("请输入验证码");
-			i++;
-		}else{
-			$(":input[name='captcha']").parent().find("i").text("");
-		}
-		//选择机构类型
-		var industryType=$("select[name='organ.industryType']").val();
-		if(industryType=="" || industryType==null){
-			$("select[name='organ.industryType']").parent().find("i").text("请选择机构类型");
-			i++;
-		}else{
-			$("select[name='organ.industryType']").parent().find("i").text("");
-		}
-		//企业名称
-		var organName=$("input[name='organ.organName']").val();
-		if(organName=="" || organName==null){
-			$(":input[name='organ.organName']").parent().find("i").text("请输入企业注册名称");
-			i++;
-		}else{
-			$(":input[name='organ.organName']").parent().find("i").text("");
-		}
-		//企业地址
-		var address=$("input[name='organ.address']").val();
-		if(address=="" || address==null){
-			$(":input[name='organ.address']").parent().find("i").text("请输入企业地址");
-			i++;
-		}else{
-			$(":input[name='organ.address']").parent().find("i").text("");
-		}
-		//企业注册资本
-		var regMoneys=$("input[name='organ.regMoney']").val();
-		if(regMoneys=="" || regMoneys==null){
-			$(":input[name='organ.regMoney']").parent().find("i").text("请输入注册资金");
-			i++;
-		}else{
-			$(":input[name='organ.regMoney']").parent().find("i").text("");
-		}
-		//选择组织机构
-		var organForm=$("select[name='organ.organForm']").val();
-		if(organForm=="" || organForm==null){
-			$("select[name='organ.organForm']").parent().find("i").text("请选择组织机构");
-			i++;
-		}else{
-			$("select[name='organ.organForm']").parent().find("i").text("");
-		}
-		//统一信用代码
-		var socialCreditCode=$(":input[name='organ.socialCreditCode']").val();
-		var regex =/^([0-9ABCDEFGHJKLMNPQRTUWXY]{2})([0-9]{6})([0-9ABCDEFGHJKLMNPQRTUWXY]{10})$/;
-		if(socialCreditCode=="" || socialCreditCode==null){
-			$(":input[name='organ.socialCreditCode']").parent().find("i").text("请输入社会信用代码");
-			i++;
-		}else if(!regex.test(socialCreditCode)){
-			$(":input[name='organ.socialCreditCode']").parent().find("i").text("请输入正确的社会信用代码");
-			i++;
-		}else{
-			$(":input[name='organ.socialCreditCode']").parent().find("i").text("");
-		}
-		//运营人名称
-		var realName=$(":input[name='operator.realName']").val();
-		if(realName=="" || realName==null){
-			$(":input[name='operator.realName']").parent().find("i").text("请输入名称");
-			i++;
-		}else{
-			$(":input[name='operator.realName']").parent().find("i").text("");
-		}
-		//运营人电话
-		var phone=$(":input[name='operator.phone']").val();
-		var phoneRe=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
-		if(phone=="" || phone==null){
-			$(":input[name='operator.phone']").parent().find("i").text("请输入电话");
-			i++;
-		}else if(!phoneRe.test(phone)){
-			$(":input[name='operator.phone']").parent().find("i").text("请输入正确的电话");
-			i++;
-		}else{
-			$(":input[name='operator.phone']").parent().find("i").text("");
-		}
-		//身份证号
-		var identityNo=$(":input[name='operator.identityNo']").val();
-		var identityNoRe=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-		if(identityNo=="" || identityNo==null){
-			$(":input[name='operator.identityNo']").parent().find("i").text("请输入身份证号");
-			i++;
-		}else if(!identityNoRe.test(identityNo)){
-			$(":input[name='operator.identityNo']").parent().find("i").text("请输入正确的身份证号");
-			i++;
-		}else{
-			$(":input[name='operator.identityNo']").parent().find("i").text("");
-		}
-		//营业执照副本复印件
-		var businessLicenceImg=$(":input[name='organ.businessLicenceImg']").val();
-		if(businessLicenceImg=="" || businessLicenceImg==null){
-			$("#drop_area").parent().find("i").text("* 请上传营业执照副本复印件");
-			i++;
-		}
-		//运营人身份证
-		var identityCardImg=$(":input[name='operator.identityCardImg']").val();
-		if(identityCardImg=="" || identityCardImg==null){
-			$("#drop_area5").parent().find("i").text("* 请上传身份证正面复印件");
-			i++;
-		}
-		//公司授权运营人授权书
-		var certificateImg=$(":input[name='certificateImg']").val();
-		if(certificateImg=="" || certificateImg==null){
-			$("#drop_area6").parent().find("i").text("* 请上传身份证反面复印件");
-			i++;
-		}
-		if(i>0){
-			return false;
-		}
-		var check=$("input[name='agree']").is(':checked');
-		if(!check){
-			layer.msg('请勾选同意《用户协议须知》', {icon: 0});
-			return false;
-		}
-		return true;
 	}
-	function click(){
-		//用户名注册验证
-		$("input[name='username']").blur("input propertychange",function(){
-			var username=$(':input[name=username]').val();
-			if(username==null ||username ==""){
-				$(":input[name='username']").parent().find("i").text("请输入用户名");
-			}else{
-				$(":input[name='username']").parent().find("i").text("将会成为您唯一的登入名");
-			}
-		})
-		//手机号验证
-		$("input[name='mobile']").blur("input propertychange",function(){
-			var mobile=$(':input[name=mobile]').val();
-			var phone=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
-			if(mobile=="" || mobile==null){
-				$(":input[name='mobile']").parent().find("i").text("请输入手机号");
-			}else if(!phone.test(mobile)){
-				$(":input[name='mobile']").parent().find("i").text("请输入正确的手机号");
-			}else{
-				$(":input[name='mobile']").parent().find("i").text("");
-			}
-		})
-		//邮箱
-		$("input[name='email']").blur("input propertychange",function(){
-			var email=$(':input[name=email]').val();
-			var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
-			if(email=="" || email==null){
-				$(":input[name='email']").parent().find("i").text("请输入邮箱");
-			}else if(!reg.test(email)){
-				$(":input[name='email']").parent().find("i").text("请输入正确的邮箱");
-			}else{
-				$(":input[name='email']").parent().find("i").text("");
-			}
-		})
-		//密码
-		$("input[name='password']").blur("input propertychange",function(){
-			var password=$(':input[name=password]').val();
-			var passwordReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-			if(password=="" || password==null){
-				$(":input[name='password']").parent().find("i").text("请输入密码");
-			}else if(!passwordReg.test(password)){
-				$(":input[name='password']").parent().find("i").text("必须多于8个字符，并包含大写，小写字母和数字");
-			}else{
-				$(":input[name='password']").parent().find("i").text("");
-			}
-		})
-		//再次输入密码
-		$("input[name='repeatPassword']").blur("input propertychange",function(){
-			var password=$(':input[name=password]').val();
-			var repeatPassword=$(':input[name=repeatPassword]').val();
-			if(repeatPassword=="" || repeatPassword==null){
-				$(":input[name='repeatPassword']").parent().find("i").text("请输入确认密码");
-			}else if(password!=repeatPassword){
-				$(":input[name='repeatPassword']").parent().find("i").text("两次输入的密码不相同，请重新输入");
-			}else{
-				$(":input[name='repeatPassword']").parent().find("i").text("");
-			}
-		})
-		//验证码
-		$("input[name='captcha']").blur("input propertychange",function(){
-			var codeInput=$(':input[name=captcha]').val();
-			if(codeInput=="" || codeInput==null){
-				$(":input[name='captcha']").parent().find("i").text("请输入验证码");
-			}else{
-				$(":input[name='captcha']").parent().find("i").text("");
-			}
-		})
-		//选择机构类型
-		$("select[name='organ.industryType']").blur("change",function(){
-			var industryType=$("select[name='organ.industryType']").val();
-			if(industryType=="" || industryType==null){
-				$("select[name='organ.industryType']").parent().find("i").text("请选择机构类型");
-			}else{
-				$("select[name='organ.industryType']").parent().find("i").text("");
-			}
-		})
-		//企业名称
-		$("input[name='organ.organName']").blur("input propertychange",function(){
-			var organName=$("input[name='organ.organName']").val();
-			if(organName=="" || organName==null){
-				$(":input[name='organ.organName']").parent().find("i").text("请输入企业注册名称");
-			}else{
-				$(":input[name='organ.organName']").parent().find("i").text("");
-			}
-		})
-		//企业地址
-		$("input[name='organ.address']").blur("input propertychange",function(){
-			var address=$("input[name='organ.address']").val();
-			if(address=="" || address==null){
-				$(":input[name='organ.address']").parent().find("i").text("请输入企业地址");
-			}else{
-				$(":input[name='organ.address']").parent().find("i").text("");
-			}
-		})
-		//企业注册资本
-		$("input[name='organ.regMoney']").blur("input propertychange",function(){
-			var regMoneys=$("input[name='organ.regMoney']").val();
-			if(regMoneys=="" || regMoneys==null){
-				$(":input[name='organ.regMoney']").parent().find("i").text("请输入注册资金");
-			}else{
-				$(":input[name='organ.regMoney']").parent().find("i").text("");
-			}
-		})
-		//选择组织机构
-		$("select[name='organ.organForm']").blur("change",function(){
-			var organForm=$("select[name='organ.organForm']").val();
-			if(organForm=="" || organForm==null){
-				$("select[name='organ.organForm']").parent().find("i").text("请选择组织机构");
-			}else{
-				$("select[name='organ.organForm']").parent().find("i").text("");
-			}
-		})
-		//统一信用代码
-		$("input[name='organ.socialCreditCode']").blur("input propertychange",function(){
-			var socialCreditCode=$(":input[name='organ.socialCreditCode']").val();
-			var regex =/^([0-9ABCDEFGHJKLMNPQRTUWXY]{2})([0-9]{6})([0-9ABCDEFGHJKLMNPQRTUWXY]{10})$/;
-			if(socialCreditCode=="" || socialCreditCode==null){
-				$(":input[name='organ.socialCreditCode']").parent().find("i").text("请输入社会信用代码");
-			}else if(!regex.test(socialCreditCode)){
-				$(":input[name='organ.socialCreditCode']").parent().find("i").text("请输入正确的社会信用代码");
-			}else{
-				$(":input[name='organ.socialCreditCode']").parent().find("i").text("");
-			}
-		})
-		//运营人名称
-		$("input[name='operator.realName']").blur("input propertychange",function(){
-			var realName=$(":input[name='operator.realName']").val();
-			if(realName=="" || realName==null){
-				$(":input[name='operator.realName']").parent().find("i").text("请输入名称");
-			}else{
-				$(":input[name='operator.realName']").parent().find("i").text("");
-			}
-		})
-		//运营人电话
-		$("input[name='operator.phone']").blur("input propertychange",function(){
-			var phone=$(":input[name='operator.phone']").val();
-			var phoneRe=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
-			if(phone=="" || phone==null){
-				$(":input[name='operator.phone']").parent().find("i").text("请输入电话");
-			}else if(!phoneRe.test(phone)){
-				$(":input[name='operator.phone']").parent().find("i").text("请输入正确的电话");
-			}else{
-				$(":input[name='operator.phone']").parent().find("i").text("");
-			}
-		})
-		//身份证号
-		$("input[name='operator.identityNo']").blur("input propertychange",function(){
-			var identityNo=$(":input[name='operator.identityNo']").val();
-			var identityNoRe=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-			if(identityNo=="" || identityNo==null){
-				$(":input[name='operator.identityNo']").parent().find("i").text("请输入身份证号");
-			}else if(!identityNoRe.test(identityNo)){
-				$(":input[name='operator.identityNo']").parent().find("i").text("请输入正确的身份证号");
-			}else{
-				$(":input[name='operator.identityNo']").parent().find("i").text("");
-			}
-		})
-	}
+	//表单验证
+	$("#registUser").validate({
+	    focusInvalid: false,
+	    onsubmit:true,
+	    ignore:"",
+	    rules: {//字段验证规则，通过name属性验证
+	        username: {
+	            required: true,//非空验证
+	            remote:{
+	                url:"/validateUser",
+	                type:"post",
+	                dataType:"json",
+	                data:{
+	                    username:function(){return $(":input[name='username']").val();}
+	                },
+	                dataFilter: function(data, type) {
+	                    var d=eval("("+data+")");
+	                    if (d.code==200) {
+	                        return true;
+	                    }else{
+	                        return false;
+	                    }
+	                }
+	            }
+	        },
+	        'organ.organName':{
+	            required: true,//非空验证
+	        },
+	        'organ.socialCreditCode':{
+	        	required: true,
+	        	isOrganizing:true,
+	        },
+	        mobile:{
+	        	required: true,
+	        	remote:{
+	                url:"/validateUser",
+	                type:"post",
+	                dataType:"html",
+	                data:{
+	                    mobile:function(){return $(":input[name='mobile']").val();},
+	                },
+	                dataFilter: function(data, type) {
+	                    var d=eval("("+data+")");
+	                    if (d.code==200) {
+	                        return true;
+	                    }else{
+	                        return false;
+	                    }
+	                }
+	            },
+	            isMobile:true,
+	        },
+	        email:{
+	        	required: true,
+	        	isEmail:true,
+	        },
+	        password:{
+	        	required: true,
+	        },
+	        repeatPassword:{
+	        	required: true,
+	        	equalTo: "#password",
+	        },
+	        captcha:{
+	        	required: true,
+	        	remote:{
+	                url:"/validateUser",
+	                type:"post",
+	                dataType:"html",
+	                data:{
+	                	captcha:function(){return $("#code_input").val();},
+	                },
+	                dataFilter: function(data, type) {
+	                    var d=eval("("+data+")");
+	                    if (d.code==200) {
+	                        return true;
+	                    }else{
+	                        return false;
+	                    }
+	                }
+	            }
+	        },
+	        'organ.businessLicenceImg':{
+	        	required: true,
+	        },
+	        'operator.identityCardImg':{
+	        	required: true,
+	        },
+	        certificateImg:{
+	        	required: true,
+	        }
+	    },
+	    messages: {//错误提示信息
+	        'organ.organName':{
+	            required: "请输入企业注册名称",
+	        },
+	        'organ.socialCreditCode':{
+	        	required: "请输入社会信用代码" ,
+	        	isOrganizing:"请填写正确的统一信用代码",
+	        },
+	        username: {
+	            required: "请输入用户名",
+	            remote: "该用户名已存在" ,
+	        },
+	        mobile:{
+	        	required: "请输入手机号" ,
+	        	remote:"该手机号已存在",
+	        	isMobile:"请填写正确的手机号码",
+	        },
+	        email:{
+	        	required: "请输入邮箱",
+	        	isEmail:"请填写正确的邮箱",
+	        },
+	        password:{
+	        	required: "请输入密码" ,
+	        },
+	        repeatPassword:{
+	        	required: "请输入确认密码" ,
+	        	equalTo: "两次密码输入不一样",
+	        },
+	        captcha:{
+	        	required: "请输入验证码" ,
+	        	remote:"该验证码输入错误",
+	        },
+	        'organ.businessLicenceImg':{
+	        	required: "请上传营业执照副本复印件" ,
+	        },
+	        'operator.identityCardImg':{
+	        	required: "请上传身份证正面复印件" ,
+	        },
+	        certificateImg:{
+	        	required: "请上传身份证反面复印件" ,
+	        }
+	    },
+	    highlight: function (e) {//给未通过验证的元素添加类，通过类设置css
+	    	if($(e).is(':hidden')){
+	    		$(e).parent().find(".drop_area").addClass('has-error');
+	    	}else{
+	    		$(e).addClass('has-error');
+	    	}
+	    },
+	    success: function (e) {//验证通过后清除验证
+	    	if($(e).prev().is(':hidden')){
+	    		$(e).parent().find(".drop_area").removeClass('has-error');
+	    	}else{
+	    		$(e).parent().find("input").removeClass('has-error');
+	    	}
+	        $(e).remove();
+	    },
+	    errorPlacement:function(error, element){
+	    	error.appendTo(element.parent());  
+	    }
+	})
 </script>
 </html>
