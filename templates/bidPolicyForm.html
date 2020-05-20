@@ -343,7 +343,7 @@
 								<span id="text">未选择文件</span>
 								<input type='file' id="imageFile" name='imageFile' accept='*.zip' onMouseleave="getImageFile()"/>
 								<input type="hidden" name="fileKey" th:value="${bidPolicy.fileKey}"/>
-								<input type="hidden" name="imageFile"/>
+								<input type="hidden" name="imageFile" th:value="${bidPolicy.imageFile}"/>
 							</div>
 							<span style="display: block;color: red;font-size: 0.14rem;line-height: 0.25rem;margin-top: 0.10rem;width: 347px;">请将投保单位营业执照、pdf版的招标文件打包<br/>压缩成zip格式上传,文件大小最大为20M</span><!-- <br/> -->
 							<div id="schedule" style="position: relative;width: 347px;display: none;">
@@ -356,9 +356,9 @@
 					</td>
 				</tr>
 				<tr>
-					<th colspan="4">发票信息</th>
+					<th colspan="4">发票信息<span class="span_color" id="invoice"></span></th>
 				</tr>
-				<tr>
+				<tr class="inviceMessage">
 					<td><span class="span_color">*</span>&nbsp;发票抬头</td>
 					<td>
 						<input name="invoice.invoiceTitle" class="input-text" placeholder="请输入" th:value="${session.LOGIN_USER.organ.organName}">
@@ -372,7 +372,7 @@
 						<i th:text="${errorMap['invoice.phone']}"></i>
 					</td>
 				</tr>
-				<tr>
+				<tr class="inviceMessage">
 					<td>银行账号</td>
 					<td>
 						<input name="invoice.bankAccount" class="input-text" placeholder="请输入" th:value="${bidPolicy.invoice==null||bidPolicy.invoice.bankAccount==null?session.LOGIN_USER.organ.bankRegNo:bidPolicy.invoice.bankAccount}">
@@ -384,7 +384,7 @@
 						<br/>
 					</td>
 				</tr>
-				<tr>
+				<tr class="inviceMessage">
 					<td>地址与联系方式</td>
 					<td colspan="3">
 						<input name="invoice.addressAndPhone" class="input-text" placeholder="请输入" th:value="${bidPolicy.invoice==null||bidPolicy.invoice.addressAndPhone==null?session.LOGIN_USER.organ.address:bidPolicy.invoice.addressAndPhone}" style="width:100%"/>
@@ -482,6 +482,15 @@ $(".zhuyi_tk li").click(function(){
 	$("#insuranceCompany").val(img.attr("val"));
 	//切换条款
 	clause(img.attr("data-code"));
+	//切换成太保时，提示发票信息只默认为投保人
+	if(img.attr("val")=="CPIC"){
+		$("#invoice").text("* 发票抬头默认为投保人");
+		$(".inviceMessage").find("input").attr("readonly",true);
+		$(".inviceMessage").find("input").css("cursor","not-allowed");
+		$(".inviceMessage").find("input").parent().css("background-color","#efefef");
+	}else{
+		$("#invoice").text("");
+	}
 })
 $(".visualSelect").click(function(){
 	$("#selectContainerQcOhiqga").show();
@@ -506,6 +515,18 @@ $("#selectContainerQcOhiqga img").click(function(){
 		        $("#schedule").hide();
 			}
 			clickImg(img);
+			//切换成太保时，提示发票信息只默认为投保人
+			if(img.attr("val")=="CPIC"){
+				$("#invoice").text("* 发票抬头默认为投保人");
+				$(".inviceMessage").find("input").attr("readonly",true);
+				$(".inviceMessage").find("input").css("cursor","not-allowed");
+				$(".inviceMessage").find("input").parent().css("background-color","#efefef");
+			}else{
+				$("#invoice").text("");
+				$(".inviceMessage").find("input").attr("readonly",false);
+				$(".inviceMessage").find("input").css("cursor","");
+				$(".inviceMessage").find("input").parent().css("background-color","");
+			}
 			layer.close(layer.index);
 		})
 	}else{
