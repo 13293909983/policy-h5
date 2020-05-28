@@ -721,6 +721,17 @@
 		}else if(value==3){
 			$(".visualSelect").text("中国大地保险");
 		}
+		if(value==1){
+			$("#invoice").text("* 发票抬头默认为投保人");
+			$(".inviceMessage").find("input").attr("readonly",true);
+			$(".inviceMessage").find("input").css("cursor","not-allowed");
+			$(".inviceMessage").find("input").parent().css("background-color","#efefef");
+		}else{
+			$("#invoice").text("");
+			$(".inviceMessage").find("input").attr("readonly",false);
+			$(".inviceMessage").find("input").css("cursor","");
+			$(".inviceMessage").find("input").parent().css("background-color","");
+		}
 		//选择换水印
 		$('.watermark').remove();
 		var img='/static/images/Insurance'+(value*1+1)+'.jpg';
