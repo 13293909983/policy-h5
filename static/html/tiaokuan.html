@@ -41,7 +41,7 @@ function clause(companyId) {
 	$.ajax({
 		type : "get",
 		url : manageUrl+"/homeController/selectClause",
-		data:{"companyId":companyId},
+		data:{"companyId":companyId,"isShow":"1"},
 		dataType : "json",
 		success : function(dataObj) {
 			if (dataObj != null) {
