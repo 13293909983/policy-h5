@@ -159,8 +159,8 @@
 				中国人民保险
 			</div>
 			<div id="selectContainerQcOhiqga" class="previewContainer" style="width: 10rem; height: 200px; position: absolute; top: 39px; left: 0px; z-index: 999; overflow: auto; display: none;">
-				<img src="/static/images/Insurance1.jpg" alt="中国人民保险" rel="0" val="PICC" data-code="1521">
 				<img src="/static/images/Insurance2.jpg" alt="太平洋保险" rel="1" val="CPIC" data-code="1522">
+				<img src="/static/images/Insurance1.jpg" alt="中国人民保险" rel="0" val="PICC" data-code="1521">
 				<img src="/static/images/Insurance3.jpg" alt="中华保险" rel="2" val="CIC" data-code="1523">
 				<img src="/static/images/Insurance4.jpg" alt="中国大地保险" rel="3" val="CCIC" data-code="1524">
 			</div>
@@ -178,7 +178,7 @@
 					<th colspan="4">被保险人信息</th>
 				</tr>
 				<tr>
-					<td><span class="span_color">*</span>&nbsp;被保险人名称</td>
+					<td><span class="span_color">*</span>&nbsp;招标人单位名称</td>
 					<td>
 						<input type="hidden" id="appliName" th:value="${bidPolicy.appliName}">
 						<input name="insuredName" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredName}" onChange="getInsuredName()">
@@ -419,8 +419,8 @@
 			<div class="pay_nav">
 			<h2>选择保险</h2>
 			<ul>     
-				<li><a><div class="pay_gwc pay_gwcactivity" data-id="0"></div><img src="/static/images/Insurance1.jpg" val="PICC" data-code="1521"/></a></li>
-				<li><a><div class="pay_gwc" data-id="1"></div><img src="/static/images/Insurance2.jpg" val="CPIC" data-code="1522"/></a></li>
+				<li><a><div class="pay_gwc pay_gwcactivity" data-id="1"></div><img src="/static/images/Insurance2.jpg" val="CPIC" data-code="1522"/></a></li>
+				<li><a><div class="pay_gwc" data-id="0"></div><img src="/static/images/Insurance1.jpg" val="PICC" data-code="1521"/></a></li>
 				<li><a><div class="pay_gwc" data-id="2"></div><img src="/static/images/Insurance3.jpg" val="CIC" data-code="1523"/></a></li>
 				<li><a><div class="pay_gwc" data-id="3"></div><img src="/static/images/Insurance4.jpg" val="CCIC" data-code="1524"/></a></li>
 			</ul>	
@@ -449,13 +449,6 @@ $(function(){
 	}else{
 		$(".zhuyi_wrap").show();
 	}
-    //返回的如果是大地，否则不显示上传文件
-    /* $("#file-row").toggle($("#insuranceCompany").val()!="CCIC");
-    if($("#insuranceCompany").val()=="CCIC"){
-        $(":hidden[name='fileKey']").val("-");
-	}else{
-        $(":hidden[name='fileKey']").val($(":hidden[name='fileKey']").attr("_val"));
-	} */
     //初始化默认选择人保，如果insuranceCompany有值，则给选择框上赋值
     var insuranceCompany=$("#insuranceCompany").val();
     if(insuranceCompany!=null && insuranceCompany!=""){
