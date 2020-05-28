@@ -230,6 +230,12 @@
 			$(":input[name='insuredIdMobile']").parent().find("i").text("请输入正确的联系电话");
 			i++;
 		}
+		//代理机构名称
+		var agencyName=$(":input[name='agencyName']").val();
+		if(agencyName==""||agencyName==null){
+			$(":input[name='agencyName']").parent().find("i").text("请输入代理机构名称");
+			i++;
+		}
 		//电子保险保函
 		//地址
 		/* var insuredAddress=$(":input[name='insuredAddress']").val();
@@ -378,6 +384,13 @@
 			$(":input[name='insuredIdMobile']").parent().find("i").text("");
 		}
 	}
+	//代理机构名称
+	$(":input[name='agencyName']").change(function(){
+		var agencyName=$(this).val();
+		if(agencyName!="" && agencyName!=null){
+			$(":input[name='agencyName']").parent().find("i").text("");
+		}
+	});
 	//地址
 	/* function getInsuredAddress(){
 		var insuredAddress=$(":input[name='insuredAddress']").val();
@@ -723,6 +736,17 @@
 		}else if(value==3){
 			$(".visualSelect").text("中国大地保险");
 		}
+		if(value==1){
+			$("#invoice").text("* 发票抬头默认为投保人");
+			$(".inviceMessage").find("input").attr("readonly",true);
+			$(".inviceMessage").find("input").css("cursor","not-allowed");
+			$(".inviceMessage").find("input").parent().css("background-color","#efefef");
+		}else{
+			$("#invoice").text("");
+			$(".inviceMessage").find("input").attr("readonly",false);
+			$(".inviceMessage").find("input").css("cursor","");
+			$(".inviceMessage").find("input").parent().css("background-color","");
+		}
 		//选择换水印
 		$('.watermark').remove();
 		var img='/static/images/Insurance'+(value*1+1)+'.jpg';
@@ -740,6 +764,7 @@ $(function(){
         if(files.length>0){
         	imgName=files[0].name;
         }
+        //var imgName = document.all.imageFile.value;
         var ext="";
         if(imgName==""){
             layer.msg('请选择需要上传的文件!', {icon: 5});
