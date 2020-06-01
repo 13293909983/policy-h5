@@ -346,9 +346,15 @@
 		$('.btnSubClass').show();
 		//隐藏确定按钮
 		$('#btnSub').hide();
-		console.log($(":input[name='retroactiveStart']").val());
-		console.log($(":input[name='officeType']").val());
-		console.log($('form').serializeArray());
+		//判断如果是大地的，把文件名称放在一个字段里
+		var insuranceCompany=$("#insuranceCompany").val();
+		if(insuranceCompany=="CCIC"){
+			var imgFile=$("#imgFile").attr("_val")+","+$("#pdfFile").attr("_val");
+			var imgFileUrl=$("#imgFile").attr("_url")+","+$("#pdfFile").attr("_url");
+			$(":input[name='fileKey']").val(imgFile);
+			$(":hidden[name='fileKey']").attr("_val",imgFile);
+			$(":input[name='imageFile']").val(imgFileUrl);
+		}
 		return true;
 	}
 	//被保险人名称
@@ -934,3 +940,109 @@ $(function(){
         }
     })
 });
+//上传营业执照
+function clickImgFile(){
+	$('#imgFile').click();
+}
+function imageFileChange(obj){
+    var file=obj.files[0];
+    if(file!=null){
+        //验证文件格式和大小
+        if(file.size>1024*1024*10){
+            layer.msg("所选文件超出允许上传文件大小",{icon:0,time:2000});
+            var imgFile = $("#imgFile");
+            imgFile.after(imgFile.clone().val(""));
+            imgFile.remove();
+            $("#imgFile").parent().attr("src", "/static/images/white.png");
+            return false;
+        }
+        var fileName=file.name;
+        var suffix=fileName.substring(fileName.lastIndexOf(".")+1,fileName.length);
+        var allow=['jpg','png','jpeg'];
+        if(allow.indexOf(suffix)<0){
+            layer.msg("暂不支持该类型文件",{icon:0,time:2000});
+            var imgFile = $("#imgFile");
+            imgFile.after(imgFile.clone().val(""));
+            imgFile.remove();
+            $("#imgFile").parent().attr("src", "/static/images/white.png");
+            return false;
+        }
+        getObjectURL(file,$('#imgFile'));
+    }
+}
+function getObjectURL(file,obj) {
+    var url = null ;
+    if (window.createObjectURL!=undefined) { // basic
+        url = window.createObjectURL(file) ;
+    } else if (window.URL!=undefined) { // mozilla(firefox)
+        url = window.URL.createObjectURL(file) ;
+    } else if (window.webkitURL!=undefined) { // webkit or chrome
+        url = window.webkitURL.createObjectURL(file) ;
+    }
+    console.log(file);
+    uploadFile(file,obj);
+}
+function uploadFile(file,obj){
+	var formData = new FormData();
+    formData.append("imageFile",file);
+    $.ajax({
+        url:"/insure/upload?insuranceCompany=CCIC",
+        type:"POST",
+        data:formData,
+        processData : false,
+        contentType:false,
+        dataType:"json",
+        success:function(data){
+        	console.log(data);
+        	if(data.success){
+        		var fileKey=data.data.fileKey;
+                var fileName=data.data.fileName;
+                var fileUrl=data.data.fileUrl;
+                //把返回的key设置到隐藏的input上
+                obj.attr("_val",file.name);
+                obj.attr("_url",url);
+                obj.prev().attr("src", url);
+                if(obj.attr("id")=="pdfFile"){
+                	obj.next().text(file.name);
+                }
+        	}
+        },
+        error:function(e){
+            layer.msg("文件未上传成功，请重新上传", {icon: 0});
+            obj.after(obj.clone().val(""));
+            obj.remove();
+            obj.prev().attr("src", "/static/images/white.png");
+        }
+    });
+}
+//上传pdf的招标文件
+function clickPdfFile(){
+	$("#pdfFile").click();
+}
+function pdfFileChange(obj){
+	 var file=obj.files[0];
+	    if(file!=null){
+	        //验证文件格式和大小
+	        if(file.size>1024*1024*10){
+	            layer.msg("所选文件超出允许上传文件大小",{icon:0,time:2000});
+	            var pdfFile = $("#pdfFile");
+	            pdfFile.after(pdfFile.clone().val(""));
+	            pdfFile.remove();
+	            $("#pdfFile").parent().attr("src", "/static/images/white.png");
+	            return false;
+	        }
+	        var fileName=file.name;
+	        var suffix=fileName.substring(fileName.lastIndexOf(".")+1,fileName.length);
+	        var allow=['pdf'];
+	        if(allow.indexOf(suffix)<0){
+	            layer.msg("暂不支持该类型文件",{icon:0,time:2000});
+	            var pdfFile = $("#pdfFile");
+	            pdfFile.after(pdfFile.clone().val(""));
+	            pdfFile.remove();
+	            $("#pdfFile").parent().attr("src", "/static/images/white.png");
+	            return false;
+	        }
+	        //上传接口
+	        uploadFile(file,$("#pdfFile"));
+	    }
+}
