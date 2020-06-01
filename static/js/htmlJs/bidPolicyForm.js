@@ -999,8 +999,8 @@ function uploadFile(file,obj,url){
                 var fileName=data.data.fileName;
                 var fileUrl=data.data.fileUrl;
                 //把返回的key设置到隐藏的input上
-                obj.attr("_val",file.name);
-                obj.attr("_url",fileUrl);
+                obj.attr("data-val",file.name);
+                obj.attr("data-url",fileUrl);
                 if(obj.attr("id")=="pdfFile"){
                 	obj.next().text(file.name);
                 	obj.prev().attr("src", "/static/images/a7.png");
