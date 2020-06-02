@@ -490,6 +490,29 @@ $(function(){
     		}
     	})
     }
+	//如果是大地的，显示大地的文件
+	 if(insuranceCompany=="CCIC"){
+    	$("#ccic-file-row").show();
+		$("#file-row").hide();
+		var fileKey=$(":input[name='fileKey']").val();
+		var result=fileKey.split(",");
+		for(var i=0;i<result.length;i++){
+		  $("#imgFileValue").val(result[0]);
+		  $("#pdfFileValue").val(result[1]);
+		}
+		var imageFile=$(":input[name='imageFile']").val();
+		var imageFileResult=imageFile.split(",");
+		for(var i=0;i<imageFileResult.length;i++){
+		  $("#imgFileValue").attr("data-url",imageFileResult[0]);
+		  $("#imgFileValue").prev().prev().attr("src", imageFileResult[0]);
+		  $("#pdfFileValue").attr("data-url",imageFileResult[1]);
+		  $("#pdfFileValue").next().text("已上传文件");
+		  $("#pdfFileValue").prev().prev().attr("src", "/static/images/a7.png");
+		}
+	}else{
+		$("#file-row").show();
+		$("#ccic-file-row").hide();
+	}
 })
 $(".reg_show").click(function (){
     if($(".agree_wrap").css("display")=="none"){

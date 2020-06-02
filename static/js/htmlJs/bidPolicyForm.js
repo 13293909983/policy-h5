@@ -127,7 +127,7 @@
 		if(sequenceNo!=null&&sequenceNo!=""){
 			//如果有的话，把字段改成禁用
        		$('input').not(":input[name='insuredAddress']")
-       		.not(":input[name='imageFile']").not(":input[name='invoice.bankAccount']")
+       		.not(":input[name='imageFiles']").not(":input[name='invoice.bankAccount']")
        		.not(":input[name='invoice.buyerTaxpayerIdentifyNumber']")
        		.not(":input[name='invoice.addressAndPhone']")
        		.not(":input[name='invoice.invoiceTitle']")
@@ -140,7 +140,7 @@
 			$('#menuBtn').removeAttr('onclick');
 			//改input的禁用样式
        		$('input').not(":input[name='insuredAddress']")
-       		.not(":input[name='imageFile']").not(":input[name='invoice.bankAccount']")
+       		.not(":input[name='imageFiles']").not(":input[name='invoice.bankAccount']")
        		.not(":input[name='invoice.buyerTaxpayerIdentifyNumber']")
        		.not(":input[name='invoice.addressAndPhone']")
        		.not(":input[name='invoice.invoiceTitle']")
@@ -151,7 +151,7 @@
 			$('select').css("cursor","not-allowed").css("background-color","#efefef");
 			//改input 上的td的禁用样式
        		$('input').not(":input[name='insuredAddress']")
-			.not(":input[name='imageFile']").not(":input[name='invoice.bankAccount']")
+			.not(":input[name='imageFiles']").not(":input[name='invoice.bankAccount']")
        		.not(":input[name='invoice.buyerTaxpayerIdentifyNumber']")
        		.not(":input[name='invoice.addressAndPhone']")
        		.not(":input[name='invoice.invoiceTitle']")
@@ -341,7 +341,7 @@
 		//把时间控件的禁用去掉
 		$(":input[name='retroactiveStart']").removeAttr("disabled"); 
 		//$(":input[name='imageFile']").prop("disabled",true);
-		$(":input[name='imageFile']").attr("disabled","disabled");
+		$(":input[name='imageFiles']").attr("disabled","disabled");
 		//显示灰色的禁用的样式
 		$('.btnSubClass').show();
 		//隐藏确定按钮
@@ -349,8 +349,8 @@
 		//判断如果是大地的，把文件名称放在一个字段里
 		var insuranceCompany=$("#insuranceCompany").val();
 		if(insuranceCompany=="CCIC"){
-			var imgFile=$("#imgFile").attr("_val")+","+$("#pdfFile").attr("_val");
-			var imgFileUrl=$("#imgFile").attr("_url")+","+$("#pdfFile").attr("_url");
+			var imgFile=$("#imgFileValue").val()+","+$("#pdfFileValue").val();
+			var imgFileUrl=$("#imgFileValue").attr("data-url")+","+$("#pdfFileValue").attr("data-url");
 			$(":input[name='fileKey']").val(imgFile);
 			$(":hidden[name='fileKey']").attr("_val",imgFile);
 			$(":input[name='imageFile']").val(imgFileUrl);
@@ -967,7 +967,7 @@ function imageFileChange(obj){
             $("#imgFile").parent().attr("src", "/static/images/white.png");
             return false;
         }
-        getObjectURL(file,$('#imgFile'));
+        getObjectURL(file,$('#imgFileValue'));
     }
 }
 function getObjectURL(file,obj) {
@@ -979,13 +979,21 @@ function getObjectURL(file,obj) {
     } else if (window.webkitURL!=undefined) { // webkit or chrome
         url = window.webkitURL.createObjectURL(file) ;
     }
-    console.log(file);
     uploadFile(file,obj,url);
 }
 function uploadFile(file,obj,url){
 	var formData = new FormData();
     formData.append("imageFile",file);
-    $.ajax({
+    /*obj.val(file.name);
+    if(obj.attr("id")=="pdfFileValue"){
+    	obj.next().text(file.name);
+    	obj.attr("data-url","http://img.sxdeliw.com/group1/M00/01/3C/rBpVRF7VrYeARbhIAAUgehCHl1c249.jpg");
+    	obj.prev().prev().attr("src", "/static/images/a7.png");
+    }else{
+    	obj.attr("data-url",url);
+    	obj.prev().prev().attr("src", url);
+    }*/
+   $.ajax({
         url:"/insure/upload?insuranceCompany=CCIC",
         type:"POST",
         data:formData,
@@ -999,10 +1007,11 @@ function uploadFile(file,obj,url){
                 var fileName=data.data.fileName;
                 var fileUrl=data.data.fileUrl;
                 //把返回的key设置到隐藏的input上
-                obj.attr("data-val",file.name);
+                obj.val(fileName);
                 obj.attr("data-url",fileUrl);
-                if(obj.attr("id")=="pdfFile"){
+                if(obj.attr("id")=="pdfFileValue"){
                 	obj.next().text(file.name);
+                	obj.next().attr("title",file.name);
                 	obj.prev().attr("src", "/static/images/a7.png");
                 }else{
                 	obj.prev().attr("src", url);
@@ -1045,6 +1054,6 @@ function pdfFileChange(obj){
 	            return false;
 	        }
 	        //上传接口
-	        uploadFile(file,$("#pdfFile"));
+	        uploadFile(file,$("#pdfFileValue"));
 	    }
 }
