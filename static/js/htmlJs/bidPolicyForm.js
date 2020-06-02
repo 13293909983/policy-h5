@@ -264,6 +264,14 @@
 			$(":input[name='retroactiveStart']").parent().parent().find("i").text("请输入开标日期");
 			i++;
 		}
+		var myDate = new Date();
+		var time=myDate.getFullYear() + "/" + (myDate.getMonth() + 1) + "/" + myDate.getDate();
+		var myTime=new Date(time);
+		var start=new Date(retroactiveStart.replace(/-/g, "/"));
+		if(myTime.getTime()-start.getTime()>0){
+			$(":input[name='retroactiveStart']").parent().parent().find("i").text("开标时间不得低于当前时间");
+			i++;
+		}
 		//保证金金额
 		var electricPower=$(":input[name='electricPower']").val();
 		if(electricPower=="" || electricPower==null){
