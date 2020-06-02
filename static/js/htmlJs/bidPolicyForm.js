@@ -1012,9 +1012,9 @@ function uploadFile(file,obj,url){
                 if(obj.attr("id")=="pdfFileValue"){
                 	obj.next().text(file.name);
                 	obj.next().attr("title",file.name);
-                	obj.prev().attr("src", "/static/images/a7.png");
+                	obj.prev().prev().attr("src", "/static/images/a7.png");
                 }else{
-                	obj.prev().attr("src", url);
+                	obj.prev().prev().attr("src", url);
                 }
         	}
         },
