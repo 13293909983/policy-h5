@@ -133,7 +133,8 @@
        		.not(":input[name='invoice.invoiceTitle']")
        		.not(":input[name='invoice.phone']")
        		.not(":input[name='agree']")
-       		.not("#regionSel").attr("readonly",true);
+       		.not("#regionSel")
+       		.not("input[name='agencyName']").attr("readonly",true);
 			//把选择框改成禁用
        		$('select').attr("disabled","disabled");
 			//把行业代码的a标签改成禁用
@@ -146,7 +147,8 @@
        		.not(":input[name='invoice.invoiceTitle']")
        		.not(":input[name='invoice.phone']")
        		.not(":input[name='agree']")
-       		.not("#regionSel").css("cursor","not-allowed");
+       		.not("#regionSel")
+       		.not("input[name='agencyName']").css("cursor","not-allowed");
        		//改select的禁用样式
 			$('select').css("cursor","not-allowed").css("background-color","#efefef");
 			//改input 上的td的禁用样式
@@ -155,7 +157,8 @@
        		.not(":input[name='invoice.buyerTaxpayerIdentifyNumber']")
        		.not(":input[name='invoice.addressAndPhone']")
        		.not(":input[name='invoice.invoiceTitle']")
-       		.not(":input[name='invoice.phone']").parent().not('form').not('p').not(".fileinput-button")
+       		.not(":input[name='invoice.phone']")
+       		.not("input[name='agencyName']").parent().not('form').not('p').not(".fileinput-button")
        		.css("cursor","not-allowed").css("background-color","#efefef");
        		//改select 上的td的禁用样式
 			$('select').parent().css("cursor","not-allowed").css("background-color","#efefef");
