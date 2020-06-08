@@ -471,6 +471,17 @@ $(function(){
     		}
     	})
     }
+	if(insuranceCompany=="CPIC"){
+		$("#invoice").text("* 发票抬头默认为投保人");
+		$(".inviceMessage").find("input").attr("readonly",true);
+		$(".inviceMessage").find("input").css("cursor","not-allowed");
+		$(".inviceMessage").find("input").parent().css("background-color","#efefef");
+	}else{
+		$("#invoice").text("");
+		$(".inviceMessage").find("input").attr("readonly",false);
+		$(".inviceMessage").find("input").css("cursor","");
+		$(".inviceMessage").find("input").parent().css("background-color","");
+	}
 })
 $(".reg_show").click(function (){
     if($(".agree_wrap").css("display")=="none"){
@@ -495,15 +506,6 @@ $(".zhuyi_tk li").click(function(){
 		$("#insuranceCompany").val(img.attr("val"));
 		//切换条款
 		clause(img.attr("data-code"));
-		//切换成太保时，提示发票信息只默认为投保人
-		if(img.attr("val")=="CPIC"){
-			$("#invoice").text("* 发票抬头默认为投保人");
-			$(".inviceMessage").find("input").attr("readonly",true);
-			$(".inviceMessage").find("input").css("cursor","not-allowed");
-			$(".inviceMessage").find("input").parent().css("background-color","#efefef");
-		}else{
-			$("#invoice").text("");
-		}
 	}
 })
 $(".visualSelect").click(function(){

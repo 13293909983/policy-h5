@@ -740,6 +740,7 @@
 			$("#file-row").toggle($("#insuranceCompany").val()=="PICC");
 		}else if(value==1){
 			$(".visualSelect").text("太平洋保险");
+			$("#insuranceCompany").val("CPIC");
 		}else if(value==2){
 			$(".visualSelect").text("中华保险");
 		}else if(value==3){
