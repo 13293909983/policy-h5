@@ -142,7 +142,8 @@
        		.not(":input[name='invoice.invoiceTitle']")
        		.not(":input[name='invoice.phone']")
        		.not(":input[name='agree']")
-       		.not("#regionSel").attr("readonly",true);
+       		.not("#regionSel")
+			.not("input[name='agencyName']").attr("readonly",true);
 			//把选择框改成禁用
        		$('select').attr("disabled","disabled");
 			//把行业代码的a标签改成禁用
@@ -155,7 +156,8 @@
        		.not(":input[name='invoice.invoiceTitle']")
        		.not(":input[name='invoice.phone']")
        		.not(":input[name='agree']")
-       		.not("#regionSel").css("cursor","not-allowed");
+       		.not("#regionSel")
+			.not("input[name='agencyName']").css("cursor","not-allowed");
        		//改select的禁用样式
 			$('select').css("cursor","not-allowed").css("background-color","#efefef");
 			//改input 上的td的禁用样式
@@ -164,7 +166,8 @@
        		.not(":input[name='invoice.buyerTaxpayerIdentifyNumber']")
        		.not(":input[name='invoice.addressAndPhone']")
        		.not(":input[name='invoice.invoiceTitle']")
-       		.not(":input[name='invoice.phone']").parent().not('form').not('p').not(".fileinput-button")
+       		.not(":input[name='invoice.phone']")
+			.not("input[name='agencyName']").parent().not('form').not('p').not(".fileinput-button")
        		.css("cursor","not-allowed").css("background-color","#efefef");
        		//改select 上的td的禁用样式
 			$('select').parent().css("cursor","not-allowed").css("background-color","#efefef");
@@ -237,6 +240,12 @@
 			i++;
 		}else if(!phone.test(insuredIdMobile) && !mobel.test(insuredIdMobile)){
 			$(":input[name='insuredIdMobile']").parent().find("i").text("请输入正确的联系电话");
+			i++;
+		}
+		//代理机构名称
+		var agencyName=$(":input[name='agencyName']").val();
+		if(agencyName==""||agencyName==null){
+			$(":input[name='agencyName']").parent().find("i").text("请输入代理机构名称");
 			i++;
 		}
 		//电子保险保函
@@ -384,6 +393,13 @@
 			$(":input[name='insuredIdMobile']").parent().find("i").text("");
 		}
 	}
+	//代理机构名称
+	$(":input[name='agencyName']").change(function(){
+		var agencyName=$(this).val();
+		if(agencyName!="" && agencyName!=null){
+			$(":input[name='agencyName']").parent().find("i").text("");
+		}
+	});
 	//地址
 	/* function getInsuredAddress(){
 		var insuredAddress=$(":input[name='insuredAddress']").val();

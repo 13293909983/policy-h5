@@ -175,10 +175,10 @@
 			<input type="hidden" th:value="${sequenceNo}" name="sequenceNo"/>
 			<table class="formtables" cellspacing="0" cellpadding="0" id="formtables">
 				<tr>
-					<th colspan="4">被保险人信息</th>
+					<th colspan="4">被保险人（招标人）信息</th>
 				</tr>
 				<tr>
-					<td><span class="span_color">*</span>&nbsp;被保险人名称</td>
+					<td><span class="span_color">*</span>&nbsp;招标人单位名称</td>
 					<td>
 						<input type="hidden" id="appliName" th:value="${bidPolicy.appliName}">
 						<input name="insuredName" class="input-text" placeholder="请输入" th:value="${bidPolicy.insuredName}" onChange="getInsuredName()">
@@ -212,6 +212,17 @@
 						<input name="insuredAddress" class="input-text input-textdz" placeholder="请输入" th:value="${bidPolicy.insuredAddress}">
 						<br/>
 						<i th:text="${errorMap['insuredAddress']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<th colspan="4">代理机构信息</th>
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;代理机构名称</td>
+					<td colspan="3">
+						<input name="agencyName" class="input-text" placeholder="请输入" th:value="${bidPolicy.agencyName}">
+						<br/>
+						<i th:text="${errorMap['agencyName']}"></i>
 					</td>
 				</tr>
 				<tr>
