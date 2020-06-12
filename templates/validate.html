@@ -12,6 +12,7 @@
 	<script src="/static/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 	<script src="/static/js/index.js" type="text/javascript"></script>
 	<script type="text/javascript" src="/static/js/paging.js" ></script>
+	<script src="/static/js/layer/2.4/layer.js"></script>
 </head>
 <style>
 	.hidden-box {
@@ -41,6 +42,21 @@
 		font-size: 0.16rem;
 		text-align: left;
 	}
+	.yz_boxptxt a.act{
+   		color: #B80404;    		
+   		background: url(/static/images/sjxxs.png)no-repeat center bottom;
+   	}
+   	.yz_boxptxt a{
+   		padding: 10px;
+   		font-weight: bold;
+   		margin: 0 0.5rem;
+   	}
+   	.yz_input_box{
+   		display: none;
+   	}
+   	.yz_input_boxatv{
+   		display: block;
+   	}
 </style>
 <body>
 <header></header>
@@ -50,24 +66,34 @@
 			<h3>保单验证</h3>
 			<img src="/static/images/xz.png" />
 		</div>
-		<!-- <div class="platform-wrap">
-			<div class="platform-box" style="min-height: 5.5rem">
-				<div class="main-box">
-					<div class="main-content"><h1>保单不存在</h1></div>
-				<div class="main-content"><h1 th:if="${base64Data==null}" th:text="${message}"></h1></div>
-				<div class="main-box-content" >
-					<img th:if="${bidPolicy!=null}" th:src="${bidPolicy.previewUrl}"/>
-				</div>
-				</div>
-			</div>
-		</div> -->
 		<div class="noyz">
+			<p class="yz_boxptxt">
+				<a>投保编号查询</a>
+				<a class="act">pdf查询</a>
+			</p>
 			<div th:if="${base64Data==null}" class="yz_input_box">
 				<form action="validate.html" method="GET" id="searchForm">
-					<input name="policyNo" class="yz_input_search" placeholder="保单号[#验证码]">
+					<input name="policyNo" class="yz_input_search" placeholder="保单号">
 					<a class="header_search_box_btn" href="#" onclick="searchValidate()">
 						<img src="/static/images/search01.png" />
 					</a>
+				</form>
+			</div>
+			<div class="yz_input_box yz_input_boxatv">
+				<form action="verification.html" method="post" id="searchPdf" enctype="multipart/form-data">
+					<input id="policyPdf" class="yz_input_search" placeholder="请上传pdf" style="margin-left: 0;">
+					<a class="header_search_box_btn" href="#">
+						<img src="/static/images/search01.png" />
+					</a>
+					<div style="float: left;margin: 26px 34px 0 0;">
+						<div class="fileinput-button">
+							<input type="file" id="pdfVerification" name="pdfVerification" style="position: absolute;top: 0;right: 0;margin: 0;opacity: 0;-ms-filter: 'alpha(opacity=0)';font-size: 200px;direction: ltr;cursor: pointer;width: 6rem;height: 0.5rem;overflow: hidden;">
+							<a class="header_search_box_btn" href="#" onclick="searchPdf()">
+								<img src="/static/images/search01.png" />
+							</a>
+							<input type="hidden" th:value="${fileName}" id="fileName">
+						</div>						
+					</div>
 				</form>
 			</div>
 			<div class="noyzerr">
@@ -94,7 +120,15 @@
 		form.submit();
 	}
 	$(function() {
-		var previewUrl=$("#previewUrl")[0].src;//获取保单
+		$("#policyPdf").val($("#fileName").val());
+		$(".yz_boxptxt a").click(function() {
+			$(this).addClass("act").siblings().removeClass("act");
+			$(".yz_input_box").eq($(this).index()).addClass("yz_input_boxatv").siblings().removeClass("yz_input_boxatv");
+		})
+		
+		if($("#previewUrl")[0]!=undefined){
+			var previewUrl=$("#previewUrl")[0].src;//获取保单
+		}
 		var insuredName=$("#insuredName").val();//被保险人单位名称
 		var certificateDepart=$("#certificateDepart").val();//投标项目名称
 		var startDate=$("#startDate").val();//投保时间
@@ -107,7 +141,39 @@
 				zIndex: 100
 			});
 		}
-		
 	});
+	//上传pdf文件查询
+	$("#pdfVerification").change(function(){
+		var file=this.files[0];
+		if(file!=null){
+	        //验证文件格式和大小
+	        if(file.size>1024*1024*10){
+	            layer.msg("所选文件超出允许上传文件大小",{icon:0,time:2000});
+	            var fileId = document.getElementById('pdfVerification');
+	            fileId.value = '';
+	            $("#policyPdf").val("请上传pdf");
+	            return false;
+	        }
+	        var fileName=file.name;
+	        var suffix=fileName.substring(fileName.lastIndexOf(".")+1,fileName.length);
+	        var allow=["pdf"];
+	        if(allow.indexOf(suffix)<0){
+	            layer.msg("暂不支持该类型文件",{icon:0,time:2000});
+	            var fileId = document.getElementById('pdfVerification');
+	            fileId.value = '';
+	            $("#policyPdf").val("请上传pdf");
+	            return false;
+	        }
+		    searchPdf();
+	    }
+	})
+	function searchPdf(){
+		if($("input[name='pdfVerification']").val()==""){
+			layer.msg("请先上传文件",{icon:0,time:2000});
+		}else{
+			var form = document.getElementById('searchPdf');
+			form.submit();
+		}
+	}
 </script>
 </html>
