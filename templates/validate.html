@@ -69,7 +69,7 @@
 		<div class="noyz">
 			<p class="yz_boxptxt">
 				<a>投保编号查询</a>
-				<a class="act">pdf查询</a>
+				<a>pdf查询</a>
 			</p>
 			<div th:if="${base64Data==null}" class="yz_input_box">
 				<form action="validate.html" method="GET" id="searchForm">
@@ -79,7 +79,7 @@
 					</a>
 				</form>
 			</div>
-			<div class="yz_input_box yz_input_boxatv">
+			<div class="yz_input_box">
 				<form action="verification.html" method="post" id="searchPdf" enctype="multipart/form-data">
 					<input id="policyPdf" class="yz_input_search" placeholder="请上传pdf" style="margin-left: 0;">
 					<a class="header_search_box_btn" href="#">
@@ -120,6 +120,15 @@
 		form.submit();
 	}
 	$(function() {
+		//判断是编号查询还是文件查询
+		var fileName=$("#fileName").val();
+		if(fileName!=""){
+			$($(".yz_boxptxt").find("a")[1]).addClass("act");
+			$($(".yz_input_box")[1]).addClass("yz_input_boxatv");
+		}else{
+			$($(".yz_boxptxt").find("a")[0]).addClass("act");
+			$($(".yz_input_box")[0]).addClass("yz_input_boxatv");
+		}
 		$("#policyPdf").val($("#fileName").val());
 		$(".yz_boxptxt a").click(function() {
 			$(this).addClass("act").siblings().removeClass("act");

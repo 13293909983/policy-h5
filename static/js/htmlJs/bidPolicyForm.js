@@ -804,7 +804,7 @@ $(function(){
                     //file.outerHTML = file.outerHTML; //重新初始化了file的html
                     $("#text").text("未选择文件");
                     $("#text").attr("title","未选择文件");
-                    $("#fileImg").attr("src", "/static/images/white.png");
+                    $("#fileImg").attr("src", "/static/images/uploadFile.png");
                     //隐藏进度条
                     $("#schedule").hide();
                     return false;
@@ -833,7 +833,7 @@ $(function(){
                 file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
                 //file.outerHTML = file.outerHTML; //重新初始化了file的html
                 $("#text").text("未选择文件");
-                $("#fileImg").attr("src", "/static/images/white.png");
+                $("#fileImg").attr("src", "/static/images/uploadFile.png");
                 return false;
             }
             //显示上传的文件
@@ -886,7 +886,7 @@ $(function(){
                     file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
                     //file.outerHTML = file.outerHTML; //重新初始化了file的html
                     $("#text").text("未选择文件");
-                    $("#fileImg").attr("src", "/static/images/white.png");
+                    $("#fileImg").attr("src", "/static/images/uploadFile.png");
                     //隐藏进度条
                     $("#schedule").hide();
                 },
@@ -956,7 +956,7 @@ function imageFileChange(obj){
             var imgFile = $("#imgFile");
             imgFile.after(imgFile.clone().val(""));
             imgFile.remove();
-            $("#imgFile").parent().attr("src", "/static/images/white.png");
+            $("#imgFile").parent().attr("src", "/static/images/uploadFile.png");
             return false;
         }
         var fileName=file.name;
@@ -967,7 +967,7 @@ function imageFileChange(obj){
             var imgFile = $("#imgFile");
             imgFile.after(imgFile.clone().val(""));
             imgFile.remove();
-            $("#imgFile").parent().attr("src", "/static/images/white.png");
+            $("#imgFile").parent().attr("src", "/static/images/uploadFile.png");
             return false;
         }
         getObjectURL(file,$('#imgFileValue'));
@@ -1025,7 +1025,7 @@ function uploadFile(file,obj,url){
             layer.msg("文件未上传成功，请重新上传", {icon: 0});
             obj.after(obj.clone().val(""));
             obj.remove();
-            obj.prev().attr("src", "/static/images/white.png");
+            obj.prev().attr("src", "/static/images/uploadFile.png");
         }
     });
 }
@@ -1042,7 +1042,7 @@ function pdfFileChange(obj){
 	            var pdfFile = $("#pdfFile");
 	            pdfFile.after(pdfFile.clone().val(""));
 	            pdfFile.remove();
-	            $("#pdfFile").parent().attr("src", "/static/images/white.png");
+	            $("#pdfFile").parent().attr("src", "/static/images/uploadFile.png");
 	            return false;
 	        }
 	        var fileName=file.name;
@@ -1053,7 +1053,7 @@ function pdfFileChange(obj){
 	            var pdfFile = $("#pdfFile");
 	            pdfFile.after(pdfFile.clone().val(""));
 	            pdfFile.remove();
-	            $("#pdfFile").parent().attr("src", "/static/images/white.png");
+	            $("#pdfFile").parent().attr("src", "/static/images/uploadFile.png");
 	            return false;
 	        }
 	        //上传接口
