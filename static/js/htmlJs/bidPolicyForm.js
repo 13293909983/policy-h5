@@ -737,9 +737,9 @@
 			$(".visualSelect").text("中国人民保险");
 			//如果初始化没有点击，默认给赋值并显示上传文件
 			$("#insuranceCompany").val("PICC");
-			$("#file-row").toggle($("#insuranceCompany").val()=="PICC");
 		}else if(value==1){
 			$(".visualSelect").text("太平洋保险");
+			$("#insuranceCompany").val("CPIC");
 		}else if(value==2){
 			$(".visualSelect").text("中华保险");
 		}else if(value==3){
@@ -955,7 +955,6 @@ function imageFileChange(obj){
             layer.msg("所选文件超出允许上传文件大小",{icon:0,time:2000});
             var imgFile = $("#imgFile");
             imgFile.after(imgFile.clone().val(""));
-            imgFile.remove();
             $("#imgFile").parent().attr("src", "/static/images/uploadFile.png");
             return false;
         }
@@ -966,7 +965,6 @@ function imageFileChange(obj){
             layer.msg("暂不支持该类型文件",{icon:0,time:2000});
             var imgFile = $("#imgFile");
             imgFile.after(imgFile.clone().val(""));
-            imgFile.remove();
             $("#imgFile").parent().attr("src", "/static/images/uploadFile.png");
             return false;
         }
@@ -1015,9 +1013,9 @@ function uploadFile(file,obj,url){
                 if(obj.attr("id")=="pdfFileValue"){
                 	obj.next().text(file.name);
                 	obj.next().attr("title",file.name);
-                	obj.prev().prev().attr("src", "/static/images/a7.png");
+                	obj.prev().prev().find("img").attr("src", "/static/images/a7.png");
                 }else{
-                	obj.prev().prev().attr("src", url);
+                	obj.prev().prev().find("img").attr("src", url);
                 }
         	}
         },
