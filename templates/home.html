@@ -163,5 +163,13 @@ $(function(){
 			form.submit();
 		}
 	}
+	//鼠标移除把空格都去掉
+	$("input[name='policyNo']").mouseout(function(){
+		$(this).val(Trim($(this).val()));
+	});
+	//去除所有空格
+	function Trim(str){ 
+        return str.replace(/(^\s*)|(\s*$)/g, ""); 
+	}
 </script>
 </html>
