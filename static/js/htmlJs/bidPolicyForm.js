@@ -351,13 +351,13 @@
 		$('#btnSub').hide();
 		//判断如果是大地的，把文件名称放在一个字段里
 		var insuranceCompany=$("#insuranceCompany").val();
-		if(insuranceCompany=="CCIC"){
+		/*if(insuranceCompany=="CCIC"){
 			var imgFile=$("#imgFileValue").val()+","+$("#pdfFileValue").val();
 			var imgFileUrl=$("#imgFileValue").attr("data-url")+","+$("#pdfFileValue").attr("data-url");
 			$(":input[name='fileKey']").val(imgFile);
 			$(":hidden[name='fileKey']").attr("_val",imgFile);
 			$(":input[name='imageFile']").val(imgFileUrl);
-		}
+		}*/
 		return true;
 	}
 	//被保险人名称
