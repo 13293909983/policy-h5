@@ -508,7 +508,7 @@ $(function(){
     	})
     }
 	//如果是大地的，显示大地的文件
-	 if(insuranceCompany=="CCIC"){
+	 /*if(insuranceCompany=="CCIC"){
     	$("#ccic-file-row").show();
 		$("#file-row").hide();
 		var fileKey=$(":input[name='fileKey']").val();
@@ -526,10 +526,11 @@ $(function(){
 		  $("#pdfFileValue").next().text("已上传文件");
 		  $("#pdfFileValue").prev().prev().attr("src", "/static/images/a7.png");
 		}
+		
 	}else{
 		$("#file-row").show();
 		$("#ccic-file-row").hide();
-	}
+	}*/
 })
 $(".reg_show").click(function (){
     if($(".agree_wrap").css("display")=="none"){
@@ -561,13 +562,13 @@ $(".zhuyi_tk li").click(function(){
 		$("#invoice").text("");
 	}
 	//如果选择大地的，则上传文件上传营业执照和pdf
-	if(img.attr("val")=="CCIC"){
+	/*if(img.attr("val")=="CCIC"){
 		$("#ccic-file-row").show();
 		$("#file-row").hide();
 	}else{
 		$("#file-row").show();
 		$("#ccic-file-row").hide();
-	}
+	}*/
 })
 $(".visualSelect").click(function(){
 	$("#selectContainerQcOhiqga").show();
