@@ -136,7 +136,7 @@
 		if(sequenceNo!=null&&sequenceNo!=""){
 			//如果有的话，把字段改成禁用
        		$('input').not(":input[name='insuredAddress']")
-       		.not(":input[name='imageFile']").not(":input[name='invoice.bankAccount']")
+       		.not("#imageFile").not(":input[name='invoice.bankAccount']")
        		.not(":input[name='invoice.buyerTaxpayerIdentifyNumber']")
        		.not(":input[name='invoice.addressAndPhone']")
        		.not(":input[name='invoice.invoiceTitle']")
@@ -150,7 +150,7 @@
 			$('#menuBtn').removeAttr('onclick');
 			//改input的禁用样式
        		$('input').not(":input[name='insuredAddress']")
-       		.not(":input[name='imageFile']").not(":input[name='invoice.bankAccount']")
+       		.not("#imageFile").not(":input[name='invoice.bankAccount']")
        		.not(":input[name='invoice.buyerTaxpayerIdentifyNumber']")
        		.not(":input[name='invoice.addressAndPhone']")
        		.not(":input[name='invoice.invoiceTitle']")
@@ -162,7 +162,7 @@
 			$('select').css("cursor","not-allowed").css("background-color","#efefef");
 			//改input 上的td的禁用样式
        		$('input').not(":input[name='insuredAddress']")
-			.not(":input[name='imageFile']").not(":input[name='invoice.bankAccount']")
+			.not("#imageFile").not(":input[name='invoice.bankAccount']")
        		.not(":input[name='invoice.buyerTaxpayerIdentifyNumber']")
        		.not(":input[name='invoice.addressAndPhone']")
        		.not(":input[name='invoice.invoiceTitle']")
@@ -353,7 +353,7 @@
 		//把时间控件的禁用去掉
 		$(":input[name='retroactiveStart']").removeAttr("disabled"); 
 		//$(":input[name='imageFile']").prop("disabled",true);
-		$(":input[name='imageFile']").attr("disabled","disabled");
+		//$("#imageFile").attr("disabled","disabled");
 		//显示灰色的禁用的样式
 		$('.btnSubClass').show();
 		//隐藏确定按钮
@@ -737,7 +737,6 @@
 			$(".visualSelect").text("中国人民保险");
 			//如果初始化没有点击，默认给赋值并显示上传文件
 			$("#insuranceCompany").val("PICC");
-			$("#file-row").toggle($("#insuranceCompany").val()=="PICC");
 		}else if(value==1){
 			$(".visualSelect").text("太平洋保险");
 			$("#insuranceCompany").val("CPIC");
@@ -770,7 +769,10 @@ $(function(){
 	$("#imageFile").change(function(){
 		var insuranceCompany=$("#insuranceCompany").val();
         var files = this.files;
-        var imgName = document.all.imageFile.value;
+        var imgName="";
+        if(files.length>0){
+        	imgName=files[0].name;
+        }
         var ext="";
         if(imgName==""){
             layer.msg('请选择需要上传的文件!', {icon: 5});
@@ -788,7 +790,11 @@ $(function(){
                 ext = ext.toLowerCase( );
                 if (ext != 'jpg' && ext != 'png' && ext != 'jpeg'&& ext != 'bmp'&& ext != 'zip'){
                     layer.msg('只能上传.jpg .png .jpeg .bmp .zip类型的文件!', {icon: 0});
-                    var file = document.getElementById('imageFile');
+                    //把file设置为空的
+                    $(":hidden[name='fileKey']").val("");
+                    $(":hidden[name='fileKey']").attr("_val","");
+                    $(":hidden[name='imageFile']").val("");
+					var file = document.getElementById('imageFile');
                     file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
                     //file.outerHTML = file.outerHTML; //重新初始化了file的html
                     $("#text").text("未选择文件");
@@ -814,6 +820,10 @@ $(function(){
             }
             if(fileSize>filemaxsize){
                 layer.msg("文件大小不能超过20M！", {icon: 0});
+				//把file设置为空的
+                $(":hidden[name='fileKey']").val("");
+                $(":hidden[name='fileKey']").attr("_val","");
+                $(":hidden[name='imageFile']").val("");
                 var file = document.getElementById('imageFile');
                 file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
                 //file.outerHTML = file.outerHTML; //重新初始化了file的html
@@ -846,9 +856,11 @@ $(function(){
                     if(data.success){
                 		var fileKey=data.data.fileKey;
                         var fileName=data.data.fileName;
+						var fileUrl=data.data.fileUrl;
                         //把返回的key设置到隐藏的input上
                         $(":hidden[name='fileKey']").val(fileName);
                         $(":hidden[name='fileKey']").attr("_val",fileName);
+						$(":hidden[name='imageFile']").val(fileUrl);
                         if(ext=="zip"){
                             $("#fileImg").attr("src", "/static/images/a7.png");
                         }else{
@@ -864,6 +876,7 @@ $(function(){
                     //把file设置为空的
                     $(":hidden[name='fileKey']").val("");
                     $(":hidden[name='fileKey']").attr("_val","");
+					$(":hidden[name='imageFile']").val("");
                     var file = document.getElementById('imageFile');
                     file.value = ''; //虽然file的value不能设为有字符的值，但是可以设置为空值
                     //file.outerHTML = file.outerHTML; //重新初始化了file的html
@@ -925,3 +938,137 @@ $(function(){
         }
     })
 });
+//输入投标名称获取其他信息
+$("[name='insuredName']").bind('input propertychange', function() {
+    var $this=$(this);
+    var name=$this.val();
+    if(name!=null&&name!=''){//输入内容不为空
+        $.ajax({
+            url:manageUrl+'/homeController/selectPolicyByInsuredName',
+            type:'post',
+            data:{insuredName:name},
+            dataType:'json',
+            success:function (response) {
+                if(response.length>0){
+                    $this.next('#insureList').remove();
+                        var str='<div class="dropdown-menu position-absolute" id="insureList" style="display: block; position: static; width: 32%; margin-top: 0; float: none;position: absolute;">';
+                        response.forEach(function (obj,index) {
+                            str+='<a class="dropdown-item" href="#" data-code="'+index+'">'+obj.insuredName+'</a>';
+                        })
+                        str+='</div>';
+                        $this.after(str);
+						$('#insureList').find('.dropdown-item').click(function () {
+							console.log($this);
+                            if($this.attr('name')=='insuredName'){
+								var policy=response[$(this).attr('data-code')];
+								$("[name='insuredName']").val(policy.insuredName);
+								$("[name='insuredIdNo']").val(policy.insuredIdNo);
+								$("[name='insuredSocialcode']").val(policy.insuredSocialcode);
+								$("[name='insuredIdMobile']").val(policy.insuredIdMobile);
+								$("[name='insuredAddress']").val(policy.insuredAddress);
+                            }
+                            $this.next('#insureList').remove();
+                        })
+                }else{
+					$this.next('#insureList').remove();
+				}
+            }
+        })
+    }else{//输入为空
+        $this.next('#insureList').remove();
+    }
+})
+//输入项目名称获取数据
+$("[name='certificateDepart']").bind('input propertychange', function() {
+    var $this=$(this);
+    var name=$this.val();
+    if(name!=null&&name!=''){//输入内容不为空
+        $.ajax({
+            url:manageUrl+'/homeController/selectCertificateDpartByBidPolicy',
+            type:'post',
+            data:{certificateDpart:name},
+            dataType:'json',
+            success:function (response) {
+				if(response.code=='200'){
+                    $this.next('#certificateDepartList').remove();
+					var data=response.data;
+                    var str='<div class="dropdown-menu position-absolute" id="certificateDepartList" style="display: block; position: static; width: 32%; margin-top: 0; float: none;position: absolute;top: 41%;">';
+					str+='<a class="dropdown-item" href="javascript:void(0);"" data-code="'+data.id+'" title="'+data.certificateDepart+'">'+data.certificateDepart+'</a>';
+					str+='</div>';
+					$this.after(str);
+					$('#certificateDepartList').find('.dropdown-item').click(function () {
+						console.log($this);
+						if($this.attr('name')=='certificateDepart'){
+							var policy=data;
+							$("[name='certificateDepart']").val(policy.certificateDepart);
+							$("[name='certificateNo']").val(policy.certificateNo);
+							$("[name='fundSource']").val(policy.fundSource);
+							$("[name='regionalism']").val(policy.regionalism);
+							$("#regionSel").val(policy.regionalismName);
+							$("[name='retroactiveStart']").val(policy.retroactiveStart);
+							$("[name='retroactiveEnd']").val(policy.retroactiveEnd);
+							$(".selector option[value='"+policy.officeType+"']").attr("selected",true);
+							$("[name='businesssource']").val(policy.businesssource);
+							$("#citySel").val(policy.businesssourceName);
+							$("[name='electricPower']").val(policy.electricPower);
+							$("[name='sumPremium']").val(policy.sumPremium);
+							$("[name='agencyName']").val(policy.agencyName);
+							//如果选择其他保险太多的话，弹出选择保险框
+							$(".zhuyi_tk").css("height","3.7rem");
+							$('.pay_gwc').removeClass("pay_gwcactivity");
+							//默认选中样式
+							$(".zhuyi_tk").find("li").eq(0).find(".pay_gwc").addClass("pay_gwcactivity");
+							$(".tishi").html("");
+							var textTishi='<div class="tishi">温馨提示：此项目已投过&nbsp;<span id="baoxian"></span>，为避免出现围标，串标等问题，建议您选择其他保险公司投保。</br>当前选择的保险公司为:&nbsp;&nbsp;<span id="selectBaoxian">太平洋保险</span></div>';
+							var tishiList=[];
+							if(policy.piccCount>=2){
+								tishiList.push("中国人民保险");
+							}
+							if(policy.cpicCount>=2){
+								tishiList.push("太平洋保险");
+							}
+							if(policy.cicCount>=2){
+								tishiList.push("中华保险");
+							}
+							if(policy.ccicCount>=2){
+								tishiList.push("大地保险");
+							}
+							if(tishiList.length>0 && tishiList.length!=4){
+								$(".pay_nav").append(textTishi);
+								$(".zhuyi_wrap").show();
+								$("#baoxian").text(tishiList);
+							}
+						}
+						$this.next('#certificateDepartList').remove();
+					})
+                }else{
+					$this.next('#certificateDepartList').remove()
+				};
+            }
+        })
+    }else{//输入为空
+        $this.next('#certificateDepartList').remove();
+    }
+})
+//查询交易平台
+function selectBusinessPlatform(){
+	$.ajax({
+		url:manageUrl+'/homeController/selectBusinessPlatform',
+		type:'post',
+		dataType:'json',
+		success:function (response) {
+			$("#businessPlatform").html("");
+			var str='<option value="">请选择交易平台</option>';
+			if(response.code=='200'){
+				var businessPlatform=response.data;
+				$(businessPlatform).each(function(index,value){
+					str+='<option value="'+value.platformCode+'">'+value.platformName+'</option>';
+				})
+			}
+			$("#businessPlatform").html(str);
+			$("#businessPlatform").select2();
+			$('.select2-selection--single').css("border","none");
+			$('.select2-container--focus').css("border","none");
+		}
+	})
+}
