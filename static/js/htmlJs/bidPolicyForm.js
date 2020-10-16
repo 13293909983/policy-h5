@@ -187,6 +187,8 @@
 		ztreeRegionClick();
 		//隐藏进度条
 		$("#schedule").hide();
+		//获取交易平台
+		selectBusinessPlatform();
 	})
 	//算保费金额，保留两位小数，四舍五入
 	function decimal(num,v){
@@ -535,10 +537,9 @@
 		}
 		if (v.length > 0 ) v = v.substring(0, v.length-1);
 		if (code.length > 0 ) code = code.substring(0, code.length-1);
-		var cityObj = $("#citySel");
-		cityObj.attr("value", v);
+		$("#citySel").val(v);;
 		//给businesssource赋code值
-		$("input[name='businesssource']").attr("value",code);
+		$("input[name='businesssource']").val(code);
 		//把行业代码提醒消息去掉
 		$(".list").parent().find("i").text("");
 		//关闭
@@ -569,8 +570,7 @@
 	        for(var j=0;j<strs.length;j++){
 	            var node = tree.getNodeByParam("code",strs[j]);
 	            tree.selectNode(node , true,true); 
-	            var cityObj = $("#citySel");
-	    		cityObj.attr("value", node.name);
+	            $("#citySel").val(node.name);
 	        }
 		 }
 	}
@@ -666,10 +666,9 @@
 		}else{
 			name=parentNode.name+"-"+v;
 		}
-		var cityObj = $("#regionSel");
-		cityObj.attr("value", name);
+		$("#regionSel").val(name);
 		//给regionalism赋code值
-		$("input[name='regionalism']").attr("value",code);
+		$("input[name='regionalism']").val(code);
 		//把提醒消息去掉
 		$(".lists").parent().find("i").text("");
 		//关闭
@@ -1057,4 +1056,137 @@ function pdfFileChange(obj){
 	        //上传接口
 	        uploadFile(file,$("#pdfFileValue"));
 	    }
+}
+//输入投标名称获取其他信息
+$("[name='insuredName']").bind('input propertychange', function() {
+    var $this=$(this);
+    var name=$this.val();
+    if(name!=null&&name!=''){//输入内容不为空
+        $.ajax({
+            url:manageUrl+'/homeController/selectPolicyByInsuredName',
+            type:'post',
+            data:{insuredName:name},
+            dataType:'json',
+            success:function (response) {
+                if(response.length>0){
+                    $this.next('#insureList').remove();
+                        var str='<div class="dropdown-menu position-absolute" id="insureList" style="display: block; position: static; width: 32%; margin-top: 0; float: none;position: absolute;">';
+                        response.forEach(function (obj,index) {
+                            str+='<a class="dropdown-item" href="javascript:void(0);"" data-code="'+index+'">'+obj.insuredName+'</a>';
+                        })
+                        str+='</div>';
+                        $this.after(str);
+						$('#insureList').find('.dropdown-item').click(function () {
+							console.log($this);
+                            if($this.attr('name')=='insuredName'){
+								var policy=response[$(this).attr('data-code')];
+								$("[name='insuredName']").val(policy.insuredName);
+								$("[name='insuredIdNo']").val(policy.insuredIdNo);
+								$("[name='insuredSocialcode']").val(policy.insuredSocialcode);
+								$("[name='insuredIdMobile']").val(policy.insuredIdMobile);
+								$("[name='insuredAddress']").val(policy.insuredAddress);
+                            }
+                            $this.next('#insureList').remove();
+                        })
+                }else{
+					$this.next('#insureList').remove();
+				}
+            }
+        })
+    }else{//输入为空
+        $this.next('#insureList').remove();
+    }
+})
+//输入项目名称获取数据
+$("[name='certificateDepart']").bind('input propertychange', function() {
+    var $this=$(this);
+    var name=$this.val();
+    if(name!=null&&name!=''){//输入内容不为空
+        $.ajax({
+            url:manageUrl+'/homeController/selectCertificateDpartByBidPolicy',
+            type:'post',
+            data:{certificateDpart:name},
+            dataType:'json',
+            success:function (response) {
+				if(response.code=='200'){
+                    $this.next('#certificateDepartList').remove();
+					var data=response.data;
+                    var str='<div class="dropdown-menu position-absolute" id="certificateDepartList" style="display: block; position: static; width: 32%; margin-top: 0; float: none;position: absolute;top: 41%;">';
+					str+='<a class="dropdown-item" href="javascript:void(0);"" data-code="'+data.id+'" title="'+data.certificateDepart+'">'+data.certificateDepart+'</a>';
+					str+='</div>';
+					$this.after(str);
+					$('#certificateDepartList').find('.dropdown-item').click(function () {
+						console.log($this);
+						if($this.attr('name')=='certificateDepart'){
+							var policy=data;
+							$("[name='certificateDepart']").val(policy.certificateDepart);
+							$("[name='certificateNo']").val(policy.certificateNo);
+							$("[name='fundSource']").val(policy.fundSource);
+							$("[name='regionalism']").val(policy.regionalism);
+							$("#regionSel").val(policy.regionalismName);
+							$("[name='retroactiveStart']").val(policy.retroactiveStart);
+							$(".selector option[value='"+policy.officeType+"']").attr("selected",true);
+							$("[name='businesssource']").val(policy.businesssource);
+							$("#citySel").val(policy.businesssourceName);
+							$("[name='electricPower']").val(policy.electricPower);
+							$("[name='sumPremium']").val(policy.sumPremium);
+							$("[name='agencyName']").val(policy.agencyName);
+							//如果选择其他保险太多的话，弹出选择保险框
+							$(".zhuyi_tk").css("height","3.7rem");
+							$('.pay_gwc').removeClass("pay_gwcactivity");
+							//默认选中样式
+							$(".zhuyi_tk").find("li").eq(0).find(".pay_gwc").addClass("pay_gwcactivity");
+							$(".tishi").html("");
+							var textTishi='<div class="tishi">温馨提示：此项目已投过&nbsp;<span id="baoxian"></span>，为避免出现围标，串标等问题，建议您选择其他保险公司投保。</br>当前选择的保险公司为:&nbsp;&nbsp;<span id="selectBaoxian">太平洋保险</span></div>';
+							var tishiList=[];
+							if(policy.piccCount>=2){
+								tishiList.push("中国人民保险");
+							}
+							if(policy.cpicCount>=2){
+								tishiList.push("太平洋保险");
+							}
+							if(policy.cicCount>=2){
+								tishiList.push("中华保险");
+							}
+							if(policy.ccicCount>=2){
+								tishiList.push("大地保险");
+							}
+							if(tishiList.length>0 && tishiList.length!=4){
+								$(".pay_nav").append(textTishi);
+								$(".zhuyi_wrap").show();
+								$("#baoxian").text(tishiList);
+							}
+						}
+						$this.next('#certificateDepartList').remove();
+					})
+                }else{
+					$this.next('#certificateDepartList').remove()
+				};
+            }
+        })
+    }else{//输入为空
+        $this.next('#certificateDepartList').remove();
+    }
+})
+//查询交易平台
+function selectBusinessPlatform(){
+	$.ajax({
+		url:manageUrl+'/homeController/selectBusinessPlatform',
+		type:'post',
+		dataType:'json',
+		success:function (response) {
+			$("#businessPlatform").html("");
+			var str='<option value="">请选择交易平台</option>';
+			if(response.code=='200'){
+				var businessPlatform=response.data;
+				$(businessPlatform).each(function(index,value){
+					str+='<option value="'+value.platformCode+'">'+value.platformName+'</option>';
+				})
+			}
+			$("#businessPlatform").html(str);
+			$("#businessPlatform").select2();
+			$('.select2-selection--single').css("border","none");
+			$('.select2-container--focus').css("border","none");
+		}
+	})
 }
