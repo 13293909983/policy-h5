@@ -1125,6 +1125,7 @@ $("[name='certificateDepart']").bind('input propertychange', function() {
 							$("[name='regionalism']").val(policy.regionalism);
 							$("#regionSel").val(policy.regionalismName);
 							$("[name='retroactiveStart']").val(policy.retroactiveStart);
+							$("[name='retroactiveEnd']").val(policy.retroactiveEnd);
 							$(".selector option[value='"+policy.officeType+"']").attr("selected",true);
 							$("[name='businesssource']").val(policy.businesssource);
 							$("#citySel").val(policy.businesssourceName);
