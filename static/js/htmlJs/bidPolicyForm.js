@@ -1072,3 +1072,11 @@ function selectBusinessPlatform(){
 		}
 	})
 }
+//验证保证金不能填写中文
+$("input[name='electricPower']").keyup(function(){
+	 var c=$(this);  
+	 if(/[^\d]/.test(c.val())){//替换非数字字符  
+	  var temp_amount=c.val().replace(/[^\d]/g,'');  
+	  $(this).val(temp_amount);  
+	 }  
+})

@@ -544,9 +544,9 @@ $(".btn_open").click(function() {
 //默认初始化选择所属公司
 $(".zhuyi_tk li").click(function(){
     var item = $(this).index();  //获取索引下标 也从0开始
-	//if(item==3){
-		//layer.msg("此功能正在建设中！", {icon: 0});
-	//}else{
+	if(item==1){
+		layer.msg("此功能正在维护中！", {icon: 0});
+	}else{
 		var img=$(this).find("img");
 		$('.pay_gwc').removeClass("pay_gwcactivity");
 		$(this).find(".pay_gwc").addClass("pay_gwcactivity");
@@ -556,7 +556,7 @@ $(".zhuyi_tk li").click(function(){
 		$("#selectBaoxian").text(img.attr("alt"));
 		//切换条款
 		clause(img.attr("data-code"));
-	//}
+	}
 })
 $(".visualSelect").click(function(){
 	$("#selectContainerQcOhiqga").show();
@@ -565,9 +565,9 @@ $(".visualSelect").click(function(){
 $("#selectContainerQcOhiqga img").click(function(){
 	var img=$(this); 
 	var item = img.index();  //获取索引下标 也从0开始
-	//if(item==3){
-		//layer.msg("此功能正在建设中！", {icon: 0});
-	//}else{
+	if(item==1){
+		layer.msg("此功能正在维护中！", {icon: 0});
+	}else{
 		if(img.attr("rel")!=$(".visualSelect").attr("data-id")){
 			layer.confirm("您确定切换保险公司吗？切换需重新上传压缩文件！",function(){
 				//切换保险公司把文件清除，再重新上传
@@ -600,7 +600,7 @@ $("#selectContainerQcOhiqga img").click(function(){
 		}else{
 			clickImg(img);
 		}
-	//}
+	}
 })
 function clickImg(obj){
 	$(".visualSelect").text(obj.attr("alt"));
