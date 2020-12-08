@@ -1111,7 +1111,7 @@ $("[name='certificateDepart']").bind('input propertychange', function() {
 				if(response.code=='200'){
                     $this.next('#certificateDepartList').remove();
 					var data=response.data;
-                    var str='<div class="dropdown-menu position-absolute" id="certificateDepartList" style="display: block; position: static; width: 32%; margin-top: 0; float: none;position: absolute;top: 41%;">';
+                    var str='<div class="dropdown-menu position-absolute" id="certificateDepartList" style="display: block; position: static; width: 32%; margin-top: 0; float: none;position: absolute;top: 45%;">';
 					str+='<a class="dropdown-item" href="javascript:void(0);"" data-code="'+data.id+'" title="'+data.certificateDepart+'">'+data.certificateDepart+'</a>';
 					str+='</div>';
 					$this.after(str);
