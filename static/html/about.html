@@ -15,63 +15,82 @@
 <script type="text/javascript" src="/static/js/paging.js"></script>
 </head>
 <style>
-#companyName {
-	width: 8rem;
-	overflow: hidden;
-	position: relative;
-	overflow: hidden;
-	margin-bottom: 0.2rem;
-}
+		#companyName {
+			width: 8rem;
+			overflow: hidden;
+			position: relative;
+			overflow: hidden;
+			margin-bottom: 0.2rem;
+		}
 
-#companyName .prev {
-	display: none;
-	position: absolute;
-	top: 0;
-	/* width: 0.59rem; */
-	width: 0.2rem;
-	height: 88%;
-	box-shadow: 0 0 3px #c6c6c7;
-	background: #fff;
-	text-align: center;
-	font-size: 0;
-	left: 0;
-	border-right: 1px solid #e1e3e6;
-}
+		#companyName .prev {
+			display: none;
+			position: absolute;
+			top: 0;
+			/* width: 0.59rem; */
+			width: 0.2rem;
+			height: 88%;
+			box-shadow: 0 0 3px #c6c6c7;
+			background: #fff;
+			text-align: center;
+			font-size: 0;
+			left: 0;
+			border-right: 1px solid #e1e3e6;
+		}
 
-#companyName .prev span {
-	display: inline-block;
-	vertical-align: middle;
-	width: 0.09rem;
-	height: 1rem;
-	background-repeat: no-repeat;
-	background-image: url(/static/images/arrow.svg);
-	background-position: 96.77% 25%;
-	background-size: initial;
-}
+		#companyName .prev span {
+			display: inline-block;
+			vertical-align: middle;
+			width: 0.09rem;
+			height: 1rem;
+			background-repeat: no-repeat;
+			background-image: url(/static/images/arrow.svg);
+			background-position: 96.77% 25%;
+			background-size: initial;
+		}
 
-#companyName .next span {
-	display: inline-block;
-	vertical-align: middle;
-	width: 0.09rem;
-	height: 1rem;
-	background-repeat: no-repeat;
-	background-image: url(../images/arrow.svg);
-	background-position: 61.29% 25%;
-	background-size: initial;
-}
+		#companyName .next span {
+			display: inline-block;
+			vertical-align: middle;
+			width: 0.09rem;
+			height: 1rem;
+			background-repeat: no-repeat;
+			background-image: url(../images/arrow.svg);
+			background-position: 61.29% 25%;
+			background-size: initial;
+		}
 
-#companyName .next {
-	position: absolute;
-	top: 0;
-	width: 0.2rem;
-	height: 88%;
-	box-shadow: 0 0 0.03rem #c6c6c7;
-	background: #fff;
-	text-align: center;
-	font-size: 0;
-	right: 0;
-	border-left: 1px solid #e1e3e6;
-}
+		#companyName .next {
+			position: absolute;
+			top: 0;
+			width: 0.2rem;
+			height: 88%;
+			box-shadow: 0 0 0.03rem #c6c6c7;
+			background: #fff;
+			text-align: center;
+			font-size: 0;
+			right: 0;
+			border-left: 1px solid #e1e3e6;
+		}
+		.about_ul .about_li {
+			border: 1px solid #e6e4e4;
+			padding: 0.1rem 0.1rem;
+			min-width: 1.6rem;
+		}
+		
+		.about_ul .about_li.active {
+			color: #B51313;
+			font-weight: bold;
+			background-color: #eaeaea;
+		}
+		
+		.about_licontent {
+			display: none;
+		}
+		
+		.about_licontent.active {
+			display: block;
+		}
 </style>
 <body>
 	<header></header>
@@ -100,16 +119,13 @@
 							</ul>
 						</div>
 						<div class="about_rightimg about_rightimgnow">
-							<img src="/static/images/about04.png" />
-						</div>
-						<div class="about_rightimg">
-							<img src="/static/images/about03.png" />
-						</div>
-						<div class="about_rightimg">
-							<img src="/static/images/about02.png" />
-						</div>
-						<div class="about_rightimg">
-							<img src="/static/images/about01.png" />
+							<div>
+								<div class="about_ul">
+									<ul>
+										<li class="about_li active">公司介绍</li>
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="about_right">
@@ -215,41 +231,53 @@
 				if (dataObj != null) {
 					var data = dataObj.data;
 					$('#companyName ul').html('');
-					$('#companyName').next().remove();
+					$('#companyName').nextAll(".about_rightimg").remove();
+					var nameStr="";
+					var contentStr="";
 					var num = data.length;
-					var str = '';
-					var strs = "";
-					if (num > 0) {
-						$.each(data,function(index, val) {
-							if (index == 0) {
-								str += '<li class="about_rightli about_rightliatv">'
-										+ val.name
-										+ '</li>';
-								strs += '<div class="about_rightimg about_rightimgnow">';
-
-							} else {
-								str += '<li class="about_rightli">'
-										+ val.name
-										+ '</li>';
-								strs += '<div class="about_rightimg">';
-							}
-							strs += '<img src="'+manageUrl+val.cover+'"/>';
-							strs += val.content;
-							strs += '</div>';
-
-						})
-					} else {
-						str += '<div style="line-height: 250px;text-align: center;font-size: 16px;color: #787675">';
-						str += '暂无公司介绍';
-						str += '</div>';
-					}
-					$('#companyName ul').append(str);
-					$('#companyName').after(strs);
-					$(".about_rightli").click(function() {
-						$(this).addClass("about_rightliatv").siblings().removeClass("about_rightliatv");
-						$(".about_rightimg").eq($(this).index()).addClass("about_rightimgnow").siblings().removeClass("about_rightimgnow");
-						$(".about_righttext").eq($(this).index()).addClass("about_righttextnow").siblings().removeClass("about_righttextnow");
+					$.each(data,function(index, val) {
+						nameStr += '<li class="about_rightli">';
+						nameStr +=	val.name;
+						nameStr += '</li>';
+						
+						contentStr += '<div class="about_rightimg">';
+						contentStr += '	<img src="'+manageUrl+val.cover+'"/>';
+						contentStr += '	<div class="about_ul">';
+						contentStr += '		<ul>';
+						contentStr += '			<li class="about_li active">公司介绍</li>';
+						contentStr += '		</ul>';
+						contentStr += '	</div>';
+						contentStr += '	<div class="about_licontent active">';
+						contentStr += '		<p>'+val.content+'</p>';
+						contentStr += '	</div>';
+						contentStr += '</div>';
 					})
+					$('#companyName ul').append(nameStr);
+					$('#companyName').after(contentStr);
+					//绑定点击事件
+					$('#companyName').find("li").click(function(){
+						$('#companyName ul li').removeClass("about_rightliatv");	
+						$(this).addClass("about_rightliatv");
+						var index=$('#companyName').find("li").index(this);
+						
+						var $about=$('#companyName').nextAll(".about_rightimg");
+						$about.removeClass("about_rightimgnow");
+						$about.eq(index).addClass("about_rightimgnow");
+						$(".about_rightimgnow").find("li").eq(0).addClass("active");
+						$(".about_rightimgnow").find(".about_licontent").eq(0).addClass("active");
+						var clauseId;
+						if(index==0){
+							clauseId='1521';
+						}else if(index==1){
+							clauseId='1522';
+						}else if(index==2){
+							clauseId='1523';
+						}else if(index==3){
+							clauseId='1524';
+						}
+						clause(clauseId);
+					})
+					$('#companyName').find("li").eq(0).click();
 					//按钮箭头
 					var companyWidth=$("#companyName").width();
 					var catew = $('#companyName ul').width() - 150;
@@ -285,6 +313,7 @@
 			}
 		})
 	}
+	
 	function help() {
 		$.ajax({
 			type : "get",
@@ -314,6 +343,41 @@
 					$('.about_righttxt').append(str);
 				}
 			}
+		})
+	}
+	//加载条款
+	function clause(companyId) {
+		$.ajax({
+			type : "get",
+			url : manageUrl+"/homeController/selectClause",
+			data:{"companyId":companyId,"isShow":"1"},
+			dataType : "json",
+			success : function(dataObj) {
+				if (dataObj != null) {
+					var data = dataObj.data;
+					$(".about_rightimgnow").find(".about_licontent").not(":eq(0)").remove();
+					var li=$(".about_rightimgnow .about_ul").find("li");
+					li.not(":eq(0)").remove();
+					var num = data.length;
+					var str = '';
+					var html ='';
+					if (num > 0) {
+						$.each(data, function(index, val) {
+							str += '<li class="about_li">'+val.clause_name+'</li>';
+							html += '<div class="about_licontent">';
+								html += '<p>'+val.clause_content+'</p>';
+							html += '</div>';
+						})
+					}
+					$(".about_rightimgnow .about_ul").find("li").eq(0).after(str);
+					$(".about_rightimgnow").find(".about_licontent").after(html);
+					//点击切换条款
+					$(".about_li").click(function() {
+						$(this).addClass("active").siblings().removeClass("active");
+						$(".about_rightimgnow .about_licontent").eq($(this).index()).addClass("active").siblings().removeClass("active");
+					})
+				}
+			} 
 		})
 	}
 </script>

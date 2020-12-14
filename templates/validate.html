@@ -58,7 +58,27 @@
    		display: block;
    	}
 	.noyzerr > img{
-		width: 72%;
+		width: 50%;
+	}
+	.yanzheng-pdftit{
+	    text-align: left;
+		font-size: 0.16rem;
+		line-height: 2.6em;
+		width: 7.5rem;
+		margin: 0.5rem auto;
+		box-shadow: #505050 0px -1px 13px;
+		padding: 0.2rem;
+		border-radius: 0.1rem;
+	}
+	.yanzheng-pdftit h5{
+	   font-weight: 700;
+       color: #c75353;
+	   font-size: 0.2rem;
+	}
+	.yanzheng-pdftit p span{
+	   font-size: 0.14rem;
+	   padding-left: 0.3rem;
+	   color: #5e5d5d;
 	}
 </style>
 <body>
@@ -72,7 +92,7 @@
 		<div class="noyz">
 			<p class="yz_boxptxt">
 				<a>投保编号查询</a>
-				<a>pdf查询</a>
+				<a>图片查询</a>
 			</p>
 			<div th:if="${base64Data==null}" class="yz_input_box">
 				<form action="validate.html" method="GET" id="searchForm">
@@ -101,7 +121,23 @@
 			</div>
 			<div class="noyzerr">
 				<img id="previewUrl" th:if="${bidPolicy!=null}" th:src="${bidPolicy.previewUrl}"/>
-				<h1 th:if="${base64Data==null}" th:text="${message}"></h1>
+				<div class="yanzheng-pdftit" th:if="${bidPolicy!=null}">
+					<input type="hidden"  th:value="${bidPolicy.platformCode}" id="platformCode"/>
+					<h5>该保函已于<span th:text="${#dates.format(bidPolicy.startDate,'yyyy-MM-dd')}"></span>通过&nbsp;<span id="platformName">平台</span>
+					由<span th:if="${bidPolicy.insuranceCompany=='PICC'}">中国人民保险</span>
+					<span th:if="${bidPolicy.insuranceCompany=='CPIC'}">太平洋保险</span>
+					<span th:if="${bidPolicy.insuranceCompany=='CIC'}">中华保险</span>
+					<span th:if="${bidPolicy.insuranceCompany=='CCIC'}">中国大地保险</span>承保</h5>
+					<p>被保险人单位名称：</p>
+					<p><span th:text="${bidPolicy.insuredName}"></span></p>
+					<p>投标项目名称：</p>
+					<p><span th:text="${bidPolicy.certificateDepart}">被保险人单位名称</span></p>
+					<p>开标时间：</p>
+					<p><span th:text="${#dates.format(bidPolicy.retroactiveStart,'yyyy-MM-dd')}">被保险人单位名称</span></p>
+					<p>投保金额 ：</p>
+					<p><span th:text="${bidPolicy.electricPower}">被保险人单位名称</span></p>
+				</div>
+				<h1 style="color:#b80404;" th:if="${message!=null}"><img src="/static/images/gantan.png" style="width:1rem;"></img></br><span th:text="${message}"></span></h1>
 				<div th:if="${bidPolicy!=null}" style="display: none">
 					<input type="hidden" th:value="${bidPolicy.insuredName}" id="insuredName"><!--被保险人单位名称  -->
 					<input type="hidden" th:value="${bidPolicy.certificateDepart}" id="certificateDepart"><!--投标项目名称-->
@@ -116,6 +152,7 @@
 <div class="fixed"></div>
 </body>
 <script src="/static/js/bootstrap.js" type="text/javascript"></script>
+<script src="/static/js/url.js"></script>
 <script src="/static/js/jquery.mousefollow2.js" type="text/javascript"></script>
 <script type="text/javascript">
 	function searchValidate(){
@@ -128,9 +165,16 @@
 		if(fileName!=""){
 			$($(".yz_boxptxt").find("a")[1]).addClass("act");
 			$($(".yz_input_box")[1]).addClass("yz_input_boxatv");
+			$("#previewUrl").hide();
+			$(".yanzheng-pdftit").show();
 		}else{
 			$($(".yz_boxptxt").find("a")[0]).addClass("act");
 			$($(".yz_input_box")[0]).addClass("yz_input_boxatv");
+		}
+		//判断交易平台编码是否为空
+		var platformCode=$("#platformCode").val();
+		if(platformCode!=null){
+			getPlatformCode(platformCode);
 		}
 		$("#policyPdf").val($("#fileName").val());
 		$(".yz_boxptxt a").click(function() {
@@ -194,6 +238,20 @@
 	//去除所有空格
 	function Trim(str){ 
 		return str.replace(/(^\s*)|(\s*$)/g, ""); 
+	}
+	function getPlatformCode(code){
+		$.ajax({
+			type : "get",
+			url : testManageUrl+"/homeController/businessPlatformByCode",
+			data:{"code":code},
+			dataType : "json",
+			success : function(dataObj) {
+				if (dataObj.code==200) {
+					var data = dataObj.data;
+					$("#platformName").text(data.platformName);
+				}
+			} 
+		})
 	}
 </script>
 </html>

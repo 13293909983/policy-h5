@@ -12,7 +12,7 @@ body {
 }
 
 .echarts-wrap h1 {
-	font-size: 0.5rem;
+	font-size: 0.46rem;
 	color: #b80404;
 	text-align: center;
 	line-height: 1rem;
@@ -25,7 +25,7 @@ body {
 	top: 0;
 	right: 0.375rem;
 	line-height: 0.9375rem;
-	font-size: 0.25rem;
+	font-size: 0.2rem;
 	color: rgba(154, 154, 154, 0.7);
 }
 
@@ -34,7 +34,7 @@ body {
 	top: 0;
 	left: 0.375rem;
 	line-height: 0.9375rem;
-	font-size: 0.16rem;
+	font-size: 0.14rem;
 	color: #c31212;
 }
 
@@ -122,7 +122,7 @@ body {
 	line-height: 0.6rem;
 	text-align: center;
 	color: #585858;
-	font-size: 0.25rem;
+	font-size: 0.2rem;
 	font-weight: 400;
 }
 
@@ -135,12 +135,12 @@ body {
 .panel h6 {
 	line-height: 2.6em;
 	color: #B10F0F;
-	font-size: 0.22rem;
+	font-size: 0.18rem;
 }
 
 .panel p {
 	line-height: 2.6em;
-	font-size: 0.2rem;
+	font-size: 0.16rem;
 	color: #ab4b4b;
 }
 
@@ -163,7 +163,7 @@ body {
 }
 
 .news-p p {
-	font-size: 0.16rem !important;
+	font-size: 0.14rem !important;
 	line-height: 2.3em !important;
 }
 
@@ -209,7 +209,7 @@ body {
 	text-align: center;
 	height: 1rem;
 	line-height: 1rem;
-	font-size: 0.875rem;
+	font-size: 0.7rem;
 	color: #b80404;
 	padding: 0.05rem 0;
 	font-family: electronicFont;
@@ -235,7 +235,7 @@ body {
 	height: 0.5rem;
 	line-height: 0.5rem;
 	text-align: center;
-	font-size: 0.36rem;
+	font-size: 0.26rem;
 	color: rgb(10 10 10 / 70%);
 	padding-top: 0.125rem;
 	font-weight: bold;

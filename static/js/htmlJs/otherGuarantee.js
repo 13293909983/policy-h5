@@ -36,6 +36,23 @@ function getChildrenList(){
 			}
 	 })
 }
+layui.use('laydate', function(){
+	 var laydate = layui.laydate;
+	laydate.render({
+		elem: '#offerPeriod',
+		 trigger: 'click', 
+		type: 'datetime',
+		range: "~",
+		done: function(value){
+			console.log(value);
+			$('#offerPeriod').parent().find("input").removeClass('has-error');
+			$('#offerPeriod-error').remove();
+			var offerPeriods=value.split('~');
+			$("input[name='startTime']").val(offerPeriods[0].trim());
+			$("input[name='endTime']").val(offerPeriods[1].trim());
+		}
+	});
+})
 //提交
 function onCheck(){
 	if($('#otherGuarantee').valid()){
@@ -46,6 +63,7 @@ function onCheck(){
 			$("input[name='projectSchedule']").val(projectSchedule);
 		}
 		console.log($("input[name='projectSchedule']").val());
+		$("input[name='offerPeriod']").attr("disabled", true);
 		return true;
 	}
 }
@@ -73,7 +91,10 @@ function onCheck(){
 	        },
 	        money:{
 	        	required: true,
-	        }
+	        },
+			offerPeriod:{
+				required:true,
+			}
 	    },
 	    messages: {//错误提示信息
 	        insuredName:{
@@ -94,7 +115,10 @@ function onCheck(){
 	        },
 	        money:{
 	        	required: "请输入保证金金额" ,
-	        }
+	        },
+			offerPeriod:{
+				required:"请选择报价周期" ,
+			}
 	    },
 	    highlight: function (e) {//给未通过验证的元素添加类，通过类设置css
 	    	if($(e).is(':hidden')){

@@ -82,8 +82,7 @@
   };*/
  option = {
     title: {
-        text: '动态数据',
-        subtext: '纯属虚构'
+        text: '交易金额',
     },
     tooltip: {
         trigger: 'axis',
@@ -95,7 +94,7 @@
         }
     },
     legend: {
-        data:['最新成交价', '预购队列']
+        data:['最新成交价']
     },
     
     dataZoom: {
@@ -139,32 +138,9 @@
             max: 30,
             min: 0,
             boundaryGap: [0.2, 0.2]
-        },
-        {
-            type: 'value',
-            scale: true,
-            name: '预购量',
-            max: 1200,
-            min: 0,
-            boundaryGap: [0.2, 0.2]
         }
     ],
     series: [
-        {
-            name: '预购队列',
-            type: 'bar',
-            xAxisIndex: 1,
-            yAxisIndex: 1,
-//          barWidth: "35%",
-            data: (function (){
-                var res = [];
-                var len = 10;
-                while (len--) {
-                    res.push(Math.round(Math.random() * 1000));
-                }
-                return res;
-            })()
-        },
         {
             name: '最新成交价',
             type: 'line',
@@ -333,7 +309,7 @@
       top: "90%",
       itemWidth: 10,
       itemHeight: 10,
-      data: ["0岁以下", "20-29岁", "30-39岁", "40-49岁", "50岁以上"],
+      data: ["山西市", "上海市", "北京市", "广东市", "其他"],
       textStyle: {
         color: "rgba(0,0,0,.5)",
         fontSize: "12"
@@ -341,7 +317,7 @@
     },
     series: [
       {
-        name: "年龄分布",
+        name: "地域分布",
         type: "pie",
         center: ["50%", "42%"],
         radius: ["40%", "60%"],
@@ -359,11 +335,11 @@
         label: { show: false },
         labelLine: { show: false },
         data: [
-          { value: 1, name: "0岁以下" },
-          { value: 4, name: "20-29岁" },
-          { value: 2, name: "30-39岁" },
-          { value: 2, name: "40-49岁" },
-          { value: 1, name: "50岁以上" }
+          { value: 30, name: "山西市" },
+          { value: 0, name: "上海市" },
+          { value: 1, name: "北京市" },
+          { value: 0, name: "广东市" },
+          { value: 20, name: "其他" }
         ]
       }
     ]
@@ -393,7 +369,7 @@
       top: "90%",
       itemWidth: 10,
       itemHeight: 10,
-      data: ["0岁以下", "20-29岁", "30-39岁", "40-49岁", "50岁以上"],
+      data: ["投标保函", "履约保函", "质量保函", "农民工工资保函", "预付款保函"],
       textStyle: {
         color: "rgba(0,0,0,.5)",
         fontSize: "12"
@@ -401,7 +377,7 @@
     },
     series: [
       {
-        name: "年龄分布",
+        name: "保函分布",
         type: "pie",
         center: ["50%", "42%"],
         radius: ["40%", "60%"],
@@ -419,11 +395,11 @@
         label: { show: false },
         labelLine: { show: false },
         data: [
-          { value: 1, name: "0岁以下" },
-          { value: 4, name: "20-29岁" },
-          { value: 2, name: "30-39岁" },
-          { value: 2, name: "40-49岁" },
-          { value: 1, name: "50岁以上" }
+          { value: 10, name: "投标保函" },
+          { value: 3, name: "履约保函" },
+          { value: 0, name: "质量保函" },
+          { value: 0, name: "农民工工资保函" },
+          { value: 0, name: "预付款保函" }
         ]
       }
     ]

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>电子保险保函</title>
+		<link rel="stylesheet" href="/static/css/common.css" />
+		<link rel="stylesheet" href="/static/css/index.css" />
+        <link rel="stylesheet" href="/static/css/form.css" />
+        <link rel="stylesheet" href="/static/css/zhuce.css" />
+        <link rel="stylesheet" href="/static/css/chanpin.css" />
+        <link rel="stylesheet" href="/static/css/metroStyle/metroStyle.css" />
+        <link rel="stylesheet" href="/static/layui/css/layui.css">
+		<link rel="stylesheet" href="/static/css/select2.css">
+        <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+		<script src="/static/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+		<script src="/static/js/index.js" type="text/javascript"></script>
+		<script type="text/javascript" src="/static/js/paging.js" ></script>
+		<script type="text/javascript" src="/static/layui/layui.js"></script>
+		<script src="/static/js/layer/2.4/layer.js"></script>
+		<script type="text/javascript" src="/static/js/jquery.ztree.all.js"></script>
+		<script type="text/javascript" src="/static/js/select2.full.min.js"></script>
+		<script type="text/javascript" src="/static/js/jquery.validate.min.js"></script>
+		<style>
+		 #text{
+		     position: absolute;
+             top: 0;
+             left: 85px;
+             color: #000;
+             width: 2rem;
+             overflow: hidden;
+			 text-overflow: ellipsis;
+			 white-space: nowrap;
+			 text-align: left;
+			 
+         }
+         .product_cpright{
+			width: 100%;
+		  }
+		  .span_color{
+		  	color:red;
+		  }
+		.btnSubClass{
+		    background: #999999 !important;
+		    border-bottom: 0.03rem solid #999999 !important;
+		    cursor: not-allowed !important;
+		}
+		label{
+		ist-style: none;
+	    font-size: 0.12rem;
+	    color: #e04646;
+	    margin-left: 0.05rem;
+	    float: left;
+		}
+		.has-error{
+			border-color: #e04646 !important;;
+		}
+		</style>
+	</head>
+<body>
+<header></header>
+<div class="body_mian">
+	<div class="title_wrap">
+		<div class="title_nav">
+			<h3>产品介绍</h3><img src="/static/images/xz.png" />
+			<h3 th:if="${type==1513||type=='1513'}">履约保函</h3><img th:if="${type==1513||type=='1513'}" src="/static/images/xz.png" />
+			<h3 th:if="${type==1514||type=='1514'}">质量保函</h3><img th:if="${type==1514||type=='1514'}" src="/static/images/xz.png" />
+			<h3 th:if="${type==1515||type=='1515'}">农民工工资保函</h3><img th:if="${type==1515||type=='1515'}" src="/static/images/xz.png" />
+			<h3 th:if="${type==1516||type=='1516'}">预付款保函保函</h3><img th:if="${type==1516||type=='1516'}" src="/static/images/xz.png" />
+		</div>
+		<form method="post" action="/addBackletterApply.json" onsubmit="return onCheck()" id="otherGuarantee">
+			<table class="formtables" cellspacing="0" cellpadding="0" id="formtables">
+				<tr>
+					<th colspan="4">被保险人信息</th>
+				</tr>
+				<tr>
+					<input type="hidden" th:value="${message}" id="message"/>
+					<!-- 判断有没有错误信息 -->
+					<input type="hidden" th:value="${errorMap}" id="errorMap">
+					<input type="hidden" name="applicantName" th:value="${session.LOGIN_USER.organ.organName}">
+					<input type="hidden" name="backletterType" th:value="${type}">
+					<td><span class="span_color">*</span>&nbsp;招标人单位名称</td>
+					<td>
+						<input name="insuredName" class="input-text" placeholder="请输入" th:value="${backletterApply.insuredName}" autocomplete="off">
+						<br/>
+						<i th:text="${errorMap['insuredName']}"></i>
+					</td>
+					<td><span class="span_color">*</span>&nbsp;组织机构代码</td>
+					<td>
+						<input name="insuredOrganizing" class="input-text" placeholder="请输入" th:value="${backletterApply.insuredOrganizing}">
+						<br/>
+						<i th:text="${errorMap['insuredOrganizing']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<th colspan="4">基本信息</th>
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;项目名称</td>
+					<td>
+						<input name="projectName" class="input-text" placeholder="请输入"  th:value="${backletterApply.projectName}">
+						<br/>
+						<i th:text="${errorMap['projectName']}"></i>
+					</td>
+					<td><span class="span_color">*</span>&nbsp;<span id="xmbh">招标编号</span></td>
+					<td>
+						<input name="tenderReference" class="input-text" placeholder="请输入" th:value="${backletterApply.tenderReference}">
+						<br/>
+						<i th:text="${errorMap['tenderReference']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;<span id="xmbh">项目编号</span></td>
+					<td>
+						<input name="projectNum" class="input-text" placeholder="请输入" th:value="${backletterApply.projectNum}">
+						<br/>
+						<i th:text="${errorMap['projectNum']}"></i>
+					</td>
+					<td><span class="span_color">*</span>&nbsp;<span id="xmbh">项目时长</span></td>
+					<td>
+						<select id="projectSchedule" class="select-form">
+							<option value="1">一年</option>
+							<option value="2">两年</option>
+							<option value="3">三年</option>
+							<option value="4">其他</option>
+						<select>
+						<input type="hidden" name="projectSchedule">
+						<br/>
+						<i th:text="${errorMap['projectSchedule']}"></i>
+					</td>
+				</tr>
+				<tr class="projectSchedule" style="display:none">
+					<td><span class="span_color">*</span>&nbsp;<span id="xmbh">项目时长</span></td>
+					<td>
+						<input type="number" id="projectScheduleNum" class="input-text" placeholder="请输入项目时长" th:value="${backletterApply.projectSchedule}">
+						<br/>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;保证金金额</td>
+					<td>
+						<input name="money" placeholder="请输入" type="number" class="input-text" th:value="${backletterApply.money}">
+						<br/>
+						<i th:text="${errorMap['money']}"></i>
+					</td>
+					<td><span class="span_color">*</span>&nbsp;保证金金额单位</td>
+					<td>
+						<select name="moneyUnit" id="moneyUnit" class="select-form">
+						<select>
+						<br/>
+						<i th:text="${errorMap['moneyUnit']}"></i>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="span_color">*</span>&nbsp;报价周期</td>
+					<td colspan="3">
+						<input type="hidden" name="startTime">
+						<input type="hidden" name="endTime">
+						<input name="offerPeriod" class="input-text" style="width: 3rem;" id="offerPeriod" type="text" placeholder="请选报价周期" readonly="readonly">
+						<br/>
+						<i th:text="${errorMap['startTime']}"></i>
+					</td>
+				</tr>
+		</table>
+		<div class="tiaokuan"></div>
+		<div class="btn-bottom">
+			<button class="quxiao" type="button" onclick="window.location.href = '/index.html'">取消</button>
+			<button id="btnSub" class="submit" onclick="onCheck()">确定报价</button>
+			<button class="btnSubClass" type="button" style="display: none;">确定报价</button>
+		</div>
+	</form>
+	</div>
+</div>
+<footer></footer>
+<div class="fixed"></div>
+</body>
+<script type="text/javascript" src="/static/js/url.js"></script>
+<script type="text/javascript" src="/static/js/htmlJs/otherGuarantee.js"></script>
+
+</html>

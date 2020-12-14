@@ -271,6 +271,20 @@
 					</td>
 				</tr>
 				<tr>
+					<td><span class="span_color">*</span>&nbsp;单位类型</td>
+					<td>
+						<select name="insuredType" class="select-form" style="width: 235px">
+							<option value="01" th:selected="${bidPolicy.insuredType=='01'}">企业</option>
+							<option value="02" th:selected="${bidPolicy.insuredType=='02'}">军队</option>
+							<option value="03" th:selected="${bidPolicy.insuredType=='03'}">外企</option>
+							<option value="03" th:selected="${bidPolicy.insuredType=='04'}">村委会</option>
+							<option value="03" th:selected="${bidPolicy.insuredType=='05'}">其他社会团体</option>
+						</select>
+						<br/>
+						<i th:text="${errorMap['insuredType']}"></i>
+					</td>
+				</tr>
+				<tr>
 					<td>地址</td>
 					<td colspan="3">
 						<input name="insuredAddress" class="input-text input-textdz" placeholder="请输入" th:value="${bidPolicy.insuredAddress}">
@@ -279,14 +293,26 @@
 					</td>
 				</tr>
 				<tr>
-					<th colspan="4">代理机构信息</th>
+					<th colspan="4">机构信息</th>
 				</tr>
 				<tr>
 					<td><span class="span_color">*</span>&nbsp;代理机构名称</td>
-					<td colspan="3">
+					<td>
 						<input name="agencyName" class="input-text" placeholder="请输入" th:value="${bidPolicy.agencyName}">
 						<br/>
 						<i th:text="${errorMap['agencyName']}"></i>
+					</td>
+					<td><span class="span_color">*</span>&nbsp;投保人单位类型</td>
+					<td>
+						<select name="appliType" class="select-form"style="width: 235px">
+							<option value="01" th:selected="${bidPolicy.appliType=='01'}">企业</option>
+							<option value="02" th:selected="${bidPolicy.appliType=='02'}">军队</option>
+							<option value="03" th:selected="${bidPolicy.appliType=='03'}">外企</option>
+							<option value="03" th:selected="${bidPolicy.appliType=='04'}">村委会</option>
+							<option value="03" th:selected="${bidPolicy.appliType=='05'}">其他社会团体</option>
+						</select>
+						<br/>
+						<i th:text="${errorMap['appliType']}"></i>
 					</td>
 				</tr>
 				<tr>
