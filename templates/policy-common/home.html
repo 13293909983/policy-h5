@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+		<meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
+		<meta name="author" content="PIXINVENT">
+		<title></title>
+		<link rel="stylesheet" href="/static/policy-common/css/style.css" />
+	</head>
+	
+	<body>
+		<div class="middle-wrap visual-region">
+			<div class="middle-content">
+				<div class="order-wrap">
+					<button class="left-button" onclick="goBack()">返回</button>
+					<h1>电子保险保函在线验证</h1>
+					<p class="home-ptxt">
+						<a class="active" href="#">投保号查询</a>
+						<a href="#">文档扫描查询</a>
+					</p>
+					<div class="home-input-box active">
+						<form action="/policy/common/home.html" method="GET" id="searchForm">
+							<div class="order-search">
+								<button onclick="searchValidate()">查询</button>
+								<input type="text" name="policyNo" placeholder="保单号/投保编号" th:value="${policyNo}"/>
+							</div>
+						</form>
+					</div>
+					<div class="home-input-box">
+						<form action="/policy/common/verification.html" method="post" id="searchPdf" enctype="multipart/form-data">
+							<div class="order-search">
+								<button type="button" onclick="searchPdf()">查询</button>
+								<input type="text" id="policyPdf" placeholder="请上传pdf" style="background: #efefef;"/>
+								<div class="fileinput-button">
+									<input type="file" id="pdfVerification" name="pdfVerification" accept="*.pdf">
+								</div>
+								<input type="hidden" th:value="${fileName}" id="fileName">
+							</div>
+						</form>
+					</div>
+					<div class="home-content">
+						<input type="hidden" id="bidPolicy" th:value="${bidPolicy}">
+						<!--未开标-->
+						<div class="home-contentimg" th:if="${bidPolicy!=null && bidPolicy.insuredName==null}">
+							<img th:src="${bidPolicy.previewUrl}"/>
+						</div>
+						<!--已开标-->
+						<div th:if="${bidPolicy!=null && bidPolicy.insuredName!=null && fileName==null}">
+							<div class="details-left">
+								<img th:src="${bidPolicy.previewUrl}"/>
+							</div>
+							<div class="details-list" >
+								<table width="100%" class="home-table">
+									<tr>
+										<th>被保险人名称：</th>
+										<td th:text="${bidPolicy.insuredName}"></td>									
+									</tr>
+									<tr>
+										<th>项目名称 ：</th>
+										<td th:text="${bidPolicy.certificateDepart}"></td>									
+									</tr>
+									<tr>
+										<th>起保时间 ：</th>
+										<td th:text="${#dates.format(bidPolicy.startDate,'yyyy-MM-dd')}"></td>									
+									</tr>
+	
+									<tr>
+										<th>保费金额/元 ：</th>
+										<td th:text="${bidPolicy.sumPremium}"></td>									
+									</tr>
+								</table>
+								<div class="home-thumbnail">
+									<img th:src="${bidPolicy.previewUrl}" />
+								</div>
+								<div class="details-btn">								
+									<button onclick="refresh()">返回</button>
+								</div>
+							</div>
+						</div>
+						<!--保单不存在-->
+						<div class="home-no" th:if="${message!=null}">
+							<h1 th:text="${message}"></h1>
+						</div>
+						<div class="home-file" th:if="${fileName!=null && bidPolicy!=null}">
+						<input type="hidden"  th:value="${bidPolicy.platformCode}" id="platformCode"/>
+							<h3>该保函于<span th:text="${#dates.format(bidPolicy.saveTimes,'yyyy-MM-dd')}"></span>日<br />
+							由
+							<span th:if="${bidPolicy.insuranceCompany=='PICC'}">中国人民财产保险股份有限公司</span>
+							<span th:if="${bidPolicy.insuranceCompany=='CPIC'}">中国太平洋财产保险股份有限公司</span>
+							<span th:if="${bidPolicy.insuranceCompany=='CIC'}">中华联合财产保险股份有限公司</span>
+							<span th:if="${bidPolicy.insuranceCompany=='CCIC'}">中国大地财产保险股份有限公司</span>承保<br />
+							此保函真实有效</h3>
+							<table width="100%" class="home-table">
+								<tr>
+									<th>被保险人名称：</th>
+									<td th:text="${bidPolicy.insuredName}"></td>									
+								</tr>
+								<tr>
+									<th>投保人名称：</th>
+									<td th:text="${bidPolicy.appliName}"></td>									
+								</tr>
+								<tr>
+									<th>项目名称 ：</th>
+									<td th:text="${bidPolicy.certificateDepart}"></td>									
+								</tr>
+								<tr>
+									<th>起保时间 ：</th>
+									<td th:text="${#dates.format(bidPolicy.startDate,'yyyy-MM-dd')}"></td>									
+								</tr>
+								<tr>
+									<th>保证金金额/元 ：</th>
+									<td th:text="${bidPolicy.sumAmount}"></td>									
+								</tr>
+								<tr>
+									<th>保费金额/元 ：</th>
+									<td th:text="${bidPolicy.sumPremium}"></td>									
+								</tr>
+								<tr>
+									<th>交易平台：</th>
+									<td id="platformName"></td>									
+								</tr>
+							</table>
+						</div>
+					</div>
+					<p class="home-ptxt other" style="font-weight: normal; font-size: 14px;">
+						<a>在线验签</a><span>｜</span>
+						<a>实时反馈</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="/static/policy-common/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/static/policy-common/js/layer/2.4/layer.js"></script>
+	<script type="text/javascript" src="/static/policy-common/js/common.js"></script>
+	<script type="text/javascript" src="/static/policy-common/js/home.js"></script>
+	<script type="text/javascript" th:inline="javascript">
+		$(function(){
+			var bidPolicyJson = [[${bidPolicy}]];
+			var fileName=[[${fileName}]];
+			var message=[[${message}]];
+			if((bidPolicyJson!=null && bidPolicyJson.policyNo!=null) || fileName!=null||message!=null){
+				$(".home-content").show();
+				$(".other").hide();
+				setTimeout(function () { setIframe(); }, 100);
+			}else{
+				$(".other").show();
+				setIframe();
+			}
+		})
+	</script>
+</html>

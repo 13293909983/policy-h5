@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+		<meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
+		<meta name="author" content="PIXINVENT">
+		<title></title>
+		<link rel="stylesheet" href="/static/policy-common/css/style.css" />
+	</head>
+	<body>
+		<div class="middle-wrap visual-region">
+			<div class="middle-content">
+				<div class="register-wrap">
+					<h6>已有账号，<a onclick="showLogin()">立即登录</a></h6>
+					<div class="content-list">
+						<h2>账号注册</h2>
+						<form enctype="multipart/form-data" onsubmit="return checkForm()" action="/policy/common/doRegister" method="post" >
+							<ul class="input-list">
+								<li th:classappend="${errorMap['organ.organName']!=null?'active':''}">
+									<span><strong>*</strong>企业名称：</span>
+									<input th:placeholder="${errorMap['organ.organName']!=null?errorMap['organ.organName']:'请输入企业名称'}" name="organ.organName" type="text" class="input-long" th:value="${account.organ.organName}">
+								</li>
+								<li th:classappend="${errorMap['organ.socialCreditCode']!=null?'active':''}">
+									<span><strong>*</strong>统一信用代码：</span>
+									<input th:placeholder="${errorMap['organ.socialCreditCode']!=null?errorMap['organ.socialCreditCode']:'请输入统一信用代码'}" name="organ.socialCreditCode" type="text" class="input-long"  th:value="${account.organ.socialCreditCode}">
+								</li>
+								<li th:classappend="${errorMap['username']!=null?'active':''}">
+									<span><strong>*</strong>用户名/登录名：</span>
+									<input th:placeholder="${errorMap['username']!=null?errorMap['username']:'请输入用户名/登录名'}" name="username" type="text" class="input-long" th:value="${errorMap['username']!=null?'':account.username}">
+								</li>
+								<li th:classappend="${errorMap['mobile']!=null?'active':''}">
+									<span><strong>*</strong>手机号：</span>
+									<input maxlength="11" th:placeholder="${errorMap['mobile']!=null?errorMap['mobile']:'请输入手机号'}" name="mobile" type="text" class="input-long" th:value="${errorMap['mobile']!=null?'':account.mobile}">
+								</li>
+								<li th:classappend="${errorMap['email']!=null?'active':''}">
+									<span><strong>*</strong>邮箱：</span>
+									<input th:placeholder="${errorMap['email']!=null?errorMap['email']:'请输入邮箱'}" name="email" type="text" class="input-long" th:value="${errorMap['email']!=null?'':account.email}">
+								</li>
+								<li th:classappend="${errorMap['password']!=null?'active':''}">
+									<span><strong>*</strong>密码：</span>
+									<input style="font-size: 14px;" th:placeholder="${errorMap['email']!=null?errorMap['email']:'请输入密码（不少于8个字符）'}" maxlength="20" type="password" name="password" class="input-long"  th:value="${account.password}">
+								</li>
+								<li>
+									<span><strong>*</strong>确认密码：</span>
+									<input style="font-size: 14px;" placeholder="请再次输入密码" type="password" name="repeatPassword" class="input-long" th:value="${account.password}" >
+								</li>
+								<li th:classappend="${errorMap['captcha']!=null?'active':''}">
+									<span><strong>*</strong>图形验证码：</span>
+									<input th:placeholder="${errorMap['email']!=null?errorMap['captcha']:'请输入图形验证码'}" type="text" name="captcha" class="input-long" value="" style="width: 400px">
+									<img src="/policy/common/captcha.jpg" onclick="this.src='/policy/common/captcha.jpg?t='+new Date().getTime()" height="42px" style="cursor: pointer;"/>
+								</li>
+								<li>
+									<span><strong>*</strong>上传证件：</span>
+									<div>
+										<font>注：必填，所传证件必须都加盖公章，图片格式支持：jpg,jpeg,png,大小不能超过2M</font>
+									</div>
+								</li>
+								<div class="upload-box">
+									<div class="upload-boxone">
+										<div class="upload-border">
+											<div class="preview" style="height: 100%; overflow: hidden;">
+												<img src="/static/policy-common/images/upload.png" class="img-responsive" style="width: 100%;height: 100%;" alt=""> 
+											</div>
+											<input type="file" style="display: none;" class="user-file" name="businessLicence" id="businessLicence"/>
+										</div>
+										<p>营业执照副本复印件</p>
+										<span class="error-msg" th:if="${errorMap['businessLicence']!=null}">请上传执照副本复印件</span>
+									</div>
+									<div class="upload-boxone">
+										<div class="upload-border">
+											<div class="preview" style="height: 100%; overflow: hidden;">
+												<img src="/static/policy-common/images/upload.png" class="img-responsive" style="width: 100%;height: 100%;" alt=""> 
+											</div>
+											<input type="file" style="display: none;" class="user-file" name="certificate" id="certificate"/>
+										</div>
+										<p>身份证正面复印件</p>
+										<span class="error-msg" th:if="${errorMap['certificate']!=null}">请上传身份证正面复印件</span>
+									</div>
+									<div class="upload-boxone">
+										<div class="upload-border">
+											<div class="preview" style="height: 100%; overflow: hidden;">
+												<img src="/static/policy-common/images/upload.png" class="img-responsive" style="width: 100%;height: 100%;" alt=""> 
+											</div>
+											<input type="file" style="display: none;" class="user-file" name="identityCard" id="identityCard"/>
+										</div>
+										<p>身份证反面复印件</p>
+										<span class="error-msg" th:if="${errorMap['identityCard']!=null}">请上传身份证反面复印件</span>
+									</div>
+								</div>
+								<div style="text-align: center;color: red;" th:text="${errorMap['message']}"></div>
+							</ul>
+							<div class="btn-wrap">
+								<p>
+									<input type="checkbox" name="agree">我已同意并阅读
+									<a class="agree-show"></a>
+								</p>
+								<div class="btn-list">
+									<button type="submit">注册</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="agree-wrap" style="display: none;">
+			<div class="agree-body">
+				<div class="agree-top">
+					<h2>
+						<span id="agreeName"></span>
+						<button class="btn_closes agree-close">x</button>
+					</h2>
+				</div>
+				<div class="agree-content">
+				</div>
+				<div class="agree-bottom">
+					<button type="button" class="btn btn_op">不同意</button>
+					<button type="button" class="btn btn_op">同意</button>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="/static/policy-common/js/jquery-1.9.1.min.js"></script>
+	<script src="/static/policy-common/js/layer/2.4/layer.js"></script>
+	<script src="/static/policy-common/js/common.js"></script>
+	<script src="/static/policy-common/js/validate.js"></script>
+	<script src="/static/policy-common/js/register.js"></script>
+</html>

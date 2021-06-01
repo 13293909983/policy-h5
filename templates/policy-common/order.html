@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+		<meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
+		<meta name="author" content="PIXINVENT">
+		<title></title>
+		<link rel="stylesheet" href="/static/policy-common/css/style.css" />
+	</head>
+
+	<body>
+		<div class="middle-wrap visual-region">
+			<div class="middle-content">
+				<div class="order-wrap">
+					<button class="left-button" onclick="goBack()">返回</button>
+					<h6 class="top-right" style="display: inline;float: right;">
+						<a onclick="showRevise()">修改信息</a>
+						<span>│</span>
+						<a onclick="loginOut()">退出</a>
+					</h6>
+					<h1>电子保险保函在线查询</h1>
+					<div class="order-search">
+						<button onclick="selectOrder()">查询</button>
+						<input type="text" placeholder="输入项目名称" id="query" th:value="${datagrid.query!='null'?datagrid.query:''}"/>
+					</div>
+					<table  class="order-tb">
+						<thead>
+							<tr>
+								<th style="width: 5%">序号</th>
+								<th style="width: 17%">订单编号</th>
+								<th style="width: 10%">保险公司</th>
+								<th style="width: 21%">项目名称</th>
+								<th style="width: 10%">交易平台</th>
+								<th style="width: 10%">保费（元）</th>
+								<th style="width: 9%">申请时间</th>
+								<th style="width: 10%">是否支付</th>
+								<th style="width: 8%">订单详情</th>		
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="bidPolicy,bidPolicyStat:${datagrid.rows}">
+								<td th:text="${(bidPolicyStat.index+1)+(datagrid.page)*datagrid.pageSize}"></td>
+								<td th:text="${bidPolicy.orderId}"></td>
+								<td th:switch="${bidPolicy.insuranceCompany}">
+									<span th:case="PICC">中国人民保险</span>
+									<span th:case="CPIC">太平洋保险</span>
+									<span th:case="CIC">中华保险</span>
+									<span th:case="CCIC">中国大地保险</span>
+									<span th:case="*">其他</span>
+								</td>
+								<td th:text="${bidPolicy.certificateDepart}"></td>
+								<td class="platformName" th:text="${bidPolicy.platformName}" th:title="${bidPolicy.platformName}"></td>
+								<td th:text="${bidPolicy.sumPremium}"></td>
+								<td th:text="${#objects.nullSafe(#dates.format(bidPolicy.saveTimes,'yyyy-MM-dd HH:mm:ss'),'-')}"></td>
+								<td th:switch="${bidPolicy.orderStatus}" style="width:110px;">
+									<a th:case="3" target="_blank" class="bg-success" th:href="${bidPolicy.payUrl}">去支付</a>
+									<span th:case="5" style="background-color: transparent;color: #000000;">已支付</span>
+									<span th:case="*" style="background-color: transparent;color: #000000;">审核中</span>
+								</td>
+								<td>
+									<a th:href="${'/policy/common/orderDetails/'+bidPolicy.orderId+'/'+datagrid.page+'/'+datagrid.query}" class="bg-warning">查看</a>
+								</td>								
+							</tr>
+						</tbody>
+					</table>
+					<div class="paging_policy" style="height:100px;">
+						<div>
+							<ul class="pagination" th:if=" ${datagrid.total/datagrid.pageSize} gt '0'">
+								<li>
+									<a th:href="${'/policy/common/order.html?page=0'+'&pageSize='+datagrid.pageSize+'&query='+datagrid.query}">&laquo;</a>
+								</li>
+								<li th:each="i:${#numbers.sequence(datagrid.page-5,datagrid.page)}" th:class="${datagrid.page==i?'active':''}" th:if="${i>=0}">
+									<a th:href="${'/policy/common/order.html?page='+i+'&pageSize='+datagrid.pageSize+'&query='+datagrid.query}" th:text="${i+1}"></a>
+								</li>
+								<li th:each="i:${#numbers.sequence(datagrid.page+1,datagrid.page+5)}" th:class="${datagrid.page==i?'active':''}" th:if="${i<=(datagrid.total%datagrid.pageSize==0?(datagrid.total/datagrid.pageSize-1):(datagrid.total/datagrid.pageSize))}">
+									<a th:href="${'/policy/common/order.html?page='+i+'&pageSize='+datagrid.pageSize+'&query='+datagrid.query}" th:text="${i+1}"></a>
+								</li>
+								<li>
+									<a th:href="${'/policy/common/order.html?page='+(datagrid.total%datagrid.pageSize==0?datagrid.total/datagrid.pageSize-1:datagrid.total/datagrid.pageSize)+'&pageSize='+datagrid.pageSize+'&query='+datagrid.query}">&raquo;</a>
+								</li>
+							</ul>
+							<p th:if="${datagrid.total} gt 0">共<span th:text="${datagrid.totalPage}"></span>页，<span th:text="${datagrid.total}"></span>条记录</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<input type="hidden" id="page" th:value="${datagrid.page}">
+		</div>
+	</body>
+	<script type="text/javascript" src="/static/policy-common/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/static/policy-common/js/common.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			setIframe();
+			window.parent.postMessage({url:"/policy/common/order.html?query="+$('#query').val()+"&page="+$('#page').val()},serviceUrl);
+		})
+		function selectOrder(){
+			location.href="/policy/common/order.html?query="+$('#query').val();
+		}
+		function goBack(){
+			window.parent.postMessage({url:"/policy/common/index.html"},serviceUrl);
+		}
+		function showRevise(){
+			location.href="/policy/common/revise.html?query="+$('#query').val()+"&page="+$("#page").val()+"&requestUrl=/policy/common/order.html";
+		}
+	</script>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+		<meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
+		<meta name="author" content="PIXINVENT">
+		<title></title>
+		<link rel="stylesheet" href="/static/estsjksh/css/index.css" />
+		<link rel="stylesheet" href="/static/policy-common/css/style.css" />
+	</head>
+
+	<body>
+		<div class="middle-wrap visual-region">
+			<div class="middle-content">
+				<div class="register-wrap">
+					<div class="echarts-main">
+						<div class="echarts-head">
+							<div class="echarts-headleft">
+								<button onclick="goBack()">返回</button>
+								<h1>电子保险保函数据监控</h1>
+							</div>
+							<div class="echarts-headright">
+								<h2>当前时间：<span id="showTime"></span></h2>
+							</div>
+						</div>
+						<div class="echarts-con">
+							<div class="echarts-conlist">
+								<div class="echarts-list echarts-listleft">
+									<div class="" id="china-map" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;"></div>
+								</div>
+								<div class="echarts-list  echarts-listleft">
+									<div class="echarts-listtit">
+										<h2>最新动态</h2>
+									</div>
+									<div class="echarts-news" id="orderList">
+									</div>
+								</div>
+
+							</div>
+							<div class="echarts-conlist">
+								<div class="echarts-list echarts-listright">
+									<div class="echarts-listtit">
+										<h2>累计成交金额</h2>
+									</div>
+									<h1 id="turnover"></h1>
+								</div>
+								<div class="echarts-list echarts-listright">
+									<div class="echarts-listtit">
+										<h2>保函类型分析</h2>
+									</div>
+									<div id="type-chart" style="width: 100%;height: 306px;">
+
+									</div>
+								</div>
+								<div class="echarts-list echarts-listright">
+									<div class="echarts-listtit">
+										<h2>地域分析</h2></div>
+									<div id="area-chart" style="width: 100%;height: 300px;">
+
+									</div>
+								</div>
+
+							</div>
+							<div class="echarts-conlist">
+								<div class="echarts-list echarts-listright">
+									<div class="echarts-listtit">
+										<h2>年订单统计</h2></div>
+									<div>
+										<h4 id="cumulativeNum"></h4>
+										<h4 id="cumulativePay"></h4>
+										<h4 id="cumulativeRatio"></h4>
+									</div>
+								</div>
+								<div class="echarts-list echarts-listright">
+									<div class="echarts-listtit">
+										<h2>年度投保统计</h2>
+									</div>
+									<div id="year-chart" style="width: 100%;height: 306px;">
+
+									</div>
+								</div>
+								<div class="echarts-list echarts-listright">
+									<div class="echarts-listtit">
+										<h2>交易金额</h2>
+									</div>
+									<div class="echarts-news" id="projectList"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="/static/policy-common/js/jquery-1.9.1.min.js"></script>
+	<script src="/static/policy-common/js/echarts.min.js"></script>
+	<script src="/static/estsjksh/js/shanxi.js"></script>
+	<script src="/static/policy-common/js/common.js"></script>
+	<script src="/static/policy-common/js/statistics.js"></script>
+</html>

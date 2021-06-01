@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+		<meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
+		<meta name="author" content="PIXINVENT">
+		<title></title>
+		<link rel="stylesheet" href="/static/policy-common/css/style.css" />
+	</head>
+
+	<body>
+		<div class="middle-wrap visual-region">
+			<div class="middle-content">
+				<div class="order-wrap">
+					<h6 class="top-right">
+						<a href="/policy/common/revise.html">修改信息</a>
+						<span>│</span>
+						<a onclick="loginOut()">退出</a>
+					</h6>
+					<h1>电子保险保函详情</h1>
+					<div class="order-details">		
+						<input type="hidden" id="hiddenRegionalism" th:value="${bidPolicy.regionalism}">	
+						<div class="details-left" th:if="${isPlay}">
+							<img th:src="${bidPolicy.previewUrl}"/>
+						</div>				
+						<div th:classappend="${isPlay?'details-list':'details-lists'}">
+							<table width="100%"  class="home-table">
+								<tr>
+									<th>订单编号 ：</th>
+									<td th:text="${bidPolicy.orderId}"></td>
+								</tr>
+								<tr>
+									<th th:text="${isPlay?'保单号：':'投保单号：'}"></th>
+									<td th:text="${isPlay?bidPolicy.policyNo:bidPolicy.proposalNo}"></td>									
+								</tr>
+								<tr>
+									<th>被保险人名称：</th>
+									<td th:text="${bidPolicy.insuredName}"></td>									
+								</tr>
+								<tr>
+									<th>项目名称 ：</th>
+									<td th:text="${bidPolicy.certificateDepart}"></td>									
+								</tr>
+								<tr>
+									<th>项目（文件）编号 ：</th>
+									<td th:text="${bidPolicy.certificateNo}"></td>									
+								</tr>
+								<tr>
+									<th>交易平台：</th>
+									<td th:text="${#objects.nullSafe(bidPolicy.platformName,'-')}"></td>									
+								</tr>
+								<tr>
+									<th>开标时间 ：</th>
+									<td th:text="${#dates.format(bidPolicy.retroactiveStart,'yyyy-MM-dd')}"></td>									
+								</tr>
+								<tr>
+									<th>项目所在区域 ：</th>
+									<td id="regionalism"></td>	
+								</tr>
+								<tr>
+									<th>投标终止日期：</th>
+									<td th:text="${#dates.format(bidPolicy.retroactiveEnd,'yyyy-MM-dd')}"></td>									
+								</tr>
+								<tr>
+									<th>保证金金额/元：</th>
+									<td th:text="${bidPolicy.electricPower}"></td>									
+								</tr>
+								<tr>
+									<th>保费金额/元 ：</th>
+									<td th:text="${bidPolicy.sumPremium}"></td>									
+								</tr>
+								<tr>
+									<th>起保日期 ：</th>
+									<td th:text="${#dates.format(bidPolicy.startDate,'yyyy-MM-dd')}"></td>									
+								</tr>
+								<tr>
+									<th>终保日期：</th>
+									<td th:text="${#dates.format(bidPolicy.endDate,'yyyy-MM-dd')}"></td>									
+								</tr>
+							</table>
+							<div class="details-btn">
+								<a th:href="${bidPolicy.downloadUrl+'?attname=baohan.pdf'}" target="_blank" th:if="${isPlay}"><button>下载保函</button></a>
+								<a th:href="${bidPolicy.payUrl}"  target="_blank" th:if="${!isPlay}"><button>去支付</button></a>
+								<a th:href="${'/policy/common/order.html?page='+page+'&query='+query}"><button>返回</button></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="/static/policy-common/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/static/policy-common/js/common.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			getBusinesssource();
+		})
+		//获取区域
+		function getBusinesssource(){
+			var regionalism=$("#hiddenRegionalism").val();
+			if(regionalism!=null && regionalism!=""){
+				$.ajax({
+			       type:"get",
+			       url: manageUrl+"/homeController/getNameStrByCode",
+			       data: {code:regionalism},
+			       dataType:"json",
+			       success:function(dataObj){
+			        	if(dataObj.code==200){
+			        		$("#regionalism").text(dataObj.data);
+			        		setIframe();
+			        	}
+			       }
+				})
+			}
+		}
+	</script>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>保函验证</title>
+<style type="text/css">
+	h5 {
+		text-align: left;
+		font-size:36px; 
+	}
+	
+	.no-img p {
+		font-size: 46px;
+	}
+	h2 {
+		text-align: center;
+		margin: 0 auto 59px;
+		border-bottom: 4px solid #808080;
+		padding: 40px;
+		font-size: 46px;
+	}
+	.no-img {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		margin-top: -200px;
+		margin-left: -200px;
+		text-align: center;
+	}
+	div {
+		text-align: center;
+	}
+	
+	.yes-img {
+		margin: 10px auto;
+	}
+	.yes-message p {
+		font-size: 36px;
+		font-weight: bold;
+		line-height: 3em;
+		border-bottom: 1px solid #F3F3F3;
+		text-align: left;
+		padding: 10px 50px;
+	}
+	
+	.yes-message p span {
+		float: right;
+		font-weight: normal;
+	}
+</style>
+</head>
+<body>
+	<div>
+		<div th:if="${policy == null || policy == ''}">
+			<h5>查询结果</h5>
+			<div class="no-img">
+				<img width="400px" src="/static/images/no.png" />
+				<p>保单不存在</p>
+			</div>
+		</div>
+		
+		<div th:if="${policy != null && policy != ''}" class="yes-message">
+			<h5>查询结果</h5>
+			<div class="yes-img">
+				<img width="200px" src="/static/images/banh.png" />
+			</div>
+			<h2>投标保函</h2>
+			<p>投保单位：<span th:text="${policy.appliName}"></span></p>
+			<p>投保时间：<span th:text="${#dates.format(policy.saveTimes, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+			<p>保费金额：<span th:text="${policy.sumAmount}"></span></p>
+			<p>投标项目：<span th:text="${policy.certificateDepart}"></span></p>
+			<p>被保险人名称：<span th:text="${policy.insuredName}"></span></p>
+			<p>承保单位：
+				<span th:switch="${policy.insuranceCompany}">
+					<span th:case="CIC">中华保险</span>
+					<span th:case="CCIC">中国大地保险</span>
+					<span th:case="CPIC">太平洋保险</span>
+					<span th:case="*">中国人民保险</span>
+				</span>
+			</p>
+		</div>
+	</div>
+</body>
+</html>

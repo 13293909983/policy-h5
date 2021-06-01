@@ -223,8 +223,8 @@
 			<div id="selectContainerQcOhiqga" class="previewContainer" style="width: 10rem; height: 200px; position: absolute; top: 39px; left: 0px; z-index: 999; overflow: auto; display: none;">
 				<img src="/static/images/Insurance2.jpg" alt="太平洋保险" rel="1" val="CPIC" data-code="1522">
 				<img src="/static/images/Insurance1.jpg" alt="中国人民保险" rel="0" val="PICC" data-code="1521">
-				<img src="/static/images/Insurance3.jpg" alt="中华保险" rel="2" val="CIC" data-code="1523">
-				<img src="/static/images/Insurance4.jpg" alt="中国大地保险" rel="3" val="CCIC" data-code="1524">
+				<img src="/static/images/Insurance3.jpg" alt="中华保险" rel="2" val="CIC" data-code="1524">
+				<img src="/static/images/Insurance4.jpg" alt="中国大地保险" rel="3" val="CCIC" data-code="1523">
 			</div>
 			<span>▼</span>
 		</div>
@@ -456,29 +456,6 @@
 						</div>
 					</td>
 				</tr>
-				<tr id="ccic-file-row" style="display: none">
-					<td><span class="span_color">*</span>&nbsp;上传文件</td>
-					<td colspan="3">
-						<div style="margin-left: 10px;float: left;margin-top: 17px;">
-							<div class="fileClass">
-								<img style="max-width: 100%;max-height: 100%;" src="/static/images/uploadFile.png" onclick="clickImgFile()"/>
-							</div>
-							<input id='imgFile' type='file' style="display: none" onchange="imageFileChange(this)"/>
-							<input id='imgFileValue' type="hidden" />
-							<div style="text-align: center;color: red;margin-top: 10px;">*&nbsp;&nbsp;请上传营业执照</div>
-						</div>
-						<div style="display: inline-block;margin-left: 60px;margin-top: 17px;">
-							<div class="fileClass">
-								<img style="max-width: 100%;max-height: 100%;" src="/static/images/uploadFile.png" onclick="clickPdfFile()"/>
-							</div>
-							<input id='pdfFile' type='file' style="display: none" onchange="pdfFileChange(this)"/>
-							<input id='pdfFileValue' type="hidden" />
-							<div class="fileText"></div>
-							<div style="color: red;width: 200px;margin-top: 10px;">*&nbsp;&nbsp;请上传pdf版的招标文件，文件大小最大为20M</div>
-						</div>
-						<i th:text="${errorMap['fileKey']}"></i>
-					</td>
-				</tr>
 				<tr>
 					<th colspan="4">发票信息<span class="span_color" id="invoice"></span></th>
 				</tr>
@@ -534,8 +511,8 @@
 			<ul>     
 				<li><a><div class="pay_gwc pay_gwcactivity" data-id="1"></div><img src="static/images/Insurance2.jpg" val="CPIC" alt="太平洋保险" data-code="1522"/></a></li>
 				<li><a><div class="pay_gwc" data-id="0"></div><img src="static/images/Insurance1.jpg" val="PICC" alt="中国人民保险" data-code="1521"/></a></li>
-				<li><a><div class="pay_gwc" data-id="2"></div><img src="static/images/Insurance3.jpg" val="CIC" alt="中华保险" data-code="1523"/></a></li>
-				<li><a><div class="pay_gwc" data-id="3"></div><img src="static/images/Insurance4.jpg" val="CCIC" alt="中国大地保险" data-code="1524"/></a></li>
+				<li><a><div class="pay_gwc" data-id="2"></div><img src="static/images/Insurance3.jpg" val="CIC" alt="中华保险" data-code="1524"/></a></li>
+				<li><a><div class="pay_gwc" data-id="3"></div><img src="static/images/Insurance4.jpg" val="CCIC" alt="中国大地保险" data-code="1523"/></a></li>
 			</ul>	
 			<!-- <div class="pay_close btn_open">
 			</div>-->
@@ -578,30 +555,6 @@ $(function(){
     		}
     	})
     }
-	//如果是大地的，显示大地的文件
-	 /*if(insuranceCompany=="CCIC"){
-    	$("#ccic-file-row").show();
-		$("#file-row").hide();
-		var fileKey=$(":input[name='fileKey']").val();
-		var result=fileKey.split(",");
-		for(var i=0;i<result.length;i++){
-		  $("#imgFileValue").val(result[0]);
-		  $("#pdfFileValue").val(result[1]);
-		}
-		var imageFile=$(":input[name='imageFile']").val();
-		var imageFileResult=imageFile.split(",");
-		for(var i=0;i<imageFileResult.length;i++){
-		  $("#imgFileValue").attr("data-url",imageFileResult[0]);
-		  $("#imgFileValue").prev().prev().attr("src", imageFileResult[0]);
-		  $("#pdfFileValue").attr("data-url",imageFileResult[1]);
-		  $("#pdfFileValue").next().text("已上传文件");
-		  $("#pdfFileValue").prev().prev().attr("src", "/static/images/a7.png");
-		}
-		
-	}else{
-		$("#file-row").show();
-		$("#ccic-file-row").hide();
-	}*/
 })
 $(".reg_show").click(function (){
     if($(".agree_wrap").css("display")=="none"){
@@ -634,14 +587,6 @@ $(".zhuyi_tk li").click(function(){
 	}else{
 		$("#invoice").text("");
 	}
-	//如果选择大地的，则上传文件上传营业执照和pdf
-	/*if(img.attr("val")=="CCIC"){
-		$("#ccic-file-row").show();
-		$("#file-row").hide();
-	}else{
-		$("#file-row").show();
-		$("#ccic-file-row").hide();
-	}*/
 })
 $(".visualSelect").click(function(){
 	$("#selectContainerQcOhiqga").show();
@@ -678,14 +623,10 @@ $("#selectContainerQcOhiqga img").click(function(){
 				$(".inviceMessage").find("input").css("cursor","");
 				$(".inviceMessage").find("input").parent().css("background-color","");
 			}
-			//如果选择大地的，则上传文件上传营业执照和pdf
-			console.log(img.attr("val"));
-			if(img.attr("val")=="CCIC"){
-				$("#ccic-file-row").show();
-				$("#file-row").hide();
-			}else{
-				$("#file-row").show();
-				$("#ccic-file-row").hide();
+			//修改保费金额
+			var electricPower=$(":input[name='electricPower']").val();
+			if(electricPower!=""){
+				changeSumPremiun(electricPower);
 			}
 			layer.close(layer.index);
 		})
@@ -693,7 +634,44 @@ $("#selectContainerQcOhiqga img").click(function(){
 		clickImg(img);
 	}
 })
-
+function changeSumPremiun(value){
+	 var electricPower = parseInt(value);
+     var sumPremium = 0;
+		var insuranceCompany=$("#insuranceCompany").val();
+		if(insuranceCompany=='CIC'||insuranceCompany=='CCIC'){
+			if (electricPower > 0 && electricPower <= 30000) {
+				sumPremium = 200;
+			} else if (electricPower > 30000 && electricPower <= 60000) {
+			sumPremium = 500;
+			}else if (electricPower > 60000 && electricPower <= 100000) {
+				sumPremium = 800;
+			}else if(electricPower > 100000 && electricPower <= 200000){
+				sumPremium = 1000;
+			} else if (electricPower <= 800000) {
+				sumPremium = electricPower * 0.005;
+				sumPremium=decimal(sumPremium,2);
+			}
+		}else{
+			//更新的保费
+			if (electricPower > 0 && electricPower <= 30000) {
+				sumPremium = 500;
+			} else if (electricPower > 30000 && electricPower <= 100000) {
+				sumPremium = 800;
+			}else if(electricPower > 100000 && electricPower <= 200000){
+				sumPremium = 1000;
+			} else if (electricPower <= 800000) {
+				sumPremium = electricPower * 0.005;
+				sumPremium=decimal(sumPremium,2);
+			}
+		}
+     $(":input[name='sumPremium']").val(sumPremium);
+     $(":input[name='sumPremium']").next().text("");
+     $(":input[name='sumPremium']").closest("td").removeClass("active");
+     var length=$(":input[name='sumPremium']").closest("tr").find(".error").length;
+ 	if(length==0){
+ 		$(":input[name='sumPremium']").closest("tr").removeAttr("style","")
+ 	}
+}
 function clickImg(obj){
 	$(".visualSelect").text(obj.attr("alt"));
 	$(".visualSelect").attr("data-id",obj.attr("rel"));

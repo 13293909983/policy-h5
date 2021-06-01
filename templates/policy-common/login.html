@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+		<meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
+		<meta name="author" content="PIXINVENT">
+		<title></title>
+		<link rel="stylesheet" href="/static/policy-common/css/style.css" />
+	</head>
+
+	<body>
+		<div class="middle-wrap visual-region">
+			<div class="middle-content">
+				<div class="register-wrap">
+					<h6>暂无账号，<a onclick="showRegister()">立即注册</a></h6>
+					<div class="content-list">
+						<div class="login-wrap">
+							<div class="login-form">
+								<div class="header-img">
+									<img src="/static/policy-common/images/user.png" alt="">
+								</div>
+								<form class="input-list" action="/policy/common/doLogin" method="POST" id="loginForm">
+									<div th:classappend="${nameError!=null&&nameError!=''?'active':''}">
+										<input type="text" name="userName" class="comm-text" placeholder="请输入用户名">
+									</div>
+									<div th:classappend="${passError!=null&&passError!=''?'active':''}">
+										<input type="password" name="password" class="comm-text" placeholder="请输入密码">
+									</div>
+									<div class="submit">
+										<input type="submit" value="登录">
+									</div>
+									<div style="text-align: center;color:red">
+										<span th:text="${message}"></span>	
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="/static/policy-common/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/static/policy-common/js/common.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			setIframe();
+			
+			$('.comm-text').bind('input propertychange', function() {
+		        var value = this.value;
+		        if(value!=null&&value!=""){
+		        	$(this).parent().removeClass("active");
+		        }
+		    })
+		})
+		document.onkeydown  = function(e){
+	        if(e.keyCode == 13){
+	            $('#loginForm').submit();
+	        }
+	    }
+		function showRegister(){
+			window.parent.postMessage({url:"/policy/common/register.html"},serviceUrl);
+		}
+	</script>
+</html>

@@ -92,7 +92,7 @@
 		<div class="noyz">
 			<p class="yz_boxptxt">
 				<a>投保编号查询</a>
-				<a>图片查询</a>
+				<a>文档扫描查询</a>
 			</p>
 			<div th:if="${base64Data==null}" class="yz_input_box">
 				<form action="validate.html" method="GET" id="searchForm">
@@ -170,6 +170,8 @@
 		}else{
 			$($(".yz_boxptxt").find("a")[0]).addClass("act");
 			$($(".yz_input_box")[0]).addClass("yz_input_boxatv");
+			$("#previewUrl").show();
+			$(".yanzheng-pdftit").hide();
 		}
 		//判断交易平台编码是否为空
 		var platformCode=$("#platformCode").val();

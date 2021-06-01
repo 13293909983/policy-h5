@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+		<meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
+		<meta name="author" content="PIXINVENT">
+		<title></title>
+		<link rel="stylesheet" href="/static/policy-common/css/style.css" />
+	</head>
+
+	<body>
+		<div class="middle-wrap visual-region">
+			<div class="middle-content">
+				<div class="register-wrap">
+					<h6 th:if="${session.LOGIN_USER!=null}">
+						<a href="/policy/common/revise.html">修改信息</a>
+						<span>│</span>
+						<a onclick="loginOut()">退出</a>
+					</h6>
+					<div class="content-list">
+						<div class="index-wrap">
+							<h3><span></span>保函产品<span></span></h3>
+							<div class="product-list">
+								<ul>
+									<li>
+										<div class="product-body">
+											<div class="product-head">
+												<div></div>
+											</div>
+											<div class="product-content">
+												<h1>投标保函</h1>
+												<button onclick="showProduct()">立即投保</button>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<h3><span></span>保函查询验证<span></span></h3>
+							<div class="product-list">
+								<ul>
+									<li>
+										<div class="link-body link-first">
+											<a onclick="showOrder()"><div>保单查询</div></a>
+										</div>
+									</li>
+									<li>
+										<div class="link-body">
+											<a onclick="showHome()"><div>保单验证</div></a>
+										</div>
+									</li>
+									<li>
+										<div class="link-body link-last">
+											<a onclick="showStatistics()"><div>数据分析</div></a>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="/static/policy-common/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/static/policy-common/js/common.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			setIframe();
+		})
+		function showProduct(){
+			window.parent.postMessage({url:"/policy/common/product.html"},serviceUrl);
+		}
+		function showOrder(){
+			window.parent.postMessage({url:"/policy/common/order.html"},serviceUrl);
+		}
+		//保单验证
+		function showHome(){
+			window.parent.postMessage({url:"/policy/common/home.html"},serviceUrl);
+		}
+		function showStatistics(){
+			window.parent.postMessage({url:"/policy/common/statistics.html"},serviceUrl);
+		}
+	</script>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+		<meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
+		<meta name="author" content="PIXINVENT">
+		<title></title>
+		<link rel="stylesheet" href="/static/policy-common/css/style.css" />
+	</head>
+	<body>
+		<div class="middle-wrap visual-region">
+			<div class="middle-content">
+				<div class="register-wrap">
+					<h6 class="top-right" >
+						<a onclick="goBack()">返回</a>
+						<span>│</span>
+						<a href="/policy/common/loginOut">退出</a>
+					</h6>
+					<div class="content-list">
+						<h2>修改信息</h2>
+						<form enctype="multipart/form-data" onsubmit="return checkForm()" action="/policy/common/doRevise" method="post" >
+							<input type="hidden" id="requestUrl" name="requestUrl" th:value="${requestUrl}">
+							<input type="hidden" id="page" name="page" th:value="${page}">
+							<input type="hidden" id="query" name="query" th:value="${query}">
+							<ul class="input-list">
+								<li>
+									<span><strong>*</strong>企业名称：</span>
+									<input placeholder="企业名称" name="organ.organName" class="bg-grey" th:value="${userData.organ.organName}" disabled="disabled">
+								</li>
+	
+								<li>
+									<span><strong>*</strong>统一信用代码：</span>
+									<input placeholder="统一信用代码" name="organ.socialCreditCode" class="bg-grey" th:value="${userData.organ.socialCreditCode}" disabled="disabled">
+								</li>
+	
+								<li>
+									<span><strong>*</strong>用户名/登录名：</span>
+									<input placeholder="用户名/登录名" name="username" class="bg-grey" th:value="${userData.username}" disabled="disabled">
+								</li>
+	
+								<li>
+									<span><strong>*</strong>手机号：</span>
+									<input placeholder="请输入手机号" name="mobile" class="input-long" th:value="${userData.mobile}">
+								</li>
+	
+								<li>
+									<span><strong>*</strong>邮箱：</span>
+									<input placeholder="请输入邮箱" name="email" class="input-long" th:value="${userData.email}">
+								</li>
+								<li>
+									<span>上传证件：</span>
+									<div>
+										<font> 注：所传证件必须都加盖公章，图片格式支持：jpg,jpeg,png,大小不能超过2M</font>
+									</div>
+								</li>
+								<div class="upload-box">
+									<div class="upload-boxone">
+										<div class="upload-border">
+											<div class="preview" style="height: 100%; overflow: hidden;">
+												<img th:src="${userData.organ.businessLicenceImg}" class="img-responsive" style="width: 100%;height: 100%;" alt=""> 
+											</div>
+											<input type="file" style="display: none;" class="user-file" name="businessLicence" id="businessLicence"/>
+										</div>
+										<p>营业执照副本复印件</p>
+									</div>
+									<div class="upload-boxone">
+										<div class="upload-border">
+											<div class="preview" style="height: 100%; overflow: hidden;">
+												<img th:src="${userData.certificateImg}" class="img-responsive" style="width: 100%;height: 100%;" alt=""> 
+											</div>
+											<input type="file" style="display: none;" class="user-file" name="certificate" id="certificate"/>
+										</div>
+										<p>身份证正面复印件</p>
+									</div>
+									<div class="upload-boxone">
+										<div class="upload-border">
+											<div class="preview" style="height: 100%; overflow: hidden;">
+												<img th:src="${userData.operator.identityCardImg}" class="img-responsive" style="width: 100%;height: 100%;" alt=""> 
+											</div>
+											<input type="file" style="display: none;" class="user-file" name="identityCard" id="identityCard"/>
+										</div>
+										<p>身份证反面复印件</p>
+									</div>
+								</div>
+							</ul>
+							<div class="btn-wrap">
+								<div class="btn-list">
+									<button type="submit">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="/static/policy-common/js/jquery-1.9.1.min.js"></script>
+	<script src="/static/policy-common/js/common.js"></script>
+	<script src="/static/policy-common/js/validate.js"></script>
+	<script src="/static/policy-common/js/revise.js"></script>
+</html>
