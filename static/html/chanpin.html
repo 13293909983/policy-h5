@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>电子保函服务平台</title>
+		<link rel="stylesheet" href="/static/css/common.css" />
+		<link rel="stylesheet" href="/static/css/index.css" />
+		<link rel="stylesheet" href="/static/css/chanpin.css" />
+		<script src="/static/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+		<script src="/static/js/index.js" type="text/javascript"></script>
+	</head>
+
+	<body>
+		<header></header>
+		<div class="body_mian">
+			<div class="title_wrap">
+				<div class="title_nav">
+
+					<h3>产品介绍</h3><img src="/static/images/xz.png" />
+				</div>
+				<div class="product_title">
+					<ul>						
+						<li class="active" data-code="1522">
+							<div class="product_choice active"></div>
+							<img src="/static/images/Insurance2.jpg" />
+						</li>
+						<li data-code="1524">
+							<div class="product_choice"></div>
+							<img src="/static/images/Insurance3.jpg" />
+						</li>
+						<li data-code="1523">
+							<div class="product_choice"></div>
+							<img src="/static/images/Insurance4.jpg" />
+						</li>
+						<li data-code="1521">
+							<div class="product_choice"></div>
+							<img src="/static/images/Insurance1.jpg" />
+						</li>
+					</ul>
+				</div>
+				<div class="product_cpleft">
+					<div class="product_cplefttit">
+						<p>投标保函</p>
+					</div>
+					<div class="product_cpleftimg">
+						<img src="/static/images/cptb.png" />
+					</div>
+					<p>投标保证保险是在招投标活动中，投标 人购买的保险。该保险将招标人作为受益人， 当投标人在投标有效期前撤销、修改投标文 件，或者中标后因自身原因不与招标人签订 合同、不按照招标文件缴纳履约保证金，保 险公司将按照保险合同约定，对招标人进行 经济赔偿。
+					</p>
+					<div class="product_cpleftbut">
+						<button class="product_cpleftbuts" onclick="policy()">立即投保</button>
+					</div>
+				</div>
+				<div class="product_cpright">
+				</div>
+			</div>
+		</div>
+		<footer></footer>
+		<div class="fixed"></div>
+	</body>
+	<script src="/static/js/bootstrap.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/static/js/url.js"></script>
+	<script>
+	$(function(){
+		clause('1522');
+	})
+		//点击获取保险公司详情
+		$(".product_title ul li").click(function() {
+			var companyId =$(this).attr("data-code");
+			clause(companyId);
+			$(this).addClass("active").siblings().removeClass("active");
+			$(".product_title").find(".product_choice").removeClass("active");
+			$(this).children(".product_choice").addClass("active");
+			$(".product_content").eq($(this).index()).addClass("active").siblings().removeClass("active");		
+			
+		});
+		//加载条款
+		function clause(companyId) {
+			$.ajax({
+				type : "get",
+				url : manageUrl+"/homeController/selectClause",
+				data:{"companyId":companyId,"isShow":"1"},
+				dataType : "json",
+				success : function(dataObj) {
+					if (dataObj != null) {
+						var data = dataObj.data;
+						$(".product_cpright").html("");
+						$(".product_cprighttit").html();
+						var num = data.length;
+						var html ='';
+						var str = '';
+						var content='';
+						if (num > 0) {
+							$.each(data, function(index, val) {
+								if(index==0){
+									html += '<div class="product_content active">';
+									html += '	<div class="product_cprighttit">';
+									str += '		<div class="product_righttitle product_righttitlenow">'+val.clause_name+'</div>';
+									html += '	</div>';
+									content += '	<div class="product_wrap_con product_wrap_active">'+val.clause_content+'</div>';
+									html += '</div>';
+								}else{
+									html += '<div class="product_content">';
+									html += '	<div class="product_cprighttit">';
+									str += '		<div class="product_righttitle">'+val.clause_name+'</div>';
+									html += '	</div>';
+									content += '	<div class="product_wrap_con">'+val.clause_content+'</div>';
+									html += '</div>';
+								}
+								
+							})
+						}else{
+							html += '<div style="line-height: 250px;text-align: center;font-size: 16px;color: #787675">';
+							html += '暂无条款';
+							html += '</div>';
+						}
+						$(".product_cpright").append(html);
+						$(".product_cprighttit").append(str);
+						$(".product_cprighttit").after(content);
+						$(".product_righttitle").click(function() {
+							$(this).addClass("product_righttitlenow").siblings().removeClass("product_righttitlenow");
+							$(".product_content.active").find(".product_wrap_con").eq($(this).index()).addClass("product_wrap_active").siblings().removeClass("product_wrap_active");
+						})
+					}
+				} 
+			})
+		}
+		function policy(){
+			window.location.href = "/bidPolicyForm.html";
+		}
+	</script>
+
+</html>

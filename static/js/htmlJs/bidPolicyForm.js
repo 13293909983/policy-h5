@@ -98,26 +98,33 @@
 		    if(this.value!=""){
                 var electricPower = parseInt(this.value);
                 var sumPremium = 0;
-                //原来的保费
-                /* if (electricPower > 0 && electricPower <= 100000) {
-                    sumPremium = 600;
-                } else if (electricPower <= 200000) {
-                    sumPremium = 800;
-                } else if (electricPower <= 800000) {
-                    sumPremium = electricPower * 0.004;
-                    sumPremium=decimal(sumPremium,2);
-                } */
-                //更新的保费
-                if (electricPower > 0 && electricPower <= 30000) {
-                    sumPremium = 500;
-                } else if (electricPower > 30000 && electricPower <= 100000) {
-                    sumPremium = 800;
-                }else if(electricPower > 100000 && electricPower <= 200000){
-                	sumPremium = 1000;
-                } else if (electricPower <= 800000) {
-                    sumPremium = electricPower * 0.005;
-                    sumPremium=decimal(sumPremium,2);
-                }
+                var insuranceCompany=$("#insuranceCompany").val();
+				if(insuranceCompany=='PICC'){
+					if (electricPower > 0 && electricPower <= 30000) {
+						sumPremium = 500;
+					} else if (electricPower > 30000 && electricPower <= 100000) {
+						sumPremium = 800;
+					}else if(electricPower > 100000 && electricPower <= 200000){
+						sumPremium = 1000;
+					} else if (electricPower <= 800000) {
+						sumPremium = electricPower * 0.005;
+						sumPremium=decimal(sumPremium,2);
+					}
+				}else{
+					//更新的保费
+					if (electricPower > 0 && electricPower <= 30000) {
+						sumPremium = 200;
+					} else if (electricPower > 30000 && electricPower <= 60000) {
+					sumPremium = 500;
+					}else if (electricPower > 60000 && electricPower <= 100000) {
+						sumPremium = 800;
+					}else if(electricPower > 100000 && electricPower <= 200000){
+						sumPremium = 1000;
+					} else if (electricPower <= 800000) {
+						sumPremium = electricPower * 0.005;
+						sumPremium=decimal(sumPremium,2);
+					}
+				}
                 $(":input[name='sumPremium']").val(sumPremium);
 			}
 		}).blur();
@@ -625,7 +632,7 @@
 	    //因为子节点还包括组织，所以这里需要筛选一下
 	    var key = false;
 	    for(var i in childNodes){
-	        if(childNodes[i].udn){//如果当前组织有终端 就不再加载
+	        if(childNodes[i].zAsync){//如果当前组织有终端 就不再加载
 	            key = true;
 	            break;
 	        }                  
@@ -992,7 +999,7 @@ $("[name='certificateDepart']").bind('input propertychange', function() {
 				if(response.code=='200'){
                     $this.next('#certificateDepartList').remove();
 					var data=response.data;
-                    var str='<div class="dropdown-menu position-absolute" id="certificateDepartList" style="display: block; position: static; width: 32%; margin-top: 0; float: none;position: absolute;top: 41%;">';
+                    var str='<div class="dropdown-menu position-absolute" id="certificateDepartList" style="display: block; position: static; width: 32%; margin-top: 0; float: none;position: absolute;top: 45%;">';
 					str+='<a class="dropdown-item" href="javascript:void(0);"" data-code="'+data.id+'" title="'+data.certificateDepart+'">'+data.certificateDepart+'</a>';
 					str+='</div>';
 					$this.after(str);

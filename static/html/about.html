@@ -15,63 +15,103 @@
 <script type="text/javascript" src="/static/js/paging.js"></script>
 </head>
 <style>
-#companyName {
-	width: 8rem;
-	overflow: hidden;
-	position: relative;
-	overflow: hidden;
-	margin-bottom: 0.2rem;
-}
+		#companyName {
+			width: 8rem;
+			overflow: hidden;
+			position: relative;
+			overflow: hidden;
+			margin-bottom: 0.2rem;
+		}
 
-#companyName .prev {
-	display: none;
-	position: absolute;
-	top: 0;
-	/* width: 0.59rem; */
-	width: 0.2rem;
-	height: 88%;
-	box-shadow: 0 0 3px #c6c6c7;
-	background: #fff;
-	text-align: center;
-	font-size: 0;
-	left: 0;
-	border-right: 1px solid #e1e3e6;
-}
+		#companyName .prev {
+			display: none;
+			position: absolute;
+			top: 0;
+			/* width: 0.59rem; */
+			width: 0.2rem;
+			height: 88%;
+			box-shadow: 0 0 3px #c6c6c7;
+			background: #fff;
+			text-align: center;
+			font-size: 0;
+			left: 0;
+			border-right: 1px solid #e1e3e6;
+		}
 
-#companyName .prev span {
-	display: inline-block;
-	vertical-align: middle;
-	width: 0.09rem;
-	height: 1rem;
-	background-repeat: no-repeat;
-	background-image: url(/static/images/arrow.svg);
-	background-position: 96.77% 25%;
-	background-size: initial;
-}
+		#companyName .prev span {
+			display: inline-block;
+			vertical-align: middle;
+			width: 0.09rem;
+			height: 1rem;
+			background-repeat: no-repeat;
+			background-image: url(/static/images/arrow.svg);
+			background-position: 96.77% 25%;
+			background-size: initial;
+		}
 
-#companyName .next span {
-	display: inline-block;
-	vertical-align: middle;
-	width: 0.09rem;
-	height: 1rem;
-	background-repeat: no-repeat;
-	background-image: url(../images/arrow.svg);
-	background-position: 61.29% 25%;
-	background-size: initial;
-}
+		#companyName .next span {
+			display: inline-block;
+			vertical-align: middle;
+			width: 0.09rem;
+			height: 1rem;
+			background-repeat: no-repeat;
+			background-image: url(../images/arrow.svg);
+			background-position: 61.29% 25%;
+			background-size: initial;
+		}
 
-#companyName .next {
-	position: absolute;
-	top: 0;
-	width: 0.2rem;
-	height: 88%;
-	box-shadow: 0 0 0.03rem #c6c6c7;
-	background: #fff;
-	text-align: center;
-	font-size: 0;
-	right: 0;
-	border-left: 1px solid #e1e3e6;
-}
+		#companyName .next {
+			position: absolute;
+			top: 0;
+			width: 0.2rem;
+			height: 88%;
+			box-shadow: 0 0 0.03rem #c6c6c7;
+			background: #fff;
+			text-align: center;
+			font-size: 0;
+			right: 0;
+			border-left: 1px solid #e1e3e6;
+		}
+		.about_ul .about_li {
+			border: 1px solid #e6e4e4;
+			padding: 0.1rem 0.1rem;
+			min-width: 1.6rem;
+		}
+		
+		.about_ul .about_li.active {
+			color: #B51313;
+			font-weight: bold;
+			background-color: #eaeaea;
+		}
+		
+		.about_licontent {
+			display: none;
+		}
+		
+		.about_licontent.active {
+			display: block;
+		}
+		.content_notice{
+			width: 9rem;
+			margin: 0 auto;
+			padding-bottom: 0.5rem;
+		}
+		.content_notice h3{
+			font-size: 0.30rem;
+			text-align: center;
+			font-weight: bold;
+			line-height: 2em;
+		}
+		.content_notice h4{
+			font-size: 0.18rem;
+			font-weight: bold;
+			line-height: 2em;
+		}
+		.content_notice p{
+			font-size: 0.14rem;
+			text-indent: 2em;
+			line-height: 2em;
+		}
 </style>
 <body>
 	<header></header>
@@ -87,6 +127,7 @@
 						<li class="about_wrapleftli about_wrapleftliatv">公司介绍</li>
 						<li class="about_wrapleftli">保险保函</li>
 						<li class="about_wrapleftli">帮助中心</li>
+						<li class="about_wrapleftli">推进小组</li>
 					</ul>
 				</div>
 				<div class="about_wrapright">
@@ -100,16 +141,13 @@
 							</ul>
 						</div>
 						<div class="about_rightimg about_rightimgnow">
-							<img src="/static/images/about04.png" />
-						</div>
-						<div class="about_rightimg">
-							<img src="/static/images/about03.png" />
-						</div>
-						<div class="about_rightimg">
-							<img src="/static/images/about02.png" />
-						</div>
-						<div class="about_rightimg">
-							<img src="/static/images/about01.png" />
+							<div>
+								<div class="about_ul">
+									<ul>
+										<li class="about_li active">公司介绍</li>
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="about_right">
@@ -188,6 +226,40 @@
 							</div>
 						</div>
 					</div>
+					<div class="about_right">
+						<div class="content_notice">
+							<h3>投标电子保函推进小组</h3>
+							<p>为有效降低投标企业负担，落实国家、省委关于减轻中小企业负担的要求，健全招标担保机制，打造“六最”营商环境，推动全省投保保证保险各项工作顺利进行，特成立投标电子保函推进小组。</p>
+							<h4>一、	组织架构</h4>
+							<p>组 &nbsp;&nbsp;&nbsp;&nbsp;长：方江团（人保财险山西分公司副总经理）</p>
+							<p>副 组 长：孟全胜（中华财险山西分公司副总经理）</p>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;范文林（大地财险山西分公司副总经理）</p>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;张建东（太保财险山西分公司副总经理）</p>
+							<p>执行主任：祁瑞锋（人保财险山西分公司责任险部总经理）、郭 廓（中华财险山西分公司重客部总经理）</p>
+							<p>成 &nbsp;&nbsp;员：仝建华、赵燕、雷远、李沛杰</p>
+							</p>
+							<h4>二、职责及分工</h4>
+							<p>组长：</p>
+							<p>1、全面负责投标电子保函推进工作</p>
+							<p>2、根据省发改委及银保监局要求组织开展各项工作。</p>
+							<p>副组长：</p>
+							<p>1、具体指导、监督、落实各项业务推进工作。</p>
+							<p>2、定期组织召开专题会议，解决实施中存在的问题。</p>
+							<p>3、配合组长完成其他相关工作</p>
+							<p>执行主任：</p>
+							<p>1、负责与招投标代理公司、科技公司及九大电子交易平台的对接工作。</p>
+							<p>2、定期向省发改委及银保监局作项目推进情况汇报</p>
+							<p>3、指导成员完成具体工作</p>
+							<p>成员：</p>
+							<p>1、负责各类数据统计及分析报告的撰写</p>
+							<p>2、做好会务布置工作</p>
+							<p>3、各环节对接工作及出单、理赔服务工作</p>
+							<p>4、完成上级交办的其他任务</p>
+							<h4>三、联络人信息</h4>
+							<p>业务联系人员： 郭 廓 13935156809</p>
+							<p>技术维护人员： 杜建德 18535449708</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -215,41 +287,53 @@
 				if (dataObj != null) {
 					var data = dataObj.data;
 					$('#companyName ul').html('');
-					$('#companyName').next().remove();
+					$('#companyName').nextAll(".about_rightimg").remove();
+					var nameStr="";
+					var contentStr="";
 					var num = data.length;
-					var str = '';
-					var strs = "";
-					if (num > 0) {
-						$.each(data,function(index, val) {
-							if (index == 0) {
-								str += '<li class="about_rightli about_rightliatv">'
-										+ val.name
-										+ '</li>';
-								strs += '<div class="about_rightimg about_rightimgnow">';
-
-							} else {
-								str += '<li class="about_rightli">'
-										+ val.name
-										+ '</li>';
-								strs += '<div class="about_rightimg">';
-							}
-							strs += '<img src="'+manageUrl+val.cover+'"/>';
-							strs += val.content;
-							strs += '</div>';
-
-						})
-					} else {
-						str += '<div style="line-height: 250px;text-align: center;font-size: 16px;color: #787675">';
-						str += '暂无公司介绍';
-						str += '</div>';
-					}
-					$('#companyName ul').append(str);
-					$('#companyName').after(strs);
-					$(".about_rightli").click(function() {
-						$(this).addClass("about_rightliatv").siblings().removeClass("about_rightliatv");
-						$(".about_rightimg").eq($(this).index()).addClass("about_rightimgnow").siblings().removeClass("about_rightimgnow");
-						$(".about_righttext").eq($(this).index()).addClass("about_righttextnow").siblings().removeClass("about_righttextnow");
+					$.each(data,function(index, val) {
+						nameStr += '<li class="about_rightli">';
+						nameStr +=	val.name;
+						nameStr += '</li>';
+						
+						contentStr += '<div class="about_rightimg">';
+						contentStr += '	<img src="'+manageUrl+val.cover+'"/>';
+						contentStr += '	<div class="about_ul">';
+						contentStr += '		<ul>';
+						contentStr += '			<li class="about_li active">公司介绍</li>';
+						contentStr += '		</ul>';
+						contentStr += '	</div>';
+						contentStr += '	<div class="about_licontent active">';
+						contentStr += '		<p>'+val.content+'</p>';
+						contentStr += '	</div>';
+						contentStr += '</div>';
 					})
+					$('#companyName ul').append(nameStr);
+					$('#companyName').after(contentStr);
+					//绑定点击事件
+					$('#companyName').find("li").click(function(){
+						$('#companyName ul li').removeClass("about_rightliatv");	
+						$(this).addClass("about_rightliatv");
+						var index=$('#companyName').find("li").index(this);
+						
+						var $about=$('#companyName').nextAll(".about_rightimg");
+						$about.removeClass("about_rightimgnow");
+						$about.eq(index).addClass("about_rightimgnow");
+						$(".about_rightimgnow").find("li").eq(0).addClass("active");
+						$(".about_rightimgnow").find(".about_licontent").eq(0).addClass("active");
+						var clauseId;
+						if(index==0){
+							clauseId='1521';
+						}else if(index==1){
+							clauseId='1522';
+						}else if(index==2){
+							clauseId='1524';
+						}else if(index==3){
+							clauseId='1523';
+						}
+						clause(clauseId);
+					})
+					$('#companyName').find("li").eq(0).click();
 					//按钮箭头
 					var companyWidth=$("#companyName").width();
 					var catew = $('#companyName ul').width() - 150;
@@ -285,6 +369,7 @@
 			}
 		})
 	}
+	
 	function help() {
 		$.ajax({
 			type : "get",
@@ -314,6 +399,41 @@
 					$('.about_righttxt').append(str);
 				}
 			}
+		})
+	}
+	//加载条款
+	function clause(companyId) {
+		$.ajax({
+			type : "get",
+			url : manageUrl+"/homeController/selectClause",
+			data:{"companyId":companyId,"isShow":"1"},
+			dataType : "json",
+			success : function(dataObj) {
+				if (dataObj != null) {
+					var data = dataObj.data;
+					$(".about_rightimgnow").find(".about_licontent").not(":eq(0)").remove();
+					var li=$(".about_rightimgnow .about_ul").find("li");
+					li.not(":eq(0)").remove();
+					var num = data.length;
+					var str = '';
+					var html ='';
+					if (num > 0) {
+						$.each(data, function(index, val) {
+							str += '<li class="about_li">'+val.clause_name+'</li>';
+							html += '<div class="about_licontent">';
+								html += '<p>'+val.clause_content+'</p>';
+							html += '</div>';
+						})
+					}
+					$(".about_rightimgnow .about_ul").find("li").eq(0).after(str);
+					$(".about_rightimgnow").find(".about_licontent").after(html);
+					//点击切换条款
+					$(".about_li").click(function() {
+						$(this).addClass("active").siblings().removeClass("active");
+						$(".about_rightimgnow .about_licontent").eq($(this).index()).addClass("active").siblings().removeClass("active");
+					})
+				}
+			} 
 		})
 	}
 </script>
